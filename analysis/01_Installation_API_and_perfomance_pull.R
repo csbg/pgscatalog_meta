@@ -1,0 +1,145 @@
+#!/usr/bin/env Rscript
+
+## =========================
+## PGS cross-ancestry metrics: full pipeline
+#Outs:
+#data/pgs_cache/pm_YYYYMMDD.rds — full S4 cache.
+#data/pgs_cache/*_{YYYYMMDD}.csv (+ .parquet if arrow present) — normalized tables.
+#results/pgs_top15_perf/pgs_evalN_top15_*.csv — top-15 PGS by eval N.
+#results/pgs_top15_perf/pgs_top15_metrics_by_ancestry_raw_*.csv — per-record tidy table.
+#results/pgs_top15_perf/auc_by_ancestry_weighted_*.csv — ancestry summaries (all models).
+#results/pgs_top15_perf/auc_by_ancestry_weighted_PGSonly_*.csv — ancestry summaries (PGS-only).
+#results/pgs_top15_perf/auc_by_ancestry_S{1,2,3}_*.csv — sensitivity analyses with min cases/controls.
+## =========================
+
+options(stringsAsFactors = FALSE, warn = 1)
+
+# ---- Helper: install missing packages (silent) ----
+.install_if_missing <- function(pkgs) {
+  to_get <- pkgs[!pkgs %in% rownames(installed.packages())]
+  if (length(to_get)) install.packages(to_get, quiet = TRUE)
+}
+.install_if_missing(c("quincunx","dplyr","tidyr","readr","purrr","stringr"))
+
+suppressPackageStartupMessages({
+  library(quincunx)
+  library(dplyr)
+  library(tidyr)
+  library(readr)
+  library(purrr)
+  library(stringr)
+})
+
+have_arrow   <- requireNamespace("arrow", quietly = TRUE)
+have_jsonlite<- requireNamespace("jsonlite", quietly = TRUE)
+
+if (have_arrow)   library(arrow)
+
+STAMP     <- format(Sys.Date(), "%Y%m%d")
+CACHE_DIR <- file.path("data", "pgs_cache")
+OUT_DIR   <- file.path("results", "pgs_top15_perf")
+dir.create(CACHE_DIR, recursive = TRUE, showWarnings = FALSE)
+dir.create(OUT_DIR,   recursive = TRUE, showWarnings = FALSE)
+
+log_step <- function(...) cat(sprintf("[%s] ", format(Sys.time(), "%H:%M:%S")), ..., "\n")
+
+# ---- 1) Fetch from API and cache (S4 + normalized tables) ----
+log_step("Pulling Performance Metrics bundle from PGS Catalog REST API…")
+pm <- quincunx::get_performance_metrics(progress_bar = TRUE)
+
+rds_path <- file.path(CACHE_DIR, paste0("pm_", STAMP, ".rds"))
+saveRDS(pm, rds_path, compress = "xz")
+log_step("Saved S4 cache ⇒ ", rds_path)
+
+# Extract normalized tables (slots)
+ppm       <- pm@performance_metrics                       # PPM-level (links to PGS)
+pss_links <- pm@sample_sets %>% distinct(ppm_id, pss_id)  # mapping PPM→PSS
+samples   <- pm@samples                                   # ancestry + sizes
+classm    <- pm@pgs_classification_metrics                # AUROC / C-index
+effectm   <- pm@pgs_effect_sizes                          # OR / HR / beta
+otherm    <- pm@pgs_other_metrics                         # R^2 etc.
+
+# 2) Idempotent display mapper
+to_display_cat <- function(x) {
+  x <- gsub("\\s*,\\s*", ",", x)
+  sapply(strsplit(x, ","), function(v) {
+    v <- unique(trimws(v))
+    if (length(v) > 1) {
+      if ("European" %in% v) "Multi-ancestry including European" else "Multi-ancestry excluding European"
+    } else {
+      vv <- v[1]
+      dplyr::case_when(
+        # keep already-normalized labels
+        vv %in% c("European","African","East Asian","South Asian",
+                  "Hispanic or Latin American","Middle Eastern or North African",
+                  "Other/Mixed","Not reported",
+                  "Multi-ancestry including European","Multi-ancestry excluding European") ~ vv,
+        # raw → display
+        vv %in% c("African American or Afro-Caribbean","African unspecified","Sub-Saharan African") ~ "African",
+        vv == "East Asian" ~ "East Asian",
+        vv == "South Asian" ~ "South Asian",
+        vv == "European" ~ "European",
+        vv == "Hispanic or Latin American" ~ "Hispanic or Latin American",
+        vv == "Greater Middle Eastern (Middle Eastern, North African or Persian)" ~ "Middle Eastern or North African",
+        vv %in% c("Central Asian","South East Asian","Asian unspecified","Oceanian","Native American",
+                  "Aboriginal Australian","Other","Other admixed ancestry") ~ "Other/Mixed",
+        vv == "Not reported" ~ "Not reported",
+        TRUE ~ "Other/Mixed"
+      )
+    }
+  }, USE.NAMES = FALSE)
+}
+
+# 3) Map ONCE
+samples <- samples %>%
+  mutate(
+    ancestry_display  = to_display_cat(ancestry_category),
+    ancestry_category = ancestry_display
+  )
+
+# 4) Sanity check (African should now be present)
+samples %>% filter(stage == "eval") %>%
+  count(ancestry_category, sort = TRUE) %>% print(n = 50)
+
+# Write CSVs (always)
+write_csv(ppm,       file.path(CACHE_DIR, paste0("ppm_", STAMP, ".csv")))
+write_csv(pss_links, file.path(CACHE_DIR, paste0("pss_links_", STAMP, ".csv")))
+write_csv(samples,   file.path(CACHE_DIR, paste0("samples_", STAMP, ".csv")))
+write_csv(classm,    file.path(CACHE_DIR, paste0("classm_", STAMP, ".csv")))
+write_csv(effectm,   file.path(CACHE_DIR, paste0("effectm_", STAMP, ".csv")))
+write_csv(otherm,    file.path(CACHE_DIR, paste0("otherm_", STAMP, ".csv")))
+log_step("Saved normalized CSV tables to: ", CACHE_DIR)
+
+# Parquet (if available)
+if (have_arrow) {
+  write_parquet(ppm,       file.path(CACHE_DIR, paste0("ppm_", STAMP, ".parquet")))
+  write_parquet(pss_links, file.path(CACHE_DIR, paste0("pss_links_", STAMP, ".parquet")))
+  write_parquet(samples,   file.path(CACHE_DIR, paste0("samples_", STAMP, ".parquet")))
+  write_parquet(classm,    file.path(CACHE_DIR, paste0("classm_", STAMP, ".parquet")))
+  write_parquet(effectm,   file.path(CACHE_DIR, paste0("effectm_", STAMP, ".parquet")))
+  write_parquet(otherm,    file.path(CACHE_DIR, paste0("otherm_", STAMP, ".parquet")))
+  log_step("Saved Parquet tables (arrow) to: ", CACHE_DIR)
+}
+
+# ---- 2) Provenance (for methods) ----
+prov <- list(
+  pulled_at_utc = format(Sys.time(), tz = "UTC"),
+  quincunx_version = as.character(utils::packageVersion("quincunx")),
+  R_version = R.version.string,
+  counts = list(
+    n_ppm       = nrow(ppm),
+    n_pss_links = nrow(pss_links),
+    n_samples   = nrow(samples),
+    n_classm    = nrow(classm),
+    n_effectm   = nrow(effectm),
+    n_otherm    = nrow(otherm)
+  )
+)
+if (have_jsonlite) {
+  jsonlite::write_json(prov, file.path(CACHE_DIR, paste0("pm_provenance_", STAMP, ".json")),
+                       pretty = TRUE, auto_unbox = TRUE)
+  log_step("Wrote provenance JSON.")
+} else {
+  log_step("jsonlite not installed; skipping provenance JSON.")
+}
+
