@@ -1,26 +1,111 @@
 library(stringr)
+library(purrr)
+library(dplyr)
+library(readr)
+
+STAMP <- format(Sys.Date(), "%Y%m%d")
+setwd("~/pgscatalog")
 
 cache_dir <- "data/pgs_cache"
 
-# Look for ANY of the cache tables and extract their YYYYMMDD stamps
-files  <- list.files(cache_dir, pattern = "_\\d{8}\\.csv$|_\\d{8}\\.rds$|_\\d{8}\\.parquet$", full.names = FALSE)
-stamps <- str_extract(files, "(?<=_)\\d{8}(?=\\.)")
-stamps <- stamps[!is.na(stamps)]
-stopifnot(length(stamps) > 0)
+# ---- Helper: find latest COMPLETE cache stamp ----
+latest_complete_stamp <- function(
+    cache_dir = "data/pgs_cache",
+    required_prefixes = c("ppm_", "pss_links_", "samples_", "classm_")
+) {
+  files <- list.files(
+    cache_dir,
+    pattern = "_\\d{8}\\.(csv|rds|parquet)$",
+    full.names = FALSE
+  )
+  
+  stamps <- stringr::str_extract(files, "(?<=_)\\d{8}(?=\\.)")
+  stamps <- unique(stamps[!is.na(stamps)])
+  
+  if (!length(stamps)) {
+    stop("No stamped cache files found in ", cache_dir)
+  }
+  
+  stamp_ok <- function(stamp) {
+    all(vapply(
+      required_prefixes,
+      function(pref) {
+        any(grepl(
+          paste0("^", pref, stamp, "\\.(csv|rds|parquet)$"),
+          files
+        ))
+      },
+      logical(1)
+    ))
+  }
+  
+  candidate_stamps <- sort(stamps, decreasing = TRUE)
+  
+  for (st in candidate_stamps) {
+    if (stamp_ok(st)) return(st)
+  }
+  
+  stop(
+    "No complete cache stamp found in ", cache_dir,
+    ". Need all of: ", paste(required_prefixes, collapse = ", ")
+  )
+}
 
-latest_stamp <- sort(unique(stamps), decreasing = TRUE)[1]
-latest_stamp
+# ---- Helper: read cache table in whatever format exists ----
+read_cache_table <- function(prefix, stamp, cache_dir = "data/pgs_cache") {
+  exts <- c("parquet", "rds", "csv")
+  
+  for (ext in exts) {
+    fp <- file.path(cache_dir, paste0(prefix, stamp, ".", ext))
+    if (file.exists(fp)) {
+      message("Reading ", fp)
+      
+      if (ext == "csv") {
+        return(readr::read_csv(fp, show_col_types = FALSE))
+      }
+      
+      if (ext == "rds") {
+        return(readRDS(fp))
+      }
+      
+      if (ext == "parquet") {
+        if (!requireNamespace("arrow", quietly = TRUE)) {
+          stop("Package 'arrow' is required to read parquet files: ", fp)
+        }
+        return(arrow::read_parquet(fp))
+      }
+    }
+  }
+  
+  stop(
+    "No file found for prefix '", prefix,
+    "' and stamp '", stamp,
+    "' in ", cache_dir
+  )
+}
 
-# 2) Load near-raw tables
-library(readr)
+# ---- Choose the latest COMPLETE cache snapshot ----
+latest_stamp <- latest_complete_stamp(
+  cache_dir = cache_dir,
+  required_prefixes = c("ppm_", "pss_links_", "samples_", "classm_")
+)
 
-ppm       <- read_csv(file.path(cache_dir, paste0("ppm_",       latest_stamp, ".csv")), show_col_types = FALSE)
-pss_links <- read_csv(file.path(cache_dir, paste0("pss_links_", latest_stamp, ".csv")), show_col_types = FALSE)
-samples   <- read_csv(file.path(cache_dir, paste0("samples_",   latest_stamp, ".csv")), show_col_types = FALSE)
-classm    <- read_csv(file.path(cache_dir, paste0("classm_",    latest_stamp, ".csv")), show_col_types = FALSE)
+message("Using cache stamp: ", latest_stamp)
+
+# ---- Load near-raw tables ----
+ppm       <- read_cache_table("ppm_",       latest_stamp, cache_dir)
+pss_links <- read_cache_table("pss_links_", latest_stamp, cache_dir)
+samples   <- read_cache_table("samples_",   latest_stamp, cache_dir)
+classm    <- read_cache_table("classm_",    latest_stamp, cache_dir)
 
 cat("\n-- ROW COUNTS --\n")
-print(list(ppm=nrow(ppm), pss_links=nrow(pss_links), samples=nrow(samples), classm=nrow(classm)))
+print(list(
+  ppm = nrow(ppm),
+  pss_links = nrow(pss_links),
+  samples = nrow(samples),
+  classm = nrow(classm)
+))
+
 
 # 3) Key sanity: ppm_id uniqueness in ppm, mapping multiplicities
 stopifnot(!any(duplicated(ppm$ppm_id)))
