@@ -60,7 +60,8 @@ dev_fp    <- dest[basename(dest) == paste0("bulk_score_development_samples_", ST
 
 scores <- readr::read_csv(scores_fp, show_col_types = FALSE)
 dev    <- readr::read_csv(dev_fp,    show_col_types = FALSE)
-# ---- Build train_bucket from your BULK dev file (with spaces in headers) ----
+# ---- Build train_bucket from the bulk score-development sample file ----
+
 suppressPackageStartupMessages({
   library(readr); library(dplyr); library(stringr); library(tidyr); library(janitor)
 })
@@ -75,7 +76,7 @@ dev_fp <- list.files(cache_dir, pattern="^bulk_score_development_samples_\\d{8}\
 stopifnot(length(dev_fp) == 1, file.exists(dev_fp))
 
 dev <- readr::read_csv(dev_fp, show_col_types = FALSE) |> janitor::clean_names()
-# Now you should have (among others):
+# Expected cleaned columns include:
 # polygenic_score_pgs_id, stage_of_pgs_development, broad_ancestry_category,
 # ancestry_e_g_french_chinese, additional_sample_cohort_information
 
