@@ -416,7 +416,7 @@ message(
 
 
 ## =========================
-## PLOTS — tailored by README diagnostics
+## PLOTS — optional diagnostic portability plots
 ## expects the TABLES section above has already run
 ## =========================
 
@@ -433,7 +433,8 @@ if (!exists("display_levels")) display_levels <- c(
 )
 lab_si <- scales::label_number(accuracy = 1, scale_cut = scales::cut_short_scale())
 
-# Load the tables we just created (from disk if not in memory)
+# Load stamped tables generated above
+
 load_csv <- function(fp) readr::read_csv(fp, show_col_types = FALSE)
 
 tbl_pgs_cov_fp       <- file.path(out_dir, paste0("tbl_pgs_coverage_",               stamp, ".csv"))
