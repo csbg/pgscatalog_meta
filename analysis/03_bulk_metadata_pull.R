@@ -1,8 +1,14 @@
 #!/usr/bin/env Rscript
-## ==========================================
-## PGS Catalog: BULK metadata pull (no API)
-## Saves CSVs to data/pgs_cache/ + derives train_bucket_<STAMP>.csv
-## ==========================================
+
+# ============================================================
+# Script: 03_bulk_metada_pull.R
+# Project: pgscatalog_meta
+# Purpose: Download PGS Catalog bulk metadata and derive training ancestry categories.
+# Inputs: PGS Catalog bulk metadata files from official FTP
+# Outputs: data/pgs_cache/bulk_*_<DATE>.csv; data/pgs_cache/train_bucket_<DATE>.csv
+# Run after: 02_loading_PGS_matrix.R
+# Run before: 04_PGS_systemic_portability_unique_pss.R
+# ============================================================
 
 options(stringsAsFactors = FALSE, warn = 1)
 
