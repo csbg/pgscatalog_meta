@@ -1,16 +1,14 @@
 #!/usr/bin/env Rscript
 
-## =========================
-## PGS cross-ancestry metrics: full pipeline
-#Outs:
-#data/pgs_cache/pm_YYYYMMDD.rds — full S4 cache.
-#data/pgs_cache/*_{YYYYMMDD}.csv (+ .parquet if arrow present) — normalized tables.
-#results/pgs_top15_perf/pgs_evalN_top15_*.csv — top-15 PGS by eval N.
-#results/pgs_top15_perf/pgs_top15_metrics_by_ancestry_raw_*.csv — per-record tidy table.
-#results/pgs_top15_perf/auc_by_ancestry_weighted_*.csv — ancestry summaries (all models).
-#results/pgs_top15_perf/auc_by_ancestry_weighted_PGSonly_*.csv — ancestry summaries (PGS-only).
-#results/pgs_top15_perf/auc_by_ancestry_S{1,2,3}_*.csv — sensitivity analyses with min cases/controls.
-## =========================
+# ============================================================
+# Script: 01_Installation_API_and_perfomance_pull.R
+# Project: pgscatalog_meta
+# Purpose: Download PGS Catalog performance metrics and save normalized cache tables.
+# Inputs: PGS Catalog API via quincunx
+# Outputs: data/pgs_cache/pm_<DATE>.rds; normalized performance, sample-set, sample, and metric tables
+# Run after: none
+# Run before: 02_loading_PGS_matrix.R
+# ============================================================
 
 options(stringsAsFactors = FALSE, warn = 1)
 
