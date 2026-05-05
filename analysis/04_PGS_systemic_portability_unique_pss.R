@@ -6,7 +6,7 @@
 # Purpose: Build the evaluation-level portability dataset using unique evaluation sample sets.
 # Inputs: data/pgs_cache/bulk_performance_metrics_<DATE>.csv, bulk_evaluation_sample_sets_<DATE>.csv, train_bucket_<DATE>.csv
 # Outputs: results/pgs_systemic/ evaluation-level summary and plotting source tables
-# Run after: 03_bulk_metada_pull.R
+# Run after: 03_bulk_metadata_pull.R
 # Run before: 05_pgs_auc_ci_audit.R
 # ============================================================
 
