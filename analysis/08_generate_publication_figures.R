@@ -1,33 +1,14 @@
 #!/usr/bin/env Rscript
-## ============================================================
-## 12_meta_results_overview_selfcontained_repro.R
-##
-## Self-contained final Step 12 plotting script, with reproduction filters matching the older overview workflow.
-##
-## Intended order:
-##   1) source("12_meta_roadmap_two_stages.R")
-##   2) source("12_i_square_filter.R")
-##   3) source("12_meta_results_overview_selfcontained_repro.R")
-##
-## What this script does:
-##   - Loads the I²-filtered Stage-1 table produced by 12_i_square_filter.R.
-##   - Falls back to the unfiltered Stage-1 table only if the filtered table is absent.
-##   - Rebuilds the paired weighted ΔAUC results from the Stage-1 table.
-##   - Rebuilds the plotting objects that older scripts expected to already exist.
-##   - Saves a faceted ΔAUC forest plot without requiring the wrapper scripts.
-##   - Reproduces the old trait-selection gate:
-##       selected buckets -> heatmap rows -> traits with any n_pairs >= 2 -> forest.
-##
-## Main input:
-##   meta_roadmap_two_stages/<STAMP>/tables/stage1_pooled_cells_I2filtered_<STAMP>.csv
-##
-## Main outputs:
-##   meta_roadmap_two_stages/<STAMP>/tables/paired_weightedtest_by_bucket_rebuilt_<STAMP>.csv
-##   meta_roadmap_two_stages/<STAMP>/tables/reproduction_gate_heatmap_df_<STAMP>.csv
-##   meta_roadmap_two_stages/<STAMP>/tables/reproduction_gate_keep_traits_<STAMP>.csv
-##   meta_roadmap_two_stages/<STAMP>/tables/deltaAUC_forest_faceted_data_<STAMP>.csv
-##   meta_roadmap_two_stages/<STAMP>/plots/results/deltaAUC_forest_faceted_<STAMP>.pdf
-## ============================================================
+
+# ============================================================
+# Script: 08_generate_publication_figures.R
+# Project: pgscatalog_meta
+# Purpose: Generate final publication figures, including the faceted ΔAUC forest plot.
+# Inputs: meta_roadmap_two_stages/<DATE>/tables/stage1_pooled_cells_I2filtered_<DATE>.csv
+# Outputs: meta_roadmap_two_stages/<DATE>/plots/results/ publication figures
+# Run after: 07_i_square_filter.R
+# Run before: none
+# ============================================================
 
 suppressPackageStartupMessages({
   library(dplyr)
