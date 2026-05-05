@@ -7,7 +7,7 @@
 # Inputs: data/pgs_cache/ppm_<DATE>.csv, pss_links_<DATE>.csv, samples_<DATE>.csv, classm_<DATE>.csv
 # Outputs: Console checks and validation summaries
 # Run after: 01_Installation_API_and_perfomance_pull.R
-# Run before: 03_bulk_metada_pull.R
+# Run before: 03_bulk_metadata_pull.R
 # ============================================================
 
 library(stringr)
