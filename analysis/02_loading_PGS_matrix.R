@@ -1,3 +1,15 @@
+#!/usr/bin/env Rscript
+
+# ============================================================
+# Script: 02_loading_PGS_matrix.R
+# Project: pgscatalog_meta
+# Purpose: Load cached PGS Catalog tables and validate relationships between performance metrics, sample sets, samples, and ancestry.
+# Inputs: data/pgs_cache/ppm_<DATE>.csv, pss_links_<DATE>.csv, samples_<DATE>.csv, classm_<DATE>.csv
+# Outputs: Console checks and validation summaries
+# Run after: 01_Installation_API_and_perfomance_pull.R
+# Run before: 03_bulk_metada_pull.R
+# ============================================================
+
 library(stringr)
 library(purrr)
 library(dplyr)
