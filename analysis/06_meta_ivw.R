@@ -1,13 +1,15 @@
 #!/usr/bin/env Rscript
-## ======================================================================
-## META ROADMAP (TWO-STAGES) — Combined pooling plots (STRICT INTERSECTION)
-## - ONE pooling plot per trait: RAW evaluations (transparent) + Stage-1 pooled per ancestry × PGS
-## - MODIFICATION: STRICT INTERSECTION logic. 
-##   1. Raw dots only show if a valid pooled bar exists.
-##   2. Pooled bars only show if raw backing data exists in the plot.
-## - STAGE 2: pooled across PGS per (trait × ancestry); x=trait, rows=ancestry
-## Output root: meta_roadmap_two_stages/<STAMP>/{plots,tables,logs}
-## ======================================================================
+
+# ============================================================
+# Script: 06_meta_ivw.R
+# Project: pgscatalog_meta
+# Purpose: Perform Stage-1 inverse-variance weighted meta-analysis of AUC within each trait × PGS × ancestry cell.
+# Inputs: results/pgs_auc_ci_audit_<DATE>/eval_df_final_auc_ci.csv
+# Outputs: meta_roadmap_two_stages/<DATE>/tables/stage1_pooled_cells_<DATE>.csv
+# Run after: 05_pgs_auc_ci_audit.R
+# Run before: 07_i_square_filter.R
+# ============================================================
+
 setwd("~/pgscatalog")
 suppressPackageStartupMessages({
   library(readr); library(dplyr); library(tidyr); library(stringr)
