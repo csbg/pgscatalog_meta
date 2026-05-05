@@ -23,7 +23,7 @@ suppressPackageStartupMessages({
   library(grid)
 })
 
-message(">> Self-contained Step 12 overview: starting")
+message(">> Self-contained Step 08 meta: starting")
 
 # ============================================================
 # 0) Self-contained setup
@@ -155,7 +155,7 @@ if (file.exists(filtered_csv)) {
   stop(
     "Could not find Stage-1 input table.\nTried:\n  ",
     filtered_csv, "\n  ", unfiltered_csv,
-    "\nRun 12_meta_roadmap_two_stages.R and then 12_i_square_filter.R first."
+    "\nRun 06_meta_ivw.R and then 07_i_square_filter.R first."
   )
 }
 
@@ -163,7 +163,7 @@ stage1_tbl <- readr::read_csv(input_csv, show_col_types = FALSE)
 
 # ------------------------------------------------------------
 # Rescue training-bucket metadata if Stage-1 does not contain it.
-# This is expected for Stage-1 tables produced by 12_meta_roadmap_two_stages.R,
+# This is expected for Stage-1 tables produced by 06_meta_ivw.R
 # because those tables are grouped by trait × PGS × evaluation ancestry and may
 # not carry train_bucket/trained_bucket forward.
 # ------------------------------------------------------------
@@ -237,10 +237,7 @@ if (!"trained_bucket" %in% names(stage1_tbl)) {
       conflict_fp
     )
     
-    # For reproducibility, do not silently choose one bucket if the metadata
-    # maps the same PGS to multiple different training buckets. The previous
-    # wrapper could accidentally duplicate rows in this situation; stopping is
-    # safer and makes the source of non-reproducibility visible.
+
     if (!exists("allow_bucket_conflicts_first") || !isTRUE(allow_bucket_conflicts_first)) {
       stop(
         "Some PGS IDs map to multiple training buckets. Wrote conflict table: ", conflict_fp, "\n",
@@ -526,13 +523,13 @@ if (nrow(res_pw2_nonempty) == 0) {
 message(glue(">> Rebuilt res_pw2_nonempty with {nrow(res_pw2_nonempty)} rows"))
 
 # ============================================================
-# 4) Reproduce old overview trait-selection gate
+# Reproduce the final manuscript trait-selection gate
 # ============================================================
 
 # IMPORTANT: this is the part that prevents the forest from becoming
-# over-inclusive. The older overview script did not plot every pairable trait.
-# It first selected the manuscript buckets, then kept only traits where the
-# heatmap had at least one tile based on >=2 PGS pairs.
+# over-inclusive. The final manuscript figure does not plot every pairable trait.
+# It first selected the training buckets, then kept only traits that
+# had at least one delta based on >=2 PGS pairs.
 keep_bucket_pattern <- c("European-only", "Multi incl")
 
 heatmap_df <- res_pw2_nonempty %>%
