@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 # ============================================================
-# Script: 03_bulk_metada_pull.R
+# Script: 03_bulk_metadata_pull.R
 # Project: pgscatalog_meta
 # Purpose: Download PGS Catalog bulk metadata and derive training ancestry categories.
 # Inputs: PGS Catalog bulk metadata files from official FTP
