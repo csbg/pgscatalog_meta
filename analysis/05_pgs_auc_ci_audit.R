@@ -1,5 +1,15 @@
 #!/usr/bin/env Rscript
 
+# ============================================================
+# Script: 05_pgs_auc_ci_audit.R
+# Project: pgscatalog_meta
+# Purpose: Harmonize AUC values and confidence intervals, audit CI availability, and produce the final evaluation table.
+# Inputs: Evaluation-level PGS performance tables generated upstream
+# Outputs: results/pgs_auc_ci_audit_<DATE>/eval_df_final_auc_ci.csv
+# Run after: 04_PGS_systemic_portability_unique_pss.R
+# Run before: 06_meta_ivw.R
+# ============================================================
+
 suppressPackageStartupMessages({
   library(readr); library(dplyr); library(tidyr); library(stringr)
   library(janitor); library(purrr); library(forcats)
