@@ -25,7 +25,8 @@ stamp       <- format(Sys.Date(), "%Y%m%d")
 out_dir     <- file.path(results_dir, paste0("pgs_auc_ci_audit_", stamp))
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
-# Palettes (adjust if you like)
+# Plot palettes used for CI audit visualizations
+
 bucket_pal <- c(
   "Train: European"    = "#3B82F6",
   "Train: African"     = "#EF4444",
