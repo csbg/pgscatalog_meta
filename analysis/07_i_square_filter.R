@@ -1,20 +1,14 @@
 #!/usr/bin/env Rscript
-# ============================
-# 12_i_square_filter.R — Heterogeneity filter (I² > 80%)
-#
-# Boss feedback:
-#   - Compute I² within each (trait × PGS × ancestry) cell using Stage-1 outputs.
-#   - Drop evaluations with I² > 80% (for k_eval ≥ 2).
-#   - Produce a bar plot of I² (%) per PGS and ancestry for each phenotype.
-#
-# Input:
-#   meta_roadmap_two_stages/<STAMP>/tables/stage1_pooled_cells_<STAMP>.csv
-#
-# Outputs:
-#   tables/stage1_I2_summary_<STAMP>.csv
-#   tables/stage1_pooled_cells_I2filtered_<STAMP>.csv
-#   plots/heterogeneity/I2_bar_<trait>_<STAMP>.pdf
-# ============================
+
+# ============================================================
+# Script: 07_i_square_filter.R
+# Project: pgscatalog_meta
+# Purpose: Apply heterogeneity filtering to Stage-1 pooled AUC estimates using an I² threshold.
+# Inputs: meta_roadmap_two_stages/<DATE>/tables/stage1_pooled_cells_<DATE>.csv
+# Outputs: meta_roadmap_two_stages/<DATE>/tables/stage1_pooled_cells_I2filtered_<DATE>.csv; I² summary tables and plots
+# Run after: 06_meta_ivw.R
+# Run before: 08_generate_publication_figures.R
+# ============================================================
 
 suppressPackageStartupMessages({
   library(dplyr); library(tidyr); library(ggplot2); library(readr); library(glue); library(stringr)
