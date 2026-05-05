@@ -10,7 +10,8 @@
 # Run before: 07_i_square_filter.R
 # ============================================================
 
-setwd("~/pgscatalog")
+# Run this script from the repository root.
+
 suppressPackageStartupMessages({
   library(readr); library(dplyr); library(tidyr); library(stringr)
   library(forcats); library(janitor); library(purrr)
@@ -187,7 +188,7 @@ na_empty <- function(x) { x <- as.character(x); ifelse(!is.na(x) & trimws(x) == 
 slug_lc  <- function(x) stringr::str_replace_all(tolower(x), "[^a-z0-9]+", "_")
 
 # ======================================================================
-# TRAIT HARMONIZATION (The Elegant Fix)
+# TRAIT HARMONIZATION
 # ======================================================================
 
 # 1. Define Dictionary of Aliases
@@ -413,7 +414,7 @@ plot_stage1_final <- function(pooled){
         panel.grid.major.y = element_line(color = "gray95", linetype = "dotted")
       )
     
-    # 6. Save (NEW FILENAME to distinguish it)
+    # 6. Save 
     fn <- file.path(dirs$stage1, paste0("stage1_grouped_ancestries_", slugify(tr), "_", stamp, ".pdf"))
     
     ggsave(fn, g, width = 8.5, height = h_dynamic, device = pdf_device, limitsize = FALSE)
@@ -424,7 +425,7 @@ plot_stage1_final <- function(pooled){
 
 
 # -------------------------
-# 5b) Combined RAW + Stage-1 pooling per trait (MODIFIED)
+# 5b) Combined RAW + Stage-1 pooling per trait 
 # -------------------------
 plot_pooling_combined <- function(raw_df, stage1_tbl){
   message(">> Plot: Combined RAW evaluations + Stage-1 pooled (one file per trait)")
@@ -454,7 +455,7 @@ plot_pooling_combined <- function(raw_df, stage1_tbl){
     if (nrow(d_raw) == 0 || nrow(d_pooled) == 0) return(invisible(NULL))
     
     # =================================================================
-    # START MODIFICATION: STRICT INTERSECTION (A AND B)
+    # Strict intersection between raw and pooled data for plotting
     # =================================================================
     # 1. Identify keys available in RAW data for this trait
     keys_raw <- d_raw %>% 
@@ -474,11 +475,7 @@ plot_pooling_combined <- function(raw_df, stage1_tbl){
     # This prevents "Raw without Pooled" AND "Pooled without Raw"
     d_raw <- d_raw %>% semi_join(valid_keys, by = c("pgs_id", "ancestry_display"))
     d_pooled <- d_pooled %>% semi_join(valid_keys, by = c("pgs_id", "ancestry_display"))
-    
-    # =================================================================
-    # END MODIFICATION
-    # =================================================================
-    
+  
     # If filtering emptied the dataframes
     if(nrow(d_raw) == 0 || nrow(d_pooled) == 0) return(invisible(NULL))
     
@@ -599,7 +596,7 @@ pool_stage2 <- function(stage1_tbl){
 }
 
 # -------------------------
-# 6b) IMPROVED STAGE-2 PLOT (Individual Files per Trait)
+# 6b)STAGE-2 PLOT (Individual Files per Trait)
 # -------------------------
 plot_stage2_individual_traits <- function(stage2_tbl){
   message(">> Plot 3/3: Stage-2 Comparative (Individual Files)")
@@ -730,10 +727,10 @@ out_stage1 <- file.path(dirs$tables, paste0("stage1_pooled_cells_", stamp, ".csv
 readr::write_csv(stage1_tbl, out_stage1)
 message(glue(">> Wrote Stage-1 pooled cells: {out_stage1}"))
 
-# 2) Combined RAW + pooled plot per trait (boss feedback: single pooling plot per phenotype)
+# 2) Combined RAW + pooled plot per trait 
 plot_pooling_combined(eval_for_stage, stage1_tbl)
 
-# 3) Stage-2 pooling across PGS (kept as in original script; comment out if not needed)
+# 3) Stage-2 pooling across PGS, retained as a diagnostic output
 stage2_tbl <- pool_stage2(stage1_tbl)
 plot_stage2_individual_traits(stage2_tbl)
 
