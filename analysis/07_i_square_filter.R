@@ -45,7 +45,7 @@ pal_ancestry <- c(
 # ---------------------------
 fp_stage1 <- file.path(tables_dir, paste0("stage1_pooled_cells_", stamp, ".csv"))
 if (!file.exists(fp_stage1)) {
-  stop(glue("Stage-1 file not found: {fp_stage1}. Please run 12_meta_roadmap_two_stages.R (or 11_) first."))
+  stop(glue("Stage-1 file not found: {fp_stage1}. Please run 06_meta_ivw.R first."))
 }
 
 message(glue(">> Loading Stage-1 data from: {fp_stage1}"))
