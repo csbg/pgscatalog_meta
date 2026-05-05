@@ -16,7 +16,8 @@ library(dplyr)
 library(readr)
 
 STAMP <- format(Sys.Date(), "%Y%m%d")
-setwd("~/pgscatalog")
+
+# Run this script from the repository root.
 
 cache_dir <- "data/pgs_cache"
 
