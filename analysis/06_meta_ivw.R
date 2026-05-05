@@ -22,9 +22,11 @@ suppressPackageStartupMessages({
 # -------------------------
 # 0) CONFIG
 # -------------------------
-if (!exists("audit_dir"))  audit_dir  <- "/home/people/nnunes/pgscatalog/results/pgs_auc_ci_audit_20251006"  # where eval_df_final_auc_ci.csv lives
-if (!exists("stamp") || !is.character(stamp) || length(stamp) != 1) {
-  stamp <- format(Sys.Date(), "%Y%m%d")
+if (!exists("audit_dir")) {
+  audit_candidates <- list.dirs("results", recursive = FALSE, full.names = TRUE)
+  audit_candidates <- audit_candidates[grepl("pgs_auc_ci_audit_\\d{8}$", audit_candidates)]
+  stopifnot("No pgs_auc_ci_audit_<DATE> directory found under results/" = length(audit_candidates) > 0)
+  audit_dir <- audit_candidates[order(file.info(audit_candidates)$mtime, decreasing = TRUE)][1]
 }
 
 # drop "Not reported" by default from plots
