@@ -29,7 +29,7 @@ pgscatalog_meta/
 ├── analysis/
 │   ├── 01_Installation_API_and_perfomance_pull.R
 │   ├── 02_loading_PGS_matrix.R
-│   ├── 03_bulk_metada_pull.R
+│   ├── 03_bulk_metadata_pull.R
 │   ├── 04_PGS_systemic_portability_unique_pss.R
 │   ├── 05_pgs_auc_ci_audit.R
 │   ├── 06_meta_ivw.R
