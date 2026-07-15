@@ -1,0 +1,495 @@
+================================================================================
+PEER REVIEW STATISTICS LOG
+PGS Catalog systemic portability meta-analysis
+================================================================================
+
+Analysis stamp (STAMP): 20260430
+Data source: PGS Catalog bulk FTP metadata release + REST API (quincunx)
+Log generated: 2026-07-15
+Main publication figure: faceted delta-AUC forest plot
+  meta_roadmap_two_stages/20260430/plots/results/deltaAUC_forest_faceted_20260430.pdf
+
+This log documents the statistical methods and results for peer review, aligned
+with the six standard reporting items requested by reviewers. Numerical values
+are transcribed from committed analysis outputs (STAMP 20260430). All script
+names and execution order match the pgscatalog_meta GitHub repository README.
+
+Primary inference for the main figure: inverse-variance-weighted delta-AUC
+with 95% confidence intervals; significance assessed by whether the CI
+excludes zero (not by p-value thresholds).
+
+================================================================================
+PIPELINE EXECUTION ORDER (pgscatalog_meta GitHub repository)
+================================================================================
+
+Run sequentially from the repository root:
+
+  Rscript analysis/01_Installation_API_and_perfomance_pull.R
+  Rscript analysis/02_loading_PGS_matrix.R
+  Rscript analysis/03_bulk_metada_pull.R
+  Rscript analysis/04_PGS_systemic_portability_unique_pss.R
+  Rscript analysis/05_pgs_auc_ci_audit.R
+  Rscript analysis/06_meta_ivw.R
+  Rscript analysis/07_i_square_filter.R
+  Rscript analysis/08_generate_publication_figures.R
+
+Script roles:
+  01  Download PGS Catalog API performance metrics -> data/pgs_cache/
+  02  Load and validate API-derived tables
+  03  Download bulk metadata; derive train_bucket -> data/pgs_cache/
+  04  Build evaluation-level dataset (unique PSS, R-tight deduplication)
+  05  Harmonize AUC estimates and CIs -> eval_df_final_auc_ci.csv
+  06  Stage-1 + Stage-2 fixed-effect IVW meta-analysis on logit(AUC)
+      -> meta_roadmap_two_stages/<STAMP>/tables/stage1_pooled_cells_<STAMP>.csv
+  07  Heterogeneity filter (I2 > 80%, k_eval >= 2)
+      -> stage1_pooled_cells_I2filtered_<STAMP>.csv
+  08  Rebuild paired delta-AUC, IVW pooling, faceted forest plot
+      -> deltaAUC_forest_faceted_<STAMP>.pdf (main publication figure)
+
+================================================================================
+DATASET COUNTS AT EACH STAGE (STAMP 20260430)
+================================================================================
+
+Bulk PGS Catalog snapshot:
+  Performance metrics (PPM):              21,166
+  Evaluation sample sets (PSS):           10,229
+  Cohort dictionary entries:               2,474
+  PGS with training-ancestry bucket:       5,323
+
+AUC / CI harmonization (analysis/05_pgs_auc_ci_audit.R):
+  Records with finite AUC:                 4,279
+  Records with usable 95% CI:              4,099
+    - reported (native or parsed):          3,475
+    - inferred (Hanley-McNeil):               624
+
+Stage-1 inverse-variance weighted pooling (analysis/06_meta_ivw.R):
+  Pooled cells (trait x PGS x eval ancestry):  2,818
+  After I2 > 80% exclusion (k_eval >= 2):      2,525  (293 removed)
+
+Main figure (faceted delta-AUC forest):
+  Traits passing reproduction gate:             10
+  Trait x bucket x ancestry cells plotted:      28
+
+================================================================================
+SECTION 1. SAMPLE SIZE (n) PER GROUP/CONDITION
+================================================================================
+
+Units of measurement and discrete counts
+---------------------------------------
+
+A. Per-evaluation sample size (individuals)
+   Unit: persons (cases, controls, or total individuals)
+   Source columns: PSS number_of_individuals, number_of_cases, number_of_controls
+   Effective sample size for weighting:
+     Neff = 4 / (1/cases + 1/controls)   when both cases and controls > 0
+     otherwise weight = number_of_individuals
+
+B. Number of pooled evaluations per cell (k_eval)
+   Unit: count of distinct performance evaluations pooled within one
+         (trait x PGS x evaluation ancestry) cell
+   Range in Stage-1 table: k_eval = 1 (single evaluation) to k_eval >= 2
+   (multiple cohort evaluations meta-analyzed)
+
+C. Number of PGS pairs per delta-AUC estimate (n_pairs)
+   Unit: count of polygenic scores (PGS) contributing to one
+         (trait x training bucket x target ancestry) comparison
+   Definition: same PGS evaluated in both European and target ancestry,
+               with finite pooled AUC and SE for both ancestries
+
+D. Groups/conditions
+   Each statistical cell is defined by:
+     - trait_label (harmonized phenotype, EFO-preferred)
+     - trained_bucket (training ancestry of the PGS)
+     - ancestry_display / target_ancestry (evaluation ancestry)
+   European ancestry is the reference for all delta-AUC comparisons.
+
+Training ancestry buckets (5 categories):
+  Train: European-only
+  Train: African-only
+  Train: East Asian-only
+  Train: South Asian-only
+  Train: Multi incl. EUR
+  Train: Multi excl. EUR
+
+Evaluation ancestry display categories (10):
+  European, African, East Asian, South Asian,
+  Hispanic or Latin American, Middle Eastern or North African,
+  Other/Mixed, Not reported,
+  Multi-ancestry including European, Multi-ancestry excluding European
+
+Per-cell n_pairs for the 10 forest traits (main figure)
+-------------------------------------------------------
+See Supplementary Table 1, sheet "deltaAUC" (attached to the article), for
+trait x bucket x ancestry n_pairs and delta-AUC estimates with 95% CIs.
+Summary: n_pairs ranges from 1 to 12 across the 28 plotted cells.
+
+================================================================================
+SECTION 2. DISTINCT SAMPLES VS REPEATED MEASURES
+================================================================================
+
+Measurements are NOT from independent biological replicates in the
+conventional experimental sense. The analysis uses repeated evaluations
+of the same polygenic score (PGS) across distinct evaluation sample sets
+and cohorts drawn from the PGS Catalog.
+
+Evidence (analysis/04_PGS_systemic_portability_unique_pss.R, analysis/06_meta_ivw.R):
+  - The same PGS_id is evaluated in multiple performance metrics (PPM)
+    linked to different evaluation sample sets (PSS).
+  - R-tight deduplication (step 04) retains one PPM per (PGS x PSS x
+    evaluation ancestry), but the same PGS still appears across many PSS/cohorts.
+  - Stage-1 pooling (step 06) aggregates k_eval distinct evaluations within
+    each (trait x PGS x ancestry) cell; k_eval records the repeat count.
+  - Paired delta-AUC comparisons (step 08) pair the SAME PGS across European
+    vs target evaluation ancestry within the same training bucket.
+
+Interpretation for reviewers:
+  n_pairs counts distinct PGS (not distinct individuals).
+  Per-evaluation sample sizes (cases/controls/individuals) describe the
+  cohorts in which each PGS was evaluated, not a single controlled trial.
+
+================================================================================
+SECTION 3. STATISTICAL METHODS AND INFERENCE
+================================================================================
+
+Analysis stage                          Method                          Inference
+--------------------------------------------------------------------------------
+Stage-1 AUC pooling                     Fixed-effect IVW on logit(AUC)  Estimation
+Stage-2 AUC pooling (across PGS)        Fixed-effect IVW on logit(AUC)  Estimation
+Heterogeneity assessment                Cochran Q, I-squared            Diagnostic
+Heterogeneity exclusion                 I2 > 80% when k_eval >= 2       Filter
+Delta-AUC point estimate (forest)     IVW of per-PGS differences      Estimation
+Delta-AUC inference (main figure)       95% CI for delta_hat            CI excludes 0
+Weighted intercept-only lm              IVW mean via lm(diff ~ 1)       Optional p-value
+
+Primary estimand (main figure):
+  delta-AUC = AUC_target - AUC_European
+  Pooled across PGS within each (trait x training bucket x target ancestry)
+  cell by inverse-variance weighting.
+
+Primary inference rule (main figure):
+  Significance is assessed by whether the 95% confidence interval for
+  pooled delta-AUC excludes zero:
+    - lo > 0  -> higher AUC in target ancestry than European reference
+    - hi < 0  -> lower AUC in target ancestry (reduced portability)
+    - lo <= 0 <= hi  -> inconclusive; CI includes zero
+  P-value thresholds are NOT used for main-figure interpretation.
+
+IVW implementation (analysis/08_generate_publication_figures.R):
+  Per PGS i within each cell:
+    diff_i    = AUC_target_i - AUC_European_i
+    diff_se_i = sqrt(SE_European_i^2 + SE_target_i^2)
+
+  Pooled point estimate and CI (used in forest plot and deltaAUC sheet):
+    w_i       = 1 / diff_se_i^2
+    delta_hat = sum(w_i * diff_i) / sum(w_i)
+    se_hat    = sqrt(1 / sum(w_i))
+    lo        = delta_hat - 1.96 * se_hat
+    hi        = delta_hat + 1.96 * se_hat
+
+  Weighted intercept-only linear model (equivalent IVW estimator):
+    model     = lm(diff ~ 1, weights = 1 / diff_se^2)
+    estimate  = coef(model)[1]   # equals delta_hat
+    p-value   = summary(model)$coefficients[1, 4]   # two-sided Pr(>|t|)
+                  tests H0: weighted mean delta-AUC = 0 when n_pairs >= 3
+
+  The lm fits an inverse-variance-weighted mean of diff; it is not a
+  covariate-adjusted regression. The p-value is a supplementary consistency
+  check of the same null hypothesis; the main figure uses delta_hat and CI only.
+
+================================================================================
+SECTION 4. COVARIATES TESTED / STRATIFICATION VARIABLES
+================================================================================
+
+This is a meta-analysis of published PGS Catalog performance records, not
+a primary GWAS or prospective cohort analysis. Stratification variables
+used in the portability analysis are:
+
+  1. trait_label
+     Harmonized phenotype label (EFO-preferred where available)
+
+  2. ancestry_display (evaluation ancestry)
+     Ten display categories; European is reference for delta-AUC
+
+  3. trained_bucket (training ancestry of the PGS)
+     Five buckets derived from GWAS/development sample ancestry composition
+
+  4. Sample size / effective sample size (Neff)
+     Used as inverse-variance weights in pooling, not as a regression covariate
+
+PGS Catalog performance record covariates:
+  Individual performance metrics in the PGS Catalog may include model
+  covariates (e.g., age, sex, principal components) recorded in the
+  covariates_included_in_the_model field. The pipeline does not fit new
+  regression models on individual-level data. It meta-analyzes published
+  AUC estimates. Where multiple performance records exist for the same
+  PGS x sample set x ancestry, R-tight deduplication selects one record
+  (preferring larger Neff / n, then highest AUC; analysis/04_PGS_systemic_portability_unique_pss.R).
+
+No additional covariates (e.g., sex, age) are tested as effect modifiers
+in the main delta-AUC forest analysis.
+
+================================================================================
+SECTION 5. ASSUMPTIONS AND CORRECTIONS
+================================================================================
+
+Transformations and variance model
+  - AUC pooled on logit scale: eta = qlogis(clamp(AUC, eps, 1-eps))
+  - Per-study logit SE from 95% CI: SE = (qlogis(hi) - qlogis(lo)) / (2*1.96)
+  - Missing CIs inferred by Hanley-McNeil variance from case/control counts
+    when AUC is reported but CI is absent (analysis/05_pgs_auc_ci_audit.R)
+  - Pooled AUC back-transformed: AUC_pooled = plogis(eta_pooled)
+
+Meta-analysis assumptions
+  - Fixed-effect inverse-variance weighted model (not random-effects)
+  - No tau-squared (between-study variance) estimated
+  - Independence of European and target SEs assumed for delta SE:
+      SE_delta = sqrt(SE_EUR^2 + SE_target^2)   [conservative]
+
+Heterogeneity
+  - Cochran Q: Q = sum(w * (eta - eta_hat)^2), df = k - 1
+  - I-squared: I2 = max(0, (Q - df) / Q) * 100
+  - Exclusion rule (analysis/07_i_square_filter.R): remove cells where
+      k_eval >= 2 AND I2 > 80%
+
+Normality
+  - No formal normality test applied (no Shapiro-Wilk or equivalent)
+  - 95% CIs for delta-AUC use large-sample normal approximation (z = 1.96)
+    on the IVW standard error
+
+Inference rule (main figure)
+  - Primary significance criterion: 95% CI for delta-AUC excludes zero
+  - No p-value threshold applied to the main faceted forest plot
+  - No multiple-comparison correction applied to main-figure inference
+
+Exploratory output (not used for main-figure conclusions)
+  - Benjamini-Hochberg FDR-adjusted p-values are optionally computed in
+    paired_weightedtest_by_bucket_rebuilt_<STAMP>.csv for sensitivity checks
+  - These test H0: IVW mean delta-AUC = 0 via the weighted lm when n_pairs >= 3
+  - FDR results are supplementary and not used for main-figure interpretation
+
+Reproduction gate (main figure trait selection; analysis/08_generate_publication_figures.R)
+  - Training buckets: European-only OR Multi incl. EUR
+  - Traits retained only if any tile has n_pairs >= 2
+  - Result: 10 traits in faceted forest (reproduction_gate_keep_traits)
+
+Confidence intervals
+  - All delta-AUC CIs reported at 95% (delta_hat +/- 1.96 * se_hat)
+  - Stage-1 AUC CIs use z = 1.96 on the logit scale
+
+================================================================================
+SECTION 6. INFERENCE REPORTING -> SUPPLEMENTARY TABLE 1
+================================================================================
+
+Full numerical results are provided in Supplementary Table 1, attached to
+the article. The table is not reproduced in this log file.
+
+Primary inferential quantities for the main figure are in Supplementary
+Table 1, sheet "deltaAUC": delta_hat (effect size), lo and hi (95% CI),
+n_pairs, and se_hat. Significance is interpreted by whether the 95% CI
+excludes zero (see Section 3).
+
+Supplementary Table 1 is a multi-sheet workbook (STAMP 20260430) with four
+sheets, each corresponding to a pipeline output file listed below.
+
+--------------------------------------------------------------------------------
+Sheet 1: trait_mapping_audit
+--------------------------------------------------------------------------------
+Source file: meta_roadmap_two_stages/20260430/tables/
+             trait_mapping_audit_original_method_20260430.csv
+Produced by: analysis/06_meta_ivw.R
+
+Audits how reported trait names from source datasets were mapped to internal
+trait identifiers used in the meta-analysis.
+
+Columns:
+  trait_id       Internal standardized trait identifier (e.g. custom:type_2_diabetes)
+  trait_label    Human-readable label (e.g. "Type 2 diabetes", "Breast cancer")
+  reported_trait Original trait name from the source study/dataset
+  n_rows         Number of meta-analysis records using this trait_id mapping
+
+Function: documents which traits are represented, how many PGS performance
+records exist per trait, and where variant reported labels map to a common ID.
+
+--------------------------------------------------------------------------------
+Sheet 2: step1_pooled_cells
+--------------------------------------------------------------------------------
+Source file: meta_roadmap_two_stages/20260430/tables/
+             stage1_pooled_cells_20260430.csv
+Produced by: analysis/06_meta_ivw.R
+
+Stage-1 fixed-effect IVW meta-analysis: one row per PGS x trait x evaluation
+ancestry cell (2,818 rows).
+
+Columns:
+  pgs_id           PGS Catalog identifier (e.g. PGS000001)
+  trait_label      Phenotype evaluated
+  ancestry_display Evaluation cohort ancestry (e.g. European, African)
+  eta              Logit-scale AUC (pooled when k_eval > 1, single when k_eval = 1)
+  se               Standard error of eta
+  Q                Cochran's Q heterogeneity statistic (NA when k_eval = 1)
+  I2               I-squared heterogeneity, % (NA when k_eval = 1)
+  k_eval           Number of evaluation records pooled in this cell
+  auc_pooled       Pooled AUC on probability scale
+  lo_pooled        Lower bound of 95% CI for AUC
+  hi_pooled        Upper bound of 95% CI for AUC
+
+Interpretation: each row is one PGS-trait-ancestry evaluation with pooled AUC
+and heterogeneity metrics when multiple cohort evaluations are available
+(k_eval >= 2), otherwise single-cohort performance.
+
+--------------------------------------------------------------------------------
+Sheet 3: pooled_cells_I2filtered
+--------------------------------------------------------------------------------
+Source file: meta_roadmap_two_stages/20260430/tables/
+             stage1_pooled_cells_I2filtered_20260430.csv
+Produced by: analysis/07_i_square_filter.R
+
+Same columns and structure as step1_pooled_cells. Subset retaining only cells
+that pass the heterogeneity filter: cells with k_eval >= 2 AND I2 > 80% are
+excluded (293 removed; 2,525 retained). Numeric values for overlapping rows
+match step1_pooled_cells exactly. Used as input for all downstream delta-AUC
+and figure analyses.
+
+--------------------------------------------------------------------------------
+Sheet 4: deltaAUC
+--------------------------------------------------------------------------------
+Source file: meta_roadmap_two_stages/20260430/tables/
+             deltaAUC_forest_faceted_data_20260430.csv
+Produced by: analysis/08_generate_publication_figures.R
+
+Delta-AUC portability estimates for the main faceted forest plot: one row per
+trait x training bucket x target ancestry cell (28 rows across 10 traits).
+
+Columns:
+  trait_label      Phenotype (e.g. "Breast cancer", "Type 2 diabetes")
+  trained_bucket   Training PGS ancestry bucket (e.g. "Train: European-only",
+                   "Train: Multi incl. EUR")
+  target_ancestry  Target evaluation ancestry (European is reference)
+  n_pairs          Number of PGS contributing paired EUR/target estimates
+  w                Inverse-variance weight (1 / se_delta^2) for meta-analysis
+  delta_hat        Pooled delta-AUC = AUC_target - AUC_European
+  se_hat           Standard error of delta_hat
+  all_not_pooled   TRUE if all contributing PGS cells had k_eval < 2 on both
+                   EUR and target sides (single-evaluation only)
+  lo               Lower bound of 95% CI for delta_hat
+  hi               Upper bound of 95% CI for delta_hat
+  pooled_group     Same as all_not_pooled; TRUE = hollow points in forest plot
+                   (all single-eval); FALSE = includes pooled cells
+  trait_clean      Standardized trait label for figure display
+
+Negative delta_hat indicates lower AUC in the target ancestry relative to
+European evaluation cohorts (reduced portability).
+
+Significance interpretation (sheet deltaAUC):
+  A cell shows evidence of a portability difference when lo > 0 or hi < 0
+  (95% CI excludes zero). All other cells are inconclusive at the 95% level.
+
+Summary of CI-based inference (10 forest traits, STAMP 20260430):
+  Total deltaAUC cells:                         28
+  Cells with 95% CI excluding zero:              2
+    - Type 2 diabetes / EUR-only / Hispanic or Latin American
+      delta_hat = 0.0524, 95% CI [0.0382, 0.0667] (higher in target)
+    - Type 2 diabetes / Multi incl. EUR / Hispanic or Latin American
+      delta_hat = 0.0489, 95% CI [0.0175, 0.0804] (higher in target)
+  Remaining 26 cells: 95% CI includes zero (inconclusive)
+
+--------------------------------------------------------------------------------
+Optional supplementary output (exploratory; not primary inference)
+--------------------------------------------------------------------------------
+
+paired_weightedtest_by_bucket_rebuilt_20260430.csv contains the IVW lm
+intercept estimate and two-sided p-value (when n_pairs >= 3), plus optional
+Benjamini-Hochberg FDR-adjusted p-values. These test the same null hypothesis
+(weighted mean delta-AUC = 0) but are not used for main-figure conclusions.
+See Section 3 and Section 5.
+
+================================================================================
+KEY FORMULAS (for reviewer traceability)
+================================================================================
+
+1. Logit transform and SE from 95% CI (analysis/06_meta_ivw.R):
+     eta = qlogis(clamp(AUC))
+     SE  = (qlogis(CI_hi) - qlogis(CI_lo)) / (2 * 1.96)
+
+2. Fixed-effect IVW pooling (analysis/06_meta_ivw.R):
+     w       = 1 / SE^2
+     eta_hat = sum(w * eta) / sum(w)
+     SE_hat  = sqrt(1 / sum(w))
+     AUC_pooled = plogis(eta_hat)
+     95% CI: plogis(eta_hat +/- 1.96 * SE_hat)
+
+3. Cochran Q and I-squared (analysis/06_meta_ivw.R):
+     Q  = sum(w * (eta - eta_hat)^2),  df = k - 1
+     I2 = max(0, (Q - df) / Q) * 100
+
+4. Hanley-McNeil variance (analysis/05_pgs_auc_ci_audit.R):
+     Q1 = A / (2 - A),  Q2 = 2*A^2 / (1 + A)
+     varA = (A*(1-A) + (n_cases-1)*(Q1-A^2) + (n_controls-1)*(Q2-A^2))
+            / (n_cases * n_controls)
+
+5. Per-PGS delta-AUC (analysis/08_generate_publication_figures.R):
+     delta_i = AUC_target_i - AUC_European_i
+
+6. Pooled delta-AUC and CI (analysis/08_generate_publication_figures.R):
+     w_i = 1 / (SE_target_i^2 + SE_EUR_i^2)
+     delta_hat = sum(w_i * delta_i) / sum(w_i)
+     se_hat    = sqrt(1 / sum(w_i))
+     95% CI: delta_hat +/- 1.96 * se_hat
+
+7. IVW pooled delta-AUC via weighted intercept-only lm
+   (analysis/08_generate_publication_figures.R):
+     model = lm(diff ~ 1, weights = 1/(SE_EUR^2 + SE_target^2))
+     Intercept = IVW mean delta-AUC (= delta_hat)
+     Primary inference: lo = delta_hat - 1.96*se_hat, hi = delta_hat + 1.96*se_hat
+     Significance: CI excludes zero (lo > 0 or hi < 0)
+
+8. Optional exploratory p-values (analysis/08_generate_publication_figures.R):
+     p.value = summary(model)$coefficients[1, 4]   # two-sided Pr(>|t|), n_pairs >= 3
+     p.adj   = p.adjust(p.value, method = "fdr")   # not used for main figure
+
+================================================================================
+SOURCE OUTPUT FILES (STAMP 20260430)
+================================================================================
+
+Supplementary Table 1 sheets -> repository output files:
+  Sheet trait_mapping_audit     -> trait_mapping_audit_original_method_20260430.csv
+  Sheet step1_pooled_cells      -> stage1_pooled_cells_20260430.csv
+  Sheet pooled_cells_I2filtered -> stage1_pooled_cells_I2filtered_20260430.csv
+  Sheet deltaAUC (primary inference) -> deltaAUC_forest_faceted_data_20260430.csv
+  Optional exploratory p-values -> paired_weightedtest_by_bucket_rebuilt_20260430.csv
+
+Produced by analysis/01-03 (data/pgs_cache/):
+  data/pgs_cache/train_bucket_20260430.csv
+  data/pgs_cache/bulk_performance_metrics_20260430.csv
+  data/pgs_cache/bulk_evaluation_sample_sets_20260430.csv
+
+Produced by analysis/05_pgs_auc_ci_audit.R:
+  eval_df_final_auc_ci.csv
+
+Produced by analysis/06_meta_ivw.R:
+  meta_roadmap_two_stages/20260430/tables/stage1_pooled_cells_20260430.csv
+  meta_roadmap_two_stages/20260430/tables/trait_mapping_audit_original_method_20260430.csv
+  meta_roadmap_two_stages/20260430/tables/ancestry_display_mapping_20260430.csv
+
+Produced by analysis/07_i_square_filter.R:
+  meta_roadmap_two_stages/20260430/tables/stage1_I2_summary_20260430.csv
+  meta_roadmap_two_stages/20260430/tables/stage1_pooled_cells_I2filtered_20260430.csv
+
+Produced by analysis/08_generate_publication_figures.R:
+  meta_roadmap_two_stages/20260430/tables/paired_weightedtest_by_bucket_rebuilt_20260430.csv
+  meta_roadmap_two_stages/20260430/tables/reproduction_gate_keep_traits_20260430.csv
+  meta_roadmap_two_stages/20260430/tables/reproduction_gate_heatmap_df_20260430.csv
+  meta_roadmap_two_stages/20260430/tables/deltaAUC_forest_faceted_data_20260430.csv
+  meta_roadmap_two_stages/20260430/plots/results/deltaAUC_forest_faceted_20260430.pdf
+
+Script name mapping (development workspace -> GitHub repository):
+  06_PGS_systemic_portability_unique_pss.R  ->  analysis/04_PGS_systemic_portability_unique_pss.R
+  07_2_pgs_auc_ci_audit.R                   ->  analysis/05_pgs_auc_ci_audit.R
+  12_meta_roadmap_two_stages.R              ->  analysis/06_meta_ivw.R
+  12_i_square_filter.R                      ->  analysis/07_i_square_filter.R
+  12_meta_results_overview_pythonStyle.R    ->  analysis/08_generate_publication_figures.R
+  (IVW delta-AUC and CI logic consolidated into step 08)
+
+================================================================================
+END OF LOG
+================================================================================
