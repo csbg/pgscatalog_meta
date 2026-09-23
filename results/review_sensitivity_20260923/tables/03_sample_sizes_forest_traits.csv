@@ -1,0 +1,36 @@
+trait_label,ancestry_display,n_evaluations,n_distinct_pgs,n_reported_ci,n_inferred_ci,n_with_case_control,median_n_cases,iqr_n_cases_lo,iqr_n_cases_hi,min_n_cases,median_n_controls,min_n_controls,median_n_individuals,median_case_fraction
+Apparent Treatment-Resistant Hypertension,African,2,2,2,0,2,574,574,574,574,4452,4452,5026,0.11420612813370473
+Apparent Treatment-Resistant Hypertension,European,2,2,1,1,2,2961,2961,2961,2961,25584,25584,28545,0.10373095112979507
+Breast Carcinoma,African,10,5,10,0,10,27,27,27,27,4400,4400,4427,0.006098938332956856
+Breast Carcinoma,European,30,5,30,0,30,194,176,3083,176,8115,2460,8291,0.021227837414063443
+Breast Carcinoma,South Asian,10,5,10,0,10,43,43,43,43,4392,4392,4435,0.009695603156708005
+Breast cancer,African,6,4,6,0,6,2528,2354,3986,124,4742,1032,7096,0.39716132463207227
+Breast cancer,East Asian,14,12,8,6,13,368,53,1127,51,1803,51,1857,0.10298507462686567
+Breast cancer,European,132,92,123,9,132,2685,1341,6242,387,33648,387,35878.5,0.09108286760736017
+Breast cancer,Hispanic or Latin American,5,3,5,0,5,147,147,220,147,2049,2049,2196,0.06693989071038252
+Breast cancer,South Asian,23,12,23,0,23,196,196,197,161,7670,4154,7831,0.020559315540799386
+Colorectal cancer,African,5,4,5,0,5,1954,56,1954,56,11869,5193,13823,0.14135860522317875
+Colorectal cancer,East Asian,20,14,15,5,18,638,626,987.25,96,2207,832,3044.5,0.4006653467233011
+Colorectal cancer,European,42,29,35,7,42,1311,611,2568,380,33541,353,34152,0.019382839087807593
+Colorectal cancer,Hispanic or Latin American,5,4,5,0,5,1681,70,1681,70,8696,6590,10377,0.16199286884456007
+Coronary heart disease (incident and prevalent),African,4,4,0,4,4,838,838,838,838,6759,6759,7597,0.11030670001316309
+Coronary heart disease (incident and prevalent),European,10,7,6,4,10,8108,388,8108,388,37537,3830,45645,0.10038049570314703
+Coronary heart disease (incident and prevalent),Hispanic or Latin American,4,4,0,4,4,419,419,419,419,2074,2074,2493,0.16807059767348576
+Epithelial non-mucinous ovarian cancer,East Asian,2,2,0,2,2,2841,2841,2841,2841,4828,4828,7669,0.3704524709870909
+Epithelial non-mucinous ovarian cancer,European,2,2,0,2,2,657,657,657,657,198101,198101,198758,0.003305527324686302
+Incident chronic obstructive pulmonary disease before age 50 years,African,2,2,2,0,0,NA,NA,NA,NA,NA,NA,2464,NA
+Incident chronic obstructive pulmonary disease before age 50 years,European,2,2,2,0,0,NA,NA,NA,NA,NA,NA,6647,NA
+Incident coronary heart disease,East Asian,3,3,0,3,3,6321,6321,6321,6321,16430,16430,22751,0.2778339413652147
+Incident coronary heart disease,European,6,5,3,3,6,4970,4970,6789.5,195,47732,3188,52702,0.07597248419893815
+Incident coronary heart disease,Hispanic or Latin American,3,3,0,3,3,314,314,314,314,5824,5824,6138,0.051156728576083416
+Incident coronary heart disease,South Asian,3,3,0,3,3,517,517,517,517,8661,8661,9178,0.05633035519721072
+Seropositive RA,European,48,12,48,0,48,1761.5,905.5,4121,205,143479.5,65726,144774,0.014498875065144218
+Seropositive RA,South Asian,12,12,12,0,12,60,60,60,60,43997,43997,44057,0.0013618721202079125
+Stroke excluding subarachnoid hemorrhage,European,52,13,52,0,52,4859.5,3895,10444.5,2035,74950,43633,78569.5,0.0736417427537494
+Stroke excluding subarachnoid hemorrhage,South Asian,26,13,26,0,26,317.5,211,424,211,26374,9115,26691.5,0.016124407947902826
+Type 2 diabetes,African,26,9,6,20,26,1831.5,494.75,5366,300,3864,355,6121.5,0.338737949167397
+Type 2 diabetes,East Asian,81,41,23,58,81,1057,76,2806,16,1356,563,2846,0.23076923076923078
+Type 2 diabetes,European,151,85,121,30,151,8924,4884,10069,180,98952,6408,109021,0.09235835297786665
+Type 2 diabetes,Hispanic or Latin American,50,33,29,21,50,4033,1340,4033,307,16349,779,20486,0.20194279019818412
+Type 2 diabetes,Middle Eastern or North African,3,3,1,2,2,2469,2469,2469,2469,2469,2469,4938,0.5
+Type 2 diabetes,South Asian,67,40,47,20,67,1253,629,2066,88,5739,235,6992,0.17920480549199086

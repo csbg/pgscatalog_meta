@@ -1,0 +1,18 @@
+ancestry_display,ci_class,n,n_auc,share
+European,Reported in Catalog,1906,2416,0.7889072847682119
+European,Hanley-McNeil recovery,369,2416,0.1527317880794702
+European,No usable CI,141,2416,0.05836092715231788
+African,Reported in Catalog,79,115,0.6869565217391305
+African,Hanley-McNeil recovery,36,115,0.3130434782608696
+East Asian,Reported in Catalog,328,1894,0.17317845828933473
+East Asian,Hanley-McNeil recovery,1461,1894,0.7713833157338965
+East Asian,No usable CI,105,1894,0.05543822597676874
+South Asian,Reported in Catalog,513,550,0.9327272727272727
+South Asian,Hanley-McNeil recovery,28,550,0.05090909090909091
+South Asian,No usable CI,9,550,0.016363636363636365
+Hispanic or Latin American,Reported in Catalog,71,110,0.6454545454545455
+Hispanic or Latin American,Hanley-McNeil recovery,33,110,0.3
+Hispanic or Latin American,No usable CI,6,110,0.05454545454545454
+Middle Eastern or North African,Reported in Catalog,215,230,0.9347826086956522
+Middle Eastern or North African,Hanley-McNeil recovery,3,230,0.013043478260869565
+Middle Eastern or North African,No usable CI,12,230,0.05217391304347826

@@ -1,0 +1,208 @@
+pgs_id,group,pct,stage
+PGS000011,European,40.3,GWAS (variant associations)
+PGS000011,Multi-ancestry including European,53.3,GWAS (variant associations)
+PGS000011,South Asian,6.4,GWAS (variant associations)
+PGS000013,African,1.7,GWAS (variant associations)
+PGS000013,East Asian,6,GWAS (variant associations)
+PGS000013,European,75.3,GWAS (variant associations)
+PGS000013,Hispanic or Latin American,2.2,GWAS (variant associations)
+PGS000013,Middle Eastern or North African,1.2,GWAS (variant associations)
+PGS000013,South Asian,13.6,GWAS (variant associations)
+PGS000018,African,0.8,GWAS (variant associations)
+PGS000018,East Asian,3,GWAS (variant associations)
+PGS000018,European,37,GWAS (variant associations)
+PGS000018,Hispanic or Latin American,1.1,GWAS (variant associations)
+PGS000018,Middle Eastern or North African,0.6,GWAS (variant associations)
+PGS000018,Multi-ancestry including European,50.9,GWAS (variant associations)
+PGS000018,South Asian,6.7,GWAS (variant associations)
+PGS000028,African,2.6,GWAS (variant associations)
+PGS000028,East Asian,13.4,GWAS (variant associations)
+PGS000028,European,80.7,GWAS (variant associations)
+PGS000028,Hispanic or Latin American,3.3,GWAS (variant associations)
+PGS000200,European,88.3,GWAS (variant associations)
+PGS000200,South Asian,11.7,GWAS (variant associations)
+PGS000330,European,100,GWAS (variant associations)
+PGS000729,European,100,GWAS (variant associations)
+PGS000864,European,100,GWAS (variant associations)
+PGS000868,European,100,GWAS (variant associations)
+PGS001800,European,100,GWAS (variant associations)
+PGS001801,European,100,GWAS (variant associations)
+PGS002238,African,15.1,GWAS (variant associations)
+PGS002238,East Asian,21.8,GWAS (variant associations)
+PGS002238,European,58.3,GWAS (variant associations)
+PGS002238,Hispanic or Latin American,3.6,GWAS (variant associations)
+PGS002238,Other/Mixed,1.2000000000000002,GWAS (variant associations)
+PGS002239,African,15.1,GWAS (variant associations)
+PGS002239,East Asian,21.8,GWAS (variant associations)
+PGS002239,European,58.3,GWAS (variant associations)
+PGS002239,Hispanic or Latin American,3.6,GWAS (variant associations)
+PGS002239,Other/Mixed,1.2000000000000002,GWAS (variant associations)
+PGS002308,African,2.2,GWAS (variant associations)
+PGS002308,East Asian,16.1,GWAS (variant associations)
+PGS002308,European,81.7,GWAS (variant associations)
+PGS002671,European,100,GWAS (variant associations)
+PGS002771,European,100,GWAS (variant associations)
+PGS002780,European,100,GWAS (variant associations)
+PGS003394,European,100,GWAS (variant associations)
+PGS003443,European,100,GWAS (variant associations)
+PGS003850,East Asian,72.9,GWAS (variant associations)
+PGS003850,European,27.1,GWAS (variant associations)
+PGS003851,European,100,GWAS (variant associations)
+PGS003852,East Asian,72.9,GWAS (variant associations)
+PGS003852,European,27.1,GWAS (variant associations)
+PGS003867,African,6.6,GWAS (variant associations)
+PGS003867,East Asian,28.4,GWAS (variant associations)
+PGS003867,European,51.1,GWAS (variant associations)
+PGS003867,Hispanic or Latin American,5.6,GWAS (variant associations)
+PGS003867,South Asian,8.3,GWAS (variant associations)
+PGS003983,European,100,GWAS (variant associations)
+PGS003984,African,3.9,GWAS (variant associations)
+PGS003984,East Asian,8.7,GWAS (variant associations)
+PGS003984,European,85.2,GWAS (variant associations)
+PGS003984,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS003984,Other/Mixed,0.1,GWAS (variant associations)
+PGS003984,South Asian,1.7,GWAS (variant associations)
+PGS003999,European,100,GWAS (variant associations)
+PGS004000,African,3.9,GWAS (variant associations)
+PGS004000,East Asian,8.7,GWAS (variant associations)
+PGS004000,European,85.2,GWAS (variant associations)
+PGS004000,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004000,Other/Mixed,0.1,GWAS (variant associations)
+PGS004000,South Asian,1.7,GWAS (variant associations)
+PGS004015,African,3.9,GWAS (variant associations)
+PGS004015,East Asian,8.7,GWAS (variant associations)
+PGS004015,European,85.2,GWAS (variant associations)
+PGS004015,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004015,Other/Mixed,0.1,GWAS (variant associations)
+PGS004015,South Asian,1.7,GWAS (variant associations)
+PGS004025,European,100,GWAS (variant associations)
+PGS004040,European,100,GWAS (variant associations)
+PGS004041,African,3.9,GWAS (variant associations)
+PGS004041,East Asian,8.7,GWAS (variant associations)
+PGS004041,European,85.2,GWAS (variant associations)
+PGS004041,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004041,Other/Mixed,0.1,GWAS (variant associations)
+PGS004041,South Asian,1.7,GWAS (variant associations)
+PGS004053,European,100,GWAS (variant associations)
+PGS004054,African,3.9,GWAS (variant associations)
+PGS004054,East Asian,8.7,GWAS (variant associations)
+PGS004054,European,85.2,GWAS (variant associations)
+PGS004054,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004054,Other/Mixed,0.1,GWAS (variant associations)
+PGS004054,South Asian,1.7,GWAS (variant associations)
+PGS004069,European,100,GWAS (variant associations)
+PGS004070,African,3.9,GWAS (variant associations)
+PGS004070,East Asian,8.7,GWAS (variant associations)
+PGS004070,European,85.2,GWAS (variant associations)
+PGS004070,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004070,Other/Mixed,0.1,GWAS (variant associations)
+PGS004070,South Asian,1.7,GWAS (variant associations)
+PGS004083,European,100,GWAS (variant associations)
+PGS004098,African,3.9,GWAS (variant associations)
+PGS004098,East Asian,8.7,GWAS (variant associations)
+PGS004098,European,85.2,GWAS (variant associations)
+PGS004098,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004098,Other/Mixed,0.1,GWAS (variant associations)
+PGS004098,South Asian,1.7,GWAS (variant associations)
+PGS004106,European,100,GWAS (variant associations)
+PGS004107,European,100,GWAS (variant associations)
+PGS004108,African,3.9,GWAS (variant associations)
+PGS004108,East Asian,8.7,GWAS (variant associations)
+PGS004108,European,85.2,GWAS (variant associations)
+PGS004108,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004108,Other/Mixed,0.1,GWAS (variant associations)
+PGS004108,South Asian,1.7,GWAS (variant associations)
+PGS004118,East Asian,81.3,GWAS (variant associations)
+PGS004118,European,18.7,GWAS (variant associations)
+PGS004123,European,100,GWAS (variant associations)
+PGS004124,African,3.9,GWAS (variant associations)
+PGS004124,East Asian,8.7,GWAS (variant associations)
+PGS004124,European,85.2,GWAS (variant associations)
+PGS004124,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004124,Other/Mixed,0.1,GWAS (variant associations)
+PGS004124,South Asian,1.7,GWAS (variant associations)
+PGS004133,East Asian,81.3,GWAS (variant associations)
+PGS004133,European,18.7,GWAS (variant associations)
+PGS004153,European,100,GWAS (variant associations)
+PGS004154,African,3.9,GWAS (variant associations)
+PGS004154,East Asian,8.7,GWAS (variant associations)
+PGS004154,European,85.2,GWAS (variant associations)
+PGS004154,Hispanic or Latin American,0.3,GWAS (variant associations)
+PGS004154,Other/Mixed,0.1,GWAS (variant associations)
+PGS004154,South Asian,1.7,GWAS (variant associations)
+PGS004696,African,7,GWAS (variant associations)
+PGS004696,East Asian,19.4,GWAS (variant associations)
+PGS004696,European,70.7,GWAS (variant associations)
+PGS004696,Hispanic or Latin American,2.8,GWAS (variant associations)
+PGS004697,African,4.1,GWAS (variant associations)
+PGS004697,East Asian,11.4,GWAS (variant associations)
+PGS004697,European,82.9,GWAS (variant associations)
+PGS004697,Hispanic or Latin American,1.6,GWAS (variant associations)
+PGS004698,African,7,GWAS (variant associations)
+PGS004698,East Asian,19.4,GWAS (variant associations)
+PGS004698,European,70.7,GWAS (variant associations)
+PGS004698,Hispanic or Latin American,2.8,GWAS (variant associations)
+PGS004859,African,3.5,GWAS (variant associations)
+PGS004859,European,81.9,GWAS (variant associations)
+PGS004859,Hispanic or Latin American,1.3,GWAS (variant associations)
+PGS004859,Multi-ancestry excluding European,13.4,GWAS (variant associations)
+PGS005242,African,3.9,GWAS (variant associations)
+PGS005242,European,77,GWAS (variant associations)
+PGS005242,Hispanic or Latin American,1.4,GWAS (variant associations)
+PGS005242,Multi-ancestry excluding European,14.9,GWAS (variant associations)
+PGS005242,South Asian,2.8,GWAS (variant associations)
+PGS005345,European,100,GWAS (variant associations)
+PGS005346,European,100,GWAS (variant associations)
+PGS005347,European,100,GWAS (variant associations)
+PGS005348,European,100,GWAS (variant associations)
+PGS000013,European,100,Score development/training
+PGS000018,Multi-ancestry including European,100,Score development/training
+PGS000330,European,100,Score development/training
+PGS000713,European,100,Score development/training
+PGS001295,European,100,Score development/training
+PGS001336,European,100,Score development/training
+PGS001800,European,100,Score development/training
+PGS001801,European,100,Score development/training
+PGS001818,European,100,Score development/training
+PGS002026,European,100,Score development/training
+PGS002238,European,100,Score development/training
+PGS002239,European,100,Score development/training
+PGS002250,European,100,Score development/training
+PGS002780,European,100,Score development/training
+PGS003394,European,100,Score development/training
+PGS003443,Hispanic or Latin American,100,Score development/training
+PGS003983,European,100,Score development/training
+PGS003984,European,100,Score development/training
+PGS003999,European,100,Score development/training
+PGS004000,European,100,Score development/training
+PGS004015,European,100,Score development/training
+PGS004025,European,100,Score development/training
+PGS004040,European,100,Score development/training
+PGS004041,European,100,Score development/training
+PGS004053,European,100,Score development/training
+PGS004054,European,100,Score development/training
+PGS004069,European,100,Score development/training
+PGS004070,European,100,Score development/training
+PGS004083,European,100,Score development/training
+PGS004098,European,100,Score development/training
+PGS004106,European,100,Score development/training
+PGS004107,European,100,Score development/training
+PGS004108,European,100,Score development/training
+PGS004118,European,100,Score development/training
+PGS004123,European,100,Score development/training
+PGS004124,European,100,Score development/training
+PGS004133,European,100,Score development/training
+PGS004153,European,100,Score development/training
+PGS004154,European,100,Score development/training
+PGS004696,African,19.4,Score development/training
+PGS004696,European,64.2,Score development/training
+PGS004696,Hispanic or Latin American,11.4,Score development/training
+PGS004696,Multi-ancestry excluding European,5,Score development/training
+PGS004697,European,100,Score development/training
+PGS004698,African,19.4,Score development/training
+PGS004698,European,64.2,Score development/training
+PGS004698,Hispanic or Latin American,11.4,Score development/training
+PGS004698,Multi-ancestry excluding European,5,Score development/training
+PGS005345,European,100,Score development/training
+PGS005346,European,100,Score development/training
+PGS005347,European,100,Score development/training

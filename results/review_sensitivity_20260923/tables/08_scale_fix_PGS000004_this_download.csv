@@ -1,0 +1,4 @@
+catalog_snapshot,stage1_table,pgs_id,trait_label,ancestry_display,eta,se,I2,k_eval,auc_pooled,lo_pooled,hi_pooled,note
+20260923,unfiltered,PGS000004,Breast cancer,African,0.2958424308423159,0.01607784062623504,37.40828069577125,3,0.5734258512811957,0.5657003686251141,0.5811156683960957,On this download the European Breast cancer cell has I2 > 80 and is dropped before Figure 1C.
+20260923,unfiltered,PGS000004,Breast cancer,European,0.5970307524782752,0.01600206427248812,99.46589010834217,2,0.6449766957616456,0.6377626902615964,0.6521253985793563,On this download the European Breast cancer cell has I2 > 80 and is dropped before Figure 1C.
+20260923,I2_filtered,PGS000004,Breast cancer,African,0.2958424308423159,0.01607784062623504,37.40828069577125,3,0.5734258512811957,0.5657003686251141,0.5811156683960957,On this download the European Breast cancer cell has I2 > 80 and is dropped before Figure 1C.

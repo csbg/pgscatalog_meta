@@ -1,0 +1,8 @@
+role,performance_id,pgs_id,reported_trait,has_auc,auc,r2_class,other_metric_txt,other_info_txt
+auroc_liability_r2_named,PPM014916,PGS002745,Rheumatoid arthritis,TRUE,0.66,liability_scale_other,Liability R2 = 0.059,Performance metrics are the mean values across eave-one-cohort-out cross-validation folds
+auroc_liability_r2_nested,PPM020792,PGS004615,Type 2 diabetes,TRUE,0.657,liability_nested_or_incremental,liability R2 (nested model) = 0.097,
+liability_scale_only_in_free_text,PPM000901,PGS000334,Late-onset Alzheimer’s disease,FALSE,NA,liability_scale_other,"R² = 0.191 [0.131,0.269]",R2 = variance explained on the liability scale
+author_assumed_prevalence,PPM021757,PGS004950,Clinical dilated cardiomyopathy,FALSE,NA,liability_with_assumed_prevalence,"Nagelkerke pseudo-R^2 full model = 0.101, Nagelkerke pseudo-R^2 delta PRS/residual = 0.052, Liability-scale R^2 (assuming 0.4% prev) full model = 0.13, Liability-scale R^2 (assuming 0.4% prev) delta PRS/residual = 0.073, Univariate (PRS only) AUC = 0.64 [0.62,0.66], Univariate (PRS only) AUPRC = 0.1765",beta represents log(OR) per SD of PRS
+figure_1c_unspecified_r2,PPM013064,PGS002308,Type 2 diabetes,TRUE,0.793,unspecified_r2,R² = 0.092,
+figure_1c_nagelkerke,PPM008974,PGS001295,Type 2 diabetes,TRUE,0.83509,nagelkerke_pseudo_r2,"R² = 0.20575, Incremental AUROC (full-covars) = -0.00085, PGS R2 (no covariates) = 0.00265, PGS AUROC (no covariates) = 0.56328 [0.47919,0.64736]",Full Model & PGS R2 is estimated using Nagelkerke's method
+figure_1c_no_r2,PPM000059,PGS000028,Breast cancer,TRUE,0.62,no_r2_reported,,

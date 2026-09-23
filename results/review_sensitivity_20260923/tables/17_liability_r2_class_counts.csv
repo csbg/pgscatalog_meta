@@ -1,0 +1,11 @@
+scope,denominator,r2_class,n
+auroc_metrics,5315,unspecified_r2,2476
+auroc_metrics,5315,no_r2_reported,1367
+auroc_metrics,5315,nagelkerke_pseudo_r2,1291
+auroc_metrics,5315,other_metric_not_r2,105
+auroc_metrics,5315,other_pseudo_r2,60
+auroc_metrics,5315,liability_nested_or_incremental,14
+auroc_metrics,5315,liability_scale_other,2
+figure_1c_metrics,294,no_r2_reported,148
+figure_1c_metrics,294,unspecified_r2,138
+figure_1c_metrics,294,nagelkerke_pseudo_r2,8

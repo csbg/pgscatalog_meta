@@ -1,0 +1,2 @@
+n_cells,n_cells_k1,n_cells_k1_significant_corrected,n_traits,n_traits_all_cells_k1,trait_level_gate_leaves_k1_cells,note
+28,7,4,11,0,TRUE,The figure keeps a trait if any of its cells has at least two PGS; single-PGS cells can remain.

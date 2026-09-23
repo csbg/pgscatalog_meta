@@ -1,0 +1,2 @@
+se_scale,n_figure1c_cells,n_cells_recovered_without_hanley_mcneil,n_cells_lost_without_hanley_mcneil,n_sign_flips,n_inference_flips,n_sig_all,n_sig_reported_only,max_abs_delta_diff
+logit_as_implemented,28,22,6,0,0,2,2,0.020085685135574627

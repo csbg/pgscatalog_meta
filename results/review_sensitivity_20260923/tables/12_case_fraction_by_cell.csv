@@ -1,0 +1,29 @@
+trait_label,trained_bucket,target_ancestry,european_n_sample_sets,target_n_sample_sets,european_n_sample_sets_with_counts,target_n_sample_sets_with_counts,european_total_cases,target_total_cases,european_total_controls,target_total_controls,european_total_individuals,target_total_individuals,european_min_cases_in_a_sample_set,target_min_cases_in_a_sample_set,european_case_fraction,target_case_fraction
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,1,1,1,1,2961,574,25584,4452,28545,5026,2961,574,0.10373095112979507,0.11420612813370473
+Breast Carcinoma,Train: European-only,African,3,1,3,1,3453,27,219852,4400,223305,4427,176,27,0.015463155773493652,0.006098938332956856
+Breast Carcinoma,Train: European-only,South Asian,3,1,3,1,3453,43,219852,4392,223305,4435,176,43,0.015463155773493652,0.009695603156708005
+Breast cancer,Train: European-only,East Asian,2,1,2,1,3425,53,88905,1651,92330,1704,954,53,0.037095201992851726,0.031103286384976527
+Breast cancer,Train: European-only,South Asian,6,3,6,3,27035,554,497928,35946,524963,36500,954,161,0.0514988675392361,0.015178082191780821
+Breast cancer,Train: Multi incl. EUR,East Asian,1,1,1,1,387,51,387,51,774,102,387,51,0.5,0.5
+Colorectal cancer,Train: European-only,African,2,2,2,2,4962,2010,186585,17062,191547,19072,1311,56,0.025904869301007064,0.10539010067114093
+Colorectal cancer,Train: European-only,East Asian,2,1,2,1,4962,96,186585,6870,191547,6966,1311,96,0.025904869301007064,0.013781223083548665
+Colorectal cancer,Train: European-only,Hispanic or Latin American,2,2,2,2,4962,1751,186585,15286,191547,17037,1311,70,0.025904869301007064,0.10277631038328344
+Colorectal cancer,Train: Multi incl. EUR,African,1,1,1,1,3651,1954,115105,11869,118756,13823,3651,1954,0.030743709791505272,0.14135860522317875
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,1,1,1,1,3651,1681,115105,8696,118756,10377,3651,1681,0.030743709791505272,0.16199286884456007
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,2,1,2,1,8496,838,41367,6759,49863,7597,388,838,0.1703868599963901,0.11030670001316309
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,2,1,2,1,8496,419,41367,2074,49863,2493,388,419,0.1703868599963901,0.16807059767348576
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,1,1,1,1,657,2841,198101,4828,198758,7669,657,2841,0.003305527324686302,0.3704524709870909
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,1,1,0,0,0,0,0,0,6647,2464,NA,NA,NA,NA
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,1,1,1,1,4970,6321,47732,16430,52702,22751,4970,6321,0.0943038214868506,0.2778339413652147
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,1,1,1,1,4970,314,47732,5824,52702,6138,4970,314,0.0943038214868506,0.051156728576083416
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,1,1,1,1,4970,517,47732,8661,52702,9178,4970,517,0.0943038214868506,0.05633035519721072
+Seropositive RA,Train: Multi incl. EUR,South Asian,4,1,4,1,13060,60,732243,43997,745303,44057,205,60,0.0175230745079518,0.0013618721202079125
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,4,2,4,2,37920,635,544100,52748,582020,53383,2035,211,0.06515240026115941,0.011895172620497161
+Type 2 diabetes,Train: European-only,East Asian,3,2,3,2,10830,92,190521,3044,201351,3136,180,16,0.053786671037144095,0.029336734693877552
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,1,1,1,1,10069,4033,98952,29619,109021,33652,10069,4033,0.09235835297786665,0.11984428860097468
+Type 2 diabetes,Train: European-only,South Asian,7,4,7,4,92317,10120,842855,58086,935172,68206,180,171,0.09871659972710903,0.14837404333929566
+Type 2 diabetes,Train: Multi incl. EUR,African,1,2,1,2,3646,4008,18660,10012,22306,14020,3646,2004,0.16345377925221913,0.28587731811697575
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,2,2,2,2,13715,176,117612,1919,131327,2095,3646,76,0.104433970166074,0.08400954653937948
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,4,4,4,4,26180,15667,182003,48388,208183,64055,3646,868,0.12575474462372047,0.24458668331902272
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,1,1,1,0,10069,0,98952,0,109021,2669,10069,NA,0.09235835297786665,NA
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,2,2,2,2,13715,1341,117612,5974,131327,7315,3646,88,0.104433970166074,0.18332194121667805

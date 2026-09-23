@@ -1,0 +1,4 @@
+covariate_class,n_evaluations,share
+Age/sex/PCs/technical,3461,0.6864339547798493
+Clinical or other covariates,491,0.09738199127330424
+None (PRS only),1090,0.21618405394684648

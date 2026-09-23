@@ -1,0 +1,2 @@
+n_cells,n_sig_as_implemented,n_sig_delta_method,n_sig_delta_method_negative,n_sig_delta_method_positive,n_sig_delta_method_k1,n_sig_from_ci,n_cells_dm_ci_disagree,se_inflation_min,se_inflation_max,max_abs_delta_shift
+28,2,19,12,7,4,19,0,4.020409209742371,6.144813133004657,0.010396170681636546

@@ -1,0 +1,10 @@
+step,unit,n,n_label,catalog_snapshot
+1. All PGS Catalog performance records (PPM),evaluations,20133,20133,20260923
+2. Records with a finite AUC,evaluations,5315,5315,20260923
+3a. AUC with a published/parsed 95% CI,evaluations,3112,3112,20260923
+3b. AUC with Hanley-McNeil recovered CI,evaluations,1930,1930,20260923
+3c. AUC dropped (no published CI and not recoverable),evaluations,273,273,20260923
+4. Evaluations entering IVW (usable 95% CI),evaluations,5042,5042,20260923
+5. Stage-1 cells (trait x PGS x evaluation ancestry),cells,3931,3931,20260923
+6. Stage-1 cells after I2 > 80% filter,cells,3611,3611,20260923
+7. Figure 1C traits / trait-bucket-ancestry cells,traits / cells,NA,11 / 28,20260923

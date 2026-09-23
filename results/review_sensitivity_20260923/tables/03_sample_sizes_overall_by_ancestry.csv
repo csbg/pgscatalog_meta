@@ -1,0 +1,7 @@
+ancestry_display,n_evaluations,n_distinct_pgs,n_distinct_pss,n_with_case_control,median_n_cases,iqr_n_cases_lo,iqr_n_cases_hi,min_n_cases,median_n_controls,min_n_controls,median_n_individuals,median_case_fraction
+African,115,65,48,109,574,101,2004,2,3760,4,4427,0.1615148983570036
+East Asian,1789,1695,1665,1772,442,205,1028.25,2,16692,9,17554,0.035703433606806445
+European,2275,1247,1025,2186,1729,501,5446.5,7,27938,0,34623,0.07137854186564788
+Hispanic or Latin American,104,58,29,84,3326.5,396,4033,65,6590,43,19619.5,0.16199286884456007
+Middle Eastern or North African,218,124,6,215,2267,199,2267,134,2267,1394,4534,0.5
+South Asian,541,404,277,536,245,110,970,2,7511.5,47,7831,0.027774230621887372

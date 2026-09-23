@@ -1,0 +1,4 @@
+table,n_rows,n_I2_na,n_I2_k1_na_expected,n_I2_below_0,n_I2_above_100,n_I2_above_80,I2_min,I2_max,unit,in_range,note
+stage1_or_hr (this script),412,331,331,0,0,0,0,79.62163630210665,percentage (0-100),TRUE,I2 is stored as a percentage on 0-100.
+stage1_pooled_cells,3931,3231,3231,0,0,320,0,99.97772923956482,percentage (0-100),TRUE,I2 is stored as a percentage on 0-100.
+stage1_pooled_cells_I2filtered,3611,3231,3231,0,0,0,0,79.74083776085187,percentage (0-100),TRUE,I2 is stored as a percentage on 0-100.

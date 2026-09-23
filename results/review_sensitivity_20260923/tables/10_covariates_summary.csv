@@ -1,0 +1,2 @@
+n_pairs,n_pairs_covariate_matched,n_pairs_either_side_clinical,n_pairs_mixed_classes_within_side,n_cells,n_cells_estimable_matched_only,n_cells_inference_flip_matched_only
+107,95,13,12,28,26,0

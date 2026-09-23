@@ -1,0 +1,25 @@
+clause,n,denominator,detail
+Performance metrics with a finite AUC,5315,20133,Structured AUROC. This is the denominator of the liability count.
+AUROC metrics that mention the liability scale,16,5315,Free-text match for 'liability' in Other Metric(s) or the performance note. Subclasses are the next two rows.
+AUROC metrics with nested or incremental liability R2,14,5315,"The string also says nested or incremental, so the value is not a marginal liability-scale R2."
+AUROC metrics that name liability R2 without a further definition,2,5315,Named liability R2 with no nested model and no stated prevalence.
+AUROC metrics reporting Nagelkerke pseudo-R2,1291,5315,Nagelkerke pseudo-R2 is not a liability-scale R2.
+AUROC metrics reporting another pseudo-R2,60,5315,"Covariate-adjusted or other pseudo-R2, not labelled liability-scale."
+AUROC metrics reporting an unspecified R2,2476,5315,The string says R2 or variance explained and does not name the scale.
+AUROC metrics reporting no R2,1367,5315,No R2 in the other-metric field or the performance note.
+AUROC metrics whose other metric is not an R2,105,5315,Another metric is present (for example AUPRC) and it is not an R2.
+Figure 1C performance metrics,294,294,Distinct PPM identifiers in 13_cell_identifiers_long.csv.
+Figure 1C metrics that mention the liability scale,0,294,None of the Figure 1C metrics names the liability scale.
+Figure 1C metrics reporting an unspecified R2,138,294,Bare R2 string; scale not stated.
+Figure 1C metrics reporting Nagelkerke pseudo-R2,8,294,Info field identifies Nagelkerke's method.
+Figure 1C metrics reporting no R2,148,294,Empty R2 fields.
+Performance metrics in the release that mention liability anywhere,19,20133,"Includes records whose AUC sits only in free text, so they sit outside the finite-AUROC count."
+Performance metrics that state an author-assumed prevalence,2,20133,"The prevalence is an author assumption written into the metric string, not a Catalog field. See 17_liability_r2_examples.csv."
+Evaluation sample-set rows in the release file,11928,11928,bulk_evaluation_sample_sets_20260923.csv. One sample set can occupy more than one row.
+Distinct evaluation sample-set identifiers,11533,11928,Unique PGS Sample Set (PSS) identifiers in that file.
+Sample-set rows with case and control counts,4743,11928,These rows support an evaluation case fraction P = cases / (cases + controls). P is not the population prevalence K.
+Distinct sample-set identifiers with more than one case/control pair,76,11533,"The same PSS identifier is stored with different numeric case and control counts, so P is not a single Catalog value. In Figure 1C: PSS011515."
+Figure 1C sample sets with more than one case/control pair,1,74,Figure 1C uses 13_cell_identifiers_long.csv. 1 of its sample sets have more than one case/control pair in the release file.
+Sample-set columns that record population prevalence,0,18,No sample-set column matches prevalence or liability.
+Figure 1C cells with a paired OR or HR,21,28,"An odds ratio or hazard ratio still needs K, and per-SD scaling is not a structured field. See 12_or_per_sd_summary.csv."
+Liability-scale R2 implied by AUC 0.60 at three prevalences,NA,NA,Wray et al. 2010 population-sample mapping. K = 0.01 -> R2 = 0.018; K = 0.10 -> R2 = 0.033; K = 0.50 -> R2 = 0.049. Lee et al. 2012 changes these values again when the sample is ascertained. See 17_liability_r2_prevalence_sensitivity.csv.

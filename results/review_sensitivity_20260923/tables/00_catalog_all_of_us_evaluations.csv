@@ -1,0 +1,718 @@
+performance_id,pgs_id,sampleset_id,reported_trait,ancestry_display,train_bucket,auc,ci_source,cohort_txt,note
+PPM019121,PGS003968,PSS011189,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM019122,PGS003964,PSS011189,Diastolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020764,PGS004603,PSS011396,Systolic blood pressure,African,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020765,PGS004604,PSS011396,Diastolic blood pressure,African,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020766,PGS004605,PSS011396,Pulse pressure,African,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020806,PGS004621,PSS011418,Cirrhosis,European,Train: European-only,0.68,inferred_hm,deCODE|EB|MyCode|FinnGen|IHCS|CHB|AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020926,PGS004701,PSS011478,A1c,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020928,PGS004703,PSS011478,A1c,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020930,PGS004705,PSS011465,Atrial Fibrillation,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020931,PGS004706,PSS011465,Atrial Fibrillation,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020932,PGS004707,PSS011480,Albumin,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020934,PGS004709,PSS011480,Albumin,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020936,PGS004711,PSS011455,Alkaline phosphatase,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020938,PGS004713,PSS011455,Alkaline phosphatase,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020940,PGS004715,PSS011457,Alanine aminotransferase,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020942,PGS004717,PSS011457,Alanine aminotransferase,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020944,PGS004719,PSS011481,Aspartate aminotransferase,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020946,PGS004721,PSS011481,Aspartate aminotransferase,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020948,PGS004723,PSS011465,Asthma,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020950,PGS004725,PSS011465,Asthma,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020952,PGS004727,PSS011482,Basophil count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020954,PGS004729,PSS011482,Basophil count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020956,PGS004731,PSS011483,Total bilirubin,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020957,PGS004732,PSS011483,Total bilirubin,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020958,PGS004733,PSS011484,Body mass index,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020960,PGS004735,PSS011484,Body mass index,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020962,PGS004737,PSS011486,Breast cancer,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020963,PGS004738,PSS011486,Breast cancer,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020964,PGS004739,PSS011461,Urea,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020966,PGS004741,PSS011461,Urea,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020968,PGS004743,PSS011487,Coronary artery disease,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020970,PGS004745,PSS011487,Coronary artery disease,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020972,PGS004747,PSS011488,Serum creatinine,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020974,PGS004749,PSS011488,Serum creatinine,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020976,PGS004751,PSS011490,Current smoker,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020978,PGS004753,PSS011490,Current smoker,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020980,PGS004755,PSS011465,Diastolic blood pressure,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020982,PGS004757,PSS011465,Diastolic blood pressure,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020984,PGS004759,PSS011465,Depression,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020985,PGS004760,PSS011465,Depression,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020986,PGS004761,PSS011492,Eosinophil count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020988,PGS004763,PSS011492,Eosinophil count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020990,PGS004765,PSS011465,Glaucoma,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020991,PGS004766,PSS011465,Glaucoma,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020992,PGS004767,PSS011465,Gout,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020993,PGS004768,PSS011465,Gout,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020994,PGS004769,PSS011466,Hemoglobin,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020995,PGS004770,PSS011466,Hemoglobin,European,NA,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020996,PGS004771,PSS011493,Hematocrit,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM020998,PGS004773,PSS011493,Hematocrit,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021000,PGS004775,PSS011495,High-density lipoprotein,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021002,PGS004777,PSS011495,High-density lipoprotein,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021004,PGS004779,PSS011497,Height,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021006,PGS004781,PSS011497,Height,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021008,PGS004783,PSS011465,Hypercholesterolemia,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021009,PGS004784,PSS011465,Hypercholesterolemia,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021010,PGS004785,PSS011465,Hypertension,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021012,PGS004787,PSS011465,Hypertension,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021014,PGS004789,PSS011465,Hypothyroidism,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021015,PGS004790,PSS011465,Hypothyroidism,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021016,PGS004791,PSS011499,Low-density lipoprotein,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021018,PGS004793,PSS011499,Low-density lipoprotein,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021020,PGS004795,PSS011465,Melanoma,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021021,PGS004796,PSS011465,Melanoma,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021022,PGS004797,PSS011465,Migraine,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021024,PGS004799,PSS011465,Migraine,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021026,PGS004801,PSS011501,Monocyte count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021028,PGS004803,PSS011501,Monocyte count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021030,PGS004805,PSS011502,Neutrophil count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021032,PGS004807,PSS011502,Neutrophil count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021034,PGS004809,PSS011465,Osteoporosis,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021035,PGS004810,PSS011465,Osteoporosis,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021036,PGS004811,PSS011470,Platelet count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021038,PGS004813,PSS011470,Platelet count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021040,PGS004815,PSS011469,Prostate cancer,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021041,PGS004816,PSS011469,Prostate cancer,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021042,PGS004817,PSS011465,Rheumatoid Arthritis,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021044,PGS004819,PSS011465,Rheumatoid Arthritis,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021046,PGS004821,PSS011503,Red blood count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021048,PGS004823,PSS011503,Red blood count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021050,PGS004825,PSS011504,Red cell distribution width,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021052,PGS004827,PSS011504,Red cell distribution width,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021054,PGS004829,PSS011465,Systolic blood pressure,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021056,PGS004831,PSS011465,Systolic blood pressure,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021058,PGS004833,PSS011465,Skin cancer,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021059,PGS004834,PSS011465,Skin cancer,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021060,PGS004835,PSS011506,Stroke,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021061,PGS004836,PSS011506,Stroke,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021062,PGS004837,PSS011507,Type 2 diabetes,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021064,PGS004839,PSS011507,Type 2 diabetes,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021066,PGS004841,PSS011508,Total cholesterol,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021068,PGS004843,PSS011508,Total cholesterol,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021070,PGS004845,PSS011510,Triglycerides,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021072,PGS004847,PSS011510,Triglycerides,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021076,PGS004851,PSS011475,Total protein measurement,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021077,PGS004852,PSS011475,Total protein measurement,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021078,PGS004853,PSS011465,venous thromboembolism,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021079,PGS004854,PSS011465,venous thromboembolism,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021080,PGS004855,PSS011512,White blood count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021082,PGS004857,PSS011512,White blood count,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021085,PGS004859,PSS011514,Type 2 diabetes,African,Train: Multi incl. EUR,0.76,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021086,PGS004859,PSS011516,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,0.84,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021087,PGS004859,PSS011517,Type 2 diabetes,East Asian,Train: Multi incl. EUR,0.84,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021088,PGS004859,PSS011518,Type 2 diabetes,European,Train: Multi incl. EUR,0.77,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021089,PGS004859,PSS011519,Type 2 diabetes,South Asian,Train: Multi incl. EUR,0.88,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021090,PGS004859,PSS011515,Type 2 diabetes,African,Train: Multi incl. EUR,0.75,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021410,PGS004923,PSS011737,Type 2 diabetes,European,Train: Multi incl. EUR,0.737,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021411,PGS002771,PSS011737,Type 2 diabetes,European,Train: European-only,0.735,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021412,PGS003443,PSS011737,Type 2 diabetes,European,Train: Multi incl. EUR,0.731,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021413,PGS003444,PSS011737,Type 2 diabetes,European,Train: Multi excl. EUR,0.731,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021414,PGS003445,PSS011737,Type 2 diabetes,European,Train: Multi excl. EUR,0.731,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021415,PGS003867,PSS011737,Type 2 diabetes,European,Train: Multi incl. EUR,0.73,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021416,PGS000330,PSS011737,Type 2 diabetes,European,Train: European-only,0.726,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021417,PGS003103,PSS011737,Type 2 diabetes,European,Train: European-only,0.725,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021418,PGS002026,PSS011737,Type 2 diabetes,European,Train: European-only,0.714,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021419,PGS000729,PSS011737,Type 2 diabetes,European,Train: European-only,0.712,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021420,PGS000713,PSS011737,Type 2 diabetes,European,Train: European-only,0.712,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021421,PGS001818,PSS011737,Type 2 diabetes,European,Train: European-only,0.709,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021422,PGS000805,PSS011737,Type 2 diabetes,European,Train: European-only,0.707,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021423,PGS001357,PSS011737,Type 2 diabetes,European,Train: European-only,0.704,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021424,PGS002671,PSS011737,Type 2 diabetes,European,Train: European-only,0.704,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021425,PGS002243,PSS011737,Type 2 diabetes,European,Train: European-only,0.703,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021426,PGS001781,PSS011737,Type 2 diabetes,European,Train: European-only,0.702,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021427,PGS000036,PSS011737,Type 2 diabetes,European,Train: Multi incl. EUR,0.701,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021428,PGS000014,PSS011737,Type 2 diabetes,European,Train: European-only,0.7,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021429,PGS000868,PSS011737,Type 2 diabetes,European,Train: European-only,0.696,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021430,PGS002780,PSS011737,Type 2 diabetes,European,Train: European-only,0.694,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021431,PGS000864,PSS011737,Type 2 diabetes,European,Train: European-only,0.687,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021488,PGS003443,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,0.78,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021489,PGS003444,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: Multi excl. EUR,0.78,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021490,PGS003445,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: Multi excl. EUR,0.78,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021491,PGS004923,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,0.777,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021492,PGS003867,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,0.776,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021493,PGS002771,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.775,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021494,PGS003103,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.77,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021495,PGS000330,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.768,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021496,PGS002026,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.764,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021497,PGS000805,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.764,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021498,PGS001818,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.762,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021499,PGS000713,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.762,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021500,PGS001357,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.761,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021501,PGS000729,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.761,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021502,PGS002671,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.761,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021503,PGS002243,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.76,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021504,PGS001781,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.76,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021505,PGS000036,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,0.759,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021506,PGS000014,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.757,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021507,PGS000868,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.758,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021508,PGS002780,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.756,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021509,PGS000864,PSS011736,Type 2 diabetes,Hispanic or Latin American,Train: European-only,0.745,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021776,PGS005030,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021777,PGS005031,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021778,PGS005032,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021779,PGS005027,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021780,PGS005029,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021781,PGS005028,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021782,PGS005033,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021783,PGS005030,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021784,PGS005031,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021785,PGS005032,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021786,PGS005027,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021787,PGS005029,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021788,PGS005028,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021789,PGS005033,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021790,PGS005030,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021791,PGS005031,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021792,PGS005032,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021793,PGS005027,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021794,PGS005029,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021795,PGS005028,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021796,PGS005033,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021797,PGS005043,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021798,PGS005044,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021799,PGS005045,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021800,PGS005040,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021801,PGS005042,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021802,PGS005041,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021803,PGS005046,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021804,PGS005043,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021805,PGS005044,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021806,PGS005045,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021807,PGS005040,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021808,PGS005042,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021809,PGS005041,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021810,PGS005046,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021811,PGS005043,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021812,PGS005044,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021813,PGS005045,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021814,PGS005040,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021815,PGS005042,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021816,PGS005041,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021817,PGS005046,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021818,PGS005056,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021819,PGS005057,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021820,PGS005058,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021821,PGS005053,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021822,PGS005055,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021823,PGS005054,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021824,PGS005059,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021825,PGS005056,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021826,PGS005057,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021827,PGS005058,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021828,PGS005053,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021829,PGS005055,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021830,PGS005054,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021831,PGS005059,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021832,PGS005056,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021833,PGS005057,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021834,PGS005058,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021835,PGS005053,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021836,PGS005055,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021837,PGS005054,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021838,PGS005059,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021839,PGS005069,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021840,PGS005070,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021841,PGS005071,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021842,PGS005066,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021843,PGS005068,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021844,PGS005067,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021845,PGS005072,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021846,PGS005069,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021847,PGS005070,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021848,PGS005071,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021849,PGS005066,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021850,PGS005068,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021851,PGS005067,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021852,PGS005072,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021853,PGS005069,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021854,PGS005070,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021855,PGS005071,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021856,PGS005066,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021857,PGS005068,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021858,PGS005067,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021859,PGS005072,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021860,PGS005082,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021861,PGS005083,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021862,PGS005084,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021863,PGS005079,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021864,PGS005081,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021865,PGS005080,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021866,PGS005085,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021867,PGS005082,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021868,PGS005083,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021869,PGS005084,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021870,PGS005079,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021871,PGS005081,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021872,PGS005080,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021873,PGS005085,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021874,PGS005082,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021875,PGS005083,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021876,PGS005084,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021877,PGS005079,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021878,PGS005081,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021879,PGS005080,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021880,PGS005085,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021881,PGS005024,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021882,PGS005025,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021883,PGS005026,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021884,PGS005021,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021885,PGS005023,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021886,PGS005022,PSS011807,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021887,PGS005024,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021888,PGS005025,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021889,PGS005026,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021890,PGS005021,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021891,PGS005023,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021892,PGS005022,PSS011817,Type 2 diabetes,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021893,PGS005024,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021894,PGS005025,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021895,PGS005026,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021896,PGS005021,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021897,PGS005023,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021898,PGS005022,PSS011797,Type 2 diabetes,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021899,PGS005037,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021900,PGS005038,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021901,PGS005039,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021902,PGS005034,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021903,PGS005036,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021904,PGS005035,PSS011808,Myocardial infarction,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021905,PGS005037,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021906,PGS005038,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021907,PGS005039,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021908,PGS005034,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021909,PGS005036,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021910,PGS005035,PSS011818,Myocardial infarction,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021911,PGS005037,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021912,PGS005038,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021913,PGS005039,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021914,PGS005034,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021915,PGS005036,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021916,PGS005035,PSS011798,Myocardial infarction,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021917,PGS005050,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021918,PGS005051,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021919,PGS005052,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021920,PGS005047,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021921,PGS005049,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021922,PGS005048,PSS011809,Angina pectoris,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021923,PGS005050,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021924,PGS005051,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021925,PGS005052,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021926,PGS005047,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021927,PGS005049,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021928,PGS005048,PSS011819,Angina pectoris,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021929,PGS005050,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021930,PGS005051,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021931,PGS005052,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021932,PGS005047,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021933,PGS005049,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021934,PGS005048,PSS011799,Angina pectoris,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021935,PGS005063,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021936,PGS005064,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021937,PGS005065,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021938,PGS005060,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021939,PGS005062,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021940,PGS005061,PSS011810,Atrial fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021941,PGS005063,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021942,PGS005064,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021943,PGS005065,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021944,PGS005060,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021945,PGS005062,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021946,PGS005061,PSS011820,Atrial fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021947,PGS005063,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021948,PGS005064,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021949,PGS005065,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021950,PGS005060,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021951,PGS005062,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021952,PGS005061,PSS011800,Atrial fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021953,PGS005076,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021954,PGS005077,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021955,PGS005078,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021956,PGS005073,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021957,PGS005075,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021958,PGS005074,PSS011811,"Congestive heart failure (CHF), NOS",Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021959,PGS005076,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021960,PGS005077,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021961,PGS005078,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021962,PGS005073,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021963,PGS005075,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021964,PGS005074,PSS011821,"Congestive heart failure (CHF), NOS",European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021965,PGS005076,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021966,PGS005077,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021967,PGS005078,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021968,PGS005073,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021969,PGS005075,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021970,PGS005074,PSS011801,"Congestive heart failure (CHF), NOS",African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021971,PGS004968,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021972,PGS004965,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021973,PGS004966,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021974,PGS004967,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021975,PGS004962,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021976,PGS004964,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021977,PGS004963,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021978,PGS004968,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021979,PGS004965,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021980,PGS004966,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021981,PGS004967,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021982,PGS004962,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021983,PGS004964,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021984,PGS004963,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021985,PGS004968,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021986,PGS004965,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021987,PGS004966,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021988,PGS004967,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021989,PGS004962,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021990,PGS004964,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021991,PGS004963,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021992,PGS004981,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021993,PGS004978,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021994,PGS004979,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021995,PGS004980,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021996,PGS004975,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021997,PGS004977,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021998,PGS004976,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM021999,PGS004981,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022000,PGS004978,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022001,PGS004979,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022002,PGS004980,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022003,PGS004975,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022004,PGS004977,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022005,PGS004976,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022006,PGS004981,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022007,PGS004978,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022008,PGS004979,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022009,PGS004980,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022010,PGS004975,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022011,PGS004977,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022012,PGS004976,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022013,PGS004994,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022014,PGS004991,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022015,PGS004992,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022016,PGS004993,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022017,PGS004988,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022018,PGS004990,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022019,PGS004989,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022020,PGS004994,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022021,PGS004991,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022022,PGS004992,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022023,PGS004993,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022024,PGS004988,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022025,PGS004990,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022026,PGS004989,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022027,PGS004994,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022028,PGS004991,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022029,PGS004992,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022030,PGS004993,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022031,PGS004988,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022032,PGS004990,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022033,PGS004989,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022034,PGS005007,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022035,PGS005004,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022036,PGS005005,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022037,PGS005006,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022038,PGS005001,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022039,PGS005003,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022040,PGS005002,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022041,PGS005007,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022042,PGS005004,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022043,PGS005005,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022044,PGS005006,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022045,PGS005001,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022046,PGS005003,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022047,PGS005002,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022048,PGS005007,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022049,PGS005004,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022050,PGS005005,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022051,PGS005006,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022052,PGS005001,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022053,PGS005003,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022054,PGS005002,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022055,PGS005020,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022056,PGS005017,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022057,PGS005018,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022058,PGS005019,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022059,PGS005014,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022060,PGS005016,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022061,PGS005015,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022062,PGS005020,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022063,PGS005017,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022064,PGS005018,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022065,PGS005019,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022066,PGS005014,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022067,PGS005016,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022068,PGS005015,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022069,PGS005020,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022070,PGS005017,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022071,PGS005018,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022072,PGS005019,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022073,PGS005014,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022074,PGS005016,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022075,PGS005015,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022076,PGS004959,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022077,PGS004960,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022078,PGS004961,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022079,PGS004956,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022080,PGS004958,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022081,PGS004957,PSS011815,Hemoglobin,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022082,PGS004959,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022083,PGS004960,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022084,PGS004961,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022085,PGS004956,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022086,PGS004958,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022087,PGS004957,PSS011795,Hemoglobin,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022088,PGS004959,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022089,PGS004960,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022090,PGS004961,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022091,PGS004956,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022092,PGS004958,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022093,PGS004957,PSS011805,Hemoglobin,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022094,PGS004972,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022095,PGS004973,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022096,PGS004974,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022097,PGS004969,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022098,PGS004971,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022099,PGS004970,PSS011816,LDL cholesterol,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022100,PGS004972,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022101,PGS004973,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022102,PGS004974,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022103,PGS004969,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022104,PGS004971,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022105,PGS004970,PSS011796,LDL cholesterol,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022106,PGS004972,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022107,PGS004973,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022108,PGS004974,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022109,PGS004969,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022110,PGS004971,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022111,PGS004970,PSS011806,LDL cholesterol,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022112,PGS004985,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022113,PGS004986,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022114,PGS004987,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022115,PGS004982,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022116,PGS004984,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022117,PGS004983,PSS011822,Body mass index (BMI),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022118,PGS004985,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022119,PGS004986,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022120,PGS004987,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022121,PGS004982,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022122,PGS004984,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022123,PGS004983,PSS011802,Body mass index (BMI),African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022124,PGS004985,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022125,PGS004986,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022126,PGS004987,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022127,PGS004982,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022128,PGS004984,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022129,PGS004983,PSS011812,Body mass index (BMI),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022130,PGS004998,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022131,PGS004999,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022132,PGS005000,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022133,PGS004995,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022134,PGS004997,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022135,PGS004996,PSS011823,Height,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022136,PGS004998,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022137,PGS004999,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022138,PGS005000,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022139,PGS004995,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022140,PGS004997,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022141,PGS004996,PSS011803,Height,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022142,PGS004998,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022143,PGS004999,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022144,PGS005000,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022145,PGS004995,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022146,PGS004997,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022147,PGS004996,PSS011813,Height,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022148,PGS005011,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022149,PGS005012,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022150,PGS005013,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022151,PGS005008,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022152,PGS005010,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022153,PGS005009,PSS011824,Systolic blood pressure,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022154,PGS005011,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022155,PGS005012,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022156,PGS005013,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022157,PGS005008,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022158,PGS005010,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022159,PGS005009,PSS011804,Systolic blood pressure,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022160,PGS005011,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022161,PGS005012,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022162,PGS005013,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022163,PGS005008,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022164,PGS005010,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022165,PGS005009,PSS011814,Systolic blood pressure,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022178,PGS005091,PSS011830,Prevalent coronary heart disease,European,Train: Multi incl. EUR,0.776,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022181,PGS005092,PSS011830,Prevalent coronary heart disease,European,Train: Multi incl. EUR,0.774,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022220,PGS005098,PSS011846,log(PSA),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022221,PGS005099,PSS011846,log(PSA),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022222,PGS005100,PSS011846,log(PSA),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022223,PGS005101,PSS011846,log(PSA),European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022232,PGS005098,PSS011845,log(PSA),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022233,PGS005099,PSS011845,log(PSA),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022234,PGS005100,PSS011845,log(PSA),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022235,PGS005101,PSS011845,log(PSA),Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022489,PGS005170,PSS011964,Incident all-cause dementia,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022490,PGS005170,PSS011962,Incident all-cause dementia,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022491,PGS005170,PSS011963,Incident all-cause dementia,East Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022492,PGS005170,PSS011965,Incident all-cause dementia,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022603,PGS005217,PSS012038,Incident and prevelant peripheral artery disease,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022604,PGS005217,PSS012039,Incident and prevelant peripheral artery disease,East Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022605,PGS005217,PSS012040,Incident and prevelant peripheral artery disease,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022606,PGS005217,PSS012041,Incident and prevelant peripheral artery disease,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022607,PGS005217,PSS012028,Incident and prevelant peripheral artery disease,Middle Eastern or North African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022608,PGS005217,PSS012029,Incident and prevelant peripheral artery disease,South Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022737,PGS005254,PSS012068,incident aortic stenosis,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022738,PGS005255,PSS012068,incident aortic stenosis,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022739,PGS005256,PSS012068,incident aortic stenosis,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM022740,PGS005257,PSS012068,incident aortic stenosis,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023094,PGS005331,PSS012114,Obesity (BMI≥30),Hispanic or Latin American,Train: Multi incl. EUR,0.678,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023095,PGS005103,PSS012115,Obesity (BMI≥25),East Asian,Train: Multi incl. EUR,0.75,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023096,PGS005331,PSS012116,Obesity (BMI≥30),European,Train: Multi incl. EUR,0.706,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023097,PGS005331,PSS012117,Obesity (BMI≥30),Middle Eastern or North African,Train: Multi incl. EUR,0.721,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023098,PGS005332,PSS012118,Obesity (BMI≥30),South Asian,Train: Multi incl. EUR,0.726,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023106,PGS005331,PSS012114,Log transform of body mass index [log(BMI)],Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023107,PGS005103,PSS012115,Log transform of body mass index [log(BMI)],East Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023108,PGS005331,PSS012116,Log transform of body mass index [log(BMI)],European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023109,PGS005331,PSS012117,Log transform of body mass index [log(BMI)],Middle Eastern or North African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023110,PGS005332,PSS012118,Log transform of body mass index [log(BMI)],South Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023126,PGS005335,PSS012114,Type 2 diabetes (T2D),Hispanic or Latin American,Train: Multi incl. EUR,0.767,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023127,PGS005334,PSS012115,Type 2 diabetes (T2D),East Asian,Train: Multi incl. EUR,0.807,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023128,PGS005335,PSS012116,Type 2 diabetes (T2D),European,Train: Multi incl. EUR,0.727,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023129,PGS005335,PSS012117,Type 2 diabetes (T2D),Middle Eastern or North African,Train: Multi incl. EUR,0.778,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023130,PGS005336,PSS012118,Type 2 diabetes (T2D),South Asian,Train: Multi incl. EUR,0.839,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023199,PGS005353,PSS012148,Type 2 diabetes,African,Train: African-only,0.68035189168604,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023200,PGS005354,PSS012148,Type 2 diabetes,African,Train: Multi excl. EUR,0.68035189168604,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023201,PGS005355,PSS012148,Type 2 diabetes,African,Train: Multi excl. EUR,0.68035189168604,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023202,PGS005356,PSS012148,Type 2 diabetes,African,Train: Multi incl. EUR,0.68035189168604,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023203,PGS005357,PSS012148,Type 2 diabetes,African,Train: Multi excl. EUR,0.68035189168604,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023219,PGS005353,PSS012148,Proliferative diabetic retinopathy,African,Train: African-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023220,PGS005354,PSS012148,Proliferative diabetic retinopathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023221,PGS005355,PSS012148,Proliferative diabetic retinopathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023222,PGS005356,PSS012148,Proliferative diabetic retinopathy,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023223,PGS005357,PSS012148,Proliferative diabetic retinopathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023224,PGS005353,PSS012148,Ischemic stroke,African,Train: African-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023225,PGS005354,PSS012148,Ischemic stroke,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023226,PGS005355,PSS012148,Ischemic stroke,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023227,PGS005356,PSS012148,Ischemic stroke,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023228,PGS005357,PSS012148,Ischemic stroke,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023229,PGS005353,PSS012148,End-stage diabetic nephropathy,African,Train: African-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023230,PGS005354,PSS012148,End-stage diabetic nephropathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023231,PGS005355,PSS012148,End-stage diabetic nephropathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023232,PGS005356,PSS012148,End-stage diabetic nephropathy,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023233,PGS005357,PSS012148,End-stage diabetic nephropathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023234,PGS005353,PSS012148,Diabetic retinopathy,African,Train: African-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023235,PGS005354,PSS012148,Diabetic retinopathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023236,PGS005355,PSS012148,Diabetic retinopathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023237,PGS005356,PSS012148,Diabetic retinopathy,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023238,PGS005357,PSS012148,Diabetic retinopathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023239,PGS005353,PSS012148,Diabetic nephropathy,African,Train: African-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023240,PGS005354,PSS012148,Diabetic nephropathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023241,PGS005355,PSS012148,Diabetic nephropathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023242,PGS005356,PSS012148,Diabetic nephropathy,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023243,PGS005357,PSS012148,Diabetic nephropathy,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023244,PGS005353,PSS012148,Cardiovascular disease,African,Train: African-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023245,PGS005354,PSS012148,Cardiovascular disease,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023246,PGS005355,PSS012148,Cardiovascular disease,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023247,PGS005356,PSS012148,Cardiovascular disease,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023248,PGS005357,PSS012148,Cardiovascular disease,African,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023249,PGS005358,PSS012151,Type 2 diabetes,Hispanic or Latin American,Train: Multi excl. EUR,0.765548748620214,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023250,PGS005359,PSS012151,Type 2 diabetes,Hispanic or Latin American,Train: Multi excl. EUR,0.765548748620214,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023251,PGS005360,PSS012151,Type 2 diabetes,Hispanic or Latin American,Train: Multi excl. EUR,0.765548748620214,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023252,PGS005361,PSS012151,Type 2 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,0.765548748620214,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023253,PGS005362,PSS012151,Type 2 diabetes,Hispanic or Latin American,Train: Multi excl. EUR,0.765548748620214,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023269,PGS005358,PSS012151,Proliferative diabetic retinopathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023270,PGS005359,PSS012151,Proliferative diabetic retinopathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023271,PGS005360,PSS012151,Proliferative diabetic retinopathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023272,PGS005361,PSS012151,Proliferative diabetic retinopathy,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023273,PGS005362,PSS012151,Proliferative diabetic retinopathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023274,PGS005358,PSS012151,Ischemic stroke,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023275,PGS005359,PSS012151,Ischemic stroke,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023276,PGS005360,PSS012151,Ischemic stroke,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023277,PGS005361,PSS012151,Ischemic stroke,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023278,PGS005362,PSS012151,Ischemic stroke,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023279,PGS005358,PSS012151,End-stage diabetic nephropathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023280,PGS005359,PSS012151,End-stage diabetic nephropathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023281,PGS005360,PSS012151,End-stage diabetic nephropathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023282,PGS005361,PSS012151,End-stage diabetic nephropathy,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023283,PGS005362,PSS012151,End-stage diabetic nephropathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023284,PGS005358,PSS012151,Diabetic retinopathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023285,PGS005359,PSS012151,Diabetic retinopathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023286,PGS005360,PSS012151,Diabetic retinopathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023287,PGS005361,PSS012151,Diabetic retinopathy,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023288,PGS005362,PSS012151,Diabetic retinopathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023289,PGS005358,PSS012151,Diabetic nephropathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023290,PGS005359,PSS012151,Diabetic nephropathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023291,PGS005360,PSS012151,Diabetic nephropathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023292,PGS005361,PSS012151,Diabetic nephropathy,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023293,PGS005362,PSS012151,Diabetic nephropathy,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023294,PGS005358,PSS012151,Cardiovascular disease,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023295,PGS005359,PSS012151,Cardiovascular disease,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023296,PGS005360,PSS012151,Cardiovascular disease,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023297,PGS005361,PSS012151,Cardiovascular disease,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023298,PGS005362,PSS012151,Cardiovascular disease,Hispanic or Latin American,Train: Multi excl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023299,PGS005363,PSS012149,Type 2 diabetes,East Asian,Train: Multi excl. EUR,0.803544575725027,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023300,PGS005364,PSS012149,Type 2 diabetes,East Asian,Train: Multi excl. EUR,0.803544575725027,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023301,PGS005365,PSS012149,Type 2 diabetes,East Asian,Train: East Asian-only,0.803544575725027,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023302,PGS005366,PSS012149,Type 2 diabetes,East Asian,Train: Multi incl. EUR,0.803544575725027,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023303,PGS005367,PSS012149,Type 2 diabetes,East Asian,Train: Multi excl. EUR,0.803544575725027,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023334,PGS005368,PSS012150,Type 2 diabetes,European,Train: Multi incl. EUR,0.757096822406426,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023335,PGS005369,PSS012150,Type 2 diabetes,European,Train: Multi incl. EUR,0.757096822406426,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023336,PGS005370,PSS012150,Type 2 diabetes,European,Train: Multi incl. EUR,0.757096822406426,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023337,PGS005371,PSS012150,Type 2 diabetes,European,Train: European-only,0.757096822406426,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023338,PGS005372,PSS012150,Type 2 diabetes,European,Train: Multi incl. EUR,0.757096822406426,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023354,PGS005368,PSS012150,Proliferative diabetic retinopathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023355,PGS005369,PSS012150,Proliferative diabetic retinopathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023356,PGS005370,PSS012150,Proliferative diabetic retinopathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023357,PGS005371,PSS012150,Proliferative diabetic retinopathy,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023358,PGS005372,PSS012150,Proliferative diabetic retinopathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023359,PGS005368,PSS012150,Ischemic stroke,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023360,PGS005369,PSS012150,Ischemic stroke,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023361,PGS005370,PSS012150,Ischemic stroke,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023362,PGS005371,PSS012150,Ischemic stroke,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023363,PGS005372,PSS012150,Ischemic stroke,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023364,PGS005368,PSS012150,End-stage diabetic nephropathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023365,PGS005369,PSS012150,End-stage diabetic nephropathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023366,PGS005370,PSS012150,End-stage diabetic nephropathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023367,PGS005371,PSS012150,End-stage diabetic nephropathy,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023368,PGS005372,PSS012150,End-stage diabetic nephropathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023369,PGS005368,PSS012150,Diabetic retinopathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023370,PGS005369,PSS012150,Diabetic retinopathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023371,PGS005370,PSS012150,Diabetic retinopathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023372,PGS005371,PSS012150,Diabetic retinopathy,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023373,PGS005372,PSS012150,Diabetic retinopathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023374,PGS005368,PSS012150,Diabetic nephropathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023375,PGS005369,PSS012150,Diabetic nephropathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023376,PGS005370,PSS012150,Diabetic nephropathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023377,PGS005371,PSS012150,Diabetic nephropathy,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023378,PGS005372,PSS012150,Diabetic nephropathy,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023379,PGS005368,PSS012150,Cardiovascular disease,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023380,PGS005369,PSS012150,Cardiovascular disease,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023381,PGS005370,PSS012150,Cardiovascular disease,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023382,PGS005371,PSS012150,Cardiovascular disease,European,Train: European-only,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023383,PGS005372,PSS012150,Cardiovascular disease,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023389,PGS005373,PSS012147,Type 2 diabetes,South Asian,Train: Multi excl. EUR,0.801444788441692,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023390,PGS005374,PSS012147,Type 2 diabetes,South Asian,Train: Multi excl. EUR,0.801444788441692,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023391,PGS005375,PSS012147,Type 2 diabetes,South Asian,Train: Multi excl. EUR,0.801444788441692,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023392,PGS005376,PSS012147,Type 2 diabetes,South Asian,Train: Multi incl. EUR,0.801444788441692,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023393,PGS005377,PSS012147,Type 2 diabetes,South Asian,Train: South Asian-only,0.801444788441692,inferred_hm,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023414,PGS005378,PSS012175,breast cancer risk,African,Train: African-only,0.608,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM023415,PGS005379,PSS012175,breast cancer risk,African,Train: African-only,0.602,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030616,PGS005168,PSS012204,Atrial Fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030617,PGS012531,PSS012204,Atrial Fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030618,PGS012532,PSS012204,Atrial Fibrillation,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030619,PGS005168,PSS012206,Atrial Fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030620,PGS012531,PSS012206,Atrial Fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030621,PGS012533,PSS012206,Atrial Fibrillation,Hispanic or Latin American,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030622,PGS005168,PSS012207,Atrial Fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030623,PGS012531,PSS012207,Atrial Fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030624,PGS012534,PSS012207,Atrial Fibrillation,African,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030625,PGS005168,PSS012208,Atrial Fibrillation,South Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030626,PGS012531,PSS012208,Atrial Fibrillation,South Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030627,PGS012535,PSS012208,Atrial Fibrillation,South Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030628,PGS005168,PSS012209,Atrial Fibrillation,East Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030629,PGS012531,PSS012209,Atrial Fibrillation,East Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030630,PGS012536,PSS012209,Atrial Fibrillation,East Asian,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030680,PGS012555,PSS012236,type 1 diabetes,European,Train: Multi incl. EUR,0.821,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030681,PGS012555,PSS012237,type 1 diabetes,Hispanic or Latin American,Train: Multi incl. EUR,0.688,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030682,PGS012555,PSS012235,type 1 diabetes,African,Train: Multi incl. EUR,0.652,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM030683,PGS012555,PSS012238,type 1 diabetes,African,Train: Multi incl. EUR,0.752,reported_native_or_parsed,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM038158,PGS019958,PSS013851,HbA1c in G6PD non-carriets,European,Train: Multi incl. EUR,NA,none,AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis
+PPM038164,PGS019958,PSS013852,Diabetic retinopathy in diabetes,European,Train: Multi incl. EUR,NA,none,UKB|AllofUs,Catalog evaluation whose cohort is All of Us; not the manuscript All of Us analysis

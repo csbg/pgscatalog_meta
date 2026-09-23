@@ -1,0 +1,57 @@
+trait_label,trained_bucket,target_ancestry,side,n_sample_sets,n_sample_sets_with_sex,median_pct_male,min_pct_male,max_pct_male,sex_specific_trait,single_sex_sample_sets
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,European,1,1,46,46,46,FALSE,FALSE
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,Target,1,1,37,37,37,FALSE,FALSE
+Breast Carcinoma,Train: European-only,African,European,3,3,0,0,0,TRUE,TRUE
+Breast Carcinoma,Train: European-only,African,Target,1,1,0,0,0,TRUE,TRUE
+Breast Carcinoma,Train: European-only,South Asian,European,3,3,0,0,0,TRUE,TRUE
+Breast Carcinoma,Train: European-only,South Asian,Target,1,1,0,0,0,TRUE,TRUE
+Breast cancer,Train: European-only,East Asian,European,2,0,NA,NA,NA,TRUE,FALSE
+Breast cancer,Train: European-only,East Asian,Target,1,0,NA,NA,NA,TRUE,FALSE
+Breast cancer,Train: European-only,South Asian,European,6,4,0,0,0,TRUE,TRUE
+Breast cancer,Train: European-only,South Asian,Target,3,2,0,0,0,TRUE,TRUE
+Breast cancer,Train: Multi incl. EUR,East Asian,European,1,1,0,0,0,TRUE,TRUE
+Breast cancer,Train: Multi incl. EUR,East Asian,Target,1,1,0,0,0,TRUE,TRUE
+Colorectal cancer,Train: European-only,African,European,2,2,47.175,41.6,52.75,FALSE,FALSE
+Colorectal cancer,Train: European-only,African,Target,2,2,54.75,44,65.5,FALSE,FALSE
+Colorectal cancer,Train: European-only,East Asian,European,2,2,47.175,41.6,52.75,FALSE,FALSE
+Colorectal cancer,Train: European-only,East Asian,Target,1,1,42.1,42.1,42.1,FALSE,FALSE
+Colorectal cancer,Train: European-only,Hispanic or Latin American,European,2,2,47.175,41.6,52.75,FALSE,FALSE
+Colorectal cancer,Train: European-only,Hispanic or Latin American,Target,2,2,43.1,38.7,47.5,FALSE,FALSE
+Colorectal cancer,Train: Multi incl. EUR,African,European,1,1,52.75,52.75,52.75,FALSE,FALSE
+Colorectal cancer,Train: Multi incl. EUR,African,Target,1,1,44,44,44,FALSE,FALSE
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,European,1,1,52.75,52.75,52.75,FALSE,FALSE
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,Target,1,1,47.5,47.5,47.5,FALSE,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,European,2,2,45.8,44.6,47,FALSE,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,Target,1,1,31,31,31,FALSE,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,European,2,2,45.8,44.6,47,FALSE,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,Target,1,1,36.2,36.2,36.2,FALSE,FALSE
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,European,1,1,0,0,0,TRUE,TRUE
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,Target,1,1,0,0,0,TRUE,TRUE
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,European,1,1,52.3,52.3,52.3,FALSE,FALSE
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,Target,1,1,57.6,57.6,57.6,FALSE,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,European,1,0,NA,NA,NA,FALSE,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,Target,1,0,NA,NA,NA,FALSE,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,European,1,0,NA,NA,NA,FALSE,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,Target,1,0,NA,NA,NA,FALSE,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,European,1,0,NA,NA,NA,FALSE,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,Target,1,0,NA,NA,NA,FALSE,FALSE
+Seropositive RA,Train: Multi incl. EUR,South Asian,European,4,0,NA,NA,NA,FALSE,FALSE
+Seropositive RA,Train: Multi incl. EUR,South Asian,Target,1,0,NA,NA,NA,FALSE,FALSE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,European,4,0,NA,NA,NA,FALSE,FALSE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,Target,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: European-only,East Asian,European,3,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: European-only,East Asian,Target,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,European,1,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,Target,1,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: European-only,South Asian,European,7,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: European-only,South Asian,Target,4,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,African,European,1,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,African,Target,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,European,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,Target,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,European,4,1,17.1,17.1,17.1,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,Target,4,1,36.8,36.8,36.8,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,European,1,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,Target,1,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,European,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,Target,2,0,NA,NA,NA,FALSE,FALSE
