@@ -284,7 +284,8 @@ message(glue(">> Loaded {nrow(stage1_tbl)} Stage-1 rows across {n_distinct(stage
 
 # ============================================================
 # 2) Rebuild weighted paired ΔAUC results from Stage-1 table
-#    se_scale stays "logit_as_implemented" until the figure step.
+#    The published estimate uses delta-method standard errors.
+#    The logit-scale standard error is stored beside it.
 # ============================================================
 
 dat <- stage1_tbl %>%
@@ -375,6 +376,13 @@ for (b in bucket_levels) {
           tgt_auc = tgt_auc,
           eur_se  = eur_se,
           tgt_se  = tgt_se,
+          se_scale = "delta_method"
+        )
+        wout_logit <- safe_weighted_paired_test(
+          eur_auc = eur_auc,
+          tgt_auc = tgt_auc,
+          eur_se  = eur_se,
+          tgt_se  = tgt_se,
           se_scale = "logit_as_implemented"
         )
         
@@ -389,6 +397,8 @@ for (b in bucket_levels) {
           median_delta    = median_delta,
           estimate        = wout$estimate,
           p.value         = wout$p.value,
+          estimate_logit_as_submitted = wout_logit$estimate,
+          p_value_logit_as_submitted  = wout_logit$p.value,
           n_pairs         = as.integer(wout$n_pairs),
           flag_not_pooled = flag_not_pooled
         )
@@ -412,6 +422,13 @@ res_pw <- bind_rows(results) %>%
   mutate(
     p.adj = {
       pvec <- p.value
+      mask <- is.finite(pvec)
+      padj <- rep(NA_real_, length(pvec))
+      if (any(mask)) padj[mask] <- p.adjust(pvec[mask], method = "fdr")
+      padj
+    },
+    p_adj_logit_as_submitted = {
+      pvec <- p_value_logit_as_submitted
       mask <- is.finite(pvec)
       padj <- rep(NA_real_, length(pvec))
       if (any(mask)) padj[mask] <- p.adjust(pvec[mask], method = "fdr")
@@ -571,8 +588,10 @@ eur_df <- scat_df %>%
     eur_auc = auc_pooled,
     eur_se  = se,
     eur_k   = k_eval,
-    eur_lo  = auc_pooled - 1.96 * se,
-    eur_hi  = auc_pooled + 1.96 * se
+    eur_lo  = auc_pooled - 1.96 * auc_scale_se(auc_pooled, se, "delta_method"),
+    eur_hi  = auc_pooled + 1.96 * auc_scale_se(auc_pooled, se, "delta_method"),
+    eur_lo_logit_as_submitted = auc_pooled - 1.96 * se,
+    eur_hi_logit_as_submitted = auc_pooled + 1.96 * se
   )
 
 tgt_df <- scat_df %>%
@@ -583,8 +602,10 @@ tgt_df <- scat_df %>%
     tgt_auc = auc_pooled,
     tgt_se  = se,
     tgt_k   = k_eval,
-    tgt_lo  = auc_pooled - 1.96 * se,
-    tgt_hi  = auc_pooled + 1.96 * se
+    tgt_lo  = auc_pooled - 1.96 * auc_scale_se(auc_pooled, se, "delta_method"),
+    tgt_hi  = auc_pooled + 1.96 * auc_scale_se(auc_pooled, se, "delta_method"),
+    tgt_lo_logit_as_submitted = auc_pooled - 1.96 * se,
+    tgt_hi_logit_as_submitted = auc_pooled + 1.96 * se
   )
 
 paired_df <- tgt_df %>%
@@ -605,7 +626,20 @@ if (nrow(paired_df) == 0) {
   stop("No paired EUR/target data available for the faceted forest.")
 }
 
-delta_df <- pool_stage2_cells(paired_df, se_scale = "logit_as_implemented") %>%
+scale_keys <- c("trait_label", "trained_bucket", "target_ancestry")
+delta_submitted <- pool_stage2_cells(paired_df, se_scale = "logit_as_implemented") %>%
+  mutate(across(all_of(scale_keys), as.character)) %>%
+  transmute(
+    trait_label, trained_bucket, target_ancestry,
+    delta_hat_logit_as_submitted = delta_hat,
+    se_hat_logit_as_submitted = se_hat,
+    lo_logit_as_submitted = lo,
+    hi_logit_as_submitted = hi
+  )
+
+delta_df <- pool_stage2_cells(paired_df, se_scale = "delta_method") %>%
+  mutate(across(all_of(scale_keys), as.character)) %>%
+  left_join(delta_submitted, by = scale_keys) %>%
   mutate(
     pooled_group    = all_not_pooled,
     trait_clean     = wrap_trait(trait_label),
@@ -627,6 +661,19 @@ if (nrow(delta_df) == 0) {
 out_delta_data <- file.path(tables_pw, paste0("deltaAUC_forest_faceted_data_", stamp, ".csv"))
 readr::write_csv(delta_df, out_delta_data)
 message(glue(">> Wrote faceted forest plotting data: {out_delta_data}"))
+
+out_scale_compare <- file.path(tables_pw, paste0("deltaAUC_scale_comparison_", stamp, ".csv"))
+readr::write_csv(
+  delta_df %>%
+    transmute(
+      trait_label, trained_bucket, target_ancestry, n_pairs,
+      delta_hat, se_hat, lo, hi,
+      delta_hat_logit_as_submitted, se_hat_logit_as_submitted,
+      lo_logit_as_submitted, hi_logit_as_submitted
+    ),
+  out_scale_compare
+)
+message(glue(">> Wrote logit-scale comparison: {out_scale_compare}"))
 
 # ============================================================
 # 6) Axis limits and colors
