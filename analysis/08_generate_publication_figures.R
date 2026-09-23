@@ -4,8 +4,8 @@
 # Script: 08_generate_publication_figures.R
 # Project: pgscatalog_meta
 # Purpose: Generate final publication figures, including the faceted ΔAUC forest plot.
-# Inputs: meta_roadmap_two_stages/<DATE>/tables/stage1_pooled_cells_I2filtered_<DATE>.csv
-# Outputs: meta_roadmap_two_stages/<DATE>/plots/results/ publication figures
+# Inputs: results/pgs_catalog_<DATE>/stage1/stage1_pooled_cells_I2filtered_<DATE>.csv
+# Outputs: results/pgs_catalog_<DATE>/stage2/ Figure 1C tables and forest PDF
 # Run after: 07_i_square_filter.R
 # Run before: none
 # ============================================================
@@ -36,13 +36,12 @@ message(">> Self-contained Step 08 meta: starting")
 
 stamp <- pipeline_stamp
 
-root_pw     <- file.path("meta_roadmap_two_stages", stamp)
-tables_pw   <- file.path(root_pw, "tables")
-plots_pw    <- file.path(root_pw, "plots")
-results_dir <- file.path(plots_pw, "results")
+root_results <- catalog_results_dir(stamp)
+tables_stage1 <- file.path(root_results, "stage1")
+tables_stage2 <- file.path(root_results, "stage2")
 
 invisible(lapply(
-  list(tables_pw, plots_pw, results_dir),
+  list(tables_stage1, tables_stage2),
   dir.create,
   recursive = TRUE,
   showWarnings = FALSE
@@ -145,8 +144,8 @@ theme_CrossAncestryGenPhen <- function(
 # 1) Load I²-filtered Stage-1 table
 # ============================================================
 
-filtered_csv <- file.path(tables_pw, paste0("stage1_pooled_cells_I2filtered_", stamp, ".csv"))
-unfiltered_csv <- file.path(tables_pw, paste0("stage1_pooled_cells_", stamp, ".csv"))
+filtered_csv <- file.path(tables_stage1, paste0("stage1_pooled_cells_I2filtered_", stamp, ".csv"))
+unfiltered_csv <- file.path(tables_stage1, paste0("stage1_pooled_cells_", stamp, ".csv"))
 
 if (file.exists(filtered_csv)) {
   input_csv <- filtered_csv
@@ -211,7 +210,7 @@ if (!"trained_bucket" %in% names(stage1_tbl)) {
     dplyr::filter(n_buckets > 1)
   
   if (nrow(bucket_conflicts) > 0) {
-    conflict_fp <- file.path(tables_pw, paste0("training_bucket_conflicts_", stamp, ".csv"))
+    conflict_fp <- file.path(tables_stage1, paste0("training_bucket_conflicts_", stamp, ".csv"))
     readr::write_csv(
       bucket_map %>% dplyr::semi_join(bucket_conflicts, by = "pgs_id"),
       conflict_fp
@@ -438,7 +437,7 @@ res_pw <- bind_rows(results) %>%
     flag_not_pooled = coalesce(flag_not_pooled, FALSE)
   )
 
-out_res_pw <- file.path(tables_pw, paste0("paired_weightedtest_by_bucket_rebuilt_", stamp, ".csv"))
+out_res_pw <- file.path(tables_stage2, paste0("paired_weightedtest_by_bucket_rebuilt_", stamp, ".csv"))
 readr::write_csv(res_pw, out_res_pw)
 message(glue(">> Wrote rebuilt paired weighted-test table: {out_res_pw}"))
 
@@ -546,8 +545,8 @@ selected_traits_tbl <- heatmap_df %>%
   dplyr::distinct(trait_wrapped) %>%
   dplyr::arrange(trait_wrapped)
 
-out_heatmap_gate <- file.path(tables_pw, paste0("reproduction_gate_heatmap_df_", stamp, ".csv"))
-out_keep_traits  <- file.path(tables_pw, paste0("reproduction_gate_keep_traits_", stamp, ".csv"))
+out_heatmap_gate <- file.path(tables_stage2, paste0("reproduction_gate_heatmap_df_", stamp, ".csv"))
+out_keep_traits  <- file.path(tables_stage2, paste0("reproduction_gate_keep_traits_", stamp, ".csv"))
 readr::write_csv(heatmap_df, out_heatmap_gate)
 readr::write_csv(selected_traits_tbl, out_keep_traits)
 
@@ -658,11 +657,11 @@ if (nrow(delta_df) == 0) {
   stop("No valid delta_df rows available for the faceted forest.")
 }
 
-out_delta_data <- file.path(tables_pw, paste0("deltaAUC_forest_faceted_data_", stamp, ".csv"))
+out_delta_data <- file.path(tables_stage2, paste0("deltaAUC_forest_faceted_data_", stamp, ".csv"))
 readr::write_csv(delta_df, out_delta_data)
 message(glue(">> Wrote faceted forest plotting data: {out_delta_data}"))
 
-out_scale_compare <- file.path(tables_pw, paste0("deltaAUC_scale_comparison_", stamp, ".csv"))
+out_scale_compare <- file.path(tables_stage2, paste0("deltaAUC_scale_comparison_", stamp, ".csv"))
 readr::write_csv(
   delta_df %>%
     transmute(
@@ -772,7 +771,7 @@ n_traits     <- n_distinct(delta_df$trait_clean)
 n_total_rows <- n_distinct(paste(delta_df$trait_clean, delta_df$target_ancestry))
 h_delta      <- max(4.0, (n_total_rows * 0.15) + (n_traits * 0.2) + 1.5)
 
-out_delta_faceted <- file.path(results_dir, paste0("deltaAUC_forest_faceted_", stamp, ".pdf"))
+out_delta_faceted <- file.path(tables_stage2, paste0("deltaAUC_forest_faceted_", stamp, ".pdf"))
 
 ggsave(
   out_delta_faceted,

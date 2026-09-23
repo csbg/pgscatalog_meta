@@ -4,8 +4,9 @@
 # Script: 07_i_square_filter.R
 # Project: pgscatalog_meta
 # Purpose: Apply heterogeneity filtering to Stage-1 pooled AUC estimates using an I² threshold.
-# Inputs: meta_roadmap_two_stages/<DATE>/tables/stage1_pooled_cells_<DATE>.csv
-# Outputs: meta_roadmap_two_stages/<DATE>/tables/stage1_pooled_cells_I2filtered_<DATE>.csv; I² summary tables and plots
+# Inputs: results/pgs_catalog_<DATE>/stage1/stage1_pooled_cells_<DATE>.csv
+# Outputs: results/pgs_catalog_<DATE>/stage1/stage1_pooled_cells_I2filtered_<DATE>.csv;
+#          diagnostics/<DATE>/heterogeneity/ I² bar plots
 # Run after: 06_meta_ivw.R
 # Run before: 08_generate_publication_figures.R
 # ============================================================
@@ -23,9 +24,8 @@ source("R/load.R")
 # 0) CONFIG
 # ---------------------------
 stamp <- pipeline_stamp
-root_pw    <- file.path("meta_roadmap_two_stages", stamp)
-tables_dir <- file.path(root_pw, "tables")
-plots_dir  <- file.path(root_pw, "plots", "heterogeneity")
+tables_dir <- file.path(catalog_results_dir(stamp), "stage1")
+plots_dir  <- file.path(catalog_diagnostics_dir(stamp), "heterogeneity")
 dir.create(tables_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(plots_dir,  recursive = TRUE, showWarnings = FALSE)
 

@@ -34,11 +34,18 @@ pgscatalog_meta/
 │   ├── 05_pgs_auc_ci_audit.R
 │   ├── 06_meta_ivw.R
 │   ├── 07_i_square_filter.R
-│   └── 08_generate_publication_figures.R
+│   ├── 08_generate_publication_figures.R
+│   └── 09_review_sensitivity.R
 ├── data/
-│   └── pgs_cache/              # generated; not tracked if large
-├── results/                    # generated analysis outputs
-├── meta_roadmap_two_stages/     # generated meta-analysis tables and figures
+│   ├── catalog_bulk/           # frozen Catalog bulk downloads
+│   └── pgs_cache/              # working copy; not tracked
+├── results/                    # paper Catalog outputs and review checks
+│   ├── pgs_auc_ci_audit_<STAMP>/
+│   ├── pgs_catalog_<STAMP>/
+│   │   ├── stage1/             # Stage-1 pooled AUC tables
+│   │   └── stage2/             # Stage-2 ΔAUC / Figure 1C
+│   └── review_sensitivity_<STAMP>/
+├── diagnostics/                # per-trait exploratory PDFs (not Stage 2)
 ├── README.md
 └── LICENSE
 ```
@@ -102,9 +109,11 @@ For each trait, PGS, and evaluation ancestry, this script pools AUC values acros
 
 Main output:
 
-- `meta_roadmap_two_stages/<STAMP>/tables/stage1_pooled_cells_<STAMP>.csv`
+- `results/pgs_catalog_<STAMP>/stage1/stage1_pooled_cells_<STAMP>.csv`
 
 This file is the main Stage-1 input for heterogeneity filtering and final figure generation.
+
+Per-trait exploratory PDFs (raw evaluations, Stage-1 checks, and an across-PGS AUC diagnostic that is not manuscript Stage 2) are written under `diagnostics/<STAMP>/`.
 
 ### 7. `07_i_square_filter.R`
 
@@ -117,23 +126,23 @@ Cells with high heterogeneity are removed when:
 
 Main outputs:
 
-- `stage1_I2_summary_<STAMP>.csv`
-- `stage1_pooled_cells_I2filtered_<STAMP>.csv`
-- I² diagnostic plots under `plots/heterogeneity/`
+- `results/pgs_catalog_<STAMP>/stage1/stage1_I2_summary_<STAMP>.csv`
+- `results/pgs_catalog_<STAMP>/stage1/stage1_pooled_cells_I2filtered_<STAMP>.csv`
+- I² diagnostic plots under `diagnostics/<STAMP>/heterogeneity/`
 
 ### 8. `08_generate_publication_figures.R`
 
 Generates the final publication figures from the I²-filtered Stage-1 table.
 
-This script rebuilds the paired ΔAUC analysis in a self-contained way and applies the final reproduction filters used for the faceted forest plot.
+This script rebuilds the paired ΔAUC analysis (manuscript Stage 2) in a self-contained way and applies the final reproduction filters used for the faceted forest plot.
 
 Main outputs include:
 
-- `paired_weightedtest_by_bucket_rebuilt_<STAMP>.csv`
-- `reproduction_gate_heatmap_df_<STAMP>.csv`
-- `reproduction_gate_keep_traits_<STAMP>.csv`
-- `deltaAUC_forest_faceted_data_<STAMP>.csv`
-- `deltaAUC_forest_faceted_<STAMP>.pdf`
+- `results/pgs_catalog_<STAMP>/stage2/paired_weightedtest_by_bucket_rebuilt_<STAMP>.csv`
+- `results/pgs_catalog_<STAMP>/stage2/reproduction_gate_heatmap_df_<STAMP>.csv`
+- `results/pgs_catalog_<STAMP>/stage2/reproduction_gate_keep_traits_<STAMP>.csv`
+- `results/pgs_catalog_<STAMP>/stage2/deltaAUC_forest_faceted_data_<STAMP>.csv`
+- `results/pgs_catalog_<STAMP>/stage2/deltaAUC_forest_faceted_<STAMP>.pdf`
 
 ## Main publication figure
 

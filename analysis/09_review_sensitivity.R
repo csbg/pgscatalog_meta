@@ -358,9 +358,9 @@ fp_funnel <- file.path("results", paste0("pgs_auc_ci_audit_", stamp), "ci_recove
 fp_pss    <- catalog_bulk_file("evaluation_sample_sets", stamp)
 fp_ppm    <- catalog_bulk_file("performance_metrics", stamp)
 fp_scores <- catalog_bulk_file("scores", stamp)
-fp_s1     <- file.path("meta_roadmap_two_stages", stamp, "tables", paste0("stage1_pooled_cells_", stamp, ".csv"))
-fp_s1f    <- file.path("meta_roadmap_two_stages", stamp, "tables", paste0("stage1_pooled_cells_I2filtered_", stamp, ".csv"))
-fp_forest <- file.path("meta_roadmap_two_stages", stamp, "tables", paste0("deltaAUC_forest_faceted_data_", stamp, ".csv"))
+fp_s1     <- file.path(catalog_results_dir(stamp), "stage1", paste0("stage1_pooled_cells_", stamp, ".csv"))
+fp_s1f    <- file.path(catalog_results_dir(stamp), "stage1", paste0("stage1_pooled_cells_I2filtered_", stamp, ".csv"))
+fp_forest <- file.path(catalog_results_dir(stamp), "stage2", paste0("deltaAUC_forest_faceted_data_", stamp, ".csv"))
 
 stopifnot(
   file.exists(fp_eval), file.exists(fp_pss), file.exists(fp_ppm), file.exists(fp_scores),

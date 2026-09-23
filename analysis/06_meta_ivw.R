@@ -5,7 +5,8 @@
 # Project: pgscatalog_meta
 # Purpose: Perform Stage-1 inverse-variance weighted meta-analysis of AUC within each trait × PGS × ancestry cell.
 # Inputs: results/pgs_auc_ci_audit_<DATE>/eval_df_final_auc_ci.csv
-# Outputs: meta_roadmap_two_stages/<DATE>/tables/stage1_pooled_cells_<DATE>.csv
+# Outputs: results/pgs_catalog_<DATE>/stage1/stage1_pooled_cells_<DATE>.csv
+#          diagnostics/<DATE>/ exploratory PDFs (not manuscript Stage 2)
 # Run after: 05_pgs_auc_ci_audit.R
 # Run before: 07_i_square_filter.R
 # ============================================================
@@ -97,15 +98,17 @@ filter_min_ancestries <- function(df){
 # -------------------------
 # 2) OUTPUT DIRS
 # -------------------------
-root <- file.path("meta_roadmap_two_stages", stamp)
+# Paper Stage-1 tables live under results/. Per-trait PDFs and the
+# across-PGS AUC diagnostic (not manuscript Stage 2) live under diagnostics/.
+root_results <- catalog_results_dir(stamp)
+root_diag    <- catalog_diagnostics_dir(stamp)
 dirs <- list(
-  base   = root,
-  plots  = file.path(root, "plots"),
-  raw    = file.path(root, "plots", "raw"),
-  stage1 = file.path(root, "plots", "stage1"),
-  stage2 = file.path(root, "plots", "stage2"),
-  tables = file.path(root, "tables"),
-  logs   = file.path(root, "logs")
+  tables         = file.path(root_results, "stage1"),
+  tables_diag    = file.path(root_diag, "tables"),
+  raw            = file.path(root_diag, "raw"),
+  stage1         = file.path(root_diag, "stage1"),
+  across_pgs_auc = file.path(root_diag, "across_pgs_auc"),
+  logs           = file.path(root_diag, "logs")
 )
 invisible(lapply(dirs, dir.create, recursive = TRUE, showWarnings = FALSE))
 
@@ -237,7 +240,7 @@ plot_raw_flipped <- function(df){
     ggsave(fn, g, width = width_this, height = height_this, device = pdf_device, limitsize = FALSE)
     
     write_csv(d %>% arrange(ancestry_display, pgs_id),
-              file.path(dirs$tables, paste0("raw_rows_", slugify(tr), "_", stamp, ".csv")))
+              file.path(dirs$tables_diag, paste0("raw_rows_", slugify(tr), "_", stamp, ".csv")))
   })
 }
 
@@ -349,7 +352,7 @@ plot_stage1_final <- function(pooled){
     
     ggsave(fn, g, width = 8.5, height = h_dynamic, device = pdf_device, limitsize = FALSE)
     
-    write_csv(d_trait, file.path(dirs$tables, paste0("stage1_rows_", slugify(tr), "_", stamp, ".csv")))
+    write_csv(d_trait, file.path(dirs$tables_diag, paste0("stage1_rows_", slugify(tr), "_", stamp, ".csv")))
   })
 }
 
@@ -508,9 +511,11 @@ plot_pooling_combined <- function(raw_df, stage1_tbl){
 }
 
 # -------------------------
-# 6) STAGE-2 POOLING (across PGS per trait × ancestry) + plot
+# 6) ACROSS-PGS AUC DIAGNOSTIC (not manuscript Stage 2)
 # -------------------------
-pool_stage2 <- function(stage1_tbl){
+# Manuscript Stage 2 is the paired ΔAUC IVW in script 08. This helper
+# pools Stage-1 AUCs across PGS within trait × ancestry for exploratory plots.
+pool_auc_across_pgs <- function(stage1_tbl){
   stage1_tbl %>%
     select(trait_label, ancestry_display, pgs_id, eta, se, I2, k_eval) %>%
     group_by(trait_label, ancestry_display) %>%
@@ -526,13 +531,13 @@ pool_stage2 <- function(stage1_tbl){
 }
 
 # -------------------------
-# 6b)STAGE-2 PLOT (Individual Files per Trait)
+# 6b) ACROSS-PGS AUC PLOTS (one PDF per trait)
 # -------------------------
-plot_stage2_individual_traits <- function(stage2_tbl){
-  message(">> Plot 3/3: Stage-2 Comparative (Individual Files)")
+plot_auc_across_pgs_traits <- function(across_tbl){
+  message(">> Plot 3/3: Across-PGS AUC diagnostic (Individual Files)")
   
   # 1. Clean Data
-  d <- stage2_tbl %>%
+  d <- across_tbl %>%
     mutate(ancestry_display = as.character(ancestry_display)) %>%
     filter(ancestry_display != drop_label)
   
@@ -571,8 +576,7 @@ plot_stage2_individual_traits <- function(stage2_tbl){
   d_plot <- d_plot %>% left_join(eur_refs, by = "trait_label")
   
   # 4. LOOP & SAVE INDIVIDUALLY
-  # Base directory
-  base_out <- file.path(dirs$stage2, "by_ancestry_count")
+  base_out <- file.path(dirs$across_pgs_auc, "by_ancestry_count")
   dir.create(base_out, recursive = TRUE, showWarnings = FALSE)
   
   # We iterate through every single trait
@@ -660,8 +664,11 @@ message(glue(">> Wrote Stage-1 pooled cells: {out_stage1}"))
 # 2) Combined RAW + pooled plot per trait 
 plot_pooling_combined(eval_for_stage, stage1_tbl)
 
-# 3) Stage-2 pooling across PGS, retained as a diagnostic output
-stage2_tbl <- pool_stage2(stage1_tbl)
-plot_stage2_individual_traits(stage2_tbl)
+# 3) Across-PGS AUC diagnostic (not manuscript Stage 2)
+across_tbl <- pool_auc_across_pgs(stage1_tbl)
+plot_auc_across_pgs_traits(across_tbl)
 
-message(glue("\n✅ Done. Outputs in: {normalizePath(root, mustWork = FALSE)}"))
+message(glue(
+  "\n>> Done. Stage-1 tables: {normalizePath(dirs$tables, mustWork = FALSE)}\n",
+  ">> Diagnostics: {normalizePath(root_diag, mustWork = FALSE)}"
+))
