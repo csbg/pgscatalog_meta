@@ -50,3 +50,6 @@ rsconnect/
 
 # Working copy of Catalog downloads. The frozen bulk files are in data/catalog_bulk/.
 data/pgs_cache/
+
+# Per-trait exploratory PDFs. Paper Stage-1/Stage-2 tables live under results/.
+diagnostics/
