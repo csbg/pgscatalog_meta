@@ -22,7 +22,7 @@ source("R/load.R")
 # ---------------------------
 # 0) CONFIG
 # ---------------------------
-if (!exists("stamp")) stamp <- format(Sys.Date(), "%Y%m%d")
+stamp <- pipeline_stamp
 root_pw    <- file.path("meta_roadmap_two_stages", stamp)
 tables_dir <- file.path(root_pw, "tables")
 plots_dir  <- file.path(root_pw, "plots", "heterogeneity")

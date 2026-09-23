@@ -50,6 +50,15 @@ make_ancestry_display <- function(x) {
   )
 }
 
+evaluation_display_levels <- c(
+  "European",
+  "African",
+  "East Asian",
+  "South Asian",
+  "Hispanic or Latin American",
+  "Middle Eastern or North African"
+)
+
 # Exact Catalog broad_ancestry_category values that enter an evaluation.
 # Commas inside parentheses are part of one label.
 .evaluation_ancestry_map <- c(

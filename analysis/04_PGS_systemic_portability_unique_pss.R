@@ -43,19 +43,11 @@ message(sprintf(
 cache_dir <- "data/pgs_cache"
 out_dir   <- file.path("results","pgs_systemic_unique_pss")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-stamp     <- format(Sys.Date(), "%Y%m%d")
+stamp     <- pipeline_stamp
 
 ## -------------------------
 ## Helpers
 ## -------------------------
-latest_of <- function(pattern, dir = cache_dir, fail_if_missing = TRUE) {
-  fs <- list.files(dir, pattern = pattern, full.names = TRUE)
-  if (!length(fs)) {
-    msg <- paste0("No files matching '", pattern, "' in ", dir)
-    if (fail_if_missing) stop(msg) else return(NA_character_)
-  }
-  head(sort(fs, decreasing = TRUE), 1)
-}
 calc_Neff_vec <- function(cases, ctrls) {
   cases <- as.numeric(cases); ctrls <- as.numeric(ctrls)
   out <- rep(NA_real_, length(cases))
@@ -76,10 +68,13 @@ lab_si <- scales::label_number(accuracy = 1, scale_cut = scales::cut_short_scale
 ## -------------------------
 ## Load newest cache files
 ## -------------------------
-pm_fp     <- latest_of("^bulk_performance_metrics_\\d{8}\\.csv$")
-pss_fp    <- latest_of("^bulk_evaluation_sample_sets_\\d{8}\\.csv$")
-tb_fp     <- latest_of("^train_bucket_\\d{8}\\.csv$")
-scores_fp <- latest_of("^bulk_scores_\\d{8}\\.csv$")
+pm_fp     <- catalog_bulk_file("performance_metrics", stamp)
+pss_fp    <- catalog_bulk_file("evaluation_sample_sets", stamp)
+scores_fp <- catalog_bulk_file("scores", stamp)
+tb_fp     <- file.path(cache_dir, paste0("train_bucket_", stamp, ".csv"))
+if (!file.exists(tb_fp)) {
+  stop("Training-bucket file not found: ", tb_fp, "\nRun analysis/03_bulk_metadata_pull.R first.", call. = FALSE)
+}
 
 pm     <- read_csv(pm_fp,     show_col_types = FALSE) |> clean_names()
 pss    <- read_csv(pss_fp,    show_col_types = FALSE) |> clean_names()
@@ -118,10 +113,12 @@ pss_min <- pss %>%
   transmute(
     pss_id        = pgs_sample_set_pss,
     ancestry_eval = broad_ancestry_category,
+    ancestry_display = assign_evaluation_ancestry(broad_ancestry_category),
     n             = num(number_of_individuals),
     cases         = num(number_of_cases),
     ctrls         = num(number_of_controls)
-  )
+  ) %>%
+  filter(!is.na(ancestry_display))
 
 # PGS → EFO mapping (may be multi-EFO)
 pgs_traits <- scores %>%
@@ -187,8 +184,7 @@ eval_df <- eval_ranked %>%
   left_join(pgs_traits, by = "pgs_id") %>%
   mutate(
     ancestry_raw     = as.character(ancestry_eval),
-    ancestry_display = to_display_cat(ancestry_raw),
-    ancestry_display = forcats::fct_relevel(ancestry_display, display_levels, after = 0)
+    ancestry_display = forcats::fct_relevel(as.character(ancestry_display), evaluation_display_levels, after = 0)
   )
 
 message(

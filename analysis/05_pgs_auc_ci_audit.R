@@ -26,7 +26,7 @@ source("R/load.R")
 # =========================
 cache_dir   <- "data/pgs_cache"
 results_dir <- "results"
-stamp       <- format(Sys.Date(), "%Y%m%d")
+stamp       <- pipeline_stamp
 out_dir     <- file.path(results_dir, paste0("pgs_auc_ci_audit_", stamp))
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
@@ -56,22 +56,6 @@ anc_pal <- c(
 # =========================
 message_glue <- function(fmt, ...) cat(sprintf(paste0(fmt, "\n"), ...))
 
-latest_of <- function(pattern, dir = cache_dir, recursive = FALSE, fail_if_missing = TRUE) {
-  fs <- list.files(dir, pattern = pattern, full.names = TRUE, recursive = recursive)
-  if (!length(fs)) {
-    if (fail_if_missing) stop(sprintf("No files matching '%s' under %s", pattern, normalizePath(dir, mustWork = FALSE)), call. = FALSE)
-    return(NA_character_)
-  }
-  fs[order(file.info(fs)$mtime, decreasing = TRUE)][1]
-}
-latest_any <- function(patterns, dir = cache_dir, recursive = FALSE, fail_if_missing = TRUE) {
-  for (pat in patterns) {
-    fp <- latest_of(pat, dir = dir, recursive = recursive, fail_if_missing = FALSE)
-    if (!is.na(fp)) return(fp)
-  }
-  if (fail_if_missing) stop(sprintf("No files matching any of: %s under %s", paste(patterns, collapse=" | "), normalizePath(dir, mustWork = FALSE)), call. = FALSE)
-  NA_character_
-}
 read_csv_safe <- function(fp, ...) {
   if (is.na(fp)) return(tibble(.empty=TRUE)[,0])
   suppressMessages(readr::read_csv(fp, show_col_types = FALSE, progress = FALSE, ...))
@@ -91,6 +75,7 @@ theme_clean <- function() {
 canon_anc <- function(x){
   x <- as.character(x)
   dplyr::case_when(
+    x %in% evaluation_display_levels ~ x,
     is.na(x) | x == "" | grepl("Unknown", x, ignore.case = TRUE) ~ "Unknown",
     x %in% c("European") ~ "European",
     x %in% c("East Asian") ~ "East Asian",
@@ -107,22 +92,16 @@ canon_anc <- function(x){
 # =========================
 # 1) Locate inputs
 # =========================
-message_glue(">> Scanning cache dir: %s", cache_dir)
+message_glue(">> Scanning catalog stamp: %s", stamp)
 
-fp_ppm <- latest_of("^bulk_performance_metrics_\\d{8}\\.csv(\\.gz)?$")
-fp_pss <- latest_any(c("^bulk_evaluation_sample_sets_\\d{8}\\.csv(\\.gz)?$",
-                       "^bulk_sample_sets_\\d{8}\\.csv(\\.gz)?$"))
+fp_ppm <- catalog_bulk_file("performance_metrics", stamp)
+fp_pss <- catalog_bulk_file("evaluation_sample_sets", stamp)
 
-cand_eval <- list.files(results_dir, pattern = "(^|_)eval_df(.*)\\.(csv|parquet)$",
-                        full.names = TRUE, recursive = TRUE)
-fp_eval_df <- if (length(cand_eval)) cand_eval[order(file.info(cand_eval)$mtime, decreasing = TRUE)][1] else NA_character_
+fp_eval_df <- file.path(results_dir, "pgs_systemic_unique_pss", paste0("eval_df_full_", stamp, ".csv"))
+if (!file.exists(fp_eval_df)) fp_eval_df <- NA_character_
 
-cand_bucket <- c(
-  list.files(results_dir, pattern = "bucket.*\\.csv(\\.gz)?$", full.names = TRUE, recursive = TRUE),
-  list.files(cache_dir,   pattern = "bucket.*\\.csv(\\.gz)?$", full.names = TRUE, recursive = TRUE),
-  list.files(results_dir, pattern = "train.*bucket.*\\.csv(\\.gz)?$", full.names = TRUE, recursive = TRUE)
-)
-fp_bucket <- if (length(cand_bucket)) cand_bucket[order(file.info(cand_bucket)$mtime, decreasing = TRUE)][1] else NA_character_
+fp_bucket <- file.path(cache_dir, paste0("train_bucket_", stamp, ".csv"))
+if (!file.exists(fp_bucket)) fp_bucket <- NA_character_
 
 message_glue("  * PPM: %s", basename(fp_ppm))
 message_glue("  * PSS: %s", basename(fp_pss))
@@ -239,11 +218,14 @@ pss_pick <- if (is.na(id_pss) || !length(col_anc)) {
   tibble(sampleset_id = unique(ci_records$sampleset_id), ancestry_eval = NA_character_)
 } else {
   pss %>%
-    transmute(sampleset_id = .data[[id_pss]], ancestry_eval = .data[[col_anc[1]]]) %>%
-    mutate(ancestry_eval = if_else(is.na(ancestry_eval) | ancestry_eval == "", "Unknown", ancestry_eval))
+    transmute(
+      sampleset_id = .data[[id_pss]],
+      ancestry_eval = assign_evaluation_ancestry(.data[[col_anc[1]]])
+    ) %>%
+    filter(!is.na(ancestry_eval))
 }
 
-ci_records <- ci_records %>% left_join(pss_pick, by = "sampleset_id")
+ci_records <- ci_records %>% inner_join(pss_pick, by = "sampleset_id")
 
 train_bucket <- if (!is.na(fp_bucket)) {
   tmp <- read_csv_safe(fp_bucket) %>% clean_names()
@@ -558,6 +540,27 @@ audit <- eligible_universe %>%
 audit_summary <- audit %>% count(reason, name = "n") %>% mutate(share = n / sum(n))
 write_csv(audit,        file.path(out_dir, "ci_inference_gap_audit_rows.csv"))
 write_csv(audit_summary,file.path(out_dir, "ci_inference_gap_audit_summary.csv"))
+
+# Drop intervals that cannot support an inverse-variance weight:
+# zero or negative width, or a bound outside [0, 1].
+ci_auc_filled <- ci_auc_filled %>%
+  mutate(interval_issue = auc_interval_issue(ci_lower_final, ci_upper_final))
+interval_issues <- ci_auc_filled %>%
+  filter(!is.na(interval_issue)) %>%
+  transmute(
+    performance_id,
+    pgs_id,
+    sampleset_id,
+    reported_trait,
+    ancestry_eval,
+    auc = auc_single,
+    estimate_ci_lower = ci_lower_final,
+    estimate_ci_upper = ci_upper_final,
+    interval_issue
+  )
+write_csv(interval_issues, file.path(out_dir, "data_issues_intervals.csv"))
+message_glue(">> Excluded %d rows with bad AUC intervals", nrow(interval_issues))
+ci_auc_filled <- ci_auc_filled %>% filter(is.na(interval_issue))
 
 # =========================
 # 10) FINAL: eval_df-like table with correct AUC & CI

@@ -9,6 +9,7 @@ pipeline_r_dir <- (function() {
   stop("Cannot locate the R/ directory. Run scripts from the repository root.")
 })()
 
+source(file.path(pipeline_r_dir, "config.R"))
 source(file.path(pipeline_r_dir, "sanity.R"))
 source(file.path(pipeline_r_dir, "ci_parse.R"))
 source(file.path(pipeline_r_dir, "ancestry.R"))

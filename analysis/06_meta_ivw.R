@@ -27,12 +27,9 @@ source("R/load.R")
 # -------------------------
 # 0) CONFIG
 # -------------------------
-if (!exists("audit_dir")) {
-  audit_candidates <- list.dirs("results", recursive = FALSE, full.names = TRUE)
-  audit_candidates <- audit_candidates[grepl("pgs_auc_ci_audit_\\d{8}$", audit_candidates)]
-  stopifnot("No pgs_auc_ci_audit_<DATE> directory found under results/" = length(audit_candidates) > 0)
-  audit_dir <- audit_candidates[order(file.info(audit_candidates)$mtime, decreasing = TRUE)][1]
-}
+stamp <- pipeline_stamp
+audit_dir <- file.path("results", paste0("pgs_auc_ci_audit_", stamp))
+fp_eval_final <- file.path(audit_dir, "eval_df_final_auc_ci.csv")
 
 # drop "Not reported" by default from plots
 drop_label <- "Not reported"
@@ -117,11 +114,14 @@ invisible(lapply(dirs, dir.create, recursive = TRUE, showWarnings = FALSE))
 # -------------------------
 # 3) INPUT & PREP
 # -------------------------
-message(">> Looking for eval_df_final_auc_ci.csv under: ", normalizePath(audit_dir, mustWork = FALSE))
-cand <- list.files(audit_dir, pattern = "eval_df_final_auc_ci\\.csv$", full.names = TRUE, recursive = TRUE)
-stopifnot("No eval_df_final_auc_ci.csv found under audit_dir" = length(cand) > 0)
-fp_eval_final <- cand[order(file.info(cand)$mtime, decreasing = TRUE)][1]
-message("  * Using: ", fp_eval_final)
+message(">> Reading ", fp_eval_final)
+if (!file.exists(fp_eval_final)) {
+  stop(
+    "eval_df_final_auc_ci.csv not found at ", fp_eval_final,
+    "\nRun analysis/05_pgs_auc_ci_audit.R first.",
+    call. = FALSE
+  )
+}
 
 eval_final <- readr::read_csv(fp_eval_final, show_col_types = FALSE) %>% janitor::clean_names()
 
@@ -155,10 +155,20 @@ eval_final <- eval_final %>%
 # Proceed with processing; keep both id & label for grouping/printing
 eval_proc <- eval_final %>%
   mutate(
-    ancestry_display = make_ancestry_display(ancestry_eval)
+    ancestry_display = ancestry_eval
   ) %>%
   mutate(across(c(auc, estimate_ci_lower, estimate_ci_upper), as.numeric)) %>%
+  filter(ancestry_display %in% evaluation_display_levels) %>%
   filter(is.finite(auc), is.finite(estimate_ci_lower), is.finite(estimate_ci_upper))
+
+interval_issue <- auc_interval_issue(eval_proc$estimate_ci_lower, eval_proc$estimate_ci_upper)
+if (any(!is.na(interval_issue))) {
+  stop(
+    "Bad AUC intervals reached Stage 1. ",
+    "Script 05 should have written them to data_issues_intervals.csv.",
+    call. = FALSE
+  )
+}
 
 # Audit: show how rows map to EFO vs reported
 dir.create(dirs$tables, recursive = TRUE, showWarnings = FALSE)

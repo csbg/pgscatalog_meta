@@ -1,4 +1,16 @@
-# Checks on pooled summaries.
+# Checks on pooled summaries and on AUC intervals that would enter Stage 1.
+
+auc_interval_issue <- function(lower, upper) {
+  lower <- as.numeric(lower)
+  upper <- as.numeric(upper)
+  finite <- is.finite(lower) & is.finite(upper)
+  outside <- finite & (lower < 0 | lower > 1 | upper < 0 | upper > 1)
+  nonpos <- finite & !outside & !((upper - lower) > 0)
+  issue <- rep(NA_character_, length(lower))
+  issue[outside] <- "bound_outside_unit_interval"
+  issue[nonpos] <- "non_positive_width"
+  issue
+}
 
 assert_i2_percent <- function(i2) {
   bad <- !is.na(i2) & (i2 < 0 | i2 > 100)

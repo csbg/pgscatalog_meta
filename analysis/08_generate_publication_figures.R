@@ -34,9 +34,7 @@ message(">> Self-contained Step 08 meta: starting")
 # 0) Self-contained setup
 # ============================================================
 
-if (!exists("stamp") || !is.character(stamp) || length(stamp) != 1) {
-  stamp <- format(Sys.Date(), "%Y%m%d")
-}
+stamp <- pipeline_stamp
 
 root_pw     <- file.path("meta_roadmap_two_stages", stamp)
 tables_pw   <- file.path(root_pw, "tables")
@@ -178,38 +176,15 @@ if ("train_bucket" %in% names(stage1_tbl) && !"trained_bucket" %in% names(stage1
 
 if (!"trained_bucket" %in% names(stage1_tbl)) {
   message(">> Stage-1 table has no trained_bucket column; rescuing from eval_df_final_auc_ci.csv")
-  
-  # You can override this before sourcing the script if needed, e.g.:
-  # audit_dir <- "results/pgs_auc_ci_audit_20251006"
-  if (!exists("audit_dir") || !is.character(audit_dir) || length(audit_dir) != 1) {
-    audit_dir <- file.path("results", "pgs_auc_ci_audit_20251006")
-  }
-  
-  candidate_roots <- unique(c(
-    audit_dir,
-    "results",
-    ".",
-    path.expand("~/pgscatalog/results"),
-    path.expand("~/pgscatalog")
-  ))
-  candidate_roots <- candidate_roots[dir.exists(candidate_roots)]
-  
-  cand_meta <- unique(unlist(lapply(candidate_roots, function(root) {
-    list.files(root, pattern = "eval_df_final_auc_ci\\.csv$", full.names = TRUE, recursive = TRUE)
-  })))
-  
-  if (length(cand_meta) == 0) {
+
+  fp_meta <- file.path("results", paste0("pgs_auc_ci_audit_", stamp), "eval_df_final_auc_ci.csv")
+  if (!file.exists(fp_meta)) {
     stop(
-      "Stage-1 table does not contain trained_bucket, and I could not find eval_df_final_auc_ci.csv to rescue it.\n",
-      "Tried searching under: ", paste(candidate_roots, collapse = ", "), "\n",
-      "Fix options:\n",
-      "  1) Set audit_dir <- 'path/to/results/pgs_auc_ci_audit_YYYYMMDD' before sourcing this script; or\n",
-      "  2) Copy eval_df_final_auc_ci.csv somewhere under results/; or\n",
-      "  3) Add train_bucket/trained_bucket to the Stage-1 table upstream."
+      "Stage-1 table does not contain trained_bucket, and the audit table was not found at ",
+      fp_meta,
+      call. = FALSE
     )
   }
-  
-  fp_meta <- cand_meta[order(file.info(cand_meta)$mtime, decreasing = TRUE)][1]
   message(">> Using training metadata: ", fp_meta)
   
   meta_names <- names(readr::read_csv(fp_meta, n_max = 0, show_col_types = FALSE))
