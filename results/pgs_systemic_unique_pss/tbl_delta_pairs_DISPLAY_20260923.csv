@@ -1,0 +1,177 @@
+pgs_id,train_bucket,pair,delta_auc,auc_A,auc_B
+PGS000004,Train: European-only,African vs European,-0.08772969346906556,0.6641857718866676,0.576456078417602
+PGS000011,Train: Multi incl. EUR,African vs European,0.013000000000000012,0.75,0.763
+PGS000013,Train: Multi incl. EUR,African vs European,0.07418318688303449,0.6968168131169655,0.771
+PGS000018,Train: Multi incl. EUR,African vs European,0.10218239035288823,0.6728176096471119,0.7750000000000001
+PGS000022,NA,African vs European,-0.09860000000000002,0.8508,0.7522
+PGS000023,Train: African-only,African vs European,0.02196352768955312,0.7894520068644928,0.8114155345540459
+PGS000024,Train: European-only,African vs European,-0.03929723945795793,0.8700655356477494,0.8307682961897914
+PGS000036,Train: Multi incl. EUR,African vs European,-0.148303830523148,0.722303830523148,0.574
+PGS000039,Train: Multi incl. EUR,African vs European,-0.138,0.685,0.547
+PGS000200,Train: Multi incl. EUR,African vs European,0.015000000000000013,0.748,0.763
+PGS000662,Train: Multi incl. EUR,African vs European,0.12585097277360235,0.8351490272263976,0.961
+PGS000804,Train: Multi incl. EUR,African vs European,-0.15489999999999993,0.825,0.6701
+PGS002265,Train: European-only,African vs European,6.694821186747912e-5,0.5809330517881325,0.581
+PGS002308,Train: Multi incl. EUR,African vs European,-0.06604574852179479,0.793,0.7269542514782052
+PGS003850,Train: Multi incl. EUR,African vs European,-0.030000000000000138,0.6100000000000001,0.58
+PGS003851,Train: European-only,African vs European,-0.11572463170681613,0.6422680485125143,0.5265434168056982
+PGS003852,Train: Multi incl. EUR,African vs European,-0.06000000000000005,0.65,0.59
+PGS004233,Train: Multi incl. EUR,African vs European,0,0.754,0.754
+PGS004234,Train: Multi incl. EUR,African vs European,0,0.763,0.763
+PGS004235,Train: Multi incl. EUR,African vs European,0,0.757,0.757
+PGS004236,Train: Multi incl. EUR,African vs European,1.1102230246251565e-16,0.7639999999999999,0.764
+PGS004859,Train: Multi incl. EUR,African vs European,-0.0037362374531423326,0.7585487642842496,0.7548125268311072
+PGS005237,Train: Multi incl. EUR,African vs European,0.02530051207911299,0.770699487920887,0.796
+PGS005238,Train: Multi incl. EUR,African vs European,0.017193682869997784,0.7808063171300023,0.798
+PGS005239,Train: Multi incl. EUR,African vs European,0.027499179074317315,0.7725008209256827,0.8
+PGS005240,Train: Multi incl. EUR,African vs European,0.0151515427572807,0.7778484572427193,0.793
+PGS005241,Train: Multi incl. EUR,African vs European,0.03888101352421991,0.7491189864757801,0.788
+PGS005345,Train: European-only,African vs European,-0.019333832785862648,0.6453338327858628,0.6260000000000001
+PGS005346,Train: European-only,African vs European,-0.07539132864270015,0.6673913286427001,0.592
+PGS005347,Train: European-only,African vs European,-0.06458342806250117,0.6625834280625011,0.598
+PGS005348,Train: European-only,African vs European,-0.05508318354163777,0.6660831835416378,0.611
+PGS005349,Train: European-only,African vs European,-0.04355466125736551,0.6485546612573655,0.605
+PGS012555,Train: Multi incl. EUR,African vs European,-0.09407882609183804,0.8074693867112124,0.7133905606193743
+PGS000004,Train: European-only,African vs East Asian,-0.06354392158239797,0.64,0.576456078417602
+PGS000013,Train: Multi incl. EUR,African vs East Asian,-0.1489999999999999,0.9199999999999999,0.771
+PGS000036,Train: Multi incl. EUR,African vs East Asian,-0.06812844918250649,0.6421284491825064,0.574
+PGS000039,Train: Multi incl. EUR,African vs East Asian,-0.15408811333431505,0.7010881133343151,0.547
+PGS000662,Train: Multi incl. EUR,African vs East Asian,0.040943300382190184,0.9200566996178098,0.961
+PGS002265,Train: European-only,African vs East Asian,-0.010000000000000009,0.591,0.581
+PGS002308,Train: Multi incl. EUR,African vs East Asian,-0.06435087461578282,0.7913051260939881,0.7269542514782052
+PGS003851,Train: European-only,African vs East Asian,-0.07445658319430182,0.601,0.5265434168056982
+PGS004859,Train: Multi incl. EUR,African vs East Asian,-0.04018747316889271,0.7949999999999999,0.7548125268311072
+PGS012555,Train: Multi incl. EUR,African vs East Asian,-0.09660943938062572,0.81,0.7133905606193743
+PGS000013,Train: Multi incl. EUR,African vs South Asian,-0.007495670752277195,0.7784956707522772,0.771
+PGS000036,Train: Multi incl. EUR,African vs South Asian,-0.12587923643831123,0.6998792364383112,0.574
+PGS004859,Train: Multi incl. EUR,African vs South Asian,-0.060187473168892835,0.8150000000000001,0.7548125268311072
+PGS005237,Train: Multi incl. EUR,African vs South Asian,-0.04899999999999993,0.845,0.796
+PGS005238,Train: Multi incl. EUR,African vs South Asian,-0.04399999999999993,0.842,0.798
+PGS005239,Train: Multi incl. EUR,African vs South Asian,-0.03399999999999992,0.834,0.8
+PGS005240,Train: Multi incl. EUR,African vs South Asian,-0.04299999999999993,0.836,0.793
+PGS005241,Train: Multi incl. EUR,African vs South Asian,-0.017000000000000015,0.805,0.788
+PGS005345,Train: European-only,African vs South Asian,-0.03299999999999992,0.659,0.6260000000000001
+PGS005346,Train: European-only,African vs South Asian,-0.07800000000000007,0.67,0.592
+PGS005347,Train: European-only,African vs South Asian,-0.08000000000000007,0.678,0.598
+PGS005348,Train: European-only,African vs South Asian,-0.04600000000000004,0.657,0.611
+PGS005349,Train: European-only,African vs South Asian,-0.08799999999999997,0.693,0.605
+PGS012555,Train: Multi incl. EUR,African vs South Asian,-0.02260943938062565,0.736,0.7133905606193743
+PGS000004,Train: European-only,Hispanic or Latin American vs East Asian,-0.012059681135214384,0.64,0.6279403188647856
+PGS000013,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,-0.18402752594280714,0.9199999999999999,0.7359724740571928
+PGS000014,Train: European-only,Hispanic or Latin American vs East Asian,0.13607531664999317,0.6209246833500068,0.757
+PGS000036,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,0.1158282038676427,0.6421284491825064,0.7579566530501491
+PGS000330,Train: European-only,Hispanic or Latin American vs East Asian,0.12055962568124468,0.6474403743187553,0.768
+PGS000337,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,0.06718362131680378,0.674,0.7411836213168038
+PGS000662,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,0.040943300382190184,0.9200566996178098,0.961
+PGS000713,Train: European-only,Hispanic or Latin American vs East Asian,0.11729791164499093,0.644702088355009,0.7619999999999999
+PGS000729,Train: European-only,Hispanic or Latin American vs East Asian,0.11516464679124405,0.645835353208756,0.761
+PGS000805,Train: European-only,Hispanic or Latin American vs East Asian,0.11477594428874305,0.649224055711257,0.764
+PGS000864,Train: European-only,Hispanic or Latin American vs East Asian,0.12627280609499347,0.6187271939050065,0.745
+PGS000868,Train: European-only,Hispanic or Latin American vs East Asian,0.11717719956624295,0.6408228004337571,0.758
+PGS001357,Train: European-only,Hispanic or Latin American vs East Asian,0.13237468901124327,0.6286253109887567,0.761
+PGS001781,Train: European-only,Hispanic or Latin American vs East Asian,0.13376966790124367,0.6262303320987563,0.76
+PGS001818,Train: European-only,Hispanic or Latin American vs East Asian,0.10647029553999343,0.6555297044600065,0.7619999999999999
+PGS002026,Train: European-only,Hispanic or Latin American vs East Asian,0.11276339151374415,0.6512366084862559,0.764
+PGS002243,Train: European-only,Hispanic or Latin American vs East Asian,0.13327280609499348,0.6267271939050065,0.76
+PGS002265,Train: European-only,Hispanic or Latin American vs East Asian,0.0010000000000000009,0.591,0.592
+PGS002308,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,0.059694873906011914,0.7913051260939881,0.851
+PGS002671,Train: European-only,Hispanic or Latin American vs East Asian,0.13049540108999136,0.6305045989100087,0.761
+PGS002727,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,-0.030000000000000138,0.73,0.6999999999999998
+PGS002771,Train: European-only,Hispanic or Latin American vs East Asian,0.11285899804249477,0.6621410019575054,0.7750000000000001
+PGS002780,Train: European-only,Hispanic or Latin American vs East Asian,0.12387155081749357,0.6321284491825064,0.756
+PGS003103,Train: European-only,Hispanic or Latin American vs East Asian,0.11896715734624386,0.6510328426537562,0.77
+PGS003443,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,0.10258838193896203,0.6749435125125051,0.7775318944514671
+PGS003444,Train: Multi excl. EUR,Hispanic or Latin American vs East Asian,0.10258838193896203,0.6749435125125051,0.7775318944514671
+PGS003445,Train: Multi excl. EUR,Hispanic or Latin American vs East Asian,0.10258838193896203,0.6749435125125051,0.7775318944514671
+PGS003851,Train: European-only,Hispanic or Latin American vs East Asian,-0.01615643075197226,0.601,0.5848435692480277
+PGS003867,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,0.14100000000000001,0.635,0.776
+PGS004696,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,-0.05600000000000005,0.762,0.706
+PGS004697,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,-0.04800000000000004,0.756,0.708
+PGS004698,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,-0.049000000000000044,0.748,0.699
+PGS004859,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,1.1102230246251565e-16,0.7949999999999999,0.795
+PGS004923,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,0.11796715734624386,0.6590328426537562,0.777
+PGS005091,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,-0.011128066032178308,0.7963531511223275,0.7852250850901492
+PGS005092,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,-0.012499794738193182,0.7970332003316883,0.7845334055934952
+PGS012555,Train: Multi incl. EUR,Hispanic or Latin American vs East Asian,-0.09000000000000008,0.81,0.72
+PGS000013,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,-0.04252319669508442,0.7784956707522772,0.7359724740571928
+PGS000014,Train: European-only,Hispanic or Latin American vs South Asian,0.055155267436456934,0.7018447325635431,0.757
+PGS000036,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,0.05807741661183796,0.6998792364383112,0.7579566530501491
+PGS000330,Train: European-only,Hispanic or Latin American vs South Asian,0.05213801549907293,0.7158619845009271,0.768
+PGS000713,Train: European-only,Hispanic or Latin American vs South Asian,0.05091820638949507,0.7110817936105048,0.7619999999999999
+PGS000729,Train: European-only,Hispanic or Latin American vs South Asian,0.05213801549907293,0.7088619845009271,0.761
+PGS000805,Train: European-only,Hispanic or Latin American vs South Asian,0.04897635513213172,0.7150236448678683,0.764
+PGS000864,Train: European-only,Hispanic or Latin American vs South Asian,0.0583578246086508,0.6866421753913492,0.745
+PGS000868,Train: European-only,Hispanic or Latin American vs South Asian,0.05132332073388246,0.7066766792661175,0.758
+PGS001357,Train: European-only,Hispanic or Latin American vs South Asian,0.04664664146776498,0.714353358532235,0.761
+PGS001781,Train: European-only,Hispanic or Latin American vs South Asian,0.05302811094428406,0.706971889055716,0.76
+PGS001818,Train: European-only,Hispanic or Latin American vs South Asian,0.04484919863995851,0.7171508013600414,0.7619999999999999
+PGS002026,Train: European-only,Hispanic or Latin American vs South Asian,0.04737507654603479,0.7166249234539652,0.764
+PGS002243,Train: European-only,Hispanic or Latin American vs South Asian,0.05153673691297611,0.7084632630870239,0.76
+PGS002671,Train: European-only,Hispanic or Latin American vs South Asian,0.05017251937384115,0.7108274806261589,0.761
+PGS002727,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,0.04999999999999982,0.65,0.6999999999999998
+PGS002771,Train: European-only,Hispanic or Latin American vs South Asian,0.04062938953038098,0.7343706104696192,0.7750000000000001
+PGS002780,Train: European-only,Hispanic or Latin American vs South Asian,0.04897635513213161,0.7070236448678684,0.756
+PGS003103,Train: European-only,Hispanic or Latin American vs South Asian,0.04801085900689994,0.7219891409931001,0.77
+PGS003443,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,0.04157725733313511,0.735954637118332,0.7775318944514671
+PGS003444,Train: Multi excl. EUR,Hispanic or Latin American vs South Asian,0.04157725733313511,0.735954637118332,0.7775318944514671
+PGS003445,Train: Multi excl. EUR,Hispanic or Latin American vs South Asian,0.04157725733313511,0.735954637118332,0.7775318944514671
+PGS003867,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,0.09499999999999997,0.681,0.776
+PGS004696,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,-0.0970000000000002,0.8030000000000002,0.706
+PGS004697,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,-0.0950000000000002,0.8030000000000002,0.708
+PGS004698,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,-0.08700000000000008,0.786,0.699
+PGS004859,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,-0.020000000000000018,0.8150000000000001,0.795
+PGS004923,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,0.040594885655612534,0.7364051143443875,0.777
+PGS005091,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,-0.003784879641426042,0.7890099647315753,0.7852250850901492
+PGS005092,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,-0.00457778965932909,0.7891111952528242,0.7845334055934952
+PGS012555,Train: Multi incl. EUR,Hispanic or Latin American vs South Asian,-0.016000000000000014,0.736,0.72
+PGS000004,Train: European-only,Hispanic or Latin American vs European,-0.03624545302188198,0.6641857718866676,0.6279403188647856
+PGS000011,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.011496839770829825,0.75,0.7385031602291702
+PGS000013,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.039155660940227266,0.6968168131169655,0.7359724740571928
+PGS000014,Train: European-only,Hispanic or Latin American vs European,0.03735612355171458,0.7196438764482854,0.757
+PGS000018,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.06815309916259815,0.6728176096471119,0.74097070880971
+PGS000022,NA,Hispanic or Latin American vs European,0.04949999999999999,0.8508,0.9003
+PGS000023,Train: African-only,Hispanic or Latin American vs European,0.02535090757786762,0.7894520068644928,0.8148029144423604
+PGS000024,Train: European-only,Hispanic or Latin American vs European,-0.04269826377790731,0.8700655356477494,0.827367271869842
+PGS000036,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.03565282252700119,0.722303830523148,0.7579566530501491
+PGS000200,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.02300000000000013,0.748,0.7710000000000001
+PGS000330,Train: European-only,Hispanic or Latin American vs European,0.04200000000000004,0.726,0.768
+PGS000662,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.12585097277360235,0.8351490272263976,0.961
+PGS000713,Train: European-only,Hispanic or Latin American vs European,0.06692285199458037,0.6950771480054195,0.7619999999999999
+PGS000729,Train: European-only,Hispanic or Latin American vs European,0.049000000000000044,0.712,0.761
+PGS000804,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.0956999999999999,0.825,0.7293000000000001
+PGS000805,Train: European-only,Hispanic or Latin American vs European,-0.022689108986553408,0.7866891089865534,0.764
+PGS000864,Train: European-only,Hispanic or Latin American vs European,0.05799999999999994,0.687,0.745
+PGS000868,Train: European-only,Hispanic or Latin American vs European,0.062000000000000055,0.696,0.758
+PGS001357,Train: European-only,Hispanic or Latin American vs European,0.052845557275023824,0.7081544427249762,0.761
+PGS001781,Train: European-only,Hispanic or Latin American vs European,0.004745512168697008,0.755254487831303,0.76
+PGS001818,Train: European-only,Hispanic or Latin American vs European,0.052999999999999936,0.709,0.7619999999999999
+PGS002026,Train: European-only,Hispanic or Latin American vs European,0.050000000000000044,0.714,0.764
+PGS002243,Train: European-only,Hispanic or Latin American vs European,0.038758315947467814,0.7212416840525322,0.76
+PGS002265,Train: European-only,Hispanic or Latin American vs European,0.011066948211867489,0.5809330517881325,0.592
+PGS002308,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.05799999999999994,0.793,0.851
+PGS002671,Train: European-only,Hispanic or Latin American vs European,0.05700000000000005,0.704,0.761
+PGS002727,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.039999999999999813,0.66,0.6999999999999998
+PGS002771,Train: European-only,Hispanic or Latin American vs European,0.04000000000000015,0.735,0.7750000000000001
+PGS002780,Train: European-only,Hispanic or Latin American vs European,0.06960073416653245,0.6863992658334676,0.756
+PGS003103,Train: European-only,Hispanic or Latin American vs European,0.06358015855506716,0.7064198414449329,0.77
+PGS003443,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.046531894451467104,0.731,0.7775318944514671
+PGS003444,Train: Multi excl. EUR,Hispanic or Latin American vs European,0.046531894451467104,0.731,0.7775318944514671
+PGS003445,Train: Multi excl. EUR,Hispanic or Latin American vs European,0.046531894451467104,0.731,0.7775318944514671
+PGS003850,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.02000000000000013,0.6100000000000001,0.59
+PGS003851,Train: European-only,Hispanic or Latin American vs European,-0.05742447926448657,0.6422680485125143,0.5848435692480277
+PGS003852,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.030000000000000027,0.65,0.62
+PGS003867,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.04600000000000004,0.73,0.776
+PGS004233,Train: Multi incl. EUR,Hispanic or Latin American vs European,0,0.754,0.754
+PGS004234,Train: Multi incl. EUR,Hispanic or Latin American vs European,0,0.763,0.763
+PGS004235,Train: Multi incl. EUR,Hispanic or Latin American vs European,0,0.757,0.757
+PGS004236,Train: Multi incl. EUR,Hispanic or Latin American vs European,0,0.7639999999999999,0.7639999999999999
+PGS004696,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.06800000000000006,0.774,0.706
+PGS004697,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.06500000000000006,0.773,0.708
+PGS004698,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.07400000000000007,0.773,0.699
+PGS004859,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.036451235715750485,0.7585487642842496,0.795
+PGS004923,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.018539195232315064,0.758460804767685,0.777
+PGS005091,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.001310981209169948,0.7865360662993192,0.7852250850901492
+PGS005092,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.0018301231888289138,0.7863635287823241,0.7845334055934952
+PGS005331,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.028482473301938205,0.7118391807437416,0.6833567074418034
+PGS005335,Train: Multi incl. EUR,Hispanic or Latin American vs European,0.038117813311633664,0.7320331910658977,0.7701510043775314
+PGS012555,Train: Multi incl. EUR,Hispanic or Latin American vs European,-0.0874693867112124,0.8074693867112124,0.72

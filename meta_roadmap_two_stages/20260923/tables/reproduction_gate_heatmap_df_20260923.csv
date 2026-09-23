@@ -1,0 +1,33 @@
+ancestry_target,bucket,trait,median_delta,estimate,p.value,n_pairs,flag_not_pooled,estimate_logit_as_submitted,p_value_logit_as_submitted,p.adj,p_adj_logit_as_submitted,sig,trait_wrapped,txt_col,anc_lab,bucket_panel
+African,Train: European-only,Breast Carcinoma,-0.06020979583640529,-0.052769152071433685,0.021991225988837487,4,FALSE,-0.053228059744311135,0.021095569829996948,0.06293040852034329,0.0638338993752408,FALSE,Breast Carcinoma,black,African,Weights: EUR-only
+African,Train: European-only,Colorectal cancer,-0.10704898666120044,NA,NA,1,FALSE,NA,NA,NA,NA,FALSE,Colorectal cancer,black,African,Weights: EUR-only
+African,Train: European-only,Incident chronic obstructive pulmonary disease before age 50 years,-0.10399999999999998,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE,"Incident chronic obstructive pulmonary
+disease before age 50 years",black,African,Weights: EUR-only
+East Asian,Train: European-only,Breast cancer,-0.04832585954109281,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE,Breast cancer,black,East Asian,Weights: EUR-only
+East Asian,Train: European-only,Colorectal cancer,-0.04432621120828717,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE,Colorectal cancer,black,East Asian,Weights: EUR-only
+East Asian,Train: European-only,Epithelial non-mucinous ovarian cancer,-0.051499999999999935,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE,Epithelial non-mucinous ovarian cancer,black,East Asian,Weights: EUR-only
+East Asian,Train: European-only,Type 2 diabetes,0.017999999999999905,0.017863765346773107,0.03660792392571154,11,TRUE,0.016134076481443344,0.029461799711649597,0.06995704882808763,0.0638338993752408,FALSE,Type 2 diabetes,black,East Asian,Weights: EUR-only
+South Asian,Train: European-only,Breast Carcinoma,-0.002432395241190155,-0.003503949061665265,0.5427721101600521,4,FALSE,-0.0035671380723421137,0.5366745498800218,0.5880031193400564,0.5459304937969176,FALSE,Breast Carcinoma,black,South Asian,Weights: EUR-only
+South Asian,Train: European-only,Breast cancer,-0.02927481180098901,-0.02314171643827549,0.004306878920443621,11,FALSE,-0.027794059177927027,6.0042735856809614e-5,0.01866314198858902,3.902777830692625e-4,TRUE,Breast cancer,black,South Asian,Weights: EUR-only
+South Asian,Train: European-only,Type 2 diabetes,0.008000000000000063,-1.4476444030600506e-4,0.9742746454073109,12,FALSE,-0.0028176985975086823,0.5459304937969176,0.9742746454073109,0.5459304937969176,FALSE,Type 2 diabetes,black,South Asian,Weights: EUR-only
+Hispanic or Latin American,Train: European-only,Colorectal cancer,-0.05071728498401462,NA,NA,1,FALSE,NA,NA,NA,NA,FALSE,Colorectal cancer,black,Hispanic/LatAm,Weights: EUR-only
+Hispanic or Latin American,Train: European-only,Type 2 diabetes,0.051500000000000046,0.05214415483490029,4.938603235542618e-9,10,TRUE,0.05243018186949078,4.351168492487029e-9,6.420184206205403e-8,5.656519040233138e-8,TRUE,Type 2 diabetes,black,Hispanic/LatAm,Weights: EUR-only
+African,Train: Multi incl. EUR,Apparent Treatment-Resistant Hypertension,-0.015000000000000013,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE,"Apparent Treatment-Resistant
+Hypertension",black,African,Weights: Multi incl. EUR
+African,Train: Multi incl. EUR,Colorectal cancer,-0.04500000000000004,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE,Colorectal cancer,black,African,Weights: Multi incl. EUR
+African,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),0.007340076894972236,0.007348232995708683,0.14932894071977268,4,TRUE,0.007563780111226542,0.14152731310073097,0.19412762293570449,0.18398550703095026,FALSE,"Coronary heart disease (incident and
+prevalent)",black,African,Weights: Multi incl. EUR
+African,Train: Multi incl. EUR,Type 2 diabetes,-0.01903665632198348,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE,Type 2 diabetes,black,African,Weights: Multi incl. EUR
+East Asian,Train: Multi incl. EUR,Breast cancer,-0.009999999999999898,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE,Breast cancer,black,East Asian,Weights: Multi incl. EUR
+East Asian,Train: Multi incl. EUR,Incident coronary heart disease,-0.017000000000000015,-0.017959056303705687,0.041619512958018794,3,TRUE,-0.01804436307383828,0.04137170896225908,0.06995704882808763,0.07683317378705258,FALSE,Incident coronary heart disease,black,East Asian,Weights: Multi incl. EUR
+East Asian,Train: Multi incl. EUR,Type 2 diabetes,0.03849999999999992,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE,Type 2 diabetes,black,East Asian,Weights: Multi incl. EUR
+South Asian,Train: Multi incl. EUR,Incident coronary heart disease,0.029000000000000026,0.024168064902884683,0.0475052183934828,3,TRUE,0.023758021129025655,0.050726381533552446,0.06995704882808763,0.08152906879290596,FALSE,Incident coronary heart disease,black,South Asian,Weights: Multi incl. EUR
+South Asian,Train: Multi incl. EUR,Seropositive RA,0.04783624008657056,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE,Seropositive RA,black,South Asian,Weights: Multi incl. EUR
+South Asian,Train: Multi incl. EUR,Stroke excluding subarachnoid hemorrhage,-0.004410928571687345,-0.00305498290049007,0.34576874539434244,10,FALSE,-0.0030958663380785305,0.33999474434798793,0.40863579001149564,0.40181197059307666,FALSE,Stroke excluding subarachnoid hemorrhage,black,South Asian,Weights: Multi incl. EUR
+South Asian,Train: Multi incl. EUR,Type 2 diabetes,0.0625,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE,Type 2 diabetes,black,South Asian,Weights: Multi incl. EUR
+Hispanic or Latin American,Train: Multi incl. EUR,Colorectal cancer,-0.025000000000000022,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE,Colorectal cancer,black,Hispanic/LatAm,Weights: Multi incl. EUR
+Hispanic or Latin American,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),0.019840076894972136,0.016967870992337448,0.02420400327705511,4,TRUE,0.016938395864147776,0.024565736905752124,0.06293040852034329,0.0638338993752408,FALSE,"Coronary heart disease (incident and
+prevalent)",black,Hispanic/LatAm,Weights: Multi incl. EUR
+Hispanic or Latin American,Train: Multi incl. EUR,Incident coronary heart disease,-0.06800000000000006,-0.06898350648427744,0.0014647751798405806,3,TRUE,-0.0690357924205742,0.0014718321887521315,0.009521038668963774,0.006377939484592569,TRUE,Incident coronary heart disease,black,Hispanic/LatAm,Weights: Multi incl. EUR
+Hispanic or Latin American,Train: Multi incl. EUR,Type 2 diabetes,0.04899999999999993,0.0356794827284969,0.048431803034829905,5,TRUE,0.03388231338279506,0.05644320147201182,0.06995704882808763,0.08152906879290596,FALSE,Type 2 diabetes,black,Hispanic/LatAm,Weights: Multi incl. EUR
+Middle Eastern or North African,Train: Multi incl. EUR,Type 2 diabetes,0.008399999999999963,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE,Type 2 diabetes,black,MENA,Weights: Multi incl. EUR

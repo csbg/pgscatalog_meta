@@ -1,0 +1,2 @@
+total_rows,with_auc,reported_ci,missing_ci_among_auc,with_counts_among_auc,eligible_for_infer,pct_with_auc,pct_reported_ci_over_total,pct_missing_ci_over_auc,pct_eligible_over_auc
+20135,5317,3114,2203,4904,1930,0.264067544077477,0.1546560715172585,0.41433138988151214,0.3629866466052285

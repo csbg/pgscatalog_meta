@@ -1,0 +1,165 @@
+efo_id,efo_label,n_pgs
+MONDO_0005148,type 2 diabetes mellitus,40
+MONDO_0005010,coronary artery disorder,10
+MONDO_0004979,asthma,7
+MONDO_0004989,breast carcinoma,7
+MONDO_0005159,prostate carcinoma,7
+EFO_0008111,diet measurement,5
+MONDO_0005147,type 1 diabetes mellitus,5
+OBA_0002313,strand of hair color,5
+EFO_0004279,suntan,4
+MONDO_0005068,myocardial infarction,4
+MONDO_0005575,colorectal cancer,4
+EFO_0000493,family history,3
+EFO_0003907,deep vein thrombosis,3
+EFO_0003907|MONDO_0005279,deep vein thrombosis|pulmonary embolism,3
+EFO_0003913,angina pectoris,3
+EFO_0006527,smoking status measurement,3
+EFO_0006781,coffee consumption measurement,3
+EFO_0009592,social interaction measurement,3
+EFO_0010729,sun exposure measurement,3
+MONDO_0005002,chronic obstructive pulmonary disease,3
+MONDO_0005041,glaucoma,3
+MONDO_0005044,hypertensive disorder,3
+MONDO_0005271,allergic disease,3
+EFO_0007012|EFO_0009799,NSAID use measurement|self-reported trait,2
+EFO_0007013,aspirin use measurement,2
+EFO_0009115,tobacco smoke exposure measurement,2
+EFO_0009116,vitamin supplement exposure measurement,2
+HP_0000023,Inguinal hernia,2
+HP_0001082,Cholecystitis,2
+HP_0002619,Varicose veins,2
+HP_0100582,Nasal polyposis,2
+MONDO_0001134,essential hypertension,2
+MONDO_0003900,connective tissue disorder,2
+MONDO_0005015,diabetes mellitus,2
+MONDO_0005083,psoriasis,2
+MONDO_0005101,ulcerative colitis,2
+MONDO_0005129,cataract,2
+MONDO_0005277,migraine disorder,2
+MONDO_0005283,retinal disorder,2
+MONDO_0005298,osteoporosis,2
+MONDO_0005306,ankylosing spondylitis,2
+MONDO_0005393,gout,2
+MONDO_0008383,rheumatoid arthritis,2
+OBA_0005494,aging rate,2
+EFO_0001063|MONDO_0005365,deafness|hearing loss disorder,1
+EFO_0003907|MONDO_0000831,deep vein thrombosis|thrombotic disease,1
+EFO_0004338|EFO_0009799,body weight|self-reported trait,1
+EFO_0004340,body mass index,1
+EFO_0004697,estradiol measurement,1
+EFO_0005422,skin aging,1
+EFO_0005606,family history of breast cancer,1
+EFO_0005767,rheumatoid factor measurement,1
+EFO_0006335,systolic blood pressure,1
+EFO_0006336,diastolic blood pressure,1
+EFO_0006953,family history of lung cancer,1
+EFO_0007010,drug use measurement,1
+EFO_0007012,NSAID use measurement,1
+EFO_0007645|OBA_1000840,longitudinal alcohol consumption measurement|alcohol consumption quality,1
+EFO_0007778,urinary albumin to creatinine ratio,1
+EFO_0007814,refractive error measurement,1
+EFO_0007865,loneliness measurement,1
+EFO_0007869,wellbeing measurement,1
+EFO_0008002,physical activity measurement,1
+EFO_0008341,snoring measurement,1
+EFO_0008561,diaphragmatic hernia,1
+EFO_0008579,risk-taking behaviour,1
+EFO_0008586,Non-ST Elevation Myocardial Infarction,1
+EFO_0009260,non-melanoma skin carcinoma,1
+EFO_0009268,family history of Alzheimer’s disease,1
+EFO_0009432,fibroblastic disorder,1
+EFO_0009486,diabetic eye disease,1
+EFO_0009507,knee injury,1
+EFO_0009514,upper extremity fracture,1
+EFO_0009589,worry measurement,1
+EFO_0009589|EFO_0009863,worry measurement|anxiety measurement,1
+EFO_0009597,feeling nervous measurement,1
+EFO_0009599,feeling emotionally hurt measurement,1
+EFO_0009959,diverticular disease,1
+EFO_0009959|MONDO_0004235,diverticular disease|diverticulitis,1
+EFO_0010078,dentures,1
+EFO_0010158,sugar consumption measurement,1
+EFO_0010698|MONDO_0008375,retinal break|retinal detachment,1
+EFO_0010906,merkel cell virus seropositivity,1
+EFO_0010907,polyomavirus 2 seropositivity,1
+EFO_0010967,urinary microalbumin measurement,1
+EFO_0600082,insulin use measurement,1
+EFO_0600083,family history of prostate cancer,1
+EFO_1001317,"Epiphyses, Slipped",1
+EFO_1001329,Follicular Cyst,1
+GO_0009314,response to radiation,1
+HP_0000155,Oral ulcer,1
+HP_0000964|MONDO_0002406,Eczematoid dermatitis|dermatitis,1
+HP_0001094,Iridocyclitis,1
+HP_0002036,Hiatus hernia,1
+HP_0002140|MONDO_0005098,Ischemic stroke|stroke disorder,1
+HP_0003040,Arthropathy,1
+HP_0003124,Hypercholesterolemia,1
+HP_0004418|MONDO_0004625,Thrombophlebitis|phlebitis,1
+MONDO_0000226,mineral metabolism disease,1
+MONDO_0000812,vertebral column disorder,1
+MONDO_0000831,thrombotic disease,1
+MONDO_0000942,corneal disorder,1
+MONDO_0001209,common wart,1
+MONDO_0001531,blood coagulation disease,1
+MONDO_0001627,dementia,1
+MONDO_0001658,nontoxic goiter,1
+MONDO_0002356,pancreas disorder,1
+MONDO_0002406,dermatitis,1
+MONDO_0002656,skin carcinoma,1
+MONDO_0002771,pulmonary fibrosis,1
+MONDO_0003004,macular degeneration,1
+MONDO_0003105,prostate disorder,1
+MONDO_0003803,aortic valve disorder,1
+MONDO_0004425|MONDO_0010138,hyperthyroidism|thyrotoxicosis,1
+MONDO_0004849,pulmonary emphysema,1
+MONDO_0004872,hemorrhoid,1
+MONDO_0004975,Alzheimer disease,1
+MONDO_0004981,atrial fibrillation,1
+MONDO_0004981|MONDO_0005310,atrial fibrillation|atrial flutter,1
+MONDO_0004995,cardiovascular disorder,1
+MONDO_0005011,Crohn disease,1
+MONDO_0005020,intestinal disorder,1
+MONDO_0005066,metabolic disease,1
+MONDO_0005105,melanoma,1
+MONDO_0005131,cervical carcinoma,1
+MONDO_0005154,liver disorder,1
+MONDO_0005178,osteoarthritis,1
+MONDO_0005265,inflammatory bowel disease,1
+MONDO_0005279,pulmonary embolism,1
+MONDO_0005300,chronic kidney disease,1
+MONDO_0005310,atrial flutter,1
+MONDO_0005324,seasonal allergic rhinitis,1
+MONDO_0005325,radius fracture,1
+MONDO_0005346,gallstones,1
+MONDO_0005365,hearing loss disorder,1
+MONDO_0005412,duodenal ulcer,1
+MONDO_0005416,"osteoarthritis, knee",1
+MONDO_0005420,hypothyroidism,1
+MONDO_0005420|MONDO_0009718,hypothyroidism|myxedema,1
+MONDO_0005578,arthritic joint disease,1
+MONDO_0005609,herpes zoster,1
+MONDO_0005649,appendicitis,1
+MONDO_0005836,male reproductive organ cancer,1
+MONDO_0006004|MONDO_0011786,vasomotor rhinitis|allergic rhinitis,1
+MONDO_0006629,"osteoarthritis, hip",1
+MONDO_0007009|MONDO_0008171,ureterolithiasis|nephrolithiasis,1
+MONDO_0007886,uterine corpus leiomyoma,1
+MONDO_0008375,retinal detachment,1
+MONDO_0008420,seborrheic keratosis,1
+MONDO_0008661,vitiligo,1
+MONDO_0010030,Sjogren syndrome,1
+MONDO_0010138,thyrotoxicosis,1
+MONDO_0010811,benign prostatic hyperplasia,1
+MONDO_0011122,obesity disorder,1
+MONDO_0011849,psoriatic arthritis,1
+MONDO_0012672,cholelithiasis,1
+MONDO_0015075,thyroid gland carcinoma,1
+MONDO_0015925,interstitial lung disease,1
+MONDO_0019735,polymyalgia rheumatica,1
+MONDO_0024355,respiratory tract infectious disorder,1
+MONDO_0024644,myocardial ischemia,1
+OBA_1000840,alcohol consumption quality,1
+OBA_1001015,folic acid level,1
+OBA_2050116,smoking behavior trait,1

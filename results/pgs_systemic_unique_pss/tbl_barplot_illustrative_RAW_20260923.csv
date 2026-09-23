@@ -1,0 +1,53 @@
+pgs_id,ancestry_raw,train_bucket,n_eval,cases_total,ctrls_total,auc_mean_w,auc_mean_unw,n_records
+PGS000013,African American or Afro-Caribbean,Train: Multi incl. EUR,7597,838,6759,0.771,0.771,1
+PGS000013,East Asian,Train: Multi incl. EUR,901,265,636,0.9199999999999999,0.92,1
+PGS000013,European,Train: Multi incl. EUR,925613,47411,867844,0.6968168131169655,0.7548823529411764,17
+PGS000013,Hispanic or Latin American,Train: Multi incl. EUR,275955,5582,130118,0.7359724740571928,0.7248,5
+PGS000013,South Asian,Train: Multi incl. EUR,8893,2047,6846,0.7784956707522772,0.7189666666666666,3
+PGS000014,East Asian,Train: European-only,2581,281,2300,0.6209246833500068,0.645,2
+PGS000014,European,Train: European-only,643176,27002,616174,0.7196438764482854,0.7203333333333333,3
+PGS000014,"Greater Middle Eastern (Middle Eastern, North African or Persian)",Train: European-only,6677,2466,4211,0.6593866105055618,0.7,2
+PGS000014,Hispanic or Latin American,Train: European-only,33652,4033,29619,0.757,0.757,1
+PGS000014,South Asian,Train: European-only,7844,1447,6397,0.7018447325635431,0.675,2
+PGS000036,African American or Afro-Caribbean,Train: Multi incl. EUR,366,0,0,0.574,0.574,1
+PGS000036,East Asian,Train: Multi incl. EUR,2581,281,2300,0.6421284491825064,0.665,2
+PGS000036,European,Train: Multi incl. EUR,680236,34629,644439,0.722303830523148,0.70625,4
+PGS000036,"Greater Middle Eastern (Middle Eastern, North African or Persian)",Train: Multi incl. EUR,4938,2469,2469,0.83,0.83,1
+PGS000036,Hispanic or Latin American,Train: Multi incl. EUR,34064,4033,29619,0.7579566530501491,0.7404999999999999,2
+PGS000036,South Asian,Train: Multi incl. EUR,7844,1447,6397,0.6998792364383112,0.679,2
+PGS001357,East Asian,Train: European-only,2581,281,2300,0.6286253109887567,0.6525,2
+PGS001357,European,Train: European-only,532336,25808,506528,0.7081544427249762,0.6958666666666666,3
+PGS001357,"Greater Middle Eastern (Middle Eastern, North African or Persian)",Train: European-only,6677,2466,4211,0.6623866105055619,0.7030000000000001,2
+PGS001357,Hispanic or Latin American,Train: European-only,33652,4033,29619,0.761,0.761,1
+PGS001357,South Asian,Train: European-only,7844,1447,6397,0.714353358532235,0.6890000000000001,2
+PGS001781,East Asian,Train: European-only,2581,281,2300,0.6262303320987563,0.6485,2
+PGS001781,European,Train: European-only,2267844,158065,2109779,0.755254487831303,0.745,8
+PGS001781,"Greater Middle Eastern (Middle Eastern, North African or Persian)",Train: European-only,6677,2466,4211,0.6616230345640446,0.7055,2
+PGS001781,Hispanic or Latin American,Train: European-only,33652,4033,29619,0.76,0.76,1
+PGS001781,South Asian,Train: European-only,7844,1447,6397,0.706971889055716,0.6805,2
+PGS002308,African American or Afro-Caribbean,Train: Multi incl. EUR,27266,7825,19441,0.7269542514782052,0.7,5
+PGS002308,East Asian,Train: Multi incl. EUR,89566,4570,84996,0.7913051260939881,0.7976666666666667,3
+PGS002308,European,Train: Multi incl. EUR,54793,8389,46404,0.793,0.793,1
+PGS002308,"Greater Middle Eastern (Middle Eastern, North African or Persian)",Train: Multi incl. EUR,6677,2466,4211,0.6703099368187571,0.716,2
+PGS002308,Hispanic or Latin American,Train: Multi incl. EUR,2374,868,1506,0.851,0.851,1
+PGS004859,African American or Afro-Caribbean,Train: Multi incl. EUR,14049,4021,10028,0.7548125268311072,0.73,3
+PGS004859,East Asian,Train: Multi incl. EUR,1326,200,1126,0.7949999999999999,0.7949999999999999,2
+PGS004859,European,Train: Multi incl. EUR,45090,7474,37616,0.7585487642842496,0.7333333333333334,3
+PGS004859,"Greater Middle Eastern (Middle Eastern, North African or Persian)",Train: Multi incl. EUR,6677,2466,4211,0.6703482736621595,0.7135,2
+PGS004859,Hispanic or Latin American,Train: Multi incl. EUR,10764,2650,8114,0.795,0.7949999999999999,2
+PGS004859,South Asian,Train: Multi incl. EUR,646,176,470,0.8150000000000001,0.815,2
+PGS005091,East Asian,Train: Multi incl. EUR,7540,1169,6371,0.7963531511223275,0.789,3
+PGS005091,European,Train: Multi incl. EUR,162291,26242,136049,0.7865360662993192,0.789,3
+PGS005091,"Greater Middle Eastern (Middle Eastern, North African or Persian)",Train: Multi incl. EUR,1736,205,1531,0.7795127500190459,0.7835000000000001,2
+PGS005091,Hispanic or Latin American,Train: Multi incl. EUR,39194,4090,35104,0.7852250850901492,0.789,3
+PGS005091,South Asian,Train: Multi incl. EUR,3104,390,2714,0.7890099647315753,0.789,3
+PGS005092,East Asian,Train: Multi incl. EUR,7540,1169,6371,0.7970332003316883,0.7893333333333333,3
+PGS005092,European,Train: Multi incl. EUR,162291,26242,136049,0.7863635287823241,0.7893333333333333,3
+PGS005092,"Greater Middle Eastern (Middle Eastern, North African or Persian)",Train: Multi incl. EUR,1736,205,1531,0.7784494833574582,0.7835000000000001,2
+PGS005092,Hispanic or Latin American,Train: Multi incl. EUR,39194,4090,35104,0.7845334055934952,0.7893333333333333,3
+PGS005092,South Asian,Train: Multi incl. EUR,3104,390,2714,0.7891111952528242,0.7893333333333333,3
+PGS012555,African American or Afro-Caribbean,Train: Multi incl. EUR,31635,773,30862,0.7133905606193743,0.711,3
+PGS012555,East Asian,Train: Multi incl. EUR,596,293,303,0.81,0.81,1
+PGS012555,European,Train: Multi incl. EUR,513784,2375,511409,0.8074693867112124,0.80175,4
+PGS012555,Hispanic or Latin American,Train: Multi incl. EUR,37506,522,36984,0.72,0.72,2
+PGS012555,South Asian,Train: Multi incl. EUR,315,30,285,0.736,0.736,1
