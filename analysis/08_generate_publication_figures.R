@@ -794,4 +794,149 @@ ggsave(
 
 message(glue(">> Saved faceted forest: {out_delta_faceted}"))
 message(glue(">> Saved faceted forest: {out_delta_faceted_png}"))
+
+# ============================================================
+# 9) Companion forest: train columns + k labels (sensitivity layout)
+# ============================================================
+# Same delta-method cells as Figure 1C above, drawn like the review-sensitivity
+# forests: facet by training bucket, ancestry on the y-axis, k = n_pairs.
+
+trait_display_short <- c(
+  "Incident chronic obstructive pulmonary disease before age 50 years" = "Incident COPD before age 50",
+  "Coronary heart disease (incident and prevalent)" = "Coronary heart disease (incident + prevalent)",
+  "Stroke excluding subarachnoid hemorrhage" = "Stroke (excl. subarachnoid hemorrhage)",
+  "Epithelial non-mucinous ovarian cancer" = "Ovarian cancer (epithelial, non-mucinous)",
+  "Apparent Treatment-Resistant Hypertension" = "Treatment-resistant hypertension"
+)
+wrap_trait_short <- function(x) {
+  x <- as.character(x)
+  x <- ifelse(x %in% names(trait_display_short), trait_display_short[x], x)
+  stringr::str_wrap(x, 24)
+}
+
+anc_keep_forest <- c(
+  "African", "East Asian", "South Asian",
+  "Hispanic or Latin American", "Middle Eastern or North African"
+)
+pal_bucket_forest <- c(
+  "Train: European-only" = "#0072B2",
+  "Train: Multi incl. EUR" = "#D55E00"
+)
+pooled_levels_forest <- c("Includes pooled Stage-1 cells", "All single-eval cells")
+
+trait_order_forest <- delta_df %>%
+  count(trait_label, name = "n_cells") %>%
+  arrange(desc(n_cells), trait_label) %>%
+  pull(trait_label)
+trait_levels_forest <- wrap_trait_short(trait_order_forest)
+
+by_train_df <- delta_df %>%
+  mutate(
+    trait_wrapped = factor(wrap_trait_short(trait_label), levels = trait_levels_forest),
+    target_ancestry = factor(
+      as.character(target_ancestry),
+      levels = rev(intersect(anc_keep_forest, unique(as.character(target_ancestry))))
+    ),
+    trained_bucket = factor(
+      as.character(trained_bucket),
+      levels = intersect(names(pal_bucket_forest), unique(as.character(trained_bucket)))
+    ),
+    pooled = factor(
+      ifelse(all_not_pooled, pooled_levels_forest[2], pooled_levels_forest[1]),
+      levels = pooled_levels_forest
+    ),
+    sig = (lo > 0) | (hi < 0),
+    k_lab = paste0("k = ", n_pairs, ifelse(sig, " *", ""))
+  )
+
+n_sig_by_train <- sum(by_train_df$sig, na.rm = TRUE)
+x_lim_by_train <- c(-0.35, 0.30)
+x_lab_by_train <- 0.31
+
+g_delta_by_train <- ggplot(
+  by_train_df,
+  aes(x = delta_hat, y = target_ancestry, colour = target_ancestry)
+) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
+  geom_errorbar(
+    aes(xmin = lo, xmax = hi),
+    width = 0, linewidth = 0.55, orientation = "y"
+  ) +
+  geom_point(aes(shape = pooled), size = 2.6, fill = "white", stroke = 0.9) +
+  geom_text(
+    aes(x = x_lab_by_train, label = k_lab, fontface = ifelse(sig, "bold", "plain")),
+    size = 2.7, hjust = 0, colour = "grey20", show.legend = FALSE
+  ) +
+  scale_colour_manual(values = pal_ancestry, name = "Target ancestry", drop = FALSE) +
+  scale_shape_manual(
+    values = setNames(c(16, 21), pooled_levels_forest),
+    name = "Point fill"
+  ) +
+  scale_x_continuous(
+    breaks = seq(-0.3, 0.3, by = 0.1),
+    labels = scales::label_number(accuracy = 0.1, style_negative = "minus")
+  ) +
+  coord_cartesian(xlim = x_lim_by_train, clip = "off") +
+  facet_grid(
+    trait_wrapped ~ trained_bucket,
+    scales = "free_y",
+    space = "free_y",
+    switch = "y"
+  ) +
+  labs(
+    title = "Figure 1C ΔAUC by training bucket",
+    subtitle = glue(
+      "{nrow(by_train_df)} cells; {n_sig_by_train} with 95% CI excluding zero (delta-method SE)."
+    ),
+    x = "ΔAUC (target − European) with 95% CI",
+    y = NULL,
+    caption = paste0(
+      "Same cells as deltaAUC_forest_faceted_", stamp, ". ",
+      "k = number of PGS with a paired European/target estimate; * = 95% CI excludes zero.\n",
+      "Hollow points: every PGS in the cell has a single evaluation on each side (no Stage-1 pooling)."
+    )
+  ) +
+  theme_minimal(base_size = 9) +
+  theme(
+    plot.title = element_text(face = "bold", size = 11),
+    plot.subtitle = element_text(size = 9),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "bottom",
+    legend.box = "vertical",
+    strip.placement = "outside",
+    strip.text.y.left = element_text(angle = 0, hjust = 1, size = 8, face = "bold", lineheight = 0.85),
+    strip.text.x = element_text(face = "bold", size = 9),
+    strip.background = element_rect(fill = "grey95", colour = NA),
+    panel.spacing.y = unit(0.35, "lines"),
+    panel.spacing.x = unit(1.6, "lines"),
+    plot.margin = margin(5.5, 45, 5.5, 5.5),
+    plot.caption = element_text(hjust = 0, size = 7.5)
+  )
+
+n_row_by_train <- n_distinct(paste(by_train_df$trait_label, by_train_df$target_ancestry))
+h_by_train <- max(6.5, 0.30 * n_row_by_train + 2.8)
+out_delta_by_train <- file.path(tables_stage2, paste0("deltaAUC_forest_by_train_", stamp, ".pdf"))
+out_delta_by_train_png <- file.path(tables_stage2, paste0("deltaAUC_forest_by_train_", stamp, ".png"))
+
+ggsave(
+  out_delta_by_train,
+  g_delta_by_train,
+  width = 10,
+  height = h_by_train,
+  device = pdf_device,
+  limitsize = FALSE
+)
+ggsave(
+  out_delta_by_train_png,
+  g_delta_by_train,
+  width = 10,
+  height = h_by_train,
+  dpi = 300,
+  bg = "white",
+  limitsize = FALSE
+)
+
+message(glue(">> Saved train-faceted forest: {out_delta_by_train}"))
+message(glue(">> Saved train-faceted forest: {out_delta_by_train_png}"))
 message("\n✅ Self-contained faceted ΔAUC forest complete.")
