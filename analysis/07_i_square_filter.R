@@ -89,7 +89,7 @@ message(glue(">> Wrote I² summary: {out_summary}"))
 # ---------------------------
 df_flagged <- df %>%
   mutate(
-    flag_high_I2 = !is.na(I2) & k_eval >= 2 & I2 > 80
+    flag_high_I2 = flag_high_i2(I2, k_eval)
   )
 
 n_high <- sum(df_flagged$flag_high_I2, na.rm = TRUE)

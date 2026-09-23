@@ -18,6 +18,10 @@ assert_i2_percent <- function(i2) {
   invisible(i2)
 }
 
+flag_high_i2 <- function(i2, k_eval, threshold = 80) {
+  !is.na(i2) & k_eval >= 2 & i2 > threshold
+}
+
 assert_one_row_per_stage2_cell <- function(df,
                                            keys = c("trait_label", "trained_bucket", "target_ancestry")) {
   missing <- setdiff(keys, names(df))
