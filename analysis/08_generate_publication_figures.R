@@ -772,6 +772,7 @@ n_total_rows <- n_distinct(paste(delta_df$trait_clean, delta_df$target_ancestry)
 h_delta      <- max(4.0, (n_total_rows * 0.15) + (n_traits * 0.2) + 1.5)
 
 out_delta_faceted <- file.path(tables_stage2, paste0("deltaAUC_forest_faceted_", stamp, ".pdf"))
+out_delta_faceted_png <- file.path(tables_stage2, paste0("deltaAUC_forest_faceted_", stamp, ".png"))
 
 ggsave(
   out_delta_faceted,
@@ -781,6 +782,16 @@ ggsave(
   device = pdf_device,
   limitsize = FALSE
 )
+ggsave(
+  out_delta_faceted_png,
+  g_delta_faceted,
+  width  = 6.0,
+  height = h_delta,
+  dpi = 300,
+  bg = "white",
+  limitsize = FALSE
+)
 
 message(glue(">> Saved faceted forest: {out_delta_faceted}"))
+message(glue(">> Saved faceted forest: {out_delta_faceted_png}"))
 message("\n✅ Self-contained faceted ΔAUC forest complete.")
