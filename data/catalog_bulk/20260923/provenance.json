@@ -1,0 +1,58 @@
+{
+  "stamp": "20260923",
+  "downloaded_at_utc": "2026-09-23T08:44:48Z",
+  "source": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/metadata/",
+  "catalog_files_last_modified": "2026-09-17 12:24",
+  "note": "stamp is the download date (2026-09-23). The FTP index listed every bulk CSV as last modified 2026-09-17 12:24. A copy with the same bytes is in data/pgs_cache/, which is not tracked.",
+  "files": [
+    {
+      "filename": "bulk_cohorts_20260923.csv",
+      "source_filename": "pgs_all_metadata_cohorts.csv",
+      "bytes": 121136,
+      "sha256": "021f44f99723a3fdcc9ed562849370d5d05879507df1cc96e4fc596c1b8440d8",
+      "n_lines": 2545
+    },
+    {
+      "filename": "bulk_efo_traits_20260923.csv",
+      "source_filename": "pgs_all_metadata_efo_traits.csv",
+      "bytes": 200793,
+      "sha256": "d27e55f5b60c530e61060f5c4a214bbb3c797970dd827b38f8bfb0d9db27b0cb",
+      "n_lines": 814
+    },
+    {
+      "filename": "bulk_evaluation_sample_sets_20260923.csv",
+      "source_filename": "pgs_all_metadata_evaluation_sample_sets.csv",
+      "bytes": 1686847,
+      "sha256": "78992f614de360657f9ab4d20b0809dc73e2d0b187c95ad70860e2edb67dea00",
+      "n_lines": 11929
+    },
+    {
+      "filename": "bulk_performance_metrics_20260923.csv",
+      "source_filename": "pgs_all_metadata_performance_metrics.csv",
+      "bytes": 5325260,
+      "sha256": "5301a9a70eaba6357e47531bd8ffe0902546649dc9c7ce914241ba69b7fecab0",
+      "n_lines": 22969
+    },
+    {
+      "filename": "bulk_publications_20260923.csv",
+      "source_filename": "pgs_all_metadata_publications.csv",
+      "bytes": 452836,
+      "sha256": "7865b14b85f2593e55eb0d17ee08a1163b687e3e0dd3b2565660a66646ad919f",
+      "n_lines": 837
+    },
+    {
+      "filename": "bulk_score_development_samples_20260923.csv",
+      "source_filename": "pgs_all_metadata_score_development_samples.csv",
+      "bytes": 2697420,
+      "sha256": "f14874147c0cca690189ff25aed774ebe0d8ffffdb26d7ebda51b778796f50b6",
+      "n_lines": 15722
+    },
+    {
+      "filename": "bulk_scores_20260923.csv",
+      "source_filename": "pgs_all_metadata_scores.csv",
+      "bytes": 4299489,
+      "sha256": "1f0b5528db25ca08929e82122ce046675c5d775e02d65eae5e458e628bbc61c2",
+      "n_lines": 6992
+    }
+  ]
+}
