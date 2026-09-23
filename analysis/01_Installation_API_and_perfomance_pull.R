@@ -33,6 +33,11 @@ have_jsonlite<- requireNamespace("jsonlite", quietly = TRUE)
 
 if (have_arrow)   library(arrow)
 
+if (!file.exists("R/load.R")) {
+  stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
+}
+source("R/load.R")
+
 STAMP     <- format(Sys.Date(), "%Y%m%d")
 CACHE_DIR <- file.path("data", "pgs_cache")
 OUT_DIR   <- file.path("results", "pgs_top15_perf")
@@ -57,36 +62,7 @@ classm    <- pm@pgs_classification_metrics                # AUROC / C-index
 effectm   <- pm@pgs_effect_sizes                          # OR / HR / beta
 otherm    <- pm@pgs_other_metrics                         # R^2 etc.
 
-# 2) Idempotent display mapper
-to_display_cat <- function(x) {
-  x <- gsub("\\s*,\\s*", ",", x)
-  sapply(strsplit(x, ","), function(v) {
-    v <- unique(trimws(v))
-    if (length(v) > 1) {
-      if ("European" %in% v) "Multi-ancestry including European" else "Multi-ancestry excluding European"
-    } else {
-      vv <- v[1]
-      dplyr::case_when(
-        # keep already-normalized labels
-        vv %in% c("European","African","East Asian","South Asian",
-                  "Hispanic or Latin American","Middle Eastern or North African",
-                  "Other/Mixed","Not reported",
-                  "Multi-ancestry including European","Multi-ancestry excluding European") ~ vv,
-        # raw → display
-        vv %in% c("African American or Afro-Caribbean","African unspecified","Sub-Saharan African") ~ "African",
-        vv == "East Asian" ~ "East Asian",
-        vv == "South Asian" ~ "South Asian",
-        vv == "European" ~ "European",
-        vv == "Hispanic or Latin American" ~ "Hispanic or Latin American",
-        vv == "Greater Middle Eastern (Middle Eastern, North African or Persian)" ~ "Middle Eastern or North African",
-        vv %in% c("Central Asian","South East Asian","Asian unspecified","Oceanian","Native American",
-                  "Aboriginal Australian","Other","Other admixed ancestry") ~ "Other/Mixed",
-        vv == "Not reported" ~ "Not reported",
-        TRUE ~ "Other/Mixed"
-      )
-    }
-  }, USE.NAMES = FALSE)
-}
+# 2) Map ancestry with the shared display mapper
 
 # 3) Map ONCE
 samples <- samples %>%

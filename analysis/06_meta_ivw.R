@@ -19,6 +19,11 @@ suppressPackageStartupMessages({
   library(tibble)
 })
 
+if (!file.exists("R/load.R")) {
+  stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
+}
+source("R/load.R")
+
 # -------------------------
 # 0) CONFIG
 # -------------------------
@@ -78,64 +83,8 @@ theme_clean <- function(){
 }
 
 # -------------------------
-# 1) HELPERS (ancestry map + IVW)
+# 1) HELPERS (ancestry map + IVW are in R/)
 # -------------------------
-make_ancestry_display <- function(x){
-  x <- as.character(x)
-  g <- function(p) grepl(p, x, ignore.case = TRUE, perl = TRUE)
-  dplyr::case_when(
-    is.na(x) | x == "" | g("Unknown|Not reported|\\bNR\\b|unspecified") ~ "Not reported",
-    g("Multi-ancestry including European") ~ "Multi-ancestry including European",
-    g("Multi-ancestry excluding European") ~ "Multi-ancestry excluding European",
-    g("^European(,|$)|^EUR(,|$)|^European\\b") ~ "European",
-    g("Sub-?Saharan|\\bSSA\\b") ~ "African",
-    g("African\\s*American|Afro-?Caribbean|Black or African American|Black/African American") ~ "African",
-    (g("^African") & !g("^African\\s*American")) ~ "African",
-    g("Middle|Greater Middle|North African|\\bMENA\\b") ~ "Middle Eastern or North African",
-    g("East\\s*Asian")  ~ "East Asian",
-    g("South\\s*Asian") ~ "South Asian",
-    g("Hispanic|Lat(in|inx|ino)|Latin American") ~ "Hispanic or Latin American",
-    g("Other|Mixed|Admixed") ~ "Other/Mixed",
-    TRUE ~ x
-  )
-}
-
-clamp01 <- function(a, eps = 1e-6) pmin(pmax(a, eps), 1 - eps)
-
-auc_ci_to_logit <- function(auc, lo, hi, eps_se = 1e-8){
-  a    <- clamp01(as.numeric(auc))
-  lo1 <- clamp01(as.numeric(lo))
-  hi1 <- clamp01(as.numeric(hi))
-  eta <- qlogis(a)
-  se  <- (qlogis(hi1) - qlogis(lo1)) / (2*1.96)
-  # guard against zero/negative/NA se
-  se  <- ifelse(is.finite(se) & se > 0, se, eps_se)
-  tibble(eta = eta, se = se)
-}
-
-ivw_pool_logit <- function(eta, se){
-  # keep only finite, positive SE
-  ok <- is.finite(eta) & is.finite(se) & (se > 0)
-  eta <- eta[ok]; se <- se[ok]
-  k <- length(eta)
-  if (k == 0) return(tibble(eta = NA_real_, se = NA_real_, Q = NA_real_, I2 = NA_real_, k_eval = 0L))
-  if (k == 1) return(tibble(eta = eta,       se = se,       Q = NA_real_, I2 = NA_real_, k_eval = 1L))
-  
-  w <- 1 / (se^2)
-  w <- ifelse(is.finite(w), w, 0)
-  sw <- sum(w)
-  if (!is.finite(sw) || sw <= 0)
-    return(tibble(eta = NA_real_, se = NA_real_, Q = NA_real_, I2 = NA_real_, k_eval = k))
-  
-  eta_hat <- sum(w * eta) / sw
-  se_hat  <- sqrt(1 / sw)
-  
-  Q  <- sum(w * (eta - eta_hat)^2)
-  df <- k - 1
-  I2 <- if (isTRUE(Q > 0)) max(0, (Q - df) / Q) * 100 else 0
-  
-  tibble(eta = eta_hat, se = se_hat, Q = Q, I2 = I2, k_eval = k)
-}
 
 # Optional ancestry-count filter (off by default)
 filter_min_ancestries <- function(df){
@@ -193,45 +142,14 @@ slug_lc  <- function(x) stringr::str_replace_all(tolower(x), "[^a-z0-9]+", "_")
 # TRAIT HARMONIZATION
 # ======================================================================
 
-# 1. Define Dictionary of Aliases
-trait_dictionary <- c(
-  # Fix Capitalization Duplicates
-  "Type 2 Diabetes"    = "Type 2 diabetes",
-  "Breast Cancer"      = "Breast cancer",
-  "Prostate Cancer"    = "Prostate cancer",
-  
-  # Fix Abbreviations / Synonyms
-  "T1D"                = "Type 1 diabetes",
-  "Cancer of prostate" = "Prostate cancer",
-  "Breast cancer [female]" = "Breast cancer",
-  
-  # Standardize naming
-  "Coronary artery disease" = "Coronary heart disease"
-)
-
-# 2. Helper to clean text
-clean_text <- function(x) {
-  trimws(x)
-}
-
-# 3. Apply Logic
+# 2. Apply the shared reported-trait dictionary. EFO is still coalesced first;
+#    the audit table has no EFO column, so the label that remains is reported_trait.
 eval_final <- eval_final %>%
   mutate(
     efo_id      = na_empty(efo_id),
     efo_label   = na_empty(efo_label),
     reported_trait = na_empty(reported_trait),
-    
-    # Step A: Get raw label (EFO preferred)
-    raw_label = dplyr::coalesce(efo_label, reported_trait),
-    
-    # Step B: Basic Clean
-    temp_label = clean_text(raw_label),
-    
-    # Step C: Apply Dictionary Remapping (The Magic Step)
-    trait_label = dplyr::recode(temp_label, !!!trait_dictionary),
-    
-    # Step D: Re-generate ID based on the CLEAN label
-    # This ensures "Type 2 Diabetes" and "Type 2 diabetes" get merged into ONE ID.
+    trait_label = harmonize_trait_label(efo_label, reported_trait),
     trait_id = paste0("custom:", slug_lc(trait_label))
   )
 # Proceed with processing; keep both id & label for grouping/printing

@@ -22,6 +22,11 @@ suppressPackageStartupMessages({
   library(readr); library(dplyr); library(stringr); library(tibble)
 })
 
+if (!file.exists("R/load.R")) {
+  stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
+}
+source("R/load.R")
+
 STAMP     <- format(Sys.Date(), "%Y%m%d")
 CACHE_DIR <- file.path("data","pgs_cache")
 dir.create(CACHE_DIR, recursive = TRUE, showWarnings = FALSE)
@@ -79,32 +84,6 @@ dev <- readr::read_csv(dev_fp, show_col_types = FALSE) |> janitor::clean_names()
 # Expected cleaned columns include:
 # polygenic_score_pgs_id, stage_of_pgs_development, broad_ancestry_category,
 # ancestry_e_g_french_chinese, additional_sample_cohort_information
-
-# Map ancestry to your display buckets
-to_display_cat <- function(x) {
-  x <- gsub("\\s*,\\s*", ",", x)
-  sapply(strsplit(x, ","), function(v) {
-    v <- unique(trimws(v))
-    if (length(v) > 1) {
-      if ("European" %in% v) "Multi-ancestry including European" else "Multi-ancestry excluding European"
-    } else {
-      vv <- v[1]
-      dplyr::case_when(
-        vv %in% c("European","African","East Asian","South Asian",
-                  "Hispanic or Latin American","Middle Eastern or North African",
-                  "Other/Mixed","Not reported",
-                  "Multi-ancestry including European","Multi-ancestry excluding European") ~ vv,
-        vv %in% c("African American or Afro-Caribbean","African unspecified","Sub-Saharan African") ~ "African",
-        vv == "Hispanic or Latin American" ~ "Hispanic or Latin American",
-        vv == "Greater Middle Eastern (Middle Eastern, North African or Persian)" ~ "Middle Eastern or North African",
-        vv %in% c("Central Asian","South East Asian","Asian unspecified","Oceanian","Native American",
-                  "Aboriginal Australian","Other","Other admixed ancestry") ~ "Other/Mixed",
-        vv == "Not reported" ~ "Not reported",
-        TRUE ~ "Other/Mixed"
-      )
-    }
-  }, USE.NAMES = FALSE)
-}
 
 bucket_from_set <- function(anc_set) {
   anc_set <- unique(stats::na.omit(anc_set))

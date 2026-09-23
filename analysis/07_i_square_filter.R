@@ -14,6 +14,11 @@ suppressPackageStartupMessages({
   library(dplyr); library(tidyr); library(ggplot2); library(readr); library(glue); library(stringr)
 })
 
+if (!file.exists("R/load.R")) {
+  stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
+}
+source("R/load.R")
+
 # ---------------------------
 # 0) CONFIG
 # ---------------------------

@@ -16,6 +16,11 @@ suppressPackageStartupMessages({
   library(purrr)
 })
 
+if (!file.exists("R/load.R")) {
+  stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
+}
+source("R/load.R")
+
 ## -------------------------
 ## Parameters (defaults)
 ## -------------------------
@@ -51,13 +56,6 @@ latest_of <- function(pattern, dir = cache_dir, fail_if_missing = TRUE) {
   }
   head(sort(fs, decreasing = TRUE), 1)
 }
-parse_est_ci <- function(x) {
-  x <- as.character(x)
-  est <- suppressWarnings(as.numeric(str_extract(x, "^[0-9]*\\.?[0-9]+")))
-  lo  <- suppressWarnings(as.numeric(str_match(x, "\\[(\\d*\\.?\\d+),")[,2]))
-  hi  <- suppressWarnings(as.numeric(str_match(x, ",\\s*(\\d*\\.?\\d+)\\]")[,2]))
-  tibble(est = est, lo = lo, hi = hi)
-}
 calc_Neff_vec <- function(cases, ctrls) {
   cases <- as.numeric(cases); ctrls <- as.numeric(ctrls)
   out <- rep(NA_real_, length(cases))
@@ -66,35 +64,6 @@ calc_Neff_vec <- function(cases, ctrls) {
   out
 }
 num <- function(x) suppressWarnings(readr::parse_number(as.character(x)))
-
-## ---- Ancestry mapping (high-res + display labels)
-to_display_cat <- function(x) {
-  x <- gsub("\\s*,\\s*", ",", x)
-  sapply(strsplit(x, ","), function(v) {
-    v <- unique(trimws(v))
-    if (length(v) > 1) {
-      if ("European" %in% v) "Multi-ancestry including European" else "Multi-ancestry excluding European"
-    } else {
-      vv <- v[1]
-      dplyr::case_when(
-        vv %in% c("European","African","East Asian","South Asian",
-                  "Hispanic or Latin American","Middle Eastern or North African",
-                  "Other/Mixed","Not reported",
-                  "Multi-ancestry including European","Multi-ancestry excluding European") ~ vv,
-        vv %in% c("African American or Afro-Caribbean","African unspecified","Sub-Saharan African") ~ "African",
-        vv == "East Asian" ~ "East Asian",
-        vv == "South Asian" ~ "South Asian",
-        vv == "European" ~ "European",
-        vv == "Hispanic or Latin American" ~ "Hispanic or Latin American",
-        vv == "Greater Middle Eastern (Middle Eastern, North African or Persian)" ~ "Middle Eastern or North African",
-        vv %in% c("Central Asian","South East Asian","Asian unspecified","Oceanian","Native American",
-                  "Aboriginal Australian","Other","Other admixed ancestry") ~ "Other/Mixed",
-        vv == "Not reported" ~ "Not reported",
-        TRUE ~ "Other/Mixed"
-      )
-    }
-  }, USE.NAMES = FALSE)
-}
 
 display_levels <- c("European","African","East Asian","South Asian",
                     "Hispanic or Latin American","Middle Eastern or North African",

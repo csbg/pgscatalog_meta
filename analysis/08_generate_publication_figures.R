@@ -23,6 +23,11 @@ suppressPackageStartupMessages({
   library(grid)
 })
 
+if (!file.exists("R/load.R")) {
+  stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
+}
+source("R/load.R")
+
 message(">> Self-contained Step 08 meta: starting")
 
 # ============================================================
@@ -304,31 +309,8 @@ message(glue(">> Loaded {nrow(stage1_tbl)} Stage-1 rows across {n_distinct(stage
 
 # ============================================================
 # 2) Rebuild weighted paired ΔAUC results from Stage-1 table
+#    se_scale stays "logit_as_implemented" until the figure step.
 # ============================================================
-
-safe_weighted_paired_test <- function(eur_auc, tgt_auc, eur_se, tgt_se) {
-  ok <- is.finite(eur_auc) & is.finite(tgt_auc) &
-    is.finite(eur_se) & is.finite(tgt_se) &
-    eur_se > 0 & tgt_se > 0
-  
-  n_pairs <- sum(ok)
-  
-  if (n_pairs < 3) {
-    return(list(estimate = NA_real_, p.value = NA_real_, n_pairs = n_pairs))
-  }
-  
-  diff    <- tgt_auc[ok] - eur_auc[ok]
-  diff_se <- sqrt(eur_se[ok]^2 + tgt_se[ok]^2)
-  weights <- 1 / diff_se^2
-  
-  model <- stats::lm(diff ~ 1, weights = weights)
-  
-  list(
-    estimate = as.numeric(stats::coef(model)[1]),
-    p.value  = summary(model)$coefficients[1, 4],
-    n_pairs  = n_pairs
-  )
-}
 
 dat <- stage1_tbl %>%
   transmute(
@@ -417,7 +399,8 @@ for (b in bucket_levels) {
           eur_auc = eur_auc,
           tgt_auc = tgt_auc,
           eur_se  = eur_se,
-          tgt_se  = tgt_se
+          tgt_se  = tgt_se,
+          se_scale = "logit_as_implemented"
         )
         
         flag_not_pooled <- FALSE
@@ -647,25 +630,8 @@ if (nrow(paired_df) == 0) {
   stop("No paired EUR/target data available for the faceted forest.")
 }
 
-delta_df <- paired_df %>%
+delta_df <- pool_stage2_cells(paired_df, se_scale = "logit_as_implemented") %>%
   mutate(
-    delta           = tgt_auc - eur_auc,
-    delta_se        = sqrt(tgt_se^2 + eur_se^2),
-    flag_not_pooled = !is_pooled
-  ) %>%
-  filter(is.finite(delta), is.finite(delta_se), delta_se > 0) %>%
-  group_by(trait_label, trained_bucket, target_ancestry) %>%
-  summarise(
-    n_pairs        = n(),
-    w              = 1 / (delta_se^2),
-    delta_hat      = sum(w * delta) / sum(w),
-    se_hat         = sqrt(1 / sum(w)),
-    all_not_pooled = all(flag_not_pooled, na.rm = TRUE),
-    .groups        = "drop"
-  ) %>%
-  mutate(
-    lo              = delta_hat - 1.96 * se_hat,
-    hi              = delta_hat + 1.96 * se_hat,
     pooled_group    = all_not_pooled,
     trait_clean     = wrap_trait(trait_label),
     target_ancestry = factor(

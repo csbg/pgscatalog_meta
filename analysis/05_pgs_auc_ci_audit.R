@@ -16,6 +16,11 @@ suppressPackageStartupMessages({
   library(ggplot2); library(scales); library(patchwork)
 })
 
+if (!file.exists("R/load.R")) {
+  stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
+}
+source("R/load.R")
+
 # =========================
 # 0) CONFIG
 # =========================
@@ -71,10 +76,6 @@ read_csv_safe <- function(fp, ...) {
   if (is.na(fp)) return(tibble(.empty=TRUE)[,0])
   suppressMessages(readr::read_csv(fp, show_col_types = FALSE, progress = FALSE, ...))
 }
-coerce01 <- function(x) {
-  xnum <- suppressWarnings(as.numeric(x))
-  ifelse(!is.na(xnum) & xnum > 1 & xnum <= 100, xnum/100, xnum)
-}
 theme_clean <- function() {
   theme_minimal(base_size = 12) +
     theme(
@@ -101,47 +102,6 @@ canon_anc <- function(x){
     grepl("Central|South American|Oceania|Native|Admixed|unspecified|Other", x, ignore.case = TRUE) ~ "Other",
     TRUE ~ x
   )
-}
-
-# -------- Vector-safe robust parser for AUROC/C-index strings --------
-parse_value_ci <- function(x) {
-  parse_one <- function(x1) {
-    s <- as.character(x1)
-    if (is.na(s) || !nzchar(s)) return(c(NA_real_, NA_real_, NA_real_))
-    s <- stringr::str_replace_all(s, "[\u2013\u2014\u2212]", "-")
-    s <- stringr::str_squish(s)
-    s <- stringr::str_replace_all(s, "(?i)\\b(AUROC|AUC|C-?index|C-stat(istic)?)\\s*[:=]?", "")
-    s <- stringr::str_squish(s)
-    
-    num   <- "[-+]?\\d*[\\.,]?\\d+(?:[eE][-+]?\\d+)?"
-    ci_any<- paste0("(?:\\[|\\()\\s*(", num, ")\\s*(?:,|;|\\-|to)\\s*(", num, ")\\s*(?:\\]|\\))")
-    
-    val1 <- stringr::str_match(s, paste0("\\b(", num, ")\\b"))[,2]
-    ci_m <- stringr::str_match(s, ci_any)
-    lo1  <- ci_m[,2]; hi1 <- ci_m[,3]
-    if (is.na(lo1) || is.na(hi1)) {
-      ci2 <- stringr::str_match(s, paste0("(?i)(?:ci|95%\\s*ci)\\s*(", num, ")\\s*(?:\\-|to)\\s*(", num, ")"))
-      lo1 <- if (!is.na(ci2[,1])) ci2[,2] else lo1
-      hi1 <- if (!is.na(ci2[,1])) ci2[,3] else hi1
-    }
-    
-    norm_num <- function(z) suppressWarnings(as.numeric(gsub(",", ".", z, fixed = FALSE)))
-    val_num <- norm_num(val1); lo_num <- norm_num(lo1); hi_num <- norm_num(hi1)
-    
-    clamp01 <- function(z) dplyr::case_when(
-      is.na(z) ~ as.numeric(NA),
-      z <= 1 ~ z,
-      z > 1 & z <= 100 ~ z/100,
-      TRUE ~ z
-    )
-    c(
-      estimate_value    = clamp01(val_num),
-      estimate_ci_lower = clamp01(lo_num),
-      estimate_ci_upper = clamp01(hi_num)
-    )
-  }
-  m <- vapply(x, parse_one, FUN.VALUE = c(estimate_value=0, estimate_ci_lower=0, estimate_ci_upper=0))
-  tibble::as_tibble(t(m))
 }
 
 # =========================

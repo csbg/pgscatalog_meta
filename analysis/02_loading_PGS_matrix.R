@@ -15,6 +15,11 @@ library(purrr)
 library(dplyr)
 library(readr)
 
+if (!file.exists("R/load.R")) {
+  stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
+}
+source("R/load.R")
+
 STAMP <- format(Sys.Date(), "%Y%m%d")
 
 # Run this script from the repository root.
