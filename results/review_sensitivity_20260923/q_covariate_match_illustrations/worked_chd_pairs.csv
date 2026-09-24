@@ -1,0 +1,9 @@
+target_ancestry,pgs_id,delta,delta_se,eur_classes,tgt_classes,covariate_matched,decision,sampleset_id,n_individuals
+African,PGS000011,0.01300000000000012,0.01046126776611976,Clinical or other covariates,Clinical or other covariates,TRUE,Kept,PSS000331,7597
+Hispanic or Latin American,PGS000011,0.0189999999999999,0.01453818121351187,Clinical or other covariates,Clinical or other covariates,TRUE,Kept,PSS000335,2493
+African,PGS000013,1.5397663291083497e-4,0.01031127654456222,Age/sex/PCs/technical | Clinical or other covariates,Clinical or other covariates,FALSE,Dropped,PSS000331,7597
+Hispanic or Latin American,PGS000013,0.00515397663291095,0.01436658543457772,Age/sex/PCs/technical | Clinical or other covariates,Clinical or other covariates,FALSE,Dropped,PSS000335,2493
+African,PGS000018,0.00168015378994434,0.01025792865057574,Age/sex/PCs/technical | Clinical or other covariates,Clinical or other covariates,FALSE,Dropped,PSS000331,7597
+Hispanic or Latin American,PGS000018,0.02068015378994436,0.01399771543182693,Age/sex/PCs/technical | Clinical or other covariates,Clinical or other covariates,FALSE,Dropped,PSS000335,2493
+African,PGS000200,0.01500000000000012,0.01046361767431046,Clinical or other covariates,Clinical or other covariates,TRUE,Kept,PSS000331,7597
+Hispanic or Latin American,PGS000200,0.02300000000000002,0.01450330350807087,Clinical or other covariates,Clinical or other covariates,TRUE,Kept,PSS000335,2493
