@@ -1394,7 +1394,11 @@ cov_cells <- delta_dm %>%
                                     delta_matched = delta_hat, lo_matched = lo, hi_matched = hi, sig_matched = ci_excludes_zero),
     by = c("trait_label", "trained_bucket", "target_ancestry")
   ) %>%
-  mutate(inference_flip_matched = !is.na(sig_matched) & sig_matched != sig_all)
+  mutate(
+    inference_flip_matched = !is.na(sig_matched) & sig_matched != sig_all,
+    # A second point is a different estimate only when matching drops at least one pair and leaves at least one.
+    matched_reduced = n_pairs_covariate_matched > 0 & n_pairs_covariate_matched < n_pairs
+  )
 
 write_tbl(cov_cells, "10_covariates_cells_matched_sensitivity")
 
@@ -1405,25 +1409,49 @@ cov_summary <- tibble(
   n_pairs_mixed_classes_within_side = sum(pair_cov$either_side_mixed_classes),
   n_cells = nrow(cov_cells),
   n_cells_estimable_matched_only = sum(!is.na(cov_cells$delta_matched)),
+  n_cells_matched_identical = sum(cov_cells$n_pairs_covariate_matched == cov_cells$n_pairs),
+  n_cells_matched_reduced = sum(cov_cells$matched_reduced),
+  n_cells_no_matched_pair = sum(cov_cells$n_pairs_covariate_matched == 0),
   n_cells_inference_flip_matched_only = sum(cov_cells$inference_flip_matched)
 )
 write_tbl(cov_summary, "10_covariates_summary")
 
+# Random effects are not used here. Matching is a subset of pairs, and the only
+# cells that lose pairs still share one target sample set, so a DL model of the
+# retained scores would not be two independent ΔAUCs.
+src_cov_all <- "IVW fixed effect"
+src_cov_matched <- "Covariate-matched pairs"
 cov_long <- bind_rows(
-  delta_dm %>% transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = "All pairs (corrected)"),
-  cells_cov_matched %>% transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = "Covariate-matched pairs only")
-) %>% mutate(source = factor(source, levels = c("All pairs (corrected)", "Covariate-matched pairs only")))
+  delta_dm %>% transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = src_cov_all),
+  cells_cov_matched %>%
+    inner_join(
+      cov_cells %>% filter(matched_reduced) %>% select(trait_label, trained_bucket, target_ancestry),
+      by = c("trait_label", "trained_bucket", "target_ancestry")
+    ) %>%
+    transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = src_cov_matched)
+) %>% mutate(source = factor(source, levels = c(src_cov_all, src_cov_matched)))
 
 p_cov <- forest_compare_plot(
   cov_long,
-  pal = c("#0072B2", "#CC79A7"), shapes = c(16, 17),
+  # Outside the ancestry palette, same indigo/red as the dependence forest.
+  pal = c("#332288", "#E41A1C"), shapes = c(16, 17),
   title = "ΔAUC restricted to pairs with the same covariate class on both sides",
-  subtitle = glue("{cov_summary$n_pairs_covariate_matched} of {cov_summary$n_pairs} pairs matched; {cov_summary$n_cells_estimable_matched_only} of {cov_summary$n_cells} cells estimable; {cov_summary$n_cells_inference_flip_matched_only} inference changes."),
-  caption = "Covariate class from the Catalog 'Covariates Included in the Model' field: None (PRS only) / Age-sex-PCs-technical / Clinical or other. Matched = identical single class on both sides.",
+  subtitle = glue(
+    "{cov_summary$n_pairs_covariate_matched} of {cov_summary$n_pairs} pairs match. ",
+    "Matched estimate shown only where that drops pairs: {cov_summary$n_cells_matched_reduced} cells. ",
+    "{cov_summary$n_cells_no_matched_pair} cells have no matched pair. ",
+    "{cov_summary$n_cells_inference_flip_matched_only} inference changes."
+  ),
+  caption = paste0(
+    "IVW fixed effect: inverse-variance pool of every pair in the cell. ",
+    "Covariate-matched pairs: the same pool after keeping pairs whose two sides share one covariate class, drawn only when that removes at least one pair.\n",
+    "Class from the Catalog 'Covariates Included in the Model' field: None (PRS only) / Age-sex-PCs-technical / Clinical or other. ",
+    "k is the number of pairs in that point. * = 95% CI excludes zero."
+  ),
   lost_df = cov_cells %>% filter(is.na(delta_matched)) %>% select(trait_label, trained_bucket, target_ancestry),
   lost_label = "no matched pair", trait_levels = trait_levels_wrapped
 )
-save_plot("10_covariates_forest", p_cov, width = 12, height = max(6.5, 0.30 * n_row_plot + 2.6), limitsize = FALSE)
+save_plot("10_covariates_forest", p_cov, width = 12.5, height = max(7.2, 0.32 * n_row_plot + 2.8), limitsize = FALSE)
 
 # ===========================================================================
 # 11) Training ancestry
