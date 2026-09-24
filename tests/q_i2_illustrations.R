@@ -7,10 +7,10 @@
 #   PGS000004  Q far above df, so I² is about 99.5
 #
 # Run from the repository root:
-#   Rscript tests/didactic_q_i2_pgs001336.R
+#   Rscript tests/q_i2_illustrations.R
 #
 # Plots land in
-#   results/pgs_catalog_<stamp>/q_i2_pgs001336/<PGS id>/
+#   results/pgs_catalog_<stamp>/q_i2_illustrations/<PGS id>/
 #
 # The arithmetic uses only qlogis(), plogis(), and sums.
 # It is the same calculation as ivw_pool_logit(), written out
@@ -43,7 +43,7 @@ if (!file.exists("R/load.R")) {
 source("R/load.R")
 
 stamp <- pipeline_stamp
-root_dir <- file.path(catalog_results_dir(stamp), "q_i2_pgs001336")
+root_dir <- file.path(catalog_results_dir(stamp), "q_i2_illustrations")
 dir.create(root_dir, recursive = TRUE, showWarnings = FALSE)
 
 fmt <- function(x, digits = 3) formatC(x, format = "f", digits = digits)
