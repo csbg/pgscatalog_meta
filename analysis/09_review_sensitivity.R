@@ -281,7 +281,8 @@ x_labels_forest <- label_number(accuracy = 0.1, style_negative = "minus")
 forest_compare_plot <- function(long_df, pal, shapes, title, subtitle, caption,
                                 lost_df = NULL, lost_label = "not estimable",
                                 trait_levels, x_lim = x_lim_forest, x_lab = x_lab_pos,
-                                label_mode = c("all", "first_k_others_star")) {
+                                label_mode = c("all", "first_k_others_star"),
+                                show_k = TRUE) {
   label_mode <- match.arg(label_mode)
   long_df <- long_df %>%
     mutate(
@@ -305,12 +306,14 @@ forest_compare_plot <- function(long_df, pal, shapes, title, subtitle, caption,
       aes(xmin = lo, xmax = hi), width = 0, linewidth = 0.5,
       position = position_dodge(width = dodge_w), orientation = "y"
     ) +
-    geom_point(size = 2.3, position = position_dodge(width = dodge_w)) +
-    geom_text(
+    geom_point(size = 2.3, position = position_dodge(width = dodge_w))
+  if (show_k) {
+    p <- p + geom_text(
       aes(x = x_lab, label = k_lab, fontface = ifelse(sig, "bold", "plain")),
       size = 2.5, hjust = 0, colour = "grey20",
       position = position_dodge(width = dodge_w), show.legend = FALSE
     )
+  }
   if (!is.null(lost_df) && nrow(lost_df) > 0) {
     lost_df <- lost_df %>%
       mutate(
@@ -1148,8 +1151,12 @@ write_tbl(mixed_bounds, "08_scale_fix_mixed_scale_pgs_bounds")
 
 # ===========================================================================
 # 9) Dependence sensitivities on the delta-method SEs
-#    (a) one PGS per target sample set per cell (lowest PGS ID)
-#    (b) DerSimonian-Laird random-effects Stage 2
+#    Fixed effect of every PGS in the cell.
+#    When k > 1 but every score shares one target sample set, the sensitivity
+#    is that single retained PGS. DerSimonian-Laird is not defined for one ΔAUC.
+#    When at least two target sample sets remain, random effects are fit to
+#    those independent ΔAUC values (one PGS per target sample set, lowest PGS ID).
+#    The fixed effect of that reduced set is drawn only when it drops a duplicate.
 # ===========================================================================
 
 message(">> [9] Dependence sensitivities")
@@ -1174,8 +1181,18 @@ paired_one_per_pss <- paired_dm %>%
   slice(1) %>%
   ungroup()
 
-cells_one_per_pss <- pool_stage2(paired_one_per_pss, model = "fixed") %>% mutate(sensitivity = "one PGS per target sample set")
-cells_random      <- pool_stage2(paired_dm, model = "random_dl") %>% mutate(sensitivity = "random effects (DL)")
+cells_one_per_pss <- pool_stage2(paired_one_per_pss, model = "fixed") %>%
+  mutate(sensitivity = "one PGS per target sample set")
+# Random effects only on the independent ΔAUCs, and only when at least two remain.
+# A cell with one ΔAUC (k = 1, or several PGS on one target sample set) has no τ² to estimate.
+cells_random <- pool_stage2(paired_one_per_pss, model = "random_dl") %>%
+  filter(n_pairs >= 2) %>%
+  mutate(sensitivity = "random effects (DL)")
+
+src_fixed   <- "IVW fixed effect"
+src_single  <- "Single PGS (shared target sample set)"
+src_reduced <- "Fixed effect, one PGS per sample set"
+src_random  <- "Random effects (DL)"
 
 dependence_cells <- delta_dm %>%
   transmute(trait_label, trained_bucket, target_ancestry, n_pairs,
@@ -1194,12 +1211,24 @@ dependence_cells <- delta_dm %>%
                                         all_pgs_share_one_target_sample_set, all_pgs_share_one_eur_sample_set),
             by = c("trait_label", "trained_bucket", "target_ancestry")) %>%
   mutate(
-    robust_all_three = sig_fixed & coalesce(sig_one_per_pss, FALSE) & coalesce(sig_random, FALSE),
+    re_applicable = n_pairs_one_per_pss >= 2,
+    n_delta_random = if_else(re_applicable, n_pairs_one_per_pss, NA_integer_),
+    single_pgs_sensitivity = n_pairs > 1 & n_pairs_one_per_pss == 1,
+    reduced_fixed_effect = n_pairs_one_per_pss >= 2 & n_pairs_one_per_pss < n_pairs,
+    robust_fixed_and_random = re_applicable & sig_fixed & coalesce(sig_random, FALSE),
     robustness = case_when(
-      !sig_fixed ~ "not significant (corrected fixed effect)",
-      robust_all_three ~ "significant in fixed, one-per-PSS and random effects",
-      sig_fixed & n_pairs == 1 ~ "significant, single PGS (k = 1; no dependence check possible)",
-      TRUE ~ "significant in fixed effect only; sensitive to dependence"
+      n_pairs == 1 & sig_fixed ~ "significant; single ΔAUC (k = 1; random effects not applicable)",
+      n_pairs == 1 & !sig_fixed ~ "not significant; single ΔAUC (k = 1; random effects not applicable)",
+      single_pgs_sensitivity & sig_fixed & sig_one_per_pss ~ "significant in the fixed effect and in the single PGS for that target sample set",
+      single_pgs_sensitivity & sig_fixed & !sig_one_per_pss ~ "significant in the fixed effect only; the single PGS for that target sample set is not",
+      single_pgs_sensitivity & !sig_fixed ~ "not significant (corrected fixed effect); sensitivity is the single PGS, not random effects",
+      re_applicable & n_pairs_one_per_pss == n_pairs & sig_fixed & sig_random ~ "significant in the fixed effect and in random effects",
+      re_applicable & n_pairs_one_per_pss == n_pairs & sig_fixed & !sig_random ~ "significant in the fixed effect only; not in random effects",
+      re_applicable & sig_fixed & sig_one_per_pss & sig_random ~ "significant in the fixed effect, the one-per-sample-set fixed effect, and random effects",
+      re_applicable & sig_fixed & sig_one_per_pss & !sig_random ~ "significant in both fixed effects; not in random effects",
+      re_applicable & sig_fixed & !sig_one_per_pss & sig_random ~ "significant in the full fixed effect and in random effects; not after one PGS per sample set",
+      re_applicable & sig_fixed ~ "significant in the full fixed effect only; sensitive to dependence",
+      TRUE ~ "not significant (corrected fixed effect)"
     )
   ) %>%
   arrange(delta_fixed)
@@ -1209,38 +1238,88 @@ write_tbl(dependence_cells, "09_dependence_cells")
 dependence_summary <- tibble(
   n_cells = nrow(dependence_cells),
   n_sig_fixed_corrected = sum(dependence_cells$sig_fixed),
-  n_sig_one_per_pss = sum(dependence_cells$sig_one_per_pss, na.rm = TRUE),
+  n_cells_single_delta = sum(dependence_cells$n_pairs == 1),
+  n_sig_single_delta = sum(dependence_cells$n_pairs == 1 & dependence_cells$sig_fixed),
+  n_cells_single_pgs_sensitivity = sum(dependence_cells$single_pgs_sensitivity),
+  n_sig_single_pgs_sensitivity = sum(dependence_cells$single_pgs_sensitivity & dependence_cells$sig_one_per_pss, na.rm = TRUE),
+  n_cells_random_effects = sum(dependence_cells$re_applicable),
   n_sig_random_dl = sum(dependence_cells$sig_random, na.rm = TRUE),
-  n_sig_all_three = sum(dependence_cells$robust_all_three),
-  n_sig_fixed_only = sum(dependence_cells$robustness == "significant in fixed effect only; sensitive to dependence"),
-  n_sig_k1 = sum(dependence_cells$robustness == "significant, single PGS (k = 1; no dependence check possible)"),
+  n_sig_fixed_and_random = sum(dependence_cells$robust_fixed_and_random, na.rm = TRUE),
+  n_cells_reduced_fixed_effect = sum(dependence_cells$reduced_fixed_effect),
   n_cells_k_reduced_by_one_per_pss = sum(dependence_cells$n_pairs_one_per_pss < dependence_cells$n_pairs, na.rm = TRUE)
 )
 write_tbl(dependence_summary, "09_dependence_summary")
 
+# One row in the figure gets the fixed effect, plus only the sensitivities that
+# are a different estimand. Random effects and the single retained PGS never
+# share a cell: the former needs ≥2 independent ΔAUCs, the latter is the case
+# in which only one ΔAUC remains.
 dependence_long <- bind_rows(
-  delta_dm          %>% transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = "Corrected fixed effect"),
-  cells_one_per_pss %>% transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = "One PGS per target sample set"),
-  cells_random      %>% transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = "Random effects (DL)")
+  dependence_cells %>%
+    transmute(trait_label, trained_bucket, target_ancestry, n_pairs,
+              delta_hat = delta_fixed, lo = lo_fixed, hi = hi_fixed, source = src_fixed),
+  dependence_cells %>%
+    filter(single_pgs_sensitivity) %>%
+    transmute(trait_label, trained_bucket, target_ancestry, n_pairs = n_pairs_one_per_pss,
+              delta_hat = delta_one_per_pss, lo = lo_one_per_pss, hi = hi_one_per_pss, source = src_single),
+  dependence_cells %>%
+    filter(reduced_fixed_effect) %>%
+    transmute(trait_label, trained_bucket, target_ancestry, n_pairs = n_pairs_one_per_pss,
+              delta_hat = delta_one_per_pss, lo = lo_one_per_pss, hi = hi_one_per_pss, source = src_reduced),
+  dependence_cells %>%
+    filter(re_applicable) %>%
+    transmute(trait_label, trained_bucket, target_ancestry, n_pairs = n_delta_random,
+              delta_hat = delta_random, lo = lo_random, hi = hi_random, source = src_random)
 ) %>%
-  mutate(source = factor(source, levels = c("Corrected fixed effect", "One PGS per target sample set", "Random effects (DL)")))
+  mutate(source = factor(source, levels = c(src_fixed, src_single, src_reduced, src_random)))
 
 p_dep <- forest_compare_plot(
   dependence_long,
-  pal = c("#0072B2", "#E69F00", "#009E73"), shapes = c(16, 17, 15),
+  # Outside the ancestry Okabe-Ito palette (no blue, orange, sky, green, yellow, pink, brown, grey, black).
+  pal = c("#332288", "#E41A1C", "#6A3D9A", "#01665E"),
+  shapes = c(16, 17, 18, 15),
   title = "Dependence sensitivities on the delta-method ΔAUC",
   subtitle = glue(
-    "Significant cells: {dependence_summary$n_sig_fixed_corrected} fixed / {dependence_summary$n_sig_one_per_pss} one-per-sample-set / ",
-    "{dependence_summary$n_sig_random_dl} random effects; {dependence_summary$n_sig_all_three} significant in all three."
+    "95% CI excludes zero for {dependence_summary$n_sig_fixed_corrected} IVW fixed effects. ",
+    "Single-PGS sensitivity (k > 1, one target sample set): {dependence_summary$n_sig_single_pgs_sensitivity} of {dependence_summary$n_cells_single_pgs_sensitivity}.",
+    "\nRandom effects, only where ≥2 independent ΔAUC remain: {dependence_summary$n_sig_random_dl} of {dependence_summary$n_cells_random_effects} exclude zero. ",
+    "{dependence_summary$n_cells_single_delta} cells are one ΔAUC and are drawn once."
   ),
   caption = paste0(
-    "One PGS per target sample set: within each cell, scores sharing the same target sample set(s) are collapsed to one (lowest PGS ID).\n",
-    "Random effects: DerSimonian-Laird tau^2 across the k within-PGS ΔAUC values. k = PGS per cell (fixed-effect row); * = 95% CI excludes zero for that version."
+    "IVW fixed effect: inverse-variance fixed effect of every PGS in the cell. ",
+    "Single PGS: those scores share one target sample set; the point is the retained score (lowest PGS ID). Random effects are not fit to one ΔAUC.\n",
+    "Fixed effect, one PGS per sample set: shown only when ≥2 scores remain and a duplicate is dropped. ",
+    "Random effects (DL): DerSimonian-Laird on those independent ΔAUC values.\n",
+    "k is the number of PGS in the IVW fixed effect. * = its 95% CI excludes zero."
   ),
   trait_levels = trait_levels_wrapped,
-  label_mode = "first_k_others_star"
+  show_k = FALSE
 )
-save_plot("09_dependence_forest", p_dep, width = 13, height = max(7.5, 0.42 * n_row_plot + 2.8), limitsize = FALSE)
+
+dependence_row_lab <- dependence_cells %>%
+  mutate(
+    trait_wrapped = factor(wrap_trait(trait_label), levels = trait_levels_wrapped),
+    target_ancestry = factor(as.character(target_ancestry), levels = rev(anc_keep)),
+    trained_bucket = factor(trained_bucket, levels = names(pal_bucket)),
+    k_lab = paste0("k = ", n_pairs, ifelse(sig_fixed, " *", ""))
+  )
+
+p_dep <- p_dep +
+  geom_text(
+    data = dependence_row_lab,
+    aes(x = x_lab_pos, y = target_ancestry, label = k_lab, fontface = ifelse(sig_fixed, "bold", "plain")),
+    inherit.aes = FALSE, size = 2.5, hjust = 0, vjust = 0.5, colour = "grey20",
+    show.legend = FALSE
+  ) +
+  guides(
+    colour = guide_legend(nrow = 2, byrow = TRUE),
+    shape = guide_legend(nrow = 2, byrow = TRUE)
+  ) +
+  theme(
+    panel.spacing.x = unit(1.15, "cm"),
+    plot.margin = margin(6, 50, 6, 6)
+  )
+save_plot("09_dependence_forest", p_dep, width = 13.2, height = max(8.2, 0.44 * n_row_plot + 3.8), limitsize = FALSE)
 
 # ===========================================================================
 # 10) Covariate adjustment

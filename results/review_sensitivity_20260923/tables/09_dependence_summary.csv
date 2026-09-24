@@ -1,2 +1,2 @@
-n_cells,n_sig_fixed_corrected,n_sig_one_per_pss,n_sig_random_dl,n_sig_all_three,n_sig_fixed_only,n_sig_k1,n_cells_k_reduced_by_one_per_pss
-28,19,16,18,14,5,0,19
+n_cells,n_sig_fixed_corrected,n_cells_single_delta,n_sig_single_delta,n_cells_single_pgs_sensitivity,n_sig_single_pgs_sensitivity,n_cells_random_effects,n_sig_random_dl,n_sig_fixed_and_random,n_cells_reduced_fixed_effect,n_cells_k_reduced_by_one_per_pss
+28,19,7,4,15,9,6,2,1,4,19
