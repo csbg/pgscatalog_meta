@@ -1844,338 +1844,460 @@ k1_summary <- tibble(
 write_tbl(k1_summary, "16_k1_gate_summary")
 
 # ===========================================================================
-# 17) Liability-scale R² is not consistently derivable
-#     The Catalog stores an evaluation case fraction and a free-text R².
-#     Converting AUC or an OR per SD to liability-scale R² also needs the
-#     population prevalence (Wray et al. 2010; Lee et al. 2012).
+# 17) Can Catalog R² be meta-analyzed?
+#     The question is not whether an AUROC row also prints an R².
+#     A meta-analysis needs the R² itself, an interval, and more than
+#     one score in the same trait. Counts use the bulk performance file.
+#     "PGS-specific R²" is the Catalog field "PGS R2 (no covariates)".
+#     Other R² intervals are counted separately.
+#     Field definitions match tests/q_r2_meta_sanity.R.
 # ===========================================================================
 
-message(">> [17] Liability-scale R2 check")
+message(">> [17] Catalog R2 meta-analysis check")
 
-# Population-sample mapping from AUC to liability-scale R²
-# (Wray, Yang, Goddard & Visscher, PLoS Genet 2010). Ascertained
-# case-control samples need the further correction in Lee, Goddard,
-# Wray & Visscher, Genet Epidemiol 2012, which requires K and P.
-auc_to_liability_r2 <- function(auc, K) {
-  r2_to_auc <- function(R2, k) {
-    thr <- qnorm(1 - k)
-    z <- dnorm(thr)
-    mean_c <- z / k
-    mean_u <- -z / (1 - k)
-    var_c <- 1 + thr * (z / k) - mean_c^2
-    var_u <- 1 - thr * (z / (1 - k)) - mean_u^2
-    mg_c <- sqrt(R2) * mean_c
-    mg_u <- sqrt(R2) * mean_u
-    vg_c <- 1 - R2 * (1 - var_c)
-    vg_u <- 1 - R2 * (1 - var_u)
-    pnorm((mg_c - mg_u) / sqrt(vg_c + vg_u))
-  }
-  mapply(function(a, k) {
-    if (!is.finite(a) || !is.finite(k) || k <= 0 || k >= 1 || a <= 0.5) return(NA_real_)
-    lo <- 1e-8
-    hi <- 0.95
-    if (r2_to_auc(hi, k) < a) return(NA_real_)
-    for (.step in seq_len(60)) {
-      mid <- 0.5 * (lo + hi)
-      if (r2_to_auc(mid, k) < a) lo <- mid else hi <- mid
-    }
-    0.5 * (lo + hi)
-  }, auc, K)
+unlink(file.path(dir_tables, c(
+  "17_liability_r2_not_derivable.csv",
+  "17_liability_r2_class_counts.csv",
+  "17_liability_r2_examples.csv",
+  "17_liability_r2_prevalence_sensitivity.csv"
+)))
+
+num_pat <- "[-+]?(?:\\d+\\.?\\d*|\\d*\\.\\d+)(?:[eE][-+]?\\d+)?"
+
+parse_metric_field <- function(text, label_regex) {
+  pat <- sprintf(
+    "%s\\s*=\\s*(%s)(?:\\s*\\[\\s*(%s)\\s*,\\s*(%s)\\s*\\])?",
+    label_regex, num_pat, num_pat, num_pat
+  )
+  m <- str_match(text, regex(pat, ignore_case = TRUE))
+  tibble(
+    present = !is.na(m[, 2]),
+    estimate = suppressWarnings(as.numeric(m[, 2])),
+    ci_lower = suppressWarnings(as.numeric(m[, 3])),
+    ci_upper = suppressWarnings(as.numeric(m[, 4]))
+  )
 }
 
-r2_classified <- eval_df %>%
+r2_ppm <- read_csv(fp_ppm, show_col_types = FALSE, col_types = cols(.default = col_character())) %>%
+  transmute(
+    performance_id = `PGS Performance Metric (PPM) ID`,
+    pgs_id = `Evaluated Score`,
+    sampleset_id = `PGS Sample Set (PSS)`,
+    pgp_id = `PGS Publication (PGP) ID`,
+    reported_trait = `Reported Trait`,
+    covariates = `Covariates Included in the Model`,
+    other_info = `PGS Performance: Other Relevant Information`,
+    pmid = `Publication (PMID)`,
+    other_metric = `Other Metric(s)`,
+    auc = `Area Under the Receiver-Operating Characteristic Curve (AUROC)`
+  )
+
+r2_publications <- read_csv(
+  catalog_bulk_file("publications", stamp),
+  show_col_types = FALSE,
+  col_types = cols(.default = col_character())
+) %>%
+  transmute(
+    pgp_id = `PGS Publication/Study (PGP) ID`,
+    first_author = `First Author`,
+    title = Title,
+    publication_year = substr(`Publication Date`, 1, 4)
+  )
+
+# One sample-set id can occupy more than one row. Keep the ancestry
+# label only when every row of that id agrees.
+r2_samples <- pss_raw %>%
+  transmute(
+    sampleset_id = `PGS Sample Set (PSS)`,
+    n_individuals = suppressWarnings(as.numeric(`Number of Individuals`)),
+    n_cases = suppressWarnings(as.numeric(`Number of Cases`)),
+    broad_ancestry_raw = `Broad Ancestry Category`,
+    cohort = `Cohort(s)`,
+    sample_note = `Additional Sample/Cohort Information`
+  ) %>%
+  group_by(sampleset_id) %>%
+  summarise(
+    n_individuals = suppressWarnings(max(n_individuals, na.rm = TRUE)),
+    any_cases = any(is.finite(n_cases)),
+    broad_ancestry = {
+      labs <- unique(broad_ancestry_raw[!is.na(broad_ancestry_raw) & nzchar(broad_ancestry_raw)])
+      if (length(labs) == 1L) labs else paste(sort(labs), collapse = " | ")
+    },
+    ancestry_conflict = n_distinct(broad_ancestry_raw[!is.na(broad_ancestry_raw) & nzchar(broad_ancestry_raw)]) > 1,
+    cohort = paste(unique(cohort[!is.na(cohort) & nzchar(cohort)]), collapse = " | "),
+    sample_note = paste(unique(sample_note[!is.na(sample_note) & nzchar(sample_note)]), collapse = " | "),
+    .groups = "drop"
+  ) %>%
   mutate(
-    other_metric_txt = coalesce(other_metric_txt, ""),
-    other_info_txt = coalesce(other_info_txt, ""),
-    r2_blob = tolower(paste(other_metric_txt, other_info_txt, sep = " || ")),
-    mentions_liability = str_detect(r2_blob, "liability"),
-    states_assumed_prevalence = mentions_liability & str_detect(r2_blob, "assum"),
-    r2_class = case_when(
-      mentions_liability & str_detect(r2_blob, "nested|incremental") ~ "liability_nested_or_incremental",
-      mentions_liability & str_detect(r2_blob, "assum|prev") ~ "liability_with_assumed_prevalence",
-      mentions_liability ~ "liability_scale_other",
-      str_detect(r2_blob, "nagelkerke") ~ "nagelkerke_pseudo_r2",
-      str_detect(r2_blob, "pseudo") ~ "other_pseudo_r2",
-      str_detect(r2_blob, "incremental|delta r|nested") ~ "incremental_or_nested_not_called_liability",
-      str_detect(r2_blob, "\\br2\\b|r\u00b2|variance explained") ~ "unspecified_r2",
-      !str_detect(other_metric_txt, "\\S") &
-        !str_detect(other_info_txt, regex("r2|r\u00b2", ignore_case = TRUE)) ~ "no_r2_reported",
-      TRUE ~ "other_metric_not_r2"
+    n_individuals = ifelse(is.infinite(n_individuals), NA_real_, n_individuals),
+    ancestry_display = assign_evaluation_ancestry(broad_ancestry),
+    is_european = !is.na(broad_ancestry) & broad_ancestry == "European",
+    is_non_european = !is.na(broad_ancestry) & nzchar(broad_ancestry) & broad_ancestry != "European"
+  )
+
+# The full-model field in this release uses the superscript "R²".
+# "PGS R2" and "Incremental R2" use an ASCII "R2".
+full_r2 <- parse_metric_field(r2_ppm$other_metric, "(?<![A-Za-z])R²")
+pgs_r2 <- parse_metric_field(r2_ppm$other_metric, "PGS R2 \\(no covariates\\)")
+incr_r2 <- parse_metric_field(r2_ppm$other_metric, "Incremental R2 \\(full-covars\\)")
+
+r2_metrics <- r2_ppm %>%
+  bind_cols(
+    full_r2 %>% rename_with(~ paste0("full_", .x)),
+    pgs_r2 %>% rename_with(~ paste0("pgs_", .x)),
+    incr_r2 %>% rename_with(~ paste0("incr_", .x))
+  ) %>%
+  mutate(
+    pgs_has_ci = pgs_present & is.finite(pgs_ci_lower) & is.finite(pgs_ci_upper),
+    full_has_ci = full_present & is.finite(full_ci_lower) & is.finite(full_ci_upper),
+    incr_has_ci = incr_present & is.finite(incr_ci_lower) & is.finite(incr_ci_upper),
+    has_auc_field = !is.na(auc) & nzchar(auc)
+  ) %>%
+  left_join(r2_samples, by = "sampleset_id") %>%
+  left_join(r2_publications, by = "pgp_id") %>%
+  left_join(scores_meta, by = "pgs_id") %>%
+  mutate(
+    sample_note = coalesce(sample_note, ""),
+    is_european = coalesce(is_european, FALSE),
+    is_non_european = coalesce(is_non_european, FALSE),
+    any_cases = coalesce(any_cases, FALSE)
+  )
+
+# -----------------------------------------------------------------------
+# Yengo et al. 2022 height. Point R², no interval.
+# -----------------------------------------------------------------------
+
+yengo <- r2_metrics %>%
+  filter(pgp_id == "PGP000382", reported_trait == "Height") %>%
+  arrange(pgs_id, broad_ancestry, sampleset_id)
+
+yengo_multi <- yengo %>% filter(pgs_id == "PGS002802")
+yengo_multi_eur <- yengo_multi %>% filter(is_european)
+yengo_multi_other <- yengo_multi %>% filter(is_non_european)
+yengo_ci_n <- sum(yengo$pgs_has_ci | yengo$full_has_ci | yengo$incr_has_ci)
+yengo_outside <- yengo %>%
+  filter(pgs_id != "PGS002802", is_non_european, round(full_estimate, 2) < 0.09 | round(full_estimate, 2) > 0.21)
+
+yengo_out <- yengo %>%
+  transmute(
+    performance_id, pgs_id, pgs_name, n_variants, dev_method,
+    gwas_ancestry = anc_gwas_txt,
+    reported_trait, sampleset_id, broad_ancestry, ancestry_display,
+    n_individuals, cohort, covariates,
+    r2 = full_estimate,
+    r2_ci_lower = full_ci_lower,
+    r2_ci_upper = full_ci_upper,
+    score_role = if_else(pgs_id == "PGS002802", "multi-ancestry score", "ancestry-specific score"),
+    other_metric, pmid, pgp_id, first_author
+  )
+write_tbl(yengo_out, "17_r2_yengo_height")
+
+# -----------------------------------------------------------------------
+# Named field: PGS R2 (no covariates), with and without an interval.
+# -----------------------------------------------------------------------
+
+pgs_ci <- r2_metrics %>% filter(pgs_has_ci)
+pgs_no_ci <- r2_metrics %>%
+  filter(pgs_present, !pgs_has_ci) %>%
+  mutate(
+    nagelkerke_note = str_detect(coalesce(other_info, ""), regex("nagelkerke", ignore_case = TRUE)),
+    auroc_interval = str_detect(
+      coalesce(other_metric, ""),
+      regex("PGS AUROC \\(no covariates\\)\\s*=\\s*[-+0-9.eE]+\\s*\\[[^\\]]+\\]", ignore_case = TRUE)
     )
   )
 
-fig_ppm_ids <- unique(cell_identifiers$performance_id)
-auroc_cls <- r2_classified %>% filter(has_auc)
-fig_cls <- r2_classified %>%
-  filter(performance_id %in% fig_ppm_ids) %>%
-  distinct(performance_id, .keep_all = TRUE)
+pair_ancestry <- pgs_ci %>%
+  group_by(pgs_id, reported_trait) %>%
+  summarise(
+    n_evaluations = n(),
+    n_european = sum(is_european),
+    n_non_european = sum(is_non_european),
+    ancestries = paste(sort(unique(broad_ancestry)), collapse = "; "),
+    manuscript_ancestries = paste(sort(unique(na.omit(ancestry_display))), collapse = "; "),
+    pmids = paste(sort(unique(pmid)), collapse = "; "),
+    pgp_ids = paste(sort(unique(pgp_id)), collapse = "; "),
+    first_authors = paste(sort(unique(first_author)), collapse = "; "),
+    publication_years = paste(sort(unique(publication_year)), collapse = "; "),
+    incr_present_n = sum(incr_present),
+    incr_ci_n = sum(incr_has_ci),
+    full_ci_n = sum(full_has_ci),
+    any_cases_n = sum(any_cases),
+    auc_n = sum(has_auc_field),
+    .groups = "drop"
+  )
 
-count_class <- function(df, scope_name) {
-  df %>%
-    count(r2_class, name = "n") %>%
-    mutate(scope = scope_name, denominator = sum(n), .before = 1)
+both_ancestry <- pair_ancestry %>%
+  filter(n_european > 0L, n_non_european > 0L)
+
+trait_scores <- both_ancestry %>%
+  group_by(reported_trait) %>%
+  summarise(
+    n_scores = n_distinct(pgs_id),
+    pmids = paste(sort(unique(unlist(str_split(pmids, "; ")))), collapse = "; "),
+    .groups = "drop"
+  )
+write_tbl(trait_scores, "17_r2_scores_per_trait")
+
+within_paper <- pgs_ci %>%
+  semi_join(both_ancestry, by = c("pgs_id", "reported_trait")) %>%
+  distinct(pmid, reported_trait, pgs_id) %>%
+  count(pmid, reported_trait, name = "n_scores")
+
+eur_notes <- pgs_ci %>%
+  semi_join(both_ancestry, by = c("pgs_id", "reported_trait")) %>%
+  filter(is_european) %>%
+  group_by(pmid, pgs_id, reported_trait) %>%
+  summarise(
+    n_holdout = sum(str_detect(sample_note, regex("holdout|testing cohort", ignore_case = TRUE))),
+    cohorts = paste(sort(unique(cohort)), collapse = "; "),
+    .groups = "drop"
+  )
+
+non_eur_labels <- pgs_ci %>%
+  semi_join(both_ancestry, by = c("pgs_id", "reported_trait")) %>%
+  filter(is_non_european) %>%
+  count(broad_ancestry, ancestry_display, name = "n_evaluations") %>%
+  arrange(desc(n_evaluations))
+write_tbl(non_eur_labels, "17_r2_non_european_labels")
+
+pairs_out <- both_ancestry %>%
+  left_join(pgs_ci %>% distinct(pgs_id, pgs_name, dev_method), by = "pgs_id") %>%
+  arrange(pmids, reported_trait, pgs_id)
+write_tbl(pairs_out, "17_r2_pgs_ci_score_trait_pairs")
+
+# An R² interval that is not the named PGS R2 (no covariates) field.
+other_ci_pat <- regex(
+  "(?i)((?:incremental\\s+variance\\s+explained[^,=]{0,80}|R²|R2))\\s*=\\s*[-+0-9.eE]+\\s*\\[[^\\]]+\\]"
+)
+other_ci <- r2_metrics %>%
+  filter(!pgs_has_ci) %>%
+  filter(str_detect(coalesce(other_metric, ""), other_ci_pat))
+
+other_pairs <- other_ci %>%
+  group_by(pmid, first_author, publication_year, pgp_id, title, pgs_id, reported_trait) %>%
+  summarise(
+    n_evaluations = n(),
+    n_european = sum(is_european),
+    n_non_european = sum(is_non_european),
+    ancestries = paste(sort(unique(broad_ancestry)), collapse = "; "),
+    covariates = paste(sort(unique(covariates)), collapse = " || "),
+    other_info = paste(sort(unique(na.omit(other_info[nzchar(other_info)]))), collapse = " || "),
+    .groups = "drop"
+  ) %>%
+  filter(n_european > 0L, n_non_european > 0L)
+
+paper_from_pairs <- function(pairs, r2_field) {
+  pairs %>%
+    group_by(pmid, first_author, publication_year, pgp_id, title) %>%
+    summarise(
+      n_score_trait_pairs = n(),
+      n_evaluations = sum(n_evaluations),
+      n_traits = n_distinct(reported_trait),
+      n_scores = n_distinct(pgs_id),
+      max_scores_in_one_trait = max(as.numeric(table(reported_trait))),
+      ancestries = paste(sort(unique(unlist(str_split(ancestries, "; ")))), collapse = "; "),
+      .groups = "drop"
+    ) %>%
+    mutate(r2_field = r2_field, .before = 1)
 }
-class_counts <- bind_rows(
-  count_class(auroc_cls, "auroc_metrics"),
-  count_class(fig_cls, "figure_1c_metrics")
+
+named_pairs_for_papers <- both_ancestry %>%
+  transmute(
+    pmid = pmids,
+    first_author = first_authors,
+    publication_year = publication_years,
+    pgp_id = pgp_ids,
+    title = NA_character_,
+    pgs_id, reported_trait,
+    n_evaluations, ancestries
+  ) %>%
+  left_join(
+    r2_publications %>% distinct(pgp_id, title_full = title),
+    by = "pgp_id"
+  ) %>%
+  mutate(title = coalesce(title_full, title)) %>%
+  select(-title_full)
+
+r2_papers <- bind_rows(
+  paper_from_pairs(named_pairs_for_papers, "PGS R2 (no covariates) with interval"),
+  paper_from_pairs(other_pairs, "Other R2 with interval")
 ) %>%
-  arrange(scope, desc(n))
+  arrange(r2_field, desc(n_score_trait_pairs))
+write_tbl(r2_papers, "17_r2_cross_ancestry_papers")
 
-n_auroc <- nrow(auroc_cls)
-n_auroc_liability <- sum(auroc_cls$mentions_liability)
-n_auroc_liability_nested <- sum(auroc_cls$r2_class == "liability_nested_or_incremental")
-n_auroc_liability_other <- sum(auroc_cls$r2_class == "liability_scale_other")
-n_fig_ppm <- nrow(fig_cls)
-n_fig_liability <- sum(fig_cls$mentions_liability)
-n_ppm_liability <- sum(r2_classified$mentions_liability)
-n_assumed_prevalence <- sum(r2_classified$states_assumed_prevalence)
-# The sample-set file repeats a PSS identifier, and some repeats disagree
-# on cases and controls. Count the file, not the de-duplicated `pss` table.
-pss_count_rows <- tibble(
-  sampleset_id = as.character(pss_raw[[pss_field_names[1]]]),
-  n_cases = suppressWarnings(as.numeric(pss_raw[["Number of Cases"]])),
-  n_controls = suppressWarnings(as.numeric(pss_raw[["Number of Controls"]]))
-)
-pss_case_variants <- pss_count_rows %>%
-  filter(is.finite(n_cases), is.finite(n_controls)) %>%
-  distinct(sampleset_id, n_cases, n_controls) %>%
-  mutate(sample_case_fraction = n_cases / (n_cases + n_controls))
-n_pss_rows <- nrow(pss_count_rows)
-n_pss_ids <- n_distinct(pss_count_rows$sampleset_id)
-n_pss_rows_with_counts <- sum(is.finite(pss_count_rows$n_cases) & is.finite(pss_count_rows$n_controls))
-n_pss_conflicting <- pss_case_variants %>%
-  count(sampleset_id, name = "n_case_control_pairs") %>%
-  summarise(n = sum(n_case_control_pairs > 1)) %>%
-  pull(n)
-n_prevalence_fields <- sum(grepl("prevalence|liability", pss_field_names, ignore.case = TRUE))
-fig_pss_ids <- unique(cell_identifiers$sampleset_id)
-n_fig_pss <- length(fig_pss_ids)
-fig_pss_conflict_ids <- pss_case_variants %>%
-  filter(sampleset_id %in% fig_pss_ids) %>%
-  count(sampleset_id, name = "n_case_control_pairs") %>%
-  filter(n_case_control_pairs > 1) %>%
-  arrange(sampleset_id) %>%
-  pull(sampleset_id)
-n_fig_pss_conflicting <- length(fig_pss_conflict_ids)
-
-class_n <- function(scope_name, class_name) {
-  hit <- class_counts$n[class_counts$scope == scope_name & class_counts$r2_class == class_name]
-  if (length(hit) == 0) 0L else hit
+n_ppm <- nrow(r2_metrics)
+n_yengo <- nrow(yengo)
+n_pgs_ci <- nrow(pgs_ci)
+n_pairs <- nrow(both_ancestry)
+n_pairs_2022 <- sum(both_ancestry$pmids == "35324888")
+n_pairs_2023 <- sum(both_ancestry$pmids == "37890495")
+n_traits <- nrow(trait_scores)
+n_traits_one <- sum(trait_scores$n_scores == 1L)
+n_traits_two <- sum(trait_scores$n_scores == 2L)
+n_within_paper_multi <- sum(within_paper$n_scores > 1L)
+n_incr_ci <- sum(pgs_ci$incr_has_ci)
+n_full_ci <- sum(pgs_ci$full_has_ci)
+n_pgs_ci_auc <- sum(pgs_ci$has_auc_field)
+n_holdout_pairs <- sum(eur_notes$pmid == "35324888" & eur_notes$n_holdout == 1L)
+yengo_eur_txt <- paste(sprintf("%.3f", sort(yengo_multi_eur$full_estimate)), collapse = " and ")
+n_other_papers <- n_distinct(other_pairs$pmid)
+n_other_pairs <- nrow(other_pairs)
+monti_quant_n <- other_pairs %>%
+  filter(pmid == "38908374", str_detect(other_info, fixed("pearson correlation"))) %>%
+  nrow()
+top_other <- r2_papers %>%
+  filter(r2_field == "Other R2 with interval") %>%
+  slice_max(n_score_trait_pairs, n = 1, with_ties = FALSE)
+other_paper_detail <- if (nrow(top_other) == 0L) {
+  "No other publication has an R² interval together with a European and a non-European evaluation."
+} else {
+  sprintf(
+    "Largest other set: %s %s (PMID %s), %d score–trait pairs, up to %d scores in one trait. Of the Monti et al. 2024 pairs, %d are quantitative (the note says the beta is a Pearson correlation) and the covariates field is 0. See 17_r2_cross_ancestry_papers.csv.",
+    top_other$first_author, top_other$publication_year, top_other$pmid,
+    top_other$n_score_trait_pairs, top_other$max_scores_in_one_trait,
+    monti_quant_n
+  )
 }
+multi_eur_lo <- if (nrow(yengo_multi_other) == 0L) NA_real_ else min(yengo_multi_other$full_estimate)
+multi_eur_hi <- if (nrow(yengo_multi_other) == 0L) NA_real_ else max(yengo_multi_other$full_estimate)
+yengo_min <- if (nrow(yengo) == 0L) NA_real_ else min(yengo$full_estimate)
 
-# Same AUC, three population prevalences: the mapping is not unique.
-k_grid <- c(0.01, 0.10, 0.50)
-r2_at_auc60 <- auc_to_liability_r2(rep(0.60, length(k_grid)), k_grid)
-auc60_detail <- paste(
-  sprintf("K = %.2f -> R2 = %.3f", k_grid, r2_at_auc60),
-  collapse = "; "
-)
-
-liability_proof <- tibble(
+r2_meta_counts <- tibble(
+  question = c(
+    "1",
+    "1",
+    "1",
+    "1",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+  ),
   clause = c(
-    "Performance metrics with a finite AUC",
-    "AUROC metrics that mention the liability scale",
-    "AUROC metrics with nested or incremental liability R2",
-    "AUROC metrics that name liability R2 without a further definition",
-    "AUROC metrics reporting Nagelkerke pseudo-R2",
-    "AUROC metrics reporting another pseudo-R2",
-    "AUROC metrics reporting an unspecified R2",
-    "AUROC metrics reporting no R2",
-    "AUROC metrics whose other metric is not an R2",
-    "Figure 1C performance metrics",
-    "Figure 1C metrics that mention the liability scale",
-    "Figure 1C metrics reporting an unspecified R2",
-    "Figure 1C metrics reporting Nagelkerke pseudo-R2",
-    "Figure 1C metrics reporting no R2",
-    "Performance metrics in the release that mention liability anywhere",
-    "Performance metrics that state an author-assumed prevalence",
-    "Evaluation sample-set rows in the release file",
-    "Distinct evaluation sample-set identifiers",
-    "Sample-set rows with case and control counts",
-    "Distinct sample-set identifiers with more than one case/control pair",
-    "Figure 1C sample sets with more than one case/control pair",
-    "Sample-set columns that record population prevalence",
-    "Figure 1C cells with a paired OR or HR",
-    "Liability-scale R2 implied by AUC 0.60 at three prevalences"
+    "Yengo 2022 height evaluations",
+    "Yengo 2022 height evaluations with an interval",
+    "Named PGS R2 (no covariates) with an interval",
+    "Those evaluations that also have an AUROC",
+    "Score-trait pairs with a named PGS R2 interval and both ancestries",
+    "Those pairs from Tanigawa 2022 (PMID 35324888)",
+    "Those pairs from Tanigawa 2023 (PMID 37890495)",
+    "Incremental R2 intervals on the named-PGS-R2 evaluations",
+    "Full-model R2 intervals on the named-PGS-R2 evaluations",
+    "Named PGS R2 reported with no interval",
+    "Traits with more than one score inside one paper",
+    "Other publications with a different R2 interval and both ancestries"
   ),
   n = c(
-    n_auroc,
-    n_auroc_liability,
-    n_auroc_liability_nested,
-    n_auroc_liability_other,
-    class_n("auroc_metrics", "nagelkerke_pseudo_r2"),
-    class_n("auroc_metrics", "other_pseudo_r2"),
-    class_n("auroc_metrics", "unspecified_r2"),
-    class_n("auroc_metrics", "no_r2_reported"),
-    class_n("auroc_metrics", "other_metric_not_r2"),
-    n_fig_ppm,
-    n_fig_liability,
-    class_n("figure_1c_metrics", "unspecified_r2"),
-    class_n("figure_1c_metrics", "nagelkerke_pseudo_r2"),
-    class_n("figure_1c_metrics", "no_r2_reported"),
-    n_ppm_liability,
-    n_assumed_prevalence,
-    n_pss_rows,
-    n_pss_ids,
-    n_pss_rows_with_counts,
-    n_pss_conflicting,
-    n_fig_pss_conflicting,
-    n_prevalence_fields,
-    or_summary$n_figure1c_cells_with_or_estimate,
-    NA_real_
+    n_yengo,
+    yengo_ci_n,
+    n_pgs_ci,
+    n_pgs_ci_auc,
+    n_pairs,
+    n_pairs_2022,
+    n_pairs_2023,
+    n_incr_ci,
+    n_full_ci,
+    nrow(pgs_no_ci),
+    n_within_paper_multi,
+    n_other_papers
   ),
   denominator = c(
     n_ppm,
-    n_auroc,
-    n_auroc,
-    n_auroc,
-    n_auroc,
-    n_auroc,
-    n_auroc,
-    n_auroc,
-    n_auroc,
-    n_fig_ppm,
-    n_fig_ppm,
-    n_fig_ppm,
-    n_fig_ppm,
-    n_fig_ppm,
+    n_yengo,
     n_ppm,
+    n_pgs_ci,
+    n_pgs_ci,
+    n_pairs,
+    n_pairs,
+    n_pgs_ci,
+    n_pgs_ci,
     n_ppm,
-    n_pss_rows,
-    n_pss_rows,
-    n_pss_rows,
-    n_pss_ids,
-    n_fig_pss,
-    length(pss_field_names),
-    or_summary$n_figure1c_cells,
-    NA_real_
+    nrow(within_paper),
+    n_other_pairs
   ),
   detail = c(
-    "Structured AUROC. This is the denominator of the liability count.",
-    "Free-text match for 'liability' in Other Metric(s) or the performance note. Subclasses are the next two rows.",
-    "The string also says nested or incremental, so the value is not a marginal liability-scale R2.",
-    "Named liability R2 with no nested model and no stated prevalence.",
-    "Nagelkerke pseudo-R2 is not a liability-scale R2.",
-    "Covariate-adjusted or other pseudo-R2, not labelled liability-scale.",
-    "The string says R2 or variance explained and does not name the scale.",
-    "No R2 in the other-metric field or the performance note.",
-    "Another metric is present (for example AUPRC) and it is not an R2.",
-    "Distinct PPM identifiers in 13_cell_identifiers_long.csv.",
-    "None of the Figure 1C metrics names the liability scale.",
-    "Bare R2 string; scale not stated.",
-    "Info field identifies Nagelkerke's method.",
-    "Empty R2 fields.",
-    "Includes records whose AUC sits only in free text, so they sit outside the finite-AUROC count.",
-    "The prevalence is an author assumption written into the metric string, not a Catalog field. See 17_liability_r2_examples.csv.",
-    paste0(basename(fp_pss), ". One sample set can occupy more than one row."),
-    "Unique PGS Sample Set (PSS) identifiers in that file.",
-    "These rows support an evaluation case fraction P = cases / (cases + controls). P is not the population prevalence K.",
-    paste0(
-      "The same PSS identifier is stored with different numeric case and control counts, so P is not a single Catalog value. In Figure 1C: ",
-      paste(fig_pss_conflict_ids, collapse = ", "),
-      "."
+    sprintf(
+      "PMID 36224396. No interval, so no standard error. The multi-ancestry score PGS002802 has European R² %s; its other ancestries run from %.3f to %.3f. Ancestry-specific scores in the same set go down to %.3f. These scores have about a million variants, not the 12,111-variant predictor cited by the reviewer.",
+      yengo_eur_txt, multi_eur_lo, multi_eur_hi, yengo_min
     ),
-    paste0("Figure 1C uses 13_cell_identifiers_long.csv. ", n_fig_pss_conflicting, " of its sample sets have more than one case/control pair in the release file."),
-    "No sample-set column matches prevalence or liability.",
-    "An odds ratio or hazard ratio still needs K, and per-SD scaling is not a structured field. See 12_or_per_sd_summary.csv.",
-    paste0(
-      "Wray et al. 2010 population-sample mapping. ",
-      auc60_detail,
-      ". Lee et al. 2012 changes these values again when the sample is ascertained. See 17_liability_r2_prevalence_sensitivity.csv."
-    )
+    "Zero intervals. Yengo height cannot be meta-analyzed from the Catalog.",
+    "This field is the unadjusted PGS R². It is not an R² attached to an AUROC row.",
+    "The named PGS R² interval does not sit on the manuscript's AUROC evaluations.",
+    sprintf(
+      "Each pair is one score in one trait, with a European evaluation and a non-European evaluation. %d of %d traits have one score; %d traits appear in both papers. See 17_r2_scores_per_trait.csv.",
+      n_traits_one, n_traits, n_traits_two
+    ),
+    sprintf(
+      "%d of these pairs label one European sample as a UK Biobank held-out testing cohort. The other European sample is a second UK Biobank partition.",
+      n_holdout_pairs
+    ),
+    "UK Biobank. One score per trait in this paper.",
+    "The covariate-adjusted PGS contribution has no interval, so it has no standard error.",
+    "The full-model R² includes the covariates. Its interval is not a PGS-only interval.",
+    sprintf(
+      "All %d are Tanigawa 2022. %d note Nagelkerke's R². %d put the interval on PGS AUROC rather than on the R².",
+      nrow(pgs_no_ci),
+      sum(pgs_no_ci$nagelkerke_note),
+      sum(pgs_no_ci$auroc_interval)
+    ),
+    sprintf(
+      "Within a paper the maximum number of scores in one trait is %d. There is no second score to pool.",
+      if (nrow(within_paper) == 0L) NA_integer_ else max(within_paper$n_scores)
+    ),
+    other_paper_detail
   )
 )
-write_tbl(liability_proof, "17_liability_r2_not_derivable")
-write_tbl(class_counts, "17_liability_r2_class_counts")
+write_tbl(r2_meta_counts, "17_r2_meta_counts")
 
-pick_example <- function(df, role) {
+pick_r2_example <- function(df, role) {
   df %>%
     arrange(performance_id) %>%
     slice(1) %>%
     transmute(
       role = role,
-      performance_id, pgs_id, reported_trait, has_auc, auc, r2_class,
-      other_metric_txt, other_info_txt
+      performance_id, pgs_id, pgs_name, reported_trait,
+      broad_ancestry, pmid, first_author,
+      covariates, other_info, other_metric
     )
 }
-liability_examples <- bind_rows(
-  pick_example(auroc_cls %>% filter(r2_class == "liability_scale_other"), "auroc_liability_r2_named"),
-  pick_example(auroc_cls %>% filter(r2_class == "liability_nested_or_incremental"), "auroc_liability_r2_nested"),
-  pick_example(r2_classified %>% filter(!has_auc, mentions_liability, !states_assumed_prevalence), "liability_scale_only_in_free_text"),
-  pick_example(r2_classified %>% filter(states_assumed_prevalence), "author_assumed_prevalence"),
-  pick_example(fig_cls %>% filter(r2_class == "unspecified_r2"), "figure_1c_unspecified_r2"),
-  pick_example(fig_cls %>% filter(r2_class == "nagelkerke_pseudo_r2"), "figure_1c_nagelkerke"),
-  pick_example(fig_cls %>% filter(r2_class == "no_r2_reported"), "figure_1c_no_r2")
+r2_examples <- bind_rows(
+  pick_r2_example(yengo %>% filter(pgs_id == "PGS002802", is_european), "yengo_multi_ancestry_european"),
+  pick_r2_example(yengo %>% filter(pgs_id == "PGS002802", is_non_european), "yengo_multi_ancestry_non_european"),
+  pick_r2_example(yengo_outside, "yengo_ancestry_specific_outside_0.09_0.21"),
+  pick_r2_example(pgs_ci %>% filter(pmid == "35324888"), "tanigawa_2022_pgs_r2_with_interval"),
+  pick_r2_example(pgs_ci %>% filter(pmid == "37890495"), "tanigawa_2023_pgs_r2_with_interval"),
+  pick_r2_example(pgs_no_ci, "tanigawa_2022_pgs_r2_without_interval"),
+  pick_r2_example(other_ci %>% filter(pmid == "38908374"), "monti_2024_other_r2_with_interval")
 )
-write_tbl(liability_examples, "17_liability_r2_examples")
-
-# Figure 1C ascertainment. AUC is taken from the performance metric.
-# Case fractions are every distinct case/control pair the release file
-# stores for that sample set, including disagreements.
-ascertainment_examples <- cell_identifiers %>%
-  filter(
-    (pgs_id == "PGS000004" & trait_label == "Breast cancer" & target_ancestry == "African") |
-      (pgs_id == "PGS002250" & grepl("ovarian", trait_label, ignore.case = TRUE))
-  ) %>%
-  distinct(pgs_id, trait_label, side, performance_id, sampleset_id, auc) %>%
-  filter(is.finite(auc)) %>%
-  inner_join(pss_case_variants, by = "sampleset_id", relationship = "many-to-many") %>%
-  group_by(sampleset_id) %>%
-  mutate(n_case_control_pairs = n_distinct(paste(n_cases, n_controls))) %>%
-  ungroup()
-
-shared_k <- c(0.01, 0.05, 0.10, 0.50)
-liability_sensitivity <- bind_rows(
-  tibble(
-    setting = "fixed_auc",
-    pgs_id = NA_character_,
-    trait_label = NA_character_,
-    side = NA_character_,
-    performance_id = NA_character_,
-    sampleset_id = NA_character_,
-    auc = 0.60,
-    n_cases = NA_real_,
-    n_controls = NA_real_,
-    prevalence_used = k_grid,
-    prevalence_role = "external_population_prevalence",
-    n_case_control_pairs_in_catalog = NA_integer_
-  ),
-  ascertainment_examples %>%
-    transmute(
-      setting = "catalog_case_fraction_used_as_k",
-      pgs_id, trait_label, side, performance_id, sampleset_id, auc,
-      n_cases, n_controls,
-      prevalence_used = sample_case_fraction,
-      prevalence_role = ifelse(
-        n_case_control_pairs > 1,
-        "catalog_lists_more_than_one_case_fraction",
-        "single_catalog_case_fraction_used_as_k"
-      ),
-      n_case_control_pairs_in_catalog = n_case_control_pairs
-    ),
-  ascertainment_examples %>%
-    distinct(pgs_id, trait_label, side, performance_id, sampleset_id, auc, n_case_control_pairs) %>%
-    crossing(prevalence_used = shared_k) %>%
-    transmute(
-      setting = "shared_external_k",
-      pgs_id, trait_label, side, performance_id, sampleset_id, auc,
-      n_cases = NA_real_,
-      n_controls = NA_real_,
-      prevalence_used,
-      prevalence_role = "one_external_k_applied_to_the_auc",
-      n_case_control_pairs_in_catalog = n_case_control_pairs
-    )
-) %>%
-  mutate(
-    r2_liability = auc_to_liability_r2(auc, prevalence_used),
-    formula = "Wray et al. 2010 population-sample liability-threshold mapping. Not reported as a result; it shows that K must be supplied."
-  )
-write_tbl(liability_sensitivity, "17_liability_r2_prevalence_sensitivity")
+write_tbl(r2_examples, "17_r2_examples")
 
 stopifnot(
-  sum(class_counts$n[class_counts$scope == "auroc_metrics"]) == n_auroc,
-  sum(class_counts$n[class_counts$scope == "figure_1c_metrics"]) == n_fig_ppm,
-  n_prevalence_fields == 0
+  nrow(r2_metrics) == n_ppm,
+  n_yengo == 14L,
+  yengo_ci_n == 0L,
+  all(yengo$full_present),
+  nrow(yengo_multi_eur) == 2L,
+  n_pgs_ci == 3150L,
+  n_pgs_ci_auc == 0L,
+  n_pairs == 630L,
+  n_pairs_2022 == 570L,
+  n_pairs_2023 == 60L,
+  n_incr_ci == 0L,
+  n_full_ci == n_pgs_ci,
+  nrow(pgs_no_ci) == 1189L,
+  all(pgs_no_ci$nagelkerke_note),
+  all(pgs_no_ci$auroc_interval),
+  n_within_paper_multi == 0L,
+  n_traits_one == 586L,
+  n_traits_two == 22L,
+  n_traits_one + n_traits_two == n_traits,
+  n_holdout_pairs == n_pairs_2022,
+  sum(r2_papers$n_score_trait_pairs[r2_papers$r2_field == "PGS R2 (no covariates) with interval"]) == n_pairs
 )
 
 # ===========================================================================
@@ -2242,7 +2364,7 @@ message("\n==== Training ancestry ====")
 print(as.data.frame(train_summary), row.names = FALSE)
 message("\n==== OR/HR per SD ====")
 print(as.data.frame(or_summary), row.names = FALSE)
-message("\n==== Liability-scale R2 ====")
-print(as.data.frame(liability_proof %>% select(clause, n, denominator)), row.names = FALSE)
+message("\n==== Catalog R2 meta-analysis ====")
+print(as.data.frame(r2_meta_counts %>% select(question, clause, n, denominator)), row.names = FALSE)
 message(glue("\n>> Wrote review-sensitivity pack to {normalizePath(root_out, mustWork = FALSE)}"))
 message(">> Done.")

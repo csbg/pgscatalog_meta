@@ -1,0 +1,609 @@
+reported_trait,n_scores,pmids
+# of cigarettes currently smoked daily (current cigarette smokers),1,35324888
+# of cigarettes previously smoked daily,1,35324888
+# of medications taken,1,35324888
+# of self-reported cancers,1,35324888
+# of self-reported non-cancer illnesses,1,35324888
+3mm cylindrical power (R),1,35324888
+3mm strong meridian (L),1,35324888
+3mm strong meridian (R),1,35324888
+3mm strong meridian angle (L),1,35324888
+3mm weak meridian (L),1,35324888
+3mm weak meridian (R),1,35324888
+6mm cylindrical power angle (L),1,35324888
+6mm strong meridian (L),1,35324888
+6mm strong meridian (R),1,35324888
+6mm weak meridian (L),1,35324888
+6mm weak meridian (R),1,35324888
+AST to ALT ratio,1,35324888
+Age asthma diagnosed,1,35324888
+Age diabetes diagnosed,1,35324888
+Age first had sexual intercourse,1,35324888
+"Age hay fever, rhinitis or eczema diagnosed",1,35324888
+Age hayfever or allergic rhinitis diagnosed by doctor,1,35324888
+Age high BP diagnosed,1,35324888
+Age started wearing glasses or contact lenses,1,35324888
+Age stopped smoking,1,35324888
+Alanine aminotransferase,1,35324888
+Albumin,1,35324888
+Alcohol intake frequency.,1,35324888
+Alkaline phosphatase,1,35324888
+Ankle spacing width,1,35324888
+Ankle spacing width (L),1,35324888
+Ankle spacing width (R),1,35324888
+Apolipoprotein A,1,35324888
+Apolipoprotein B,1,35324888
+Arm fat % (L),1,35324888
+Arm fat % (R),1,35324888
+Arm fat mass (L),1,35324888
+Arm fat mass (R),1,35324888
+Arm fat mass (left),1,37890495
+Arm fat mass (right),1,37890495
+Arm fat percentage (left),1,37890495
+Arm fat percentage (right),1,37890495
+Arm fat-free mass (L),1,35324888
+Arm fat-free mass (R),1,35324888
+Arm fat-free mass (left),1,37890495
+Arm fat-free mass (right),1,37890495
+Arm pred. mass (L),1,35324888
+Arm pred. mass (R),1,35324888
+Aspartate aminotransferase,1,35324888
+Ave. # of times bowels opened per day,1,35324888
+Ave. heart rate,1,35324888
+Ave. weekly beer plus cider intake,1,35324888
+BMI,1,35324888
+Basal metabolic rate,2,35324888; 37890495
+Basophil count,1,37890495
+Basophil percentage,1,37890495
+Basophill %,1,35324888
+Basophill count,1,35324888
+Beef intake,1,35324888
+Birth weight,1,35324888
+Body fat %,1,35324888
+Body fat percentage,1,37890495
+Body mass index (BMI),1,37890495
+Body surface area,1,35324888
+Bread intake,1,35324888
+C-reactive protein,1,35324888
+Calcium,1,35324888
+Cereal intake,1,35324888
+Cheese intake,1,35324888
+Childhood sunburn,1,35324888
+Cholesterol,1,35324888
+Coffee intake,1,35324888
+Comparative body size at age 10,1,35324888
+Comparative height size at age 10,1,35324888
+Cooked vegetable intake,1,35324888
+Corneal hysteresis (L),1,35324888
+Corneal hysteresis (R),1,35324888
+Corneal resistance factor (L),1,35324888
+Corneal resistance factor (R),1,35324888
+Creatinine,1,35324888
+Creatinine (enzymatic) in urine,1,35324888
+Cystatin C,1,35324888
+Daytime dozing / sleeping (narcolepsy),1,35324888
+Degree bothered by feeling tired all the time in the last 3 months,1,35324888
+Degree bothered by headaches in the last 3 months,1,35324888
+Degree bothered by pain in arms/legs/joints in the past 3 months,1,35324888
+Degree bothered by urinary frequency/bladder irritability in the last 3 months,1,35324888
+Diastolic BP (AR),1,35324888
+Difficulty not smoking for 1 day,1,35324888
+Direct bilirubin,1,35324888
+Dried fruit intake,1,35324888
+Duration of walks,1,35324888
+EBNA-1 antigen for Epstein-Barr Virus,1,35324888
+Eosinophil count,1,37890495
+Eosinophil percentage,1,37890495
+Eosinophill %,1,35324888
+Eosinophill count,1,35324888
+Ever taken cannabis,1,35324888
+FEV FVC ratio,1,35324888
+FEV1,1,35324888
+FVC,1,35324888
+Falls in the last year,1,35324888
+Father's age at death,1,35324888
+Fluid intelligence score,1,35324888
+Freq. of discomfort/pain in abdomen in last 3 months,1,35324888
+Freq. of drinking alcohol,1,35324888
+Freq. of playing computer games,1,35324888
+Freq. of tiredness / lethargy in last 2 weeks,1,35324888
+Freq. of unenthusiasm / disinterest in last 2 weeks,1,35324888
+Freq. of walking for pleasure in last 4 weeks,1,35324888
+Fresh fruit intake,1,35324888
+Friendships satisfaction,1,35324888
+GE / gI antigen for Varicella Zoster Virus,1,35324888
+Gamma glutamyltransferase,1,35324888
+Getting up in morning,1,35324888
+Glucose,1,35324888
+Glycated haemoglobin (HbA1c),1,35324888
+HDL cholesterol,1,35324888
+HTLV-1 gag antigen for Human T-Lymphotropic Virus 1,1,35324888
+Haematocrit %,1,35324888
+Haemoglobin concentration,1,35324888
+Hand grip strength (L),1,35324888
+Hand grip strength (R),1,35324888
+Health satisfaction,1,35324888
+"Heel Broadband ultrasound attenuation, direct entry",1,35324888
+Heel bone mineral density (BMD),1,35324888
+Heel bone mineral density (BMD) (L),1,35324888
+Heel bone mineral density (BMD) (R),1,35324888
+"Heel bone mineral density (BMD) T-score, automated",1,35324888
+"Heel bone mineral density (BMD) T-score, automated (L)",1,35324888
+"Heel bone mineral density (BMD) T-score, automated (R)",1,35324888
+Heel broadband ultrasound attenuation (L),1,35324888
+Heel broadband ultrasound attenuation (R),1,35324888
+"Heel quantitative ultrasound index (QUI), direct entry",1,35324888
+"Heel quantitative ultrasound index (QUI), direct entry (L)",1,35324888
+"Heel quantitative ultrasound index (QUI), direct entry (R)",1,35324888
+Height,1,35324888
+Hematocrit percentage,1,37890495
+Hemoglobin concentration,1,37890495
+High light scatter reticulocyte %,1,35324888
+High light scatter reticulocyte count,2,35324888; 37890495
+High light scatter reticulocyte percentage,1,37890495
+Hip circumference,2,35324888; 37890495
+IGF-1,1,35324888
+Immature reticulocyte fraction,2,35324888; 37890495
+Impedance of arm (L),1,35324888
+Impedance of arm (R),1,35324888
+Impedance of arm (left),1,37890495
+Impedance of arm (right),1,37890495
+Impedance of leg (L),1,35324888
+Impedance of leg (R),1,35324888
+Impedance of leg (left),1,37890495
+Impedance of leg (right),1,37890495
+Impedance of whole body,2,35324888; 37890495
+"Intra-ocular pressure, Goldmann-correlated (L)",1,35324888
+"Intra-ocular pressure, Goldmann-correlated (R)",1,35324888
+"Intra-ocular pressure, corneal-compensated (L)",1,35324888
+"Intra-ocular pressure, corneal-compensated (R)",1,35324888
+JC VP1 antigen for Human Polyomavirus JCV,1,35324888
+LDL cholesterol,1,35324888
+LV ejection fraction,1,35324888
+LV stroke volume,1,35324888
+Leg fat % (L),1,35324888
+Leg fat % (R),1,35324888
+Leg fat mass (R),1,35324888
+Leg fat mass (left),1,37890495
+Leg fat mass (right),1,37890495
+Leg fat percentage (left),1,37890495
+Leg fat percentage (right),1,37890495
+Leg fat-free mass (L),1,35324888
+Leg fat-free mass (R),1,35324888
+Leg fat-free mass (left),1,37890495
+Leg fat-free mass (right),1,37890495
+Leg pred. mass (L),1,35324888
+Leg pred. mass (R),1,35324888
+Lipoprotein A,1,35324888
+Lymphocyte %,1,35324888
+Lymphocyte count,2,35324888; 37890495
+Lymphocyte percentage,1,37890495
+MC VP1 antigen for Merkel Cell Polyomavirus,1,35324888
+Mean FA in anterior limb of internal capsule on FA skeleton (L),1,35324888
+Mean FA in anterior limb of internal capsule on FA skeleton (R),1,35324888
+Mean FA in body of corpus callosum on FA skeleton,1,35324888
+Mean FA in cerebral peduncle on FA skeleton (L),1,35324888
+Mean FA in cingulum cingulate gyrus on FA skeleton (L),1,35324888
+Mean FA in cingulum cingulate gyrus on FA skeleton (R),1,35324888
+Mean FA in cingulum hippocampus on FA skeleton (L),1,35324888
+Mean FA in cingulum hippocampus on FA skeleton (R),1,35324888
+Mean FA in corticospinal tract on FA skeleton (R),1,35324888
+Mean FA in external capsule on FA skeleton (R),1,35324888
+Mean FA in fornix cres+stria terminalis on FA skeleton (R),1,35324888
+Mean FA in fornix on FA skeleton,1,35324888
+Mean FA in genu of corpus callosum on FA skeleton,1,35324888
+Mean FA in inferior cerebellar peduncle on FA skeleton (R),1,35324888
+Mean FA in middle cerebellar peduncle on FA skeleton,1,35324888
+Mean FA in posterior limb of internal capsule on FA skeleton (L),1,35324888
+Mean FA in posterior limb of internal capsule on FA skeleton (R),1,35324888
+Mean FA in posterior thalamic radiation on FA skeleton (L),1,35324888
+Mean FA in posterior thalamic radiation on FA skeleton (R),1,35324888
+Mean FA in retrolenticular part of internal capsule on FA skeleton (L),1,35324888
+Mean FA in retrolenticular part of internal capsule on FA skeleton (R),1,35324888
+Mean FA in sagittal stratum on FA skeleton (L),1,35324888
+Mean FA in sagittal stratum on FA skeleton (R),1,35324888
+Mean FA in splenium of corpus callosum on FA skeleton,1,35324888
+Mean FA in superior cerebellar peduncle on FA skeleton (L),1,35324888
+Mean FA in superior cerebellar peduncle on FA skeleton (R),1,35324888
+Mean FA in superior corona radiata on FA skeleton (L),1,35324888
+Mean FA in superior corona radiata on FA skeleton (R),1,35324888
+Mean FA in superior fronto-occipital fasciculus on FA skeleton (L),1,35324888
+Mean FA in superior fronto-occipital fasciculus on FA skeleton (R),1,35324888
+Mean FA in superior longitudinal fasciculus on FA skeleton (L),1,35324888
+Mean FA in superior longitudinal fasciculus on FA skeleton (R),1,35324888
+Mean FA in tapetum on FA skeleton (L),1,35324888
+Mean FA in tapetum on FA skeleton (R),1,35324888
+Mean FA in uncinate fasciculus on FA skeleton (R),1,35324888
+Mean ICVF in anterior corona radiata on FA skeleton (L),1,35324888
+Mean ICVF in anterior corona radiata on FA skeleton (R),1,35324888
+Mean ICVF in anterior limb of internal capsule on FA skeleton (L),1,35324888
+Mean ICVF in anterior limb of internal capsule on FA skeleton (R),1,35324888
+Mean ICVF in body of corpus callosum on FA skeleton,1,35324888
+Mean ICVF in cerebral peduncle on FA skeleton (L),1,35324888
+Mean ICVF in cerebral peduncle on FA skeleton (R),1,35324888
+Mean ICVF in cingulum cingulate gyrus on FA skeleton (L),1,35324888
+Mean ICVF in cingulum cingulate gyrus on FA skeleton (R),1,35324888
+Mean ICVF in cingulum hippocampus on FA skeleton (L),1,35324888
+Mean ICVF in cingulum hippocampus on FA skeleton (R),1,35324888
+Mean ICVF in external capsule on FA skeleton (L),1,35324888
+Mean ICVF in external capsule on FA skeleton (R),1,35324888
+Mean ICVF in fornix cres+stria terminalis on FA skeleton (L),1,35324888
+Mean ICVF in fornix cres+stria terminalis on FA skeleton (R),1,35324888
+Mean ICVF in fornix on FA skeleton,1,35324888
+Mean ICVF in genu of corpus callosum on FA skeleton,1,35324888
+Mean ICVF in inferior cerebellar peduncle on FA skeleton (L),1,35324888
+Mean ICVF in inferior cerebellar peduncle on FA skeleton (R),1,35324888
+Mean ICVF in medial lemniscus on FA skeleton (L),1,35324888
+Mean ICVF in medial lemniscus on FA skeleton (R),1,35324888
+Mean ICVF in middle cerebellar peduncle on FA skeleton,1,35324888
+Mean ICVF in posterior corona radiata on FA skeleton (L),1,35324888
+Mean ICVF in posterior corona radiata on FA skeleton (R),1,35324888
+Mean ICVF in posterior limb of internal capsule on FA skeleton (L),1,35324888
+Mean ICVF in posterior limb of internal capsule on FA skeleton (R),1,35324888
+Mean ICVF in posterior thalamic radiation on FA skeleton (L),1,35324888
+Mean ICVF in posterior thalamic radiation on FA skeleton (R),1,35324888
+Mean ICVF in retrolenticular part of internal capsule on FA skeleton (L),1,35324888
+Mean ICVF in retrolenticular part of internal capsule on FA skeleton (R),1,35324888
+Mean ICVF in sagittal stratum on FA skeleton (L),1,35324888
+Mean ICVF in sagittal stratum on FA skeleton (R),1,35324888
+Mean ICVF in superior cerebellar peduncle on FA skeleton (L),1,35324888
+Mean ICVF in superior cerebellar peduncle on FA skeleton (R),1,35324888
+Mean ICVF in superior corona radiata on FA skeleton (L),1,35324888
+Mean ICVF in superior corona radiata on FA skeleton (R),1,35324888
+Mean ICVF in superior fronto-occipital fasciculus on FA skeleton (L),1,35324888
+Mean ICVF in superior fronto-occipital fasciculus on FA skeleton (R),1,35324888
+Mean ICVF in superior longitudinal fasciculus on FA skeleton (L),1,35324888
+Mean ICVF in superior longitudinal fasciculus on FA skeleton (R),1,35324888
+Mean ICVF in tapetum on FA skeleton (L),1,35324888
+Mean ICVF in uncinate fasciculus on FA skeleton (L),1,35324888
+Mean ICVF in uncinate fasciculus on FA skeleton (R),1,35324888
+Mean ISOVF in anterior corona radiata on FA skeleton (L),1,35324888
+Mean ISOVF in anterior corona radiata on FA skeleton (R),1,35324888
+Mean ISOVF in body of corpus callosum on FA skeleton,1,35324888
+Mean ISOVF in cingulum cingulate gyrus on FA skeleton (L),1,35324888
+Mean ISOVF in cingulum cingulate gyrus on FA skeleton (R),1,35324888
+Mean ISOVF in external capsule on FA skeleton (L),1,35324888
+Mean ISOVF in fornix on FA skeleton,1,35324888
+Mean ISOVF in posterior corona radiata on FA skeleton (L),1,35324888
+Mean ISOVF in posterior thalamic radiation on FA skeleton (L),1,35324888
+Mean ISOVF in sagittal stratum on FA skeleton (L),1,35324888
+Mean ISOVF in sagittal stratum on FA skeleton (R),1,35324888
+Mean ISOVF in superior cerebellar peduncle on FA skeleton (R),1,35324888
+Mean ISOVF in superior corona radiata on FA skeleton (L),1,35324888
+Mean ISOVF in superior corona radiata on FA skeleton (R),1,35324888
+Mean corpuscular haemoglobin,1,35324888
+Mean corpuscular haemoglobin concentration,1,35324888
+Mean corpuscular hemoglobin,1,37890495
+Mean corpuscular hemoglobin concentration,1,37890495
+Mean corpuscular volume,2,35324888; 37890495
+Mean platelet (thrombocyte) volume,1,37890495
+Mean platelet volume,1,35324888
+Mean reticulocyte volume,2,35324888; 37890495
+Mean sphered cell volume,1,37890495
+Median T2star in caudate (L),1,35324888
+Median T2star in caudate (R),1,35324888
+Median T2star in pallidum (L),1,35324888
+Median T2star in pallidum (R),1,35324888
+Median T2star in putamen (L),1,35324888
+Median T2star in putamen (R),1,35324888
+Median T2star in thalamus (R),1,35324888
+Microalbumin in urine,1,35324888
+Monocyte %,1,35324888
+Monocyte count,2,35324888; 37890495
+Monocyte percentage,1,37890495
+Morning/evening person (chronotype),1,35324888
+Nap during day,1,35324888
+Neutrophil count,1,37890495
+Neutrophil percentage,1,37890495
+Neutrophill %,1,35324888
+Neutrophill count,1,35324888
+Non-albumin protein,1,35324888
+Non-cancer illness year/age first occurred,1,35324888
+Oily fish intake,1,35324888
+"Outdoor time, winter",1,35324888
+Overall health rating,1,35324888
+PEF,1,35324888
+PEF pred. ratio,1,35324888
+PQ interval,1,35324888
+Phosphate,1,35324888
+Platelet count,2,35324888; 37890495
+Platelet crit,2,35324888; 37890495
+Platelet distribution width,2,35324888; 37890495
+Portion size,1,35324888
+Position of pulse wave notch,1,35324888
+Position of the pulse wave peak,1,35324888
+Potassium in urine,1,35324888
+Poultry intake,1,35324888
+Processed meat intake,1,35324888
+Pulse rate,1,35324888
+Pulse rate (AR),1,35324888
+Pulse rate (during blood-pressure measurement),1,35324888
+QRS duration,1,35324888
+QT interval,1,35324888
+QTC interval,1,35324888
+Red blood cell (erythrocyte) count,1,37890495
+Red blood cell (erythrocyte) distribution width,1,37890495
+Red blood cell count,1,35324888
+Red blood cell distribution width,1,35324888
+Reticulocyte %,1,35324888
+Reticulocyte count,2,35324888; 37890495
+Reticulocyte percentage,1,37890495
+SHBG,1,35324888
+Salt added to food,1,35324888
+Sitting height,2,35324888; 37890495
+Sleep duration,1,35324888
+Sodium in urine,1,35324888
+Speed of sound through heel,1,35324888
+Speed of sound through heel (L),1,35324888
+Speed of sound through heel (R),1,35324888
+Spherical power (L),1,35324888
+Spherical power (R),1,35324888
+Standing height,2,35324888; 37890495
+Systolic BP (AR),1,35324888
+Tea intake,1,35324888
+Testosterone,1,35324888
+Time from waking to first cigarette,1,35324888
+Time spend outdoors in summer,1,35324888
+Tinnitus severity,1,35324888
+Total bilirubin,1,35324888
+Total protein,1,35324888
+Total vol. of white matter hyperintensities (from T1 and T2 FLAIR images),1,35324888
+Triglycerides,1,35324888
+Trunk fat %,1,35324888
+Trunk fat mass,2,35324888; 37890495
+Trunk fat percentage,1,37890495
+Trunk fat-free mass,2,35324888; 37890495
+Trunk pred. mass,1,35324888
+Urate,1,35324888
+Urea,1,35324888
+Usual walking pace,1,35324888
+Variation in diet,1,35324888
+Vitamin D,1,35324888
+Vol. of accumbens (L),1,35324888
+Vol. of accumbens (R),1,35324888
+Vol. of brain stem + 4th ventricle,1,35324888
+"Vol. of brain, grey+white matter",1,35324888
+"Vol. of brain, grey+white matter (normalised for head size)",1,35324888
+Vol. of caudate (L),1,35324888
+Vol. of caudate (R),1,35324888
+Vol. of grey matter,1,35324888
+Vol. of grey matter (normalised for head size),1,35324888
+Vol. of grey matter in Amygdala (L),1,35324888
+Vol. of grey matter in Brain-Stem,1,35324888
+Vol. of grey matter in Central Opercular Cortex (L),1,35324888
+Vol. of grey matter in Central Opercular Cortex (R),1,35324888
+"Vol. of grey matter in Cingulate Gyrus, anterior division (L)",1,35324888
+"Vol. of grey matter in Cingulate Gyrus, anterior division (R)",1,35324888
+"Vol. of grey matter in Cingulate Gyrus, posterior division (R)",1,35324888
+Vol. of grey matter in Crus I Cerebellum (R),1,35324888
+Vol. of grey matter in Crus II Cerebellum (L),1,35324888
+Vol. of grey matter in Crus II Cerebellum (R),1,35324888
+Vol. of grey matter in Cuneal Cortex (R),1,35324888
+Vol. of grey matter in Frontal Operculum Cortex (L),1,35324888
+Vol. of grey matter in Frontal Orbital Cortex (L),1,35324888
+Vol. of grey matter in Frontal Orbital Cortex (R),1,35324888
+Vol. of grey matter in Frontal Pole (L),1,35324888
+Vol. of grey matter in Heschl's Gyrus (includes H1 and H2) (L),1,35324888
+Vol. of grey matter in Heschl's Gyrus (includes H1 and H2) (R),1,35324888
+Vol. of grey matter in Hippocampus (L),1,35324888
+Vol. of grey matter in Hippocampus (R),1,35324888
+Vol. of grey matter in I-IV Cerebellum (L),1,35324888
+Vol. of grey matter in I-IV Cerebellum (R),1,35324888
+Vol. of grey matter in IX Cerebellum (L),1,35324888
+Vol. of grey matter in IX Cerebellum (R),1,35324888
+"Vol. of grey matter in Inferior Frontal Gyrus, pars triangularis (R)",1,35324888
+"Vol. of grey matter in Inferior Temporal Gyrus, posterior division (L)",1,35324888
+Vol. of grey matter in Insular Cortex (L),1,35324888
+Vol. of grey matter in Insular Cortex (R),1,35324888
+Vol. of grey matter in Intracalcarine Cortex (L),1,35324888
+Vol. of grey matter in Intracalcarine Cortex (R),1,35324888
+"Vol. of grey matter in Lateral Occipital Cortex, inferior division (R)",1,35324888
+"Vol. of grey matter in Lateral Occipital Cortex, superior division (R)",1,35324888
+Vol. of grey matter in Lingual Gyrus (R),1,35324888
+Vol. of grey matter in Middle Frontal Gyrus (L),1,35324888
+Vol. of grey matter in Middle Frontal Gyrus (R),1,35324888
+"Vol. of grey matter in Middle Temporal Gyrus, posterior division (R)",1,35324888
+Vol. of grey matter in Occipital Fusiform Gyrus (L),1,35324888
+Vol. of grey matter in Occipital Pole (R),1,35324888
+Vol. of grey matter in Paracingulate Gyrus (R),1,35324888
+"Vol. of grey matter in Parahippocampal Gyrus, anterior division (L)",1,35324888
+"Vol. of grey matter in Parahippocampal Gyrus, anterior division (R)",1,35324888
+"Vol. of grey matter in Parahippocampal Gyrus, posterior division (L)",1,35324888
+"Vol. of grey matter in Parahippocampal Gyrus, posterior division (R)",1,35324888
+Vol. of grey matter in Parietal Operculum Cortex (R),1,35324888
+Vol. of grey matter in Planum Polare (L),1,35324888
+Vol. of grey matter in Planum Polare (R),1,35324888
+Vol. of grey matter in Planum Temporale (L),1,35324888
+Vol. of grey matter in Precentral Gyrus (L),1,35324888
+Vol. of grey matter in Precentral Gyrus (R),1,35324888
+Vol. of grey matter in Precuneous Cortex (L),1,35324888
+Vol. of grey matter in Putamen (L),1,35324888
+Vol. of grey matter in Putamen (R),1,35324888
+Vol. of grey matter in Subcallosal Cortex (L),1,35324888
+Vol. of grey matter in Subcallosal Cortex (R),1,35324888
+Vol. of grey matter in Superior Frontal Gyrus (L),1,35324888
+Vol. of grey matter in Superior Frontal Gyrus (R),1,35324888
+"Vol. of grey matter in Superior Temporal Gyrus, anterior division (L)",1,35324888
+"Vol. of grey matter in Superior Temporal Gyrus, posterior division (L)",1,35324888
+Vol. of grey matter in Supracalcarine Cortex (L),1,35324888
+Vol. of grey matter in Supracalcarine Cortex (R),1,35324888
+"Vol. of grey matter in Temporal Fusiform Cortex, anterior division (L)",1,35324888
+"Vol. of grey matter in Temporal Fusiform Cortex, posterior division (L)",1,35324888
+"Vol. of grey matter in Temporal Fusiform Cortex, posterior division (R)",1,35324888
+Vol. of grey matter in Temporal Pole (L),1,35324888
+Vol. of grey matter in Temporal Pole (R),1,35324888
+Vol. of grey matter in Thalamus (L),1,35324888
+Vol. of grey matter in Thalamus (R),1,35324888
+Vol. of grey matter in V Cerebellum (L),1,35324888
+Vol. of grey matter in V Cerebellum (R),1,35324888
+Vol. of grey matter in VI Cerebellum (L),1,35324888
+Vol. of grey matter in VI Cerebellum (R),1,35324888
+Vol. of grey matter in VIIIa Cerebellum (L),1,35324888
+Vol. of grey matter in VIIIa Cerebellum (R),1,35324888
+Vol. of grey matter in VIIIb Cerebellum (L),1,35324888
+Vol. of grey matter in VIIIb Cerebellum (R),1,35324888
+Vol. of grey matter in VIIb Cerebellum (L),1,35324888
+Vol. of grey matter in VIIb Cerebellum (R),1,35324888
+Vol. of grey matter in Ventral Striatum (L),1,35324888
+Vol. of grey matter in Ventral Striatum (R),1,35324888
+Vol. of grey matter in Vermis Crus II Cerebellum,1,35324888
+Vol. of grey matter in Vermis IX Cerebellum,1,35324888
+Vol. of grey matter in Vermis VI Cerebellum,1,35324888
+Vol. of grey matter in Vermis VIIIa Cerebellum,1,35324888
+Vol. of grey matter in Vermis VIIIb Cerebellum,1,35324888
+Vol. of grey matter in Vermis VIIb Cerebellum,1,35324888
+Vol. of grey matter in Vermis X Cerebellum,1,35324888
+Vol. of grey matter in X Cerebellum (R),1,35324888
+Vol. of hippocampus (L),1,35324888
+Vol. of pallidum (L),1,35324888
+Vol. of pallidum (R),1,35324888
+Vol. of peripheral cortical grey matter,1,35324888
+Vol. of peripheral cortical grey matter (normalised for head size),1,35324888
+Vol. of putamen (L),1,35324888
+Vol. of putamen (R),1,35324888
+Vol. of thalamus (L),1,35324888
+Vol. of thalamus (R),1,35324888
+Vol. of ventricular cerebrospinal fluid,1,35324888
+Vol. of ventricular cerebrospinal fluid (normalised for head size),1,35324888
+Vol. of white matter,1,35324888
+Vol. of white matter (normalised for head size),1,35324888
+Volumetric scaling from T1 head image to standard space,1,35324888
+WA FA in tract acoustic radiation (L),1,35324888
+WA FA in tract acoustic radiation (R),1,35324888
+WA FA in tract anterior thalamic radiation (L),1,35324888
+WA FA in tract anterior thalamic radiation (R),1,35324888
+WA FA in tract cingulate gyrus part of cingulum (L),1,35324888
+WA FA in tract cingulate gyrus part of cingulum (R),1,35324888
+WA FA in tract corticospinal tract (R),1,35324888
+WA FA in tract forceps major,1,35324888
+WA FA in tract forceps minor,1,35324888
+WA FA in tract inferior fronto-occipital fasciculus (L),1,35324888
+WA FA in tract inferior fronto-occipital fasciculus (R),1,35324888
+WA FA in tract inferior longitudinal fasciculus (L),1,35324888
+WA FA in tract inferior longitudinal fasciculus (R),1,35324888
+WA FA in tract posterior thalamic radiation (L),1,35324888
+WA FA in tract posterior thalamic radiation (R),1,35324888
+WA FA in tract superior longitudinal fasciculus (L),1,35324888
+WA FA in tract uncinate fasciculus (L),1,35324888
+WA FA in tract uncinate fasciculus (R),1,35324888
+WA ICVF in tract acoustic radiation (L),1,35324888
+WA ICVF in tract acoustic radiation (R),1,35324888
+WA ICVF in tract anterior thalamic radiation (L),1,35324888
+WA ICVF in tract anterior thalamic radiation (R),1,35324888
+WA ICVF in tract cingulate gyrus part of cingulum (L),1,35324888
+WA ICVF in tract cingulate gyrus part of cingulum (R),1,35324888
+WA ICVF in tract corticospinal tract (L),1,35324888
+WA ICVF in tract corticospinal tract (R),1,35324888
+WA ICVF in tract forceps major,1,35324888
+WA ICVF in tract forceps minor,1,35324888
+WA ICVF in tract inferior fronto-occipital fasciculus (L),1,35324888
+WA ICVF in tract inferior fronto-occipital fasciculus (R),1,35324888
+WA ICVF in tract inferior longitudinal fasciculus (L),1,35324888
+WA ICVF in tract inferior longitudinal fasciculus (R),1,35324888
+WA ICVF in tract medial lemniscus (L),1,35324888
+WA ICVF in tract medial lemniscus (R),1,35324888
+WA ICVF in tract middle cerebellar peduncle,1,35324888
+WA ICVF in tract parahippocampal part of cingulum (L),1,35324888
+WA ICVF in tract parahippocampal part of cingulum (R),1,35324888
+WA ICVF in tract posterior thalamic radiation (L),1,35324888
+WA ICVF in tract posterior thalamic radiation (R),1,35324888
+WA ICVF in tract superior longitudinal fasciculus (L),1,35324888
+WA ICVF in tract superior longitudinal fasciculus (R),1,35324888
+WA ICVF in tract superior thalamic radiation (L),1,35324888
+WA ICVF in tract superior thalamic radiation (R),1,35324888
+WA ICVF in tract uncinate fasciculus (L),1,35324888
+WA ICVF in tract uncinate fasciculus (R),1,35324888
+WA ISOVF in tract acoustic radiation (L),1,35324888
+WA ISOVF in tract acoustic radiation (R),1,35324888
+WA ISOVF in tract anterior thalamic radiation (R),1,35324888
+WA ISOVF in tract cingulate gyrus part of cingulum (L),1,35324888
+WA ISOVF in tract cingulate gyrus part of cingulum (R),1,35324888
+WA ISOVF in tract inferior fronto-occipital fasciculus (L),1,35324888
+WA ISOVF in tract inferior fronto-occipital fasciculus (R),1,35324888
+WA ISOVF in tract inferior longitudinal fasciculus (L),1,35324888
+WA ISOVF in tract inferior longitudinal fasciculus (R),1,35324888
+WA ISOVF in tract posterior thalamic radiation (R),1,35324888
+WA ISOVF in tract superior longitudinal fasciculus (L),1,35324888
+WA ISOVF in tract superior longitudinal fasciculus (R),1,35324888
+WA ISOVF in tract superior thalamic radiation (L),1,35324888
+WA ISOVF in tract superior thalamic radiation (R),1,35324888
+WA ISOVF in tract uncinate fasciculus (L),1,35324888
+WA ISOVF in tract uncinate fasciculus (R),1,35324888
+WA L1 in tract forceps minor,1,35324888
+WA L1 in tract inferior fronto-occipital fasciculus (L),1,35324888
+WA L1 in tract inferior fronto-occipital fasciculus (R),1,35324888
+WA L1 in tract inferior longitudinal fasciculus (L),1,35324888
+WA L1 in tract inferior longitudinal fasciculus (R),1,35324888
+WA L1 in tract superior longitudinal fasciculus (L),1,35324888
+WA L1 in tract superior longitudinal fasciculus (R),1,35324888
+WA L1 in tract superior thalamic radiation (L),1,35324888
+WA L1 in tract superior thalamic radiation (R),1,35324888
+WA L1 in tract uncinate fasciculus (L),1,35324888
+WA L2 in tract acoustic radiation (R),1,35324888
+WA L2 in tract anterior thalamic radiation (L),1,35324888
+WA L2 in tract anterior thalamic radiation (R),1,35324888
+WA L2 in tract cingulate gyrus part of cingulum (L),1,35324888
+WA L2 in tract cingulate gyrus part of cingulum (R),1,35324888
+WA L2 in tract forceps major,1,35324888
+WA L2 in tract forceps minor,1,35324888
+WA L2 in tract inferior fronto-occipital fasciculus (L),1,35324888
+WA L2 in tract inferior fronto-occipital fasciculus (R),1,35324888
+WA L2 in tract inferior longitudinal fasciculus (L),1,35324888
+WA L2 in tract inferior longitudinal fasciculus (R),1,35324888
+WA L2 in tract superior longitudinal fasciculus (L),1,35324888
+WA L2 in tract superior thalamic radiation (L),1,35324888
+WA L2 in tract uncinate fasciculus (L),1,35324888
+WA L2 in tract uncinate fasciculus (R),1,35324888
+WA L3 in tract acoustic radiation (R),1,35324888
+WA L3 in tract anterior thalamic radiation (L),1,35324888
+WA L3 in tract anterior thalamic radiation (R),1,35324888
+WA L3 in tract cingulate gyrus part of cingulum (L),1,35324888
+WA L3 in tract cingulate gyrus part of cingulum (R),1,35324888
+WA L3 in tract forceps minor,1,35324888
+WA L3 in tract inferior fronto-occipital fasciculus (L),1,35324888
+WA L3 in tract inferior fronto-occipital fasciculus (R),1,35324888
+WA L3 in tract inferior longitudinal fasciculus (L),1,35324888
+WA L3 in tract inferior longitudinal fasciculus (R),1,35324888
+WA L3 in tract superior longitudinal fasciculus (L),1,35324888
+WA L3 in tract superior thalamic radiation (L),1,35324888
+WA L3 in tract superior thalamic radiation (R),1,35324888
+WA L3 in tract uncinate fasciculus (L),1,35324888
+WA L3 in tract uncinate fasciculus (R),1,35324888
+WA MD in tract acoustic radiation (R),1,35324888
+WA MD in tract anterior thalamic radiation (L),1,35324888
+WA MD in tract cingulate gyrus part of cingulum (L),1,35324888
+WA MD in tract cingulate gyrus part of cingulum (R),1,35324888
+WA MD in tract forceps major,1,35324888
+WA MD in tract forceps minor,1,35324888
+WA MD in tract inferior fronto-occipital fasciculus (L),1,35324888
+WA MD in tract inferior fronto-occipital fasciculus (R),1,35324888
+WA MD in tract inferior longitudinal fasciculus (L),1,35324888
+WA MD in tract inferior longitudinal fasciculus (R),1,35324888
+WA MD in tract superior longitudinal fasciculus (L),1,35324888
+WA MD in tract superior thalamic radiation (L),1,35324888
+WA MD in tract superior thalamic radiation (R),1,35324888
+WA MD in tract uncinate fasciculus (L),1,35324888
+WA MD in tract uncinate fasciculus (R),1,35324888
+WA MO in tract forceps minor,1,35324888
+WA MO in tract medial lemniscus (R),1,35324888
+WA MO in tract middle cerebellar peduncle,1,35324888
+WA MO in tract posterior thalamic radiation (L),1,35324888
+WA MO in tract posterior thalamic radiation (R),1,35324888
+WA MO in tract superior longitudinal fasciculus (L),1,35324888
+WA MO in tract superior thalamic radiation (R),1,35324888
+WA OD in tract corticospinal tract (L),1,35324888
+WA OD in tract inferior longitudinal fasciculus (R),1,35324888
+WA OD in tract medial lemniscus (L),1,35324888
+WA OD in tract superior longitudinal fasciculus (L),1,35324888
+WA OD in tract superior longitudinal fasciculus (R),1,35324888
+WA OD in tract superior thalamic radiation (R),1,35324888
+Waist circumference,2,35324888; 37890495
+Water intake,1,35324888
+Weight,2,35324888; 37890495
+White blood cell (leukocyte) count,1,37890495
+White blood cell count,1,35324888
+Whole body fat mass,2,35324888; 37890495
+Whole body fat-free mass,2,35324888; 37890495
+Whole body water mass,2,35324888; 37890495
+ZEBRA antigen for Epstein-Barr Virus,1,35324888
+eGFR,1,35324888

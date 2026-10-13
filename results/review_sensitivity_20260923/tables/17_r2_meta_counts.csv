@@ -1,0 +1,13 @@
+question,clause,n,denominator,detail
+1,Yengo 2022 height evaluations,14,22968,"PMID 36224396. No interval, so no standard error. The multi-ancestry score PGS002802 has European R² 0.399 and 0.401; its other ancestries run from 0.094 to 0.214. Ancestry-specific scores in the same set go down to 0.033. These scores have about a million variants, not the 12,111-variant predictor cited by the reviewer."
+1,Yengo 2022 height evaluations with an interval,0,14,Zero intervals. Yengo height cannot be meta-analyzed from the Catalog.
+1,Named PGS R2 (no covariates) with an interval,3150,22968,This field is the unadjusted PGS R². It is not an R² attached to an AUROC row.
+1,Those evaluations that also have an AUROC,0,3150,The named PGS R² interval does not sit on the manuscript's AUROC evaluations.
+2,Score-trait pairs with a named PGS R2 interval and both ancestries,630,3150,"Each pair is one score in one trait, with a European evaluation and a non-European evaluation. 586 of 608 traits have one score; 22 traits appear in both papers. See 17_r2_scores_per_trait.csv."
+2,Those pairs from Tanigawa 2022 (PMID 35324888),570,630,570 of these pairs label one European sample as a UK Biobank held-out testing cohort. The other European sample is a second UK Biobank partition.
+2,Those pairs from Tanigawa 2023 (PMID 37890495),60,630,UK Biobank. One score per trait in this paper.
+2,Incremental R2 intervals on the named-PGS-R2 evaluations,0,3150,"The covariate-adjusted PGS contribution has no interval, so it has no standard error."
+2,Full-model R2 intervals on the named-PGS-R2 evaluations,3150,3150,The full-model R² includes the covariates. Its interval is not a PGS-only interval.
+2,Named PGS R2 reported with no interval,1189,22968,All 1189 are Tanigawa 2022. 1189 note Nagelkerke's R². 1189 put the interval on PGS AUROC rather than on the R².
+2,Traits with more than one score inside one paper,0,630,Within a paper the maximum number of scores in one trait is 1. There is no second score to pool.
+2,Other publications with a different R2 interval and both ancestries,7,195,"Largest other set: Monti R 2024 (PMID 38908374), 177 score–trait pairs, up to 13 scores in one trait. Of the Monti et al. 2024 pairs, 68 are quantitative (the note says the beta is a Pearson correlation) and the covariates field is 0. See 17_r2_cross_ancestry_papers.csv."
