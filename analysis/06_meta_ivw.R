@@ -173,8 +173,60 @@ if (any(!is.na(interval_issue))) {
   )
 }
 
-# Audit: show how rows map to EFO vs reported
+# One evaluation per score × sample set × ancestry on the rows Stage 1 pools.
+# Script 05 rebuilds from the raw Catalog, so duplicate models return here.
+pss_counts <- readr::read_csv(
+  catalog_bulk_file("evaluation_sample_sets", stamp),
+  show_col_types = FALSE
+) %>%
+  janitor::clean_names() %>%
+  transmute(
+    sampleset_id = pgs_sample_set_pss,
+    n = suppressWarnings(readr::parse_number(as.character(number_of_individuals))),
+    cases = suppressWarnings(readr::parse_number(as.character(number_of_cases))),
+    controls = suppressWarnings(readr::parse_number(as.character(number_of_controls)))
+  ) %>%
+  distinct(sampleset_id, .keep_all = TRUE)
+
+ppm_cov <- readr::read_csv(
+  catalog_bulk_file("performance_metrics", stamp),
+  show_col_types = FALSE
+) %>%
+  janitor::clean_names() %>%
+  transmute(
+    performance_id = pgs_performance_metric_ppm_id,
+    covariates = covariates_included_in_the_model
+  ) %>%
+  distinct(performance_id, .keep_all = TRUE)
+
+eval_proc <- eval_proc %>%
+  left_join(pss_counts, by = "sampleset_id") %>%
+  left_join(ppm_cov, by = "performance_id")
+
+one_eval <- keep_one_evaluation(eval_proc, return_dropped = TRUE)
+one_eval_drop_fp <- file.path(
+  dirs$tables,
+  paste0("stage1_one_evaluation_dropped_", stamp, ".csv")
+)
 dir.create(dirs$tables, recursive = TRUE, showWarnings = FALSE)
+readr::write_csv(
+  one_eval$dropped %>%
+    select(
+      pgs_id, sampleset_id, ancestry_eval, performance_id,
+      trait_label, auc, estimate_ci_lower, estimate_ci_upper,
+      n, cases, controls, covariates, one_eval_rank
+    ),
+  one_eval_drop_fp
+)
+eval_proc <- one_eval$kept %>%
+  select(-any_of(c("n", "cases", "controls", "covariates")))
+message(glue(
+  ">> One evaluation per score × sample set × ancestry: ",
+  "kept {nrow(eval_proc)}, dropped {nrow(one_eval$dropped)}. ",
+  "Log: {one_eval_drop_fp}"
+))
+
+# Audit: show how rows map to EFO vs reported
 readr::write_csv(
   eval_proc %>%
     transmute(trait_id, trait_label, efo_id, efo_label, reported_trait) %>%

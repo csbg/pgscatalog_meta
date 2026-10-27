@@ -1,7 +1,7 @@
 pgs_id,n_eval_rows,n_ancestries_display,n_ancestries_raw,efo_any,efo_label_any,train_bucket
 PGS004859,14,6,6,MONDO_0005148,type 2 diabetes mellitus,Train: Multi incl. EUR
 PGS000036,12,6,6,MONDO_0005148,type 2 diabetes mellitus,Train: Multi incl. EUR
-PGS000013,27,5,5,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
+PGS000013,22,5,5,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
 PGS001781,15,5,5,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS005091,14,5,5,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
 PGS005092,14,5,5,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
@@ -23,9 +23,8 @@ PGS002771,8,5,5,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS003444,8,5,5,MONDO_0005148,type 2 diabetes mellitus,Train: Multi excl. EUR
 PGS000330,7,5,5,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS003867,7,5,5,MONDO_0005148,type 2 diabetes mellitus,Train: Multi incl. EUR
-PGS000004,27,4,5,MONDO_0004989,breast carcinoma,Train: European-only
+PGS000004,25,4,4,MONDO_0004989,breast carcinoma,Train: European-only
 PGS000018,18,4,4,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
-PGS000662,7,4,4,MONDO_0005159,prostate carcinoma,Train: Multi incl. EUR
 PGS003445,7,4,4,MONDO_0005148,type 2 diabetes mellitus,Train: Multi excl. EUR
 PGS003851,7,4,4,MONDO_0005575,colorectal cancer,Train: European-only
 PGS004923,7,4,4,MONDO_0005148,type 2 diabetes mellitus,Train: Multi incl. EUR
@@ -60,7 +59,6 @@ PGS000011,6,3,3,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
 PGS000933,6,3,3,HP_0100582,Nasal polyposis,Train: European-only
 PGS000934,6,3,3,HP_0100582,Nasal polyposis,Train: European-only
 PGS000337,5,3,3,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
-PGS003860,5,3,3,EFO_0007814,refractive error measurement,Train: European-only
 PGS004863,5,3,3,MONDO_0004975,Alzheimer disease,Train: Multi incl. EUR
 PGS005237,5,3,3,MONDO_0005159,prostate carcinoma,Train: Multi incl. EUR
 PGS005238,5,3,3,MONDO_0005159,prostate carcinoma,Train: Multi incl. EUR
@@ -295,7 +293,7 @@ PGS004233,3,3,3,EFO_0006336,diastolic blood pressure,Train: Multi incl. EUR
 PGS004234,3,3,3,MONDO_0005044,hypertensive disorder,Train: Multi incl. EUR
 PGS004235,3,3,3,EFO_0006335,systolic blood pressure,Train: Multi incl. EUR
 PGS004236,3,3,3,MONDO_0005044,hypertensive disorder,Train: Multi incl. EUR
-PGS000005,11,2,3,MONDO_0006512,estrogen-receptor positive breast cancer,Train: European-only
+PGS000005,9,2,2,MONDO_0006512,estrogen-receptor positive breast cancer,Train: European-only
 PGS001780,9,2,2,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
 PGS003981,6,2,2,MONDO_0005265,inflammatory bowel disease,Train: Multi incl. EUR
 PGS003983,6,2,2,MONDO_0004989,breast carcinoma,Train: European-only
@@ -395,7 +393,6 @@ PGS004147,5,2,2,MONDO_0005147,type 1 diabetes mellitus,Train: Multi incl. EUR
 PGS004148,5,2,2,MONDO_0008383,rheumatoid arthritis,Train: Multi incl. EUR
 PGS004162,5,2,2,MONDO_0005147,type 1 diabetes mellitus,Train: Multi incl. EUR
 PGS004163,5,2,2,MONDO_0008383,rheumatoid arthritis,Train: Multi incl. EUR
-PGS000006,4,2,3,MONDO_0006513,estrogen-receptor negative breast cancer,Train: European-only
 PGS000137,4,2,2,MONDO_0005041,glaucoma,Train: European-only
 PGS000754,4,2,2,MONDO_0007915,systemic lupus erythematosus,Train: East Asian-only
 PGS002250,4,2,2,MONDO_0005140,ovarian carcinoma,Train: European-only
@@ -465,11 +462,12 @@ PGS004615,3,2,2,MONDO_0005148,type 2 diabetes mellitus,Train: East Asian-only
 PGS004617,3,2,2,MONDO_0005148,type 2 diabetes mellitus,Train: East Asian-only
 PGS004618,3,2,2,MONDO_0005148,type 2 diabetes mellitus,Train: East Asian-only
 PGS004620,3,2,2,MONDO_0005148,type 2 diabetes mellitus,Train: East Asian-only
-PGS005120,3,2,2,EFO_0006335,systolic blood pressure,Train: European-only
+PGS000006,2,2,2,MONDO_0006513,estrogen-receptor negative breast cancer,Train: European-only
 PGS000028,2,2,2,MONDO_0004989,breast carcinoma,Train: Multi incl. EUR
 PGS000035,2,2,2,MONDO_0004981,atrial fibrillation,Train: Multi incl. EUR
 PGS000070,2,2,2,MONDO_0005061,lung adenocarcinoma,Train: Multi incl. EUR
 PGS000331,2,2,2,MONDO_0004981,atrial fibrillation,Train: European-only
+PGS000662,2,2,2,MONDO_0005159,prostate carcinoma,Train: Multi incl. EUR
 PGS000727,2,2,2,MONDO_0004981,atrial fibrillation,Train: European-only
 PGS000779,2,2,2,MONDO_0004975,Alzheimer disease,Train: Multi incl. EUR
 PGS000806,2,2,2,MONDO_0005148,type 2 diabetes mellitus,Train: African-only
@@ -514,14 +512,12 @@ PGS005366,7,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi incl. EUR
 PGS005367,7,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi excl. EUR
 PGS003447,6,1,1,MONDO_0005133,endometriosis,Train: Multi incl. EUR
 PGS004952,6,1,1,MONDO_0005150,age-related macular degeneration,Train: European-only
-PGS000865,5,1,1,EFO_0010821,liver fat measurement,Train: Multi incl. EUR
-PGS000872,5,1,1,MONDO_0013209,metabolic dysfunction-associated steatotic liver disease,Train: Multi incl. EUR
 PGS019957,5,1,1,HP_0000545,Myopia,Train: Multi incl. EUR
 PGS000007,4,1,1,MONDO_0004989,breast carcinoma,Train: European-only
 PGS000021,4,1,1,MONDO_0005147,type 1 diabetes mellitus,Train: European-only
-PGS000317,4,1,1,MONDO_0004989,breast carcinoma,Train: Multi incl. EUR
 PGS000657,4,1,1,EFO_0009270,heel bone mineral density,Train: European-only
 PGS000714,4,1,1,MONDO_0005159,prostate carcinoma,Train: European-only
+PGS000872,4,1,1,MONDO_0013209,metabolic dysfunction-associated steatotic liver disease,Train: Multi incl. EUR
 PGS005358,4,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi excl. EUR
 PGS005359,4,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi excl. EUR
 PGS005360,4,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi excl. EUR
@@ -538,17 +534,17 @@ PGS005375,4,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi excl. EUR
 PGS005376,4,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi incl. EUR
 PGS005377,4,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: South Asian-only
 PGS000030,3,1,1,MONDO_0005159,prostate carcinoma,Train: European-only
+PGS000317,3,1,1,MONDO_0004989,breast carcinoma,Train: Multi incl. EUR
 PGS000328,3,1,1,MONDO_0007915,systemic lupus erythematosus,Train: European-only
 PGS000329,3,1,1,MONDO_0005010,coronary artery disorder,Train: European-only
-PGS000740,3,1,1,MONDO_0005138,lung carcinoma,Train: European-only
 PGS000746,3,1,1,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
 PGS000747,3,1,1,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
 PGS000748,3,1,1,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
 PGS000802,3,1,1,MONDO_0005575,colorectal cancer,Train: Multi incl. EUR
 PGS000809,3,1,1,MONDO_0005301,multiple sclerosis,Train: European-only
 PGS000814,3,1,1,EFO_0004611,low density lipoprotein cholesterol measurement,Train: European-only
+PGS000865,3,1,1,EFO_0010821,liver fat measurement,Train: Multi incl. EUR
 PGS001777,3,1,1,MONDO_0006644,alcoholic liver cirrhosis,Train: European-only
-PGS002729,3,1,1,MONDO_0005416,"osteoarthritis, knee",Train: Multi incl. EUR
 PGS003414,3,1,1,MONDO_0005937,REM sleep behavior disorder,Train: European-only
 PGS003725,3,1,1,MONDO_0005010,coronary artery disorder,Train: Multi incl. EUR
 PGS003749,3,1,1,MONDO_0005147,type 1 diabetes mellitus,Train: European-only
@@ -607,26 +603,15 @@ PGS000326,2,1,1,MONDO_0019432,rheumatoid factor-negative juvenile idiopathic art
 PGS000391,2,1,1,MONDO_0001407|MONDO_0001672|MONDO_0008903,tracheal cancer|bronchus cancer|lung cancer,Train: European-only
 PGS000392,2,1,1,MONDO_0001407|MONDO_0001672|MONDO_0008903,tracheal cancer|bronchus cancer|lung cancer,Train: European-only
 PGS000655,2,1,1,MONDO_0013209,metabolic dysfunction-associated steatotic liver disease,Train: European-only
-PGS000663,2,1,1,MONDO_0005192,exocrine pancreatic carcinoma,Train: Multi incl. EUR
 PGS000667,2,1,1,EFO_0006925,lipoprotein A measurement,Train: European-only
-PGS000743,2,1,1,MONDO_0005105,melanoma,Train: European-only
-PGS000770,2,1,1,EFO_0004340,body mass index,Train: Multi incl. EUR
-PGS000773,2,1,2,MONDO_0004989,breast carcinoma,Train: European-only
-PGS000774,2,1,2,MONDO_0006512,estrogen-receptor positive breast cancer,Train: European-only
-PGS000775,2,1,2,MONDO_0006513,estrogen-receptor negative breast cancer,Train: European-only
-PGS000799,2,1,1,MONDO_0004979,asthma,Train: Multi incl. EUR
-PGS000800,2,1,1,MONDO_0005271,allergic disease,Train: European-only
+PGS000740,2,1,1,MONDO_0005138,lung carcinoma,Train: European-only
 PGS000832,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS000883,2,1,1,OBA_0003747,glomerular filtration rate,Train: Multi incl. EUR
 PGS001098,2,1,1,OBA_0002313,strand of hair color,Train: European-only
 PGS001254,2,1,1,EFO_0004229,Dupuytren Contracture,Train: European-only
-PGS001354,2,1,1,MONDO_0015075,thyroid gland carcinoma,Train: European-only
 PGS001848,2,1,1,HP_0100582,Nasal polyposis,Train: European-only
 PGS002060,2,1,1,HP_0100582,Nasal polyposis,Train: European-only
-PGS002246,2,1,1,MONDO_0005105,melanoma,Train: European-only
-PGS002247,2,1,1,MONDO_0005105,melanoma,Train: European-only
 PGS002248,2,1,1,MONDO_0005405,childhood onset asthma,Train: European-only
-PGS002253,2,1,1,MONDO_0005105,melanoma,Train: European-only
 PGS002268,2,1,1,MONDO_0005159,prostate carcinoma,Train: East Asian-only
 PGS002272,2,1,1,MONDO_0100096,COVID-19,Train: Multi incl. EUR
 PGS002354,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
@@ -634,7 +619,6 @@ PGS002379,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: East Asian-only
 PGS002720,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS002725,2,1,1,HP_0002140|MONDO_0005098,Ischemic stroke|stroke disorder,Train: Multi incl. EUR
 PGS002726,2,1,1,MONDO_0005301,multiple sclerosis,Train: European-only
-PGS002728,2,1,1,MONDO_0006629,"osteoarthritis, hip",Train: European-only
 PGS002733,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS002742,2,1,1,MONDO_0005575,colorectal cancer,Train: Multi incl. EUR
 PGS002743,2,1,1,MONDO_0005575,colorectal cancer,Train: Multi incl. EUR
@@ -669,7 +653,6 @@ PGS004839,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS004868,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS004870,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS004887,2,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi incl. EUR
-PGS004926,2,1,1,HP_0003418,Back pain,Train: European-only
 PGS005170,2,1,1,MONDO_0001627,dementia,Train: Multi incl. EUR
 PGS005380,2,1,1,MONDO_0006512,estrogen-receptor positive breast cancer,Train: African-only
 PGS005381,2,1,1,MONDO_0006512,estrogen-receptor positive breast cancer,Train: African-only
@@ -728,7 +711,6 @@ PGS000145,1,1,1,MONDO_0002009,major depressive disorder,Train: European-only
 PGS000147,1,1,1,MONDO_0005575,colorectal cancer,Train: Multi excl. EUR
 PGS000151,1,1,1,MONDO_0005575,colorectal cancer,NA
 PGS000156,1,1,1,MONDO_0005138,lung carcinoma,Train: European-only
-PGS000192,1,1,1,EFO_0004611|EFO_0004612,low density lipoprotein cholesterol measurement|high density lipoprotein cholesterol measurement,Train: Multi incl. EUR
 PGS000208,1,1,1,MONDO_0015075,thyroid gland carcinoma,Train: European-only
 PGS000209,1,1,1,MONDO_0015075,thyroid gland carcinoma,Train: European-only
 PGS000212,1,1,1,MONDO_0021116,luminal A breast carcinoma,Train: European-only
@@ -738,7 +720,6 @@ PGS000215,1,1,1,MONDO_0006244,HER2 positive breast carcinoma,Train: European-onl
 PGS000216,1,1,1,MONDO_0005494,triple-negative breast carcinoma,Train: European-only
 PGS000316,1,1,1,MONDO_0005130,celiac disease,Train: European-only
 PGS000333,1,1,1,MONDO_0005159,prostate carcinoma,Train: European-only
-PGS000338,1,1,1,MONDO_0004981,atrial fibrillation,Train: Multi incl. EUR
 PGS000341,1,1,1,MONDO_0005100,systemic sclerosis,Train: European-only
 PGS000348,1,1,1,MONDO_0005159,prostate carcinoma,Train: Multi incl. EUR
 PGS000353,1,1,1,MONDO_0004992,cancer,Train: European-only
@@ -1062,11 +1043,7 @@ PGS000730,1,1,1,MONDO_0020804,basal cell carcinoma,Train: European-only
 PGS000731,1,1,1,MONDO_0005096,squamous cell carcinoma,Train: European-only
 PGS000732,1,1,1,MONDO_0005105,melanoma,Train: European-only
 PGS000734,1,1,1,MONDO_0005575,colorectal cancer,Train: Multi incl. EUR
-PGS000739,1,1,1,MONDO_0005045,hypertrophic cardiomyopathy,Train: Multi incl. EUR
-PGS000756,1,1,1,MONDO_0016158,narcolepsy-cataplexy syndrome,Train: Multi incl. EUR
-PGS000757,1,1,1,MONDO_0016158,narcolepsy-cataplexy syndrome,Train: East Asian-only
 PGS000758,1,1,1,OBA_VT0001253,body height,Train: European-only
-PGS000765,1,1,1,MONDO_0005575,colorectal cancer,Train: Multi incl. EUR
 PGS000771,1,1,1,MONDO_0007915,systemic lupus erythematosus,Train: Multi incl. EUR
 PGS000782,1,1,1,MONDO_0004986,urinary bladder carcinoma,Train: European-only
 PGS000783,1,1,1,MONDO_0004989,breast carcinoma,Train: European-only
@@ -1090,9 +1067,7 @@ PGS000820,1,1,1,MONDO_0005420,hypothyroidism,Train: European-only
 PGS000821,1,1,1,EFO_0009933,Thyroid preparation use measurement,Train: European-only
 PGS000852,1,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only
 PGS000873,1,1,1,MONDO_0004989,breast carcinoma,Train: European-only
-PGS000875,1,1,1,EFO_0004611,low density lipoprotein cholesterol measurement,Train: European-only
 PGS000878,1,1,1,MONDO_0005159,prostate carcinoma,Train: East Asian-only
-PGS000903,1,1,1,MONDO_0005180,Parkinson disease,Train: Multi excl. EUR
 PGS000914,1,1,1,HP_0003115,Abnormal EKG,Train: East Asian-only
 PGS001355,1,1,1,MONDO_0005010,coronary artery disorder,Train: European-only
 PGS001356,1,1,1,MONDO_0004981,atrial fibrillation,Train: European-only
@@ -1289,7 +1264,6 @@ PGS003458,1,1,1,MONDO_0005271,allergic disease,Train: European-only
 PGS003459,1,1,1,MONDO_0004980|MONDO_0005271,atopic eczema|allergic disease,Train: European-only
 PGS003486,1,1,1,MONDO_0004980,atopic eczema,Train: European-only
 PGS003750,1,1,1,MONDO_0005147,type 1 diabetes mellitus,Train: European-only
-PGS003755,1,1,1,MONDO_0007915,systemic lupus erythematosus,Train: East Asian-only
 PGS003861,1,1,1,MONDO_0005279,pulmonary embolism,Train: East Asian-only
 PGS003866,1,1,1,MONDO_0005010,coronary artery disorder,Train: Multi excl. EUR
 PGS003868,1,1,1,MONDO_0004994,cardiomyopathy,Train: Multi incl. EUR
@@ -1383,7 +1357,6 @@ PGS004583,1,1,1,EFO_0004309,platelet count,Train: East Asian-only
 PGS004584,1,1,1,EFO_0004309,platelet count,Train: East Asian-only
 PGS004585,1,1,1,HP_0001873,Thrombocytopenia,Train: East Asian-only
 PGS004592,1,1,1,EFO_0010176,keratinocyte carcinoma,Train: European-only
-PGS004599,1,1,1,MONDO_0005159,prostate carcinoma,Train: East Asian-only
 PGS004606,1,1,1,MONDO_0005150,age-related macular degeneration,Train: European-only
 PGS004607,1,1,1,MONDO_0005150,age-related macular degeneration,Train: African-only
 PGS004621,1,1,1,MONDO_0005155,cirrhosis of liver,Train: European-only
@@ -1406,6 +1379,7 @@ PGS004909,1,1,1,EFO_0007794,nicotine metabolite ratio,Train: European-only
 PGS004910,1,1,1,MONDO_0005045,hypertrophic cardiomyopathy,Train: European-only
 PGS004911,1,1,1,MONDO_0005045,hypertrophic cardiomyopathy,Train: European-only
 PGS004918,1,1,1,EFO_1001870,late-onset Alzheimer's disease,Train: European-only
+PGS004926,1,1,1,HP_0003418,Back pain,Train: European-only
 PGS004929,1,1,1,MONDO_0004981,atrial fibrillation,Train: European-only
 PGS004930,1,1,1,MONDO_0005130,celiac disease,Train: European-only
 PGS004931,1,1,1,MONDO_0005393,gout,Train: European-only
@@ -1426,7 +1400,6 @@ PGS005104,1,1,1,MONDO_0004989,breast carcinoma,Train: Multi excl. EUR
 PGS005105,1,1,1,MONDO_0006512,estrogen-receptor positive breast cancer,Train: Multi excl. EUR
 PGS005106,1,1,1,MONDO_0006513,estrogen-receptor negative breast cancer,Train: Multi excl. EUR
 PGS005205,1,1,1,MONDO_0005159,prostate carcinoma,Train: European-only
-PGS005218,1,1,1,MONDO_0005420,hypothyroidism,Train: European-only
 PGS005236,1,1,1,MONDO_0005010,coronary artery disorder,Train: European-only
 PGS005244,1,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: Multi excl. EUR
 PGS005246,1,1,1,MONDO_0005148,type 2 diabetes mellitus,Train: European-only

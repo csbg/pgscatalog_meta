@@ -4,7 +4,9 @@ Breast cancer,Train: European-only,South Asian,11,6,10,3,10,FALSE,FALSE
 Type 2 diabetes,Train: European-only,East Asian,11,3,10,2,10,FALSE,FALSE
 Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,10,4,10,2,10,TRUE,TRUE
 Type 2 diabetes,Train: European-only,Hispanic or Latin American,10,1,10,1,10,TRUE,TRUE
-Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,5,4,2,4,2,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,6,5,2,5,2,FALSE,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,African,5,3,5,1,5,TRUE,TRUE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,5,3,5,1,5,TRUE,TRUE
 Breast Carcinoma,Train: European-only,African,4,3,4,1,4,TRUE,TRUE
 Breast Carcinoma,Train: European-only,South Asian,4,3,4,1,4,TRUE,TRUE
 Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,4,2,4,1,4,TRUE,TRUE
@@ -18,12 +20,12 @@ Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,2,1,2,1,2,TR
 Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,2,1,2,1,2,TRUE,TRUE
 Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,2,1,2,1,2,TRUE,TRUE
 Seropositive RA,Train: Multi incl. EUR,South Asian,2,4,2,1,2,TRUE,TRUE
+Type 2 diabetes,Train: Multi incl. EUR,African,2,2,1,3,1,FALSE,FALSE
 Type 2 diabetes,Train: Multi incl. EUR,East Asian,2,2,1,2,1,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,2,2,1,2,1,FALSE,FALSE
 Type 2 diabetes,Train: Multi incl. EUR,South Asian,2,2,1,2,1,FALSE,FALSE
 Breast cancer,Train: European-only,East Asian,1,2,1,1,1,FALSE,FALSE
 Breast cancer,Train: Multi incl. EUR,East Asian,1,1,1,1,1,FALSE,FALSE
 Colorectal cancer,Train: European-only,African,1,2,1,2,1,FALSE,FALSE
 Colorectal cancer,Train: European-only,East Asian,1,2,1,1,1,FALSE,FALSE
 Colorectal cancer,Train: European-only,Hispanic or Latin American,1,2,1,2,1,FALSE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,African,1,1,1,2,1,FALSE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,1,1,1,1,1,FALSE,FALSE

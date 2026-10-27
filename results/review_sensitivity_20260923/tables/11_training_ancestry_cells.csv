@@ -1,7 +1,9 @@
 trait_label,trained_bucket,target_ancestry,n_pairs,n_pairs_target_in_gwas,n_pairs_target_in_dev,n_pairs_multi_incl_eur_ambiguous,n_pairs_target_possibly_represented,n_pairs_bucket_inconsistent,median_gwas_pct_european,delta_hat,lo,hi,ci_excludes_zero,strict_portability_cell
+5-year incident prostate cancer,Train: Multi incl. EUR,African,5,5,0,0,5,0,75.8,-0.10910577124844316,-0.13638764361390365,-0.08182389888298268,TRUE,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,5,0,0,0,0,0,75.8,0.01695966908932647,-0.023903246449465555,0.0578225846281185,FALSE,TRUE
 Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,2,2,0,0,2,0,58.3,-0.015007342309641613,-0.03255973764738586,0.002545053028102635,FALSE,FALSE
-Breast Carcinoma,Train: European-only,African,4,0,0,0,0,0,100,-0.052769152071433685,-0.09043727389618156,-0.015101030246685812,TRUE,TRUE
-Breast Carcinoma,Train: European-only,South Asian,4,0,0,0,0,0,100,-0.003503949061665266,-0.03257661332889683,0.0255687152055663,FALSE,TRUE
+Breast Carcinoma,Train: European-only,African,4,0,0,0,0,0,100,-0.0504222960987431,-0.10706877275491644,0.00622418055743023,FALSE,TRUE
+Breast Carcinoma,Train: European-only,South Asian,4,0,0,0,0,0,100,0.009785976538323376,-0.030613278231718354,0.0501852313083651,FALSE,TRUE
 Breast cancer,Train: European-only,East Asian,1,0,0,0,0,0,NA,-0.04832585954109281,-0.09451087690324105,-0.0021408421789445714,TRUE,TRUE
 Breast cancer,Train: European-only,South Asian,11,0,0,0,0,0,100,-0.023141716438275492,-0.0315800975457535,-0.014703335330797488,TRUE,TRUE
 Breast cancer,Train: Multi incl. EUR,East Asian,1,1,0,0,1,0,80.7,-0.009999999999999898,-0.12496472994385024,0.10496472994385045,FALSE,FALSE
@@ -22,8 +24,8 @@ Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,10,1
 Type 2 diabetes,Train: European-only,East Asian,11,0,0,0,0,0,100,0.017863765346773107,2.0295432802665617e-4,0.03552457636551956,TRUE,TRUE
 Type 2 diabetes,Train: European-only,Hispanic or Latin American,10,0,0,0,0,0,100,0.05214415483490029,0.04945502928789901,0.05483328038190158,TRUE,TRUE
 Type 2 diabetes,Train: European-only,South Asian,12,0,0,0,0,0,100,-1.4476444030600476e-4,-0.004174780046823115,0.003885251166211106,FALSE,TRUE
-Type 2 diabetes,Train: Multi incl. EUR,African,1,1,0,0,1,0,81.9,-0.01903665632198348,-0.03008321759438177,-0.007990095049585194,TRUE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,African,2,2,0,0,2,0,80.55000000000001,-0.05846003494760303,-0.06586297945452696,-0.05105709044067911,TRUE,FALSE
 Type 2 diabetes,Train: Multi incl. EUR,East Asian,2,0,0,0,0,0,90.95,0.03561600100220171,-0.004461844902812588,0.075693846907216,FALSE,TRUE
-Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,5,3,1,0,4,0,81.7,0.0356794827284969,0.030922105789837145,0.040436859667156655,TRUE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,1,0,0,0,0,0,51.1,0.008399999999999963,-0.011271989304842522,0.02807198930484245,FALSE,TRUE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,6,4,1,0,5,0,80.45,0.023013284020446726,0.01871203652954966,0.027314531511343793,TRUE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,2,0,0,0,0,0,65.15,0.1266765117645449,0.11637212118175233,0.13698090234733745,TRUE,TRUE
 Type 2 diabetes,Train: Multi incl. EUR,South Asian,2,0,0,0,0,0,90.95,0.018418746160490235,0.0033303122582137093,0.03350718006276676,TRUE,TRUE

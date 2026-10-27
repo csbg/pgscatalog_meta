@@ -1,4 +1,8 @@
 trait_label,trained_bucket,target_ancestry,side,n_sample_sets,n_sample_sets_with_sex,median_pct_male,min_pct_male,max_pct_male,sex_specific_trait,single_sex_sample_sets
+5-year incident prostate cancer,Train: Multi incl. EUR,African,European,3,3,100,100,100,TRUE,TRUE
+5-year incident prostate cancer,Train: Multi incl. EUR,African,Target,1,1,100,100,100,TRUE,TRUE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,European,3,3,100,100,100,TRUE,TRUE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,Target,1,1,100,100,100,TRUE,TRUE
 Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,European,1,1,46,46,46,FALSE,FALSE
 Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,Target,1,1,37,37,37,FALSE,FALSE
 Breast Carcinoma,Train: European-only,African,European,3,3,0,0,0,TRUE,TRUE
@@ -45,13 +49,13 @@ Type 2 diabetes,Train: European-only,Hispanic or Latin American,European,1,0,NA,
 Type 2 diabetes,Train: European-only,Hispanic or Latin American,Target,1,0,NA,NA,NA,FALSE,FALSE
 Type 2 diabetes,Train: European-only,South Asian,European,7,0,NA,NA,NA,FALSE,FALSE
 Type 2 diabetes,Train: European-only,South Asian,Target,4,0,NA,NA,NA,FALSE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,African,European,1,0,NA,NA,NA,FALSE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,African,Target,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,African,European,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,African,Target,3,0,NA,NA,NA,FALSE,FALSE
 Type 2 diabetes,Train: Multi incl. EUR,East Asian,European,2,0,NA,NA,NA,FALSE,FALSE
 Type 2 diabetes,Train: Multi incl. EUR,East Asian,Target,2,0,NA,NA,NA,FALSE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,European,4,1,17.1,17.1,17.1,FALSE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,Target,4,1,36.8,36.8,36.8,FALSE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,European,1,0,NA,NA,NA,FALSE,FALSE
-Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,Target,1,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,European,5,1,17.1,17.1,17.1,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,Target,5,1,36.8,36.8,36.8,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,European,2,0,NA,NA,NA,FALSE,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,Target,2,1,41,41,41,FALSE,FALSE
 Type 2 diabetes,Train: Multi incl. EUR,South Asian,European,2,0,NA,NA,NA,FALSE,FALSE
 Type 2 diabetes,Train: Multi incl. EUR,South Asian,Target,2,0,NA,NA,NA,FALSE,FALSE

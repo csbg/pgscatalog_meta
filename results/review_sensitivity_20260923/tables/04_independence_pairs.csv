@@ -17,6 +17,9 @@ Type 2 diabetes,Train: European-only,South Asian,PGS000713,1,1,1,1,0,0,FALSE,0.0
 Type 2 diabetes,Train: European-only,East Asian,PGS000729,1,1,1,1,0,0,FALSE,0.006000000000000005,0.13420490788169148
 Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000729,1,1,1,1,0,0,FALSE,0.049000000000000044,0.023249713559793623
 Type 2 diabetes,Train: European-only,South Asian,PGS000729,1,1,1,1,0,0,FALSE,0.0050000000000000044,0.03858362415019638
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS000804,1,1,2,2,0,0,FALSE,-0.09060000000000001,0.02103178102520142
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS000804,1,1,2,2,0,0,FALSE,-0.03369999999999995,0.02205017828868687
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS000804,1,1,2,1,0,0,FALSE,0.1714,0.04237641002863371
 Type 2 diabetes,Train: European-only,East Asian,PGS000864,1,1,1,1,0,0,FALSE,0.0129999999999999,0.14027123382253112
 Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000864,1,1,1,1,0,0,FALSE,0.05799999999999994,0.022233268584330047
 Type 2 diabetes,Train: European-only,South Asian,PGS000864,1,1,1,1,0,0,FALSE,0.005999999999999894,0.0390734821264997
@@ -97,12 +100,22 @@ Type 2 diabetes,Train: Multi incl. EUR,African,PGS004859,1,2,1,2,0,0,FALSE,-0.01
 Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS004859,1,1,1,1,0,0,FALSE,0.06999999999999995,0.2243842313772541
 Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS004859,1,1,1,1,0,0,FALSE,0.06999999999999995,0.08152601294137192
 Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS004859,1,1,1,1,0,0,FALSE,0.1100000000000001,0.38231987879907764
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005237,3,1,6,2,0,0,FALSE,-0.10450966469671252,0.12787230642393863
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005237,3,1,6,2,0,0,FALSE,0.043490335303287386,0.2536300666609983
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005238,3,1,6,2,0,0,FALSE,-0.10765476491735337,0.12693579257325152
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005238,3,1,6,2,0,0,FALSE,0.04234523508264676,0.21401095650818755
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005239,3,1,6,2,0,0,FALSE,-0.08994306031702926,0.12639988187545953
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005239,3,1,6,2,0,0,FALSE,0.023056939682970734,0.21859235242287003
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005240,3,1,6,2,0,0,FALSE,-0.14195204925626237,0.12087862425465708
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005240,3,1,6,2,0,0,FALSE,0.004047950743737538,0.2103285493071418
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005241,3,1,6,2,0,0,FALSE,-0.09730679366380213,0.13930639454102847
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005241,3,1,6,2,0,0,FALSE,-0.0533067936638022,0.23491353819180963
 Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS005242,1,1,1,1,0,0,FALSE,-0.008000000000000007,0.026741732546215355
-Breast Carcinoma,Train: European-only,African,PGS005345,6,2,6,2,0,0,FALSE,-0.0199911315487884,0.15922888911767116
-Breast Carcinoma,Train: European-only,South Asian,PGS005345,6,2,6,2,0,0,FALSE,0.004085574400860215,0.12077298609974534
-Breast Carcinoma,Train: European-only,African,PGS005346,6,2,6,2,0,0,FALSE,-0.07442090066742368,0.16294382624165737
-Breast Carcinoma,Train: European-only,South Asian,PGS005346,6,2,6,2,0,0,FALSE,-0.008950364883240525,0.134359735846508
-Breast Carcinoma,Train: European-only,African,PGS005347,6,2,6,2,0,0,FALSE,-0.06563962049225391,0.1662290412296656
-Breast Carcinoma,Train: European-only,South Asian,PGS005347,6,2,6,2,0,0,FALSE,0.005214462332007619,0.13719815751343253
-Breast Carcinoma,Train: European-only,African,PGS005348,6,2,6,2,0,0,FALSE,-0.054779971180556664,0.15627252073620068
-Breast Carcinoma,Train: European-only,South Asian,PGS005348,6,2,6,2,0,0,FALSE,-0.01602888154320037,0.1340994112815676
+Breast Carcinoma,Train: European-only,African,PGS005345,3,1,6,2,0,0,FALSE,-0.01566249475355086,0.2437056647139522
+Breast Carcinoma,Train: European-only,South Asian,PGS005345,3,1,6,2,0,0,FALSE,0.01733750524644906,0.16991707803637268
+Breast Carcinoma,Train: European-only,African,PGS005346,3,1,6,2,0,0,FALSE,-0.07174077566989323,0.24455761361823836
+Breast Carcinoma,Train: European-only,South Asian,PGS005346,3,1,6,2,0,0,FALSE,0.0062592243301069495,0.1885343713331835
+Breast Carcinoma,Train: European-only,African,PGS005347,3,1,6,2,0,0,FALSE,-0.0609734026596237,0.25033136450449023
+Breast Carcinoma,Train: European-only,South Asian,PGS005347,3,1,6,2,0,0,FALSE,0.019026597340376372,0.19487465161723214
+Breast Carcinoma,Train: European-only,African,PGS005348,3,1,6,2,0,0,FALSE,-0.055465367786210584,0.23203392721006022
+Breast Carcinoma,Train: European-only,South Asian,PGS005348,3,1,6,2,0,0,FALSE,-0.00546536778621054,0.1908258506293806

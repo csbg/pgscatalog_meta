@@ -1,4 +1,6 @@
 trait_label,trained_bucket,target_ancestry,european_n_sample_sets,target_n_sample_sets,european_n_sample_sets_with_counts,target_n_sample_sets_with_counts,european_total_cases,target_total_cases,european_total_controls,target_total_controls,european_total_individuals,target_total_individuals,european_min_cases_in_a_sample_set,target_min_cases_in_a_sample_set,european_case_fraction,target_case_fraction
+5-year incident prostate cancer,Train: Multi incl. EUR,African,3,1,3,1,3729,82,188881,3111,192610,3193,269,82,0.01936036550542547,0.025681177575947386
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,3,1,3,1,3729,30,188881,5067,192610,5097,269,30,0.01936036550542547,0.005885815185403178
 Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,1,1,1,1,2961,574,25584,4452,28545,5026,2961,574,0.10373095112979507,0.11420612813370473
 Breast Carcinoma,Train: European-only,African,3,1,3,1,3453,27,219852,4400,223305,4427,176,27,0.015463155773493652,0.006098938332956856
 Breast Carcinoma,Train: European-only,South Asian,3,1,3,1,3453,43,219852,4392,223305,4435,176,43,0.015463155773493652,0.009695603156708005
@@ -22,8 +24,8 @@ Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,4,2,
 Type 2 diabetes,Train: European-only,East Asian,3,2,3,2,10830,92,190521,3044,201351,3136,180,16,0.053786671037144095,0.029336734693877552
 Type 2 diabetes,Train: European-only,Hispanic or Latin American,1,1,1,1,10069,4033,98952,29619,109021,33652,10069,4033,0.09235835297786665,0.11984428860097468
 Type 2 diabetes,Train: European-only,South Asian,7,4,7,4,92317,10120,842855,58086,935172,68206,180,171,0.09871659972710903,0.14837404333929566
-Type 2 diabetes,Train: Multi incl. EUR,African,1,2,1,2,3646,4008,18660,10012,22306,14020,3646,2004,0.16345377925221913,0.28587731811697575
+Type 2 diabetes,Train: Multi incl. EUR,African,2,3,2,3,23432,9980,422603,19649,446035,29629,3646,2004,0.05253399396908314,0.3368321576833508
 Type 2 diabetes,Train: Multi incl. EUR,East Asian,2,2,2,2,13715,176,117612,1919,131327,2095,3646,76,0.104433970166074,0.08400954653937948
-Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,4,4,4,4,26180,15667,182003,48388,208183,64055,3646,868,0.12575474462372047,0.24458668331902272
-Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,1,1,1,0,10069,0,98952,0,109021,2669,10069,NA,0.09235835297786665,NA
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,5,5,5,5,45966,19804,585946,64737,631912,84541,3646,868,0.07274114117155553,0.23425320258809335
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,2,2,2,1,29855,2469,502895,2469,532750,7607,10069,2469,0.05603941811356171,0.5
 Type 2 diabetes,Train: Multi incl. EUR,South Asian,2,2,2,2,13715,1341,117612,5974,131327,7315,3646,88,0.104433970166074,0.18332194121667805

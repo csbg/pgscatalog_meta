@@ -3,7 +3,7 @@ MONDO_0005148,type 2 diabetes mellitus,40
 MONDO_0005010,coronary artery disorder,10
 MONDO_0004979,asthma,7
 MONDO_0004989,breast carcinoma,7
-MONDO_0005159,prostate carcinoma,7
+MONDO_0005159,prostate carcinoma,6
 EFO_0008111,diet measurement,5
 MONDO_0005147,type 1 diabetes mellitus,5
 OBA_0002313,strand of hair color,5
@@ -58,7 +58,6 @@ EFO_0007010,drug use measurement,1
 EFO_0007012,NSAID use measurement,1
 EFO_0007645|OBA_1000840,longitudinal alcohol consumption measurement|alcohol consumption quality,1
 EFO_0007778,urinary albumin to creatinine ratio,1
-EFO_0007814,refractive error measurement,1
 EFO_0007865,loneliness measurement,1
 EFO_0007869,wellbeing measurement,1
 EFO_0008002,physical activity measurement,1

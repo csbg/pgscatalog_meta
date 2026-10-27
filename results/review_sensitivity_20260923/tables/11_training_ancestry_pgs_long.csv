@@ -23,6 +23,10 @@ PGS000200,European,88.3,GWAS (variant associations)
 PGS000200,South Asian,11.7,GWAS (variant associations)
 PGS000330,European,100,GWAS (variant associations)
 PGS000729,European,100,GWAS (variant associations)
+PGS000804,African,4,GWAS (variant associations)
+PGS000804,European,79.2,GWAS (variant associations)
+PGS000804,Hispanic or Latin American,1.5,GWAS (variant associations)
+PGS000804,Multi-ancestry excluding European,15.4,GWAS (variant associations)
 PGS000864,European,100,GWAS (variant associations)
 PGS000868,European,100,GWAS (variant associations)
 PGS001800,European,100,GWAS (variant associations)
@@ -146,6 +150,26 @@ PGS004859,African,3.5,GWAS (variant associations)
 PGS004859,European,81.9,GWAS (variant associations)
 PGS004859,Hispanic or Latin American,1.3,GWAS (variant associations)
 PGS004859,Multi-ancestry excluding European,13.4,GWAS (variant associations)
+PGS005237,African,9.1,GWAS (variant associations)
+PGS005237,East Asian,11.7,GWAS (variant associations)
+PGS005237,European,75.8,GWAS (variant associations)
+PGS005237,Hispanic or Latin American,3.4,GWAS (variant associations)
+PGS005238,African,9.1,GWAS (variant associations)
+PGS005238,East Asian,11.7,GWAS (variant associations)
+PGS005238,European,75.8,GWAS (variant associations)
+PGS005238,Hispanic or Latin American,3.4,GWAS (variant associations)
+PGS005239,African,9.1,GWAS (variant associations)
+PGS005239,East Asian,11.7,GWAS (variant associations)
+PGS005239,European,75.8,GWAS (variant associations)
+PGS005239,Hispanic or Latin American,3.4,GWAS (variant associations)
+PGS005240,African,9.1,GWAS (variant associations)
+PGS005240,East Asian,11.7,GWAS (variant associations)
+PGS005240,European,75.8,GWAS (variant associations)
+PGS005240,Hispanic or Latin American,3.4,GWAS (variant associations)
+PGS005241,African,9.1,GWAS (variant associations)
+PGS005241,East Asian,11.7,GWAS (variant associations)
+PGS005241,European,75.8,GWAS (variant associations)
+PGS005241,Hispanic or Latin American,3.4,GWAS (variant associations)
 PGS005242,African,3.9,GWAS (variant associations)
 PGS005242,European,77,GWAS (variant associations)
 PGS005242,Hispanic or Latin American,1.4,GWAS (variant associations)
@@ -203,6 +227,9 @@ PGS004698,African,19.4,Score development/training
 PGS004698,European,64.2,Score development/training
 PGS004698,Hispanic or Latin American,11.4,Score development/training
 PGS004698,Multi-ancestry excluding European,5,Score development/training
+PGS005237,European,100,Score development/training
+PGS005238,European,100,Score development/training
+PGS005239,European,100,Score development/training
 PGS005345,European,100,Score development/training
 PGS005346,European,100,Score development/training
 PGS005347,European,100,Score development/training

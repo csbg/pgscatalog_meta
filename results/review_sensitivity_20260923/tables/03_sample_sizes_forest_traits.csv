@@ -1,4 +1,7 @@
 trait_label,ancestry_display,n_evaluations,n_distinct_pgs,n_reported_ci,n_inferred_ci,n_with_case_control,median_n_cases,iqr_n_cases_lo,iqr_n_cases_hi,min_n_cases,median_n_controls,min_n_controls,median_n_individuals,median_case_fraction
+5-year incident prostate cancer,African,10,5,10,0,10,82,82,82,82,3111,3111,3193,0.025681177575947386
+5-year incident prostate cancer,European,30,5,30,0,30,327,269,3133,269,6522,1482,6791,0.03961125018406715
+5-year incident prostate cancer,South Asian,10,5,10,0,10,30,30,30,30,5067,5067,5097,0.005885815185403178
 Apparent Treatment-Resistant Hypertension,African,2,2,2,0,2,574,574,574,574,4452,4452,5026,0.11420612813370473
 Apparent Treatment-Resistant Hypertension,European,2,2,1,1,2,2961,2961,2961,2961,25584,25584,28545,0.10373095112979507
 Breast Carcinoma,African,10,5,10,0,10,27,27,27,27,4400,4400,4427,0.006098938332956856

@@ -48,13 +48,6 @@ stamp     <- pipeline_stamp
 ## -------------------------
 ## Helpers
 ## -------------------------
-calc_Neff_vec <- function(cases, ctrls) {
-  cases <- as.numeric(cases); ctrls <- as.numeric(ctrls)
-  out <- rep(NA_real_, length(cases))
-  ok  <- !is.na(cases) & !is.na(ctrls) & cases > 0 & ctrls > 0
-  out[ok] <- 4 / (1/cases[ok] + 1/ctrls[ok])
-  out
-}
 num <- function(x) suppressWarnings(readr::parse_number(as.character(x)))
 
 display_levels <- c("European","African","East Asian","South Asian",
@@ -101,6 +94,7 @@ pm_class <- pm %>%
     ppm_id          = pgs_performance_metric_ppm_id,
     pss_id          = pgs_sample_set_pss,
     reported_trait  = reported_trait,
+    covariates      = covariates_included_in_the_model,
     metric_type_std = case_when(!is.na(auc_p$est) ~ "AUC",
                                 !is.na(cidx_p$est) ~ "C-index",
                                 TRUE ~ NA_character_),
@@ -137,49 +131,37 @@ pgs_traits <- scores %>%
 stopifnot(all(c("pgs_id","train_bucket") %in% names(tb)))
 stopifnot(all(c("pgs_id","efo_id","efo_label") %in% names(pgs_traits)))
 
-# ------- R-tight collapse logic --------
-# Join & compute evaluation weights/metrics
+# ------- One evaluation per score × sample set × ancestry --------
+# Prefer Neff, then larger Neff, then larger n, then score-only (no AUC).
 eval_pre <- pm_class %>%
   inner_join(pss_min, by = "pss_id") %>%
   mutate(
-    Neff   = calc_Neff_vec(cases, ctrls),     # evaluation-set Neff
+    Neff   = calc_neff(cases, ctrls),
     weight = ifelse(!is.na(Neff), Neff, n),
     auc    = estimate
   )
 
-# Rank PPM variants within the same (PGS × PSS × ancestry_eval) and keep ONE
-eval_ranked <- eval_pre %>%
-  group_by(pgs_id, pss_id, ancestry_eval) %>%
-  arrange(
-    desc(!is.na(Neff)),   # prefer having Neff
-    desc(Neff),           # higher Neff
-    desc(n),              # then higher n
-    desc(auc),            # then higher AUC (NA last)
-    .by_group = TRUE
-  ) %>%
-  mutate(
-    rtight_rank = dplyr::row_number(),
-    kept_rtight = (rtight_rank == 1L)
-  ) %>%
-  ungroup()
+one_eval <- keep_one_evaluation(
+  eval_pre,
+  sampleset_col = "pss_id",
+  performance_col = "ppm_id",
+  controls_col = "ctrls",
+  covariates_col = "covariates",
+  return_dropped = TRUE
+)
 
-# Log: all PPM rows dropped within the same PSS (BESS) after R-tight
-bess_filtered <- eval_ranked %>%
-  filter(!kept_rtight) %>%
+bess_filtered <- one_eval$dropped %>%
   select(
     pgs_id, pss_id, ancestry_eval,
     ppm_id, metric_type_std, estimate, interval_lower, interval_upper,
-    Neff, n, cases, ctrls, rtight_rank
+    Neff, n, cases, ctrls, one_eval_rank
   ) %>%
-  arrange(pgs_id, pss_id, ancestry_eval, rtight_rank)
+  arrange(pgs_id, pss_id, ancestry_eval, one_eval_rank)
 
 bess_log_fp <- file.path(out_dir, paste0("BESS_filtered_RTight_", stamp, ".csv"))
 readr::write_csv(bess_filtered, bess_log_fp)
 
-# Keep the R-tight representative rows and continue exactly as before
-eval_df <- eval_ranked %>%
-  filter(kept_rtight) %>%
-  select(-rtight_rank, -kept_rtight) %>%
+eval_df <- one_eval$kept %>%
   left_join(tb,         by = "pgs_id") %>%
   left_join(pgs_traits, by = "pgs_id") %>%
   mutate(
@@ -188,7 +170,7 @@ eval_df <- eval_ranked %>%
   )
 
 message(
-  "[R-tight] Groups with >1 PPM on the same PSS: ",
+  "[one-eval] Groups with >1 PPM on the same PSS: ",
   nrow(
     eval_pre %>%
       count(pgs_id, pss_id, ancestry_eval, name = "n_ppm") %>% filter(n_ppm > 1)

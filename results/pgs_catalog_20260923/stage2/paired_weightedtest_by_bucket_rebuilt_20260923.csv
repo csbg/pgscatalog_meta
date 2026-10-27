@@ -4,7 +4,6 @@ African,Train: European-only,AD all cause dementia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,
 African,Train: European-only,AD alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,AD asthma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,AD chronic obstructive pulmonary disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Advanced colorectal neoplasia (FOB Gold model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Advanced colorectal neoplasia (Ridascreen model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Advanced glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Age-related macular degeneration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -30,7 +29,8 @@ African,Train: European-only,Blood clot in the leg (DVT),NA,NA,NA,0,FALSE,NA,NA,
 African,Train: European-only,Blood clot in the leg (DVT) or lung,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Blood clot in the lung,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Blood clot or DVT diagnosed by doctor,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Breast Carcinoma,-0.06020979583640529,-0.052769152071433685,0.021991225988837487,4,FALSE,-0.053228059744311135,0.021095569829996948,0.06293040852034329,0.0638338993752408,FALSE
+African,Train: European-only,Breast Cancer (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Breast Carcinoma,-0.05821938522291714,-0.050422296098743095,0.026090083286652018,4,TRUE,-0.05091032458601492,0.024808229315946253,0.06522520821663004,0.062020573289865634,FALSE
 African,Train: European-only,Breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Breast cancer (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Breast cancer in male carriers of BRCA1/2 mutations,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -54,16 +54,15 @@ African,Train: European-only,Cancer of tongue,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Cancer within the respiratory system,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Carcinoma in situ of skin,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Cervical cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Childhood asthma by age 11,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Childhood asthma by age 8,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Cholecystitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Chronic Kidney Disease (stage 3 or greater),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Chronic back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Chronic bronchitis/emphysema (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Chronic lymphoid leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Coeliac disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Coeliac disease in HLA-DQ2.5 carriers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -88,7 +87,6 @@ African,Train: European-only,Drinking Status,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Dupuytren's contracture,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,ER-negative breast cancer,-0.0010000000000000009,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 African,Train: European-only,ER-positive breast cancer,-0.051000000000000045,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Early CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Early age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Early onset lung cancer (< 50 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Ease of skin tanning (Get mildly or occasionally tanned),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -113,6 +111,7 @@ African,Train: European-only,Fracture radius,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Gallstones,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Gastric cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Genetic haematological disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Glioma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Gout,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Gout diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -128,7 +127,6 @@ African,Train: European-only,Hearing difficulty and Deafness,NA,NA,NA,0,FALSE,NA
 African,Train: European-only,Heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,High BP (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,High cholesterol,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,High myopia (HM6),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Hodgkin's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Hyperthyroidism/thyrotoxicosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -137,19 +135,19 @@ African,Train: European-only,Hypothyroidism/myxoedema,NA,NA,NA,0,FALSE,NA,NA,NA,
 African,Train: European-only,Ibuprofen (e.g. Nurofen),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Ibuprofen use self-reported,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk ofatherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident bladder cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident blader cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Incident breast cancer,-0.05132057605080642,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Incident breast cancer,-0.048762866840171504,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident cervical cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident chronic obstructive pulmonary disease before age 50 years,-0.10399999999999998,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Incident hypothyroidism,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident invasive melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Incident lung cancer in never smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Incident lung cancer in smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Incident primary breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -168,19 +166,16 @@ African,Train: European-only,Ischemic stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Ischemic stroke in atrial fibrillation cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Isolated REM sleep behavior disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,JCV seropositivity for Human Polyomavirus JCV,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Juvenile Idiopathic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Keratinocyte cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Keratoconus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Keratoconus with central corneal thickness variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Keratoconus with ﻿corneal resistance factor variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,LDL-c blood concentration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Late CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Late age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Late-onset Alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Leisure/social activities (attend adult edication class in once a week or more often),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,"Light smokers, at least 100 smokes in lifetime",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,"Loneliness, isolation",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Low myopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Low-density lipoprotein cholesterol level >4.9mmol/L in individuals who have familial hypercholestrolaemia and no known mutation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Lower back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -209,7 +204,6 @@ African,Train: European-only,Mild early age-related macular degeneration (3CACSS
 African,Train: European-only,Milk type: Skimmed,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Moderate early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Moderate hyperopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Moderate myopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Multiple Sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Multiple myeloma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Multiple sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -226,7 +220,6 @@ African,Train: European-only,Obesity in individuals aged 16-17.9,NA,NA,NA,0,FALS
 African,Train: European-only,Obesity in individuals aged 18-23.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Obesity in individuals aged 24-29.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Obesity in individuals aged 30-69.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Often felt loved as a child,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Oligoarthritis Juvenile Idiophatic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Other non-epithelial cancer of skin,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -239,10 +232,12 @@ African,Train: European-only,Overweight in individuals aged 30-69.9,NA,NA,NA,0,F
 African,Train: European-only,PE +/- DVT,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Paradoxical eczema in biologic-treated  psoriasis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Past tobacco smoking (Smoked occasionally),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Peripheral arterial disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Prevalent VTE,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Prevalent cutaneous melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Prevalent gout cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Prevalent invasive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Primary open-angle glaucoma (POAG),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Probabable REM sleep behavior disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -260,13 +255,12 @@ African,Train: European-only,Radiographic osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,
 African,Train: European-only,Retinal detachment,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Rheumatoid arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Rheumatoid factor > 16 IU/mL,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: European-only,Rheumatoid-factor-negative Polyarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Risk of mitral valve prolapse,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Sarcoidosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Severe early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Severe insulin deficiency,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Short stature in adulthood,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Short stature in adulthood (females),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Short stature in adulthood (males),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Sjogren's syndrome/sicca syndrome,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Skin cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Sleep Apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -342,7 +336,6 @@ African,Train: European-only,TTE zoster [herpes zoster],NA,NA,NA,0,FALSE,NA,NA,N
 African,Train: European-only,Thinness,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Thyroid cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Tobacco smoking ever vs no,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: European-only,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Type 1 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Type 1 diabetes aetiology (non-monogenic),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: European-only,Type 1 diabetes diagnosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -380,7 +373,6 @@ East Asian,Train: European-only,AD alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA
 East Asian,Train: European-only,AD asthma,-0.057046853870483805,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,AD chronic obstructive pulmonary disease,0.0669016963030935,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,AD myocardial infarction,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Advanced colorectal neoplasia (FOB Gold model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Advanced colorectal neoplasia (Ridascreen model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Advanced glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Age-related macular degeneration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -409,6 +401,7 @@ East Asian,Train: European-only,Blood clot in the leg (DVT),-0.00467474210930018
 East Asian,Train: European-only,Blood clot in the leg (DVT) or lung,0.02751114954372158,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Blood clot in the lung,0.19988153899532557,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Blood clot or DVT diagnosed by doctor,0.05308352450529008,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Breast Cancer (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Breast Carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Breast cancer,-0.04832585954109281,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Breast cancer (FH),0.03337429497981004,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -436,18 +429,17 @@ East Asian,Train: European-only,Cataract,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Cereal type: Biscuit cereal (e.g. Weetabix),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,"Cereal type: Other (e.g. Cornflakes, Frosties)",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Cervical cancer,0.14455777402105052,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Childhood asthma by age 11,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Childhood asthma by age 8,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Cholecystitis,0.0436428471787782,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Chronic Kidney Disease (stage 3 or greater),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Chronic back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Chronic bronchitis/emphysema (FH),0.012993060774021847,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Chronic lymphoid leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Chronic obstructive airways disease/copd,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Chronic rhinosinusitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Coeliac disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Coeliac disease in HLA-DQ2.5 carriers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Coffee consumed,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -477,7 +469,6 @@ East Asian,Train: European-only,Drinking Status,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FAL
 East Asian,Train: European-only,Dupuytren's contracture,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,ER-negative breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,ER-positive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Early CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Early age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Early onset lung cancer (< 50 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Ease of skin tanning (Get mildly or occasionally tanned),-0.09328500973558063,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -532,8 +523,6 @@ East Asian,Train: European-only,Heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Hiatus hernia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,High BP (FH),6.859710470933367e-4,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,High cholesterol,-0.008939519082085123,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,High myopia (HM5),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,High myopia (HM6),-0.10951807617051323,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Hodgkin's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Hyperthyroidism/thyrotoxicosis,-0.08600757197327924,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -542,6 +531,7 @@ East Asian,Train: European-only,Hypothyroidism/myxoedema,-0.07829937168372292,NA
 East Asian,Train: European-only,Ibuprofen (e.g. Nurofen),-0.006115078588254441,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Ibuprofen use self-reported,0.035399062892923716,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk ofatherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident bladder cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident blader cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -550,11 +540,10 @@ East Asian,Train: European-only,Incident cervical cancer,NA,NA,NA,0,FALSE,NA,NA,
 East Asian,Train: European-only,Incident chronic obstructive pulmonary disease before age 50 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Incident hypothyroidism,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident invasive melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Incident lung cancer in never smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Incident lung cancer in smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Incident primary breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -574,13 +563,11 @@ East Asian,Train: European-only,Ischemic stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FAL
 East Asian,Train: European-only,Ischemic stroke in atrial fibrillation cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Isolated REM sleep behavior disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,JCV seropositivity for Human Polyomavirus JCV,0.17487734680752498,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Juvenile Idiopathic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Keratinocyte cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Keratoconus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Keratoconus with central corneal thickness variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Keratoconus with ﻿corneal resistance factor variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,LDL-c blood concentration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Late CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Late age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Late-onset Alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Leisure/social activities (attend adult edication class in once a week or more often),0.01805264438794907,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -588,7 +575,6 @@ East Asian,Train: European-only,"Leisure/social activities (attend any of the fo
 East Asian,Train: European-only,Leisure/social activities (attend sports club or gym in once a week or more often),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,"Light smokers, at least 100 smokes in lifetime",0.14434593591822797,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,"Loneliness, isolation",-0.017801563019502753,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Low myopia,-0.06792980836289475,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Low-density lipoprotein cholesterol level >4.9mmol/L in individuals who have familial hypercholestrolaemia and no known mutation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Lower back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Lung cancer,-0.04800000000000004,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -618,7 +604,6 @@ East Asian,Train: European-only,Mild early age-related macular degeneration (3CA
 East Asian,Train: European-only,Milk type: Skimmed,0.007351916529220182,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Moderate early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Moderate hyperopia,-0.13670209457303173,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Moderate myopia,-0.0894687994276715,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Mouth ulcers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Multiple Sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Multiple myeloma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -640,7 +625,6 @@ East Asian,Train: European-only,Obesity in individuals aged 16-17.9,NA,NA,NA,0,F
 East Asian,Train: European-only,Obesity in individuals aged 18-23.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Obesity in individuals aged 24-29.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Obesity in individuals aged 30-69.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Occurrence of breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Oestradiol > 212 pmol/L,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Often felt loved as a child,0.10167249248205612,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -658,12 +642,14 @@ East Asian,Train: European-only,PE +/- DVT,0.1552062088174444,NA,NA,1,TRUE,NA,NA
 East Asian,Train: European-only,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Paracetamol use self-reported,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Paradoxical eczema in biologic-treated  psoriasis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Past tobacco smoking (Smoked at least once),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Past tobacco smoking (Smoked occasionally),0.08823061475685912,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Peripheral arterial disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Polymyalgia rheumatica,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Prevalent VTE,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Prevalent cutaneous melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Prevalent gout cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Prevalent invasive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Previous Smoker,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Primary open-angle glaucoma (POAG),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -684,15 +670,14 @@ East Asian,Train: European-only,Radiographic osteoarthritis,NA,NA,NA,0,FALSE,NA,
 East Asian,Train: European-only,Retinal detachment,0.14491970587229808,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Rheumatoid arthritis,-0.009501985934296187,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Rheumatoid factor > 16 IU/mL,0.016769930089414298,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+East Asian,Train: European-only,Rheumatoid-factor-negative Polyarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Risk of mitral valve prolapse,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Risk taking,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Sarcoidosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Sensitivity / hurt feelings,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Severe early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Severe insulin deficiency,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Short stature in adulthood,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Short stature in adulthood (females),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Short stature in adulthood (males),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Sjogren's syndrome/sicca syndrome,0.013715123161340381,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Skin cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Sleep Apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -788,13 +773,12 @@ East Asian,Train: European-only,Taking other prescription medications,NA,NA,NA,0
 East Asian,Train: European-only,Thinness,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Thyroid cancer,0.16794903101880398,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Tobacco smoking ever vs no,0.1289235548947295,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Type 1 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Type 1 diabetes aetiology (non-monogenic),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Type 1 diabetes diagnosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Type 1 diabetes vs latent autoimmune diabetes/type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Type 1 diabetes with age of diagnosis under 25,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: European-only,Type 2 diabetes,0.017999999999999905,0.017863765346773107,0.03660792392571154,11,TRUE,0.016134076481443344,0.029461799711649597,0.06995704882808763,0.0638338993752408,FALSE
+East Asian,Train: European-only,Type 2 diabetes,0.017999999999999905,0.017863765346773107,0.03660792392571154,11,TRUE,0.016134076481443344,0.029461799711649597,0.07803658679628524,0.06313242795353485,FALSE
 East Asian,Train: European-only,Type 2 diabetes mellitus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Type 2 diabetes with age of diagnosis over 45,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: European-only,Types of physical activity in last 4 weeks (other exercises),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -832,7 +816,6 @@ South Asian,Train: European-only,AD alzheimer's disease,0.047933559813528426,NA,
 South Asian,Train: European-only,AD asthma,-0.017716853870483718,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,AD chronic obstructive pulmonary disease,0.0062916963030935635,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,AD myocardial infarction,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Advanced colorectal neoplasia (FOB Gold model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Advanced colorectal neoplasia (Ridascreen model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Advanced glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Age-related macular degeneration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -861,8 +844,9 @@ South Asian,Train: European-only,Blood clot in the leg (DVT),-0.0177647421093003
 South Asian,Train: European-only,Blood clot in the leg (DVT) or lung,-0.004688850456278426,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Blood clot in the lung,0.08484153899532554,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Blood clot or DVT diagnosed by doctor,0.006203524505289937,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Breast Carcinoma,-0.002432395241190155,-0.003503949061665265,0.5427721101600521,4,FALSE,-0.0035671380723421137,0.5366745498800218,0.5880031193400564,0.5459304937969176,FALSE
-South Asian,Train: European-only,Breast cancer,-0.02927481180098901,-0.02314171643827549,0.004306878920443621,11,FALSE,-0.027794059177927027,6.0042735856809614e-5,0.01866314198858902,3.902777830692625e-4,TRUE
+South Asian,Train: European-only,Breast Cancer (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Breast Carcinoma,0.011798364788278004,0.009785976538323374,0.17727088358945842,4,TRUE,0.009673040967507316,0.1824653056544189,0.2417330230765342,0.2488163258923894,FALSE
+South Asian,Train: European-only,Breast cancer,-0.02927481180098901,-0.02314171643827549,0.004306878920443621,11,FALSE,-0.027794059177927027,6.0042735856809614e-5,0.016150795951663577,4.5032051892607213e-4,TRUE
 South Asian,Train: European-only,Breast cancer (FH),0.02936429497980997,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Breast cancer in male carriers of BRCA1/2 mutations,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Breast cancer intrinsic-like subtype (HER2-enriched-like),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -888,18 +872,17 @@ South Asian,Train: European-only,Cataract,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Cereal type: Biscuit cereal (e.g. Weetabix),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,"Cereal type: Other (e.g. Cornflakes, Frosties)",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Cervical cancer,0.0696977740210506,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Childhood asthma by age 11,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Childhood asthma by age 8,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Cholecystitis,0.012492847178778188,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Chronic Kidney Disease (stage 3 or greater),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Chronic back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Chronic bronchitis/emphysema (FH),-0.03516693922597802,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Chronic kidney disease or dialysis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Chronic lymphoid leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Chronic obstructive airways disease/copd,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Coeliac disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Coeliac disease in HLA-DQ2.5 carriers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Coffee consumed,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -929,7 +912,6 @@ South Asian,Train: European-only,Drinking Status,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FA
 South Asian,Train: European-only,Dupuytren's contracture,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,ER-negative breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,ER-positive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Early CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Early age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Early onset lung cancer (< 50 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Ease of skin tanning (Get mildly or occasionally tanned),-0.11419500973558061,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -961,7 +943,7 @@ South Asian,Train: European-only,Fracture radius,0.01877507178873139,NA,NA,1,TRU
 South Asian,Train: European-only,Gallstones,0.016148081234604095,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Gastric cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Genetic haematological disorder,0.16145548608851834,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Glaucoma,-0.020000000000000018,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Glioma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Glucosamine,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Gout,-0.041854519751725494,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -985,8 +967,6 @@ South Asian,Train: European-only,Heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALS
 South Asian,Train: European-only,Hiatus hernia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,High BP (FH),0.009485971047093367,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,High cholesterol,-0.04515951908208515,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,High myopia (HM5),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,High myopia (HM6),-0.07551807617051332,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Hodgkin's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Hyperthyroidism/thyrotoxicosis,-0.021627571973279247,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -995,6 +975,7 @@ South Asian,Train: European-only,Hypothyroidism/myxoedema,-0.021049371683722895,
 South Asian,Train: European-only,Ibuprofen (e.g. Nurofen),0.0032849214117455228,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Ibuprofen use self-reported,0.014299062892923708,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk ofatherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident bladder cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident blader cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1003,11 +984,10 @@ South Asian,Train: European-only,Incident cervical cancer,NA,NA,NA,0,FALSE,NA,NA
 South Asian,Train: European-only,Incident chronic obstructive pulmonary disease before age 50 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Incident hypothyroidism,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident invasive melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Incident lung cancer in never smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Incident lung cancer in smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Incident primary breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1027,13 +1007,11 @@ South Asian,Train: European-only,Ischemic stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FA
 South Asian,Train: European-only,Ischemic stroke in atrial fibrillation cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Isolated REM sleep behavior disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,JCV seropositivity for Human Polyomavirus JCV,0.07583734680752496,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Juvenile Idiopathic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Keratinocyte cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Keratoconus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Keratoconus with central corneal thickness variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Keratoconus with ﻿corneal resistance factor variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,LDL-c blood concentration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Late CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Late age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Late-onset Alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Leisure/social activities (attend adult edication class in once a week or more often),-0.028747355612050995,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
@@ -1041,7 +1019,6 @@ South Asian,Train: European-only,"Leisure/social activities (attend any of the f
 South Asian,Train: European-only,Leisure/social activities (attend sports club or gym in once a week or more often),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,"Light smokers, at least 100 smokes in lifetime",0.06079593591822796,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,"Loneliness, isolation",0.009248436980497154,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Low myopia,-0.07392980836289476,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Low-density lipoprotein cholesterol level >4.9mmol/L in individuals who have familial hypercholestrolaemia and no known mutation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Lower back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1071,7 +1048,6 @@ South Asian,Train: European-only,Mild early age-related macular degeneration (3C
 South Asian,Train: European-only,Milk type: Skimmed,-0.009238083470779923,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Moderate early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Moderate hyperopia,-0.07070209457303167,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Moderate myopia,-0.06346879942767147,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Mouth ulcers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Multiple Sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Multiple myeloma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1092,7 +1068,6 @@ South Asian,Train: European-only,Obesity in individuals aged 16-17.9,NA,NA,NA,0,
 South Asian,Train: European-only,Obesity in individuals aged 18-23.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Obesity in individuals aged 24-29.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Obesity in individuals aged 30-69.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Oestradiol > 212 pmol/L,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Often felt loved as a child,0.013452492482056044,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Oligoarthritis Juvenile Idiophatic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1109,12 +1084,14 @@ South Asian,Train: European-only,PE +/- DVT,0.038256208817444404,NA,NA,1,TRUE,NA
 South Asian,Train: European-only,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Paracetamol use self-reported,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Paradoxical eczema in biologic-treated  psoriasis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Past tobacco smoking (Smoked at least once),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Past tobacco smoking (Smoked occasionally),0.10727061475685917,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Peripheral arterial disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Polymyalgia rheumatica,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Prevalent VTE,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Prevalent cutaneous melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Prevalent gout cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Prevalent invasive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Previous Smoker,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Primary open-angle glaucoma (POAG),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1135,15 +1112,14 @@ South Asian,Train: European-only,Radiographic osteoarthritis,NA,NA,NA,0,FALSE,NA
 South Asian,Train: European-only,Retinal detachment,0.09308970587229803,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Rheumatoid arthritis,0.03335801406570382,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Rheumatoid factor > 16 IU/mL,-0.005080069910585738,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+South Asian,Train: European-only,Rheumatoid-factor-negative Polyarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Risk of mitral valve prolapse,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Risk taking,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Sarcoidosis,0.004891330283128381,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Sensitivity / hurt feelings,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Severe early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Severe insulin deficiency,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Short stature in adulthood,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Short stature in adulthood (females),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Short stature in adulthood (males),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Sjogren's syndrome/sicca syndrome,0.05687512316134047,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Skin cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Sleep Apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1240,7 +1216,6 @@ South Asian,Train: European-only,Testicular cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,
 South Asian,Train: European-only,Thinness,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Thyroid cancer,0.047329031018804035,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Tobacco smoking ever vs no,0.09642355489472954,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-South Asian,Train: European-only,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Type 1 diabetes,0.03733996231433001,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Type 1 diabetes aetiology (non-monogenic),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: European-only,Type 1 diabetes diagnosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1283,7 +1258,6 @@ Hispanic or Latin American,Train: European-only,AD all cause dementia,NA,NA,NA,0
 Hispanic or Latin American,Train: European-only,AD alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,AD asthma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,AD chronic obstructive pulmonary disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Advanced colorectal neoplasia (FOB Gold model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Advanced colorectal neoplasia (Ridascreen model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Advanced glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Age-related macular degeneration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1309,6 +1283,7 @@ Hispanic or Latin American,Train: European-only,Blood clot in the leg (DVT),NA,N
 Hispanic or Latin American,Train: European-only,Blood clot in the leg (DVT) or lung,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Blood clot in the lung,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Blood clot or DVT diagnosed by doctor,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Breast Cancer (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Breast Carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Breast cancer (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1333,16 +1308,15 @@ Hispanic or Latin American,Train: European-only,Cancer of tongue,NA,NA,NA,0,FALS
 Hispanic or Latin American,Train: European-only,Cancer within the respiratory system,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Carcinoma in situ of skin,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Cervical cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Childhood asthma by age 11,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Childhood asthma by age 8,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Cholecystitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Chronic Kidney Disease (stage 3 or greater),0.13000000000000012,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Chronic back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Chronic bronchitis/emphysema (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Chronic lymphoid leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Coeliac disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Coeliac disease in HLA-DQ2.5 carriers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1367,7 +1341,6 @@ Hispanic or Latin American,Train: European-only,Drinking Status,NA,NA,NA,0,FALSE
 Hispanic or Latin American,Train: European-only,Dupuytren's contracture,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,ER-negative breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,ER-positive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Early CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Early age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Early onset lung cancer (< 50 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Ease of skin tanning (Get mildly or occasionally tanned),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1390,6 +1363,7 @@ Hispanic or Latin American,Train: European-only,Fracture radius,NA,NA,NA,0,FALSE
 Hispanic or Latin American,Train: European-only,Gallstones,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Gastric cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Genetic haematological disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Glioma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Gout,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Gout diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1405,7 +1379,6 @@ Hispanic or Latin American,Train: European-only,Hearing difficulty and Deafness,
 Hispanic or Latin American,Train: European-only,Heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,High BP (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,High cholesterol,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,High myopia (HM6),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Hodgkin's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Hypertension,0.047000275116987233,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Hyperthyroidism/thyrotoxicosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1414,6 +1387,7 @@ Hispanic or Latin American,Train: European-only,Hypothyroidism/myxoedema,NA,NA,N
 Hispanic or Latin American,Train: European-only,Ibuprofen (e.g. Nurofen),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Ibuprofen use self-reported,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk ofatherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident bladder cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident blader cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1422,11 +1396,10 @@ Hispanic or Latin American,Train: European-only,Incident cervical cancer,NA,NA,N
 Hispanic or Latin American,Train: European-only,Incident chronic obstructive pulmonary disease before age 50 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Incident hypothyroidism,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident invasive melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Incident lung cancer in never smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Incident lung cancer in smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Incident primary breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1445,19 +1418,16 @@ Hispanic or Latin American,Train: European-only,Ischemic stroke,NA,NA,NA,0,FALSE
 Hispanic or Latin American,Train: European-only,Ischemic stroke in atrial fibrillation cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Isolated REM sleep behavior disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,JCV seropositivity for Human Polyomavirus JCV,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Juvenile Idiopathic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Keratinocyte cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Keratoconus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Keratoconus with central corneal thickness variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Keratoconus with ﻿corneal resistance factor variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,LDL-c blood concentration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Late CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Late age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Late-onset Alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Leisure/social activities (attend adult edication class in once a week or more often),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,"Light smokers, at least 100 smokes in lifetime",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,"Loneliness, isolation",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Low myopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Low-density lipoprotein cholesterol level >4.9mmol/L in individuals who have familial hypercholestrolaemia and no known mutation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Lower back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1486,7 +1456,6 @@ Hispanic or Latin American,Train: European-only,Mild early age-related macular d
 Hispanic or Latin American,Train: European-only,Milk type: Skimmed,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Moderate early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Moderate hyperopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Moderate myopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Multiple Sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Multiple myeloma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Multiple sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1503,7 +1472,6 @@ Hispanic or Latin American,Train: European-only,Obesity in individuals aged 16-1
 Hispanic or Latin American,Train: European-only,Obesity in individuals aged 18-23.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Obesity in individuals aged 24-29.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Obesity in individuals aged 30-69.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Often felt loved as a child,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Oligoarthritis Juvenile Idiophatic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Other non-epithelial cancer of skin,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1516,10 +1484,12 @@ Hispanic or Latin American,Train: European-only,Overweight in individuals aged 3
 Hispanic or Latin American,Train: European-only,PE +/- DVT,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Paradoxical eczema in biologic-treated  psoriasis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Past tobacco smoking (Smoked occasionally),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Peripheral arterial disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Prevalent VTE,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Prevalent cutaneous melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Prevalent gout cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Prevalent invasive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Primary open-angle glaucoma (POAG),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Probabable REM sleep behavior disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1537,13 +1507,12 @@ Hispanic or Latin American,Train: European-only,Radiographic osteoarthritis,NA,N
 Hispanic or Latin American,Train: European-only,Retinal detachment,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Rheumatoid arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Rheumatoid factor > 16 IU/mL,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: European-only,Rheumatoid-factor-negative Polyarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Risk of mitral valve prolapse,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Sarcoidosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Severe early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Severe insulin deficiency,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Short stature in adulthood,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Short stature in adulthood (females),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Short stature in adulthood (males),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Sjogren's syndrome/sicca syndrome,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Skin cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Sleep Apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1619,13 +1588,12 @@ Hispanic or Latin American,Train: European-only,TTE zoster [herpes zoster],NA,NA
 Hispanic or Latin American,Train: European-only,Thinness,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Thyroid cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Tobacco smoking ever vs no,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Type 1 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Type 1 diabetes aetiology (non-monogenic),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Type 1 diabetes diagnosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Type 1 diabetes vs latent autoimmune diabetes/type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Type 1 diabetes with age of diagnosis under 25,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: European-only,Type 2 diabetes,0.051500000000000046,0.05214415483490029,4.938603235542618e-9,10,TRUE,0.05243018186949078,4.351168492487029e-9,6.420184206205403e-8,5.656519040233138e-8,TRUE
+Hispanic or Latin American,Train: European-only,Type 2 diabetes,0.051500000000000046,0.05214415483490029,4.938603235542618e-9,10,TRUE,0.05243018186949078,4.351168492487029e-9,7.407904853313927e-8,6.526752738730544e-8,TRUE
 Hispanic or Latin American,Train: European-only,Type 2 diabetes mellitus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,Type 2 diabetes with age of diagnosis over 45,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: European-only,UACR > 30 mg/g,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1656,7 +1624,6 @@ Middle Eastern or North African,Train: European-only,AD all cause dementia,NA,NA
 Middle Eastern or North African,Train: European-only,AD alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,AD asthma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,AD chronic obstructive pulmonary disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Advanced colorectal neoplasia (FOB Gold model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Advanced colorectal neoplasia (Ridascreen model),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Advanced glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Age-related macular degeneration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1682,6 +1649,7 @@ Middle Eastern or North African,Train: European-only,Blood clot in the leg (DVT)
 Middle Eastern or North African,Train: European-only,Blood clot in the leg (DVT) or lung,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Blood clot in the lung,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Blood clot or DVT diagnosed by doctor,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Breast Cancer (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Breast Carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Breast cancer (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1706,16 +1674,15 @@ Middle Eastern or North African,Train: European-only,Cancer of tongue,NA,NA,NA,0
 Middle Eastern or North African,Train: European-only,Cancer within the respiratory system,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Carcinoma in situ of skin,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Cervical cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Childhood asthma by age 11,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Childhood asthma by age 8,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Cholecystitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Chronic Kidney Disease (stage 3 or greater),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Chronic back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Chronic bronchitis/emphysema (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Chronic lymphoid leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Coeliac disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Coeliac disease in HLA-DQ2.5 carriers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1740,7 +1707,6 @@ Middle Eastern or North African,Train: European-only,Drinking Status,NA,NA,NA,0,
 Middle Eastern or North African,Train: European-only,Dupuytren's contracture,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,ER-negative breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,ER-positive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Early CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Early age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Early onset lung cancer (< 50 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Ease of skin tanning (Get mildly or occasionally tanned),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1763,6 +1729,7 @@ Middle Eastern or North African,Train: European-only,Fracture radius,NA,NA,NA,0,
 Middle Eastern or North African,Train: European-only,Gallstones,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Gastric cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Genetic haematological disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Glioma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Gout,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Gout diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1778,7 +1745,6 @@ Middle Eastern or North African,Train: European-only,Hearing difficulty and Deaf
 Middle Eastern or North African,Train: European-only,Heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,High BP (FH),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,High cholesterol,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,High myopia (HM6),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Hodgkin's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Hyperthyroidism/thyrotoxicosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1788,6 +1754,7 @@ Middle Eastern or North African,Train: European-only,Ibuprofen (e.g. Nurofen),NA
 Middle Eastern or North African,Train: European-only,Ibuprofen use self-reported,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident T2D in prediabetics,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk ofatherosclerotic cardiovascular disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident bladder cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident blader cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1796,11 +1763,10 @@ Middle Eastern or North African,Train: European-only,Incident cervical cancer,NA
 Middle Eastern or North African,Train: European-only,Incident chronic obstructive pulmonary disease before age 50 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Incident hypothyroidism,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident invasive melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Incident lung cancer in never smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Incident lung cancer in smokers,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Incident primary breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1819,19 +1785,16 @@ Middle Eastern or North African,Train: European-only,Ischemic stroke,NA,NA,NA,0,
 Middle Eastern or North African,Train: European-only,Ischemic stroke in atrial fibrillation cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Isolated REM sleep behavior disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,JCV seropositivity for Human Polyomavirus JCV,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Juvenile Idiopathic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Keratinocyte cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Keratoconus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Keratoconus with central corneal thickness variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Keratoconus with ﻿corneal resistance factor variants,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,LDL-c blood concentration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Late CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Late age-related macular degeneration (Clinical Classification),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Late-onset Alzheimer's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Leisure/social activities (attend adult edication class in once a week or more often),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,"Light smokers, at least 100 smokes in lifetime",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,"Loneliness, isolation",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Low myopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Low-density lipoprotein cholesterol level >4.9mmol/L in individuals who have familial hypercholestrolaemia and no known mutation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Lower back pain,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1860,7 +1823,6 @@ Middle Eastern or North African,Train: European-only,Mild early age-related macu
 Middle Eastern or North African,Train: European-only,Milk type: Skimmed,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Moderate early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Moderate hyperopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Moderate myopia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Multiple Sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Multiple myeloma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Multiple sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1877,7 +1839,6 @@ Middle Eastern or North African,Train: European-only,Obesity in individuals aged
 Middle Eastern or North African,Train: European-only,Obesity in individuals aged 18-23.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Obesity in individuals aged 24-29.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Obesity in individuals aged 30-69.9,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Often felt loved as a child,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Oligoarthritis Juvenile Idiophatic Arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Other non-epithelial cancer of skin,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1890,11 +1851,13 @@ Middle Eastern or North African,Train: European-only,Overweight in individuals a
 Middle Eastern or North African,Train: European-only,PE +/- DVT,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Paradoxical eczema in biologic-treated  psoriasis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Past tobacco smoking (Smoked occasionally),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Peripheral arterial disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Prediabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Prevalent VTE,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Prevalent cutaneous melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Prevalent gout cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Prevalent invasive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Primary open-angle glaucoma (POAG),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Probabable REM sleep behavior disorder,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1912,13 +1875,12 @@ Middle Eastern or North African,Train: European-only,Radiographic osteoarthritis
 Middle Eastern or North African,Train: European-only,Retinal detachment,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Rheumatoid arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Rheumatoid factor > 16 IU/mL,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: European-only,Rheumatoid-factor-negative Polyarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Risk of mitral valve prolapse,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Sarcoidosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Severe early age-related macular degeneration (3CACSS),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Severe insulin deficiency,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Short stature in adulthood,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Short stature in adulthood (females),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Short stature in adulthood (males),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Sjogren's syndrome/sicca syndrome,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Skin cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Sleep Apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -1994,7 +1956,6 @@ Middle Eastern or North African,Train: European-only,TTE zoster [herpes zoster],
 Middle Eastern or North African,Train: European-only,Thinness,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Thyroid cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Tobacco smoking ever vs no,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: European-only,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Type 1 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Type 1 diabetes aetiology (non-monogenic),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,Type 1 diabetes diagnosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2026,9 +1987,8 @@ Middle Eastern or North African,Train: European-only,ovarian serous carcinoma,NA
 Middle Eastern or North African,Train: European-only,prostate adenocarcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,skin cutaneous melanoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: European-only,uterine endometrial carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,10 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,10-year risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,5 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,5-year incident prostate cancer,-0.10450966469671252,-0.10910577124844316,2.9267685323370343e-4,5,TRUE,-0.1093327897360993,2.9738370238590673e-4,0.0021950763992527756,0.0014869185119295338,TRUE
 African,Train: Multi incl. EUR,Abdominal aortic aneurysm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Acute appendicitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Adenomyosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2038,41 +1998,33 @@ African,Train: Multi incl. EUR,Apparent Treatment-Resistant Hypertension,-0.0150
 African,Train: Multi incl. EUR,Asthma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,"Asthma ever, at age 8 years",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Atherosclerotic cardiovascular disease (incident and prevalent),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Atrial Fibrillation (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Atrial fibrillation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,BMI adjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,BMI unadjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Breast carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Chronic kidney disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Chronic obstructive pulmonary disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Clear cell renal cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Colorectal advanced neoplasm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Colorectal cancer,-0.04500000000000004,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Colorectal carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Colorectal non-advanced adenoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Coronary artery calcium score > 20,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Coronary artery calcium score > 300,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Coronary artery disease (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Coronary artery disease in childhood cancer survivors aged <10 years at diagnosis and treated with >25 Gy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Coronary heart disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),0.007340076894972236,0.007348232995708683,0.14932894071977268,4,TRUE,0.007563780111226542,0.14152731310073097,0.19412762293570449,0.18398550703095026,FALSE
+African,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),0.007340076894972236,0.007348232995708683,0.14932894071977268,4,TRUE,0.007563780111226542,0.14152731310073097,0.22399341107965903,0.21229096965109645,FALSE
 African,Train: Multi incl. EUR,Crohn's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Diabetes autoantibody positive insulin sensitive,-0.08700000000000008,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Distal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Early-onset colorectal cancer (men),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Early-onset colorectal cancer (women),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Endometriosis - other subtype,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Estrogen receptor negative breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Estrogen receptor positive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Familial / early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Full lifetime risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Gleason <=7 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Gleason >=8 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Glucocorticoid-induced hyperglycemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Gout,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Heart Failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2080,6 +2032,7 @@ African,Train: Multi incl. EUR,Hepatocellular carcinoma,NA,NA,NA,0,FALSE,NA,NA,N
 African,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with a body mass index ≥30,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with no cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Hypertrophic cardiomyopathy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Idiopathic pulmonary fibrosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Incident Lymphocytic Leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Incident all-cause dementia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2091,19 +2044,18 @@ African,Train: Multi incl. EUR,Incident colorectal cancer,NA,NA,NA,0,FALSE,NA,NA
 African,Train: Multi incl. EUR,Incident coronary artery disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Incident coronary heart disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Incident endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Incident ischemic stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Incident non-hodgkin's lymphoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Incident oral cavity and pharyngeal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Incident pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Incident prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Infiltrating endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Lethal prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Non-localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Myocardial injury following non cardiac surgery,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Nonsyndromic cleft lip with or without cleft palate,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Obesity (BMI≥30),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Obesity prevalence,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Ovarian endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Pancreatic cancer (0-10 years of follow-up),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2111,8 +2063,6 @@ African,Train: Multi incl. EUR,Pediatric Steroid-Sensitive Nephrotic Syndrome,NA
 African,Train: Multi incl. EUR,Pediatric asthma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Peritoneal endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Prevalent Coronary Artery Disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Prevalent Myocardial Infarction,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Prevalent Myocardial Infarction and Coronary Revascularization procedure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Prevalent heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Prevelant hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Primary open-angle glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2120,10 +2070,8 @@ African,Train: Multi incl. EUR,Prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALS
 African,Train: Multi incl. EUR,Prostate cancer in male carriers of BRCA1/2 mutations,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Prostate cancer incidence in men with symptoms,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Prostate carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Proximal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Psoriatic arthritis diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Radiographic osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Rectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Renal disease age of onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Rheumatoid arhtirits diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Risk of endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2133,10 +2081,10 @@ African,Train: Multi incl. EUR,Severe COVID-19 course,NA,NA,NA,0,FALSE,NA,NA,NA,
 African,Train: Multi incl. EUR,Spondyloarthropathy diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Stroke excluding subarachnoid hemorrhage,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Systemic lupus erythematosus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Thyroid cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Total prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi incl. EUR,Type 2 diabetes,-0.01903665632198348,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+African,Train: Multi incl. EUR,Type 2 diabetes,-0.05481832816099175,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Type 2 diabetes (T2D),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Ulcerative colitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,Uterine cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2146,9 +2094,8 @@ African,Train: Multi incl. EUR,colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FA
 African,Train: Multi incl. EUR,coronary atherosclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,incident fibromyalgia cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi incl. EUR,prevalent ischemic stroke cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,10 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,10-year risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,5 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,5-year incident prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Abdominal aortic aneurysm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Acute appendicitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Adenomyosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2159,41 +2106,32 @@ East Asian,Train: Multi incl. EUR,Apparent Treatment-Resistant Hypertension,NA,N
 East Asian,Train: Multi incl. EUR,Asthma,0.039000000000000035,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,"Asthma ever, at age 8 years",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Atherosclerotic cardiovascular disease (incident and prevalent),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,Atrial Fibrillation (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Atrial fibrillation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,BMI adjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,BMI unadjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Breast cancer,-0.009999999999999898,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Chronic kidney disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Chronic obstructive pulmonary disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Clear cell renal cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Clinical Dementia Rating global score ≥ 1,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Colorectal advanced neoplasm,0.009000000000000008,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Colorectal non-advanced adenoma,0.010000000000000009,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Coronary artery calcium score > 20,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Coronary artery calcium score > 300,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,Coronary artery disease (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Coronary artery disease in childhood cancer survivors aged <10 years at diagnosis and treated with >25 Gy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Coronary heart disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Cortical amyloid positivity,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Crohn's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Diabetes autoantibody positive insulin sensitive,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Distal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Early onset acute myocardial infarction following  percutaneous coronary intervention,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Early onset acute myocardial infarction following percutaneous coronary intervention,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Early-onset colorectal cancer (men),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Early-onset colorectal cancer (women),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Endometriosis - other subtype,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,Familial / early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Full lifetime risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Gleason <=7 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Gleason >=8 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Gout,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Heart Failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Hepatocellular carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2203,6 +2141,7 @@ East Asian,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with t
 East Asian,Train: Multi incl. EUR,High myopia (aged 7-18 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,High myopia (aged <6 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,High myopia (aged >18 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,Hypertrophic cardiomyopathy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Idiopathic pulmonary fibrosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,IgA nephropathy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Incident Lymphocytic Leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2213,8 +2152,9 @@ East Asian,Train: Multi incl. EUR,Incident breast cancer,NA,NA,NA,0,FALSE,NA,NA,
 East Asian,Train: Multi incl. EUR,Incident cardiovascular event,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Incident colorectal cancer,0.03799999999999992,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Incident coronary artery disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Incident coronary heart disease,-0.017000000000000015,-0.017959056303705687,0.041619512958018794,3,TRUE,-0.01804436307383828,0.04137170896225908,0.06995704882808763,0.07683317378705258,FALSE
+East Asian,Train: Multi incl. EUR,Incident coronary heart disease,-0.017000000000000015,-0.017959056303705687,0.041619512958018794,3,TRUE,-0.01804436307383828,0.04137170896225908,0.07803658679628524,0.07757195430423577,FALSE
 East Asian,Train: Multi incl. EUR,Incident endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,Incident ischemic stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Incident narcolepsy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Incident non-hodgkin's lymphoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Incident oral cavity and pharyngeal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2223,16 +2163,14 @@ East Asian,Train: Multi incl. EUR,Incident prostate cancer,NA,NA,NA,0,FALSE,NA,N
 East Asian,Train: Multi incl. EUR,Incident type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Infiltrating endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Lethal prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Lung cancer,-0.04599999999999982,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Mild myopia (aged >18 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Moderate myopia (aged >18 years),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Non-localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,Myocardial injury following non cardiac surgery,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Nonsyndromic cleft lip with or without cleft palate,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Obesity (BMI≥25),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Obesity (BMI≥30),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,Obesity prevalence,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Ovarian endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Pancreatic cancer (0-10 years of follow-up),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2240,18 +2178,14 @@ East Asian,Train: Multi incl. EUR,Pediatric Steroid-Sensitive Nephrotic Syndrome
 East Asian,Train: Multi incl. EUR,Pediatric asthma,0.06999999999999984,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Peritoneal endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Prevalent Coronary Artery Disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Prevalent Myocardial Infarction,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Prevalent Myocardial Infarction and Coronary Revascularization procedure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Prevalent heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Prevelant hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Primary open-angle glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Prostate cancer,-0.11299999999999988,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Prostate cancer in male carriers of BRCA1/2 mutations,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Prostate cancer incidence in men with symptoms,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Proximal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Psoriatic arthritis diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Radiographic osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Rectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Renal disease age of onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Rheumatoid arhtirits diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Risk of endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2261,8 +2195,8 @@ East Asian,Train: Multi incl. EUR,Severe COVID-19 course,NA,NA,NA,0,FALSE,NA,NA,
 East Asian,Train: Multi incl. EUR,Spondyloarthropathy diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Stroke excluding subarachnoid hemorrhage,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi incl. EUR,Systemic lupus erythematosus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Thyroid cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi incl. EUR,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Total prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Type 2 diabetes,0.03849999999999992,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,Type 2 diabetes (T2D),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2276,10 +2210,8 @@ East Asian,Train: Multi incl. EUR,coronary atherosclerosis,NA,NA,NA,0,FALSE,NA,N
 East Asian,Train: Multi incl. EUR,incident fibromyalgia cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,prevalent ischemic stroke cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi incl. EUR,type 1 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,10 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,10-year risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,5 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,5-year incident prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi incl. EUR,5-year incident prostate cancer,0.023056939682970734,0.016959669089326463,0.3439897997615354,5,TRUE,0.012204899470060591,0.516454889546717,0.37046651292250976,0.5459304937969176,FALSE
 South Asian,Train: Multi incl. EUR,Abdominal aortic aneurysm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Acute appendicitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Adenomyosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2290,43 +2222,36 @@ South Asian,Train: Multi incl. EUR,Apparent Treatment-Resistant Hypertension,NA,
 South Asian,Train: Multi incl. EUR,Asthma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,"Asthma ever, at age 8 years",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Atherosclerotic cardiovascular disease (incident and prevalent),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi incl. EUR,Atrial Fibrillation (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Atrial fibrillation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,BMI adjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,BMI unadjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Chronic kidney disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Chronic obstructive pulmonary disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Clear cell renal cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Colorectal advanced neoplasm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Colorectal non-advanced adenoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Coronary artery calcium score > 20,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Coronary artery calcium score > 300,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi incl. EUR,Coronary artery disease (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Coronary artery disease in childhood cancer survivors aged <10 years at diagnosis and treated with >25 Gy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Coronary heart disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Crohn's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Diabetes autoantibody positive insulin sensitive,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Distal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Early-onset colorectal cancer (men),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Early-onset colorectal cancer (women),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Endometriosis - other subtype,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi incl. EUR,Familial / early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Full lifetime risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Gleason <=7 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Gleason >=8 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Gout,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Heart Failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Hepatocellular carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with a body mass index ≥30,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with no cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi incl. EUR,Hypertrophic cardiomyopathy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Idiopathic pulmonary fibrosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Incident Lymphocytic Leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Incident all-cause dementia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2336,8 +2261,9 @@ South Asian,Train: Multi incl. EUR,Incident breast cancer,NA,NA,NA,0,FALSE,NA,NA
 South Asian,Train: Multi incl. EUR,Incident cardiovascular event,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Incident colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Incident coronary artery disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Incident coronary heart disease,0.029000000000000026,0.024168064902884683,0.0475052183934828,3,TRUE,0.023758021129025655,0.050726381533552446,0.06995704882808763,0.08152906879290596,FALSE
+South Asian,Train: Multi incl. EUR,Incident coronary heart disease,0.029000000000000026,0.024168064902884683,0.0475052183934828,3,TRUE,0.023758021129025655,0.050726381533552446,0.07917536398913799,0.08454396922258742,FALSE
 South Asian,Train: Multi incl. EUR,Incident endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi incl. EUR,Incident ischemic stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Incident non-hodgkin's lymphoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Incident oral cavity and pharyngeal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Incident pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2346,13 +2272,11 @@ South Asian,Train: Multi incl. EUR,Incident type 2 diabetes,NA,NA,NA,0,FALSE,NA,
 South Asian,Train: Multi incl. EUR,Infiltrating endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Inflammatory bowel disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Lethal prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Non-localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi incl. EUR,Myocardial injury following non cardiac surgery,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Nonsyndromic cleft lip with or without cleft palate,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Obesity (BMI≥30),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi incl. EUR,Obesity prevalence,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Ovarian endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Pancreatic cancer (0-10 years of follow-up),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2360,18 +2284,14 @@ South Asian,Train: Multi incl. EUR,Pediatric Steroid-Sensitive Nephrotic Syndrom
 South Asian,Train: Multi incl. EUR,Pediatric asthma,-0.010000000000000009,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Peritoneal endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Prevalent Coronary Artery Disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Prevalent Myocardial Infarction,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Prevalent Myocardial Infarction and Coronary Revascularization procedure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Prevalent heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Prevelant hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Primary open-angle glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Prostate cancer in male carriers of BRCA1/2 mutations,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Prostate cancer incidence in men with symptoms,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Proximal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Psoriatic arthritis diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Radiographic osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Rectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Renal disease age of onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Rheumatoid arhtirits diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Risk of endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2380,9 +2300,9 @@ South Asian,Train: Multi incl. EUR,Seropositive RA,0.04783624008657056,NA,NA,2,T
 South Asian,Train: Multi incl. EUR,Severe COVID-19 course,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Spondyloarthropathy diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Stroke excluding subarachnoid hemorrhage,-0.004410928571687345,-0.00305498290049007,0.34576874539434244,10,FALSE,-0.0030958663380785305,0.33999474434798793,0.40863579001149564,0.40181197059307666,FALSE
+South Asian,Train: Multi incl. EUR,Stroke excluding subarachnoid hemorrhage,-0.004410928571687345,-0.00305498290049007,0.34576874539434244,10,FALSE,-0.0030958663380785305,0.33999474434798793,0.37046651292250976,0.42499343043498494,FALSE
+South Asian,Train: Multi incl. EUR,Systemic lupus erythematosus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Thyroid cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi incl. EUR,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Total prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Type 1 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,Type 2 diabetes,0.0625,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
@@ -2395,9 +2315,8 @@ South Asian,Train: Multi incl. EUR,colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,N
 South Asian,Train: Multi incl. EUR,coronary atherosclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,incident fibromyalgia cases,-0.039999999999999925,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi incl. EUR,type 1 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,10 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,10-year risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,5 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,5-year incident prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Abdominal aortic aneurysm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Acute appendicitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Adenomyosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2407,45 +2326,38 @@ Hispanic or Latin American,Train: Multi incl. EUR,Apparent Treatment-Resistant H
 Hispanic or Latin American,Train: Multi incl. EUR,Asthma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,"Asthma ever, at age 8 years",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Atherosclerotic cardiovascular disease (incident and prevalent),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Atrial Fibrillation (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Atrial fibrillation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,BMI adjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,BMI unadjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Breast cancer (Latin american women),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Breast cancer (US Latinas),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Chronic kidney disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Chronic obstructive pulmonary disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Clear cell renal cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Colorectal advanced neoplasm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Colorectal cancer,-0.025000000000000022,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Colorectal non-advanced adenoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Coronary artery calcium score > 20,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Coronary artery calcium score > 300,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Coronary artery disease (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Coronary artery disease in childhood cancer survivors aged <10 years at diagnosis and treated with >25 Gy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Coronary heart disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),0.019840076894972136,0.016967870992337448,0.02420400327705511,4,TRUE,0.016938395864147776,0.024565736905752124,0.06293040852034329,0.0638338993752408,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),0.019840076894972136,0.016967870992337448,0.02420400327705511,4,TRUE,0.016938395864147776,0.024565736905752124,0.06522520821663004,0.062020573289865634,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Crohn's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Diabetes autoantibody positive insulin sensitive,0.06099999999999994,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Distal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Early-onset colorectal cancer (men),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Early-onset colorectal cancer (women),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Endometriosis - other subtype,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Familial / early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Full lifetime risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Gleason <=7 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Gleason >=8 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Gout,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Heart Failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Hepatocellular carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with a body mass index ≥30,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with no cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Hypertrophic cardiomyopathy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Idiopathic pulmonary fibrosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident Lymphocytic Leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident all-cause dementia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2455,21 +2367,20 @@ Hispanic or Latin American,Train: Multi incl. EUR,Incident breast cancer,NA,NA,N
 Hispanic or Latin American,Train: Multi incl. EUR,Incident cardiovascular event,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident coronary artery disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Incident coronary heart disease,-0.06800000000000006,-0.06898350648427744,0.0014647751798405806,3,TRUE,-0.0690357924205742,0.0014718321887521315,0.009521038668963774,0.006377939484592569,TRUE
+Hispanic or Latin American,Train: Multi incl. EUR,Incident coronary heart disease,-0.06800000000000006,-0.06898350648427744,0.0014647751798405806,3,TRUE,-0.0690357924205742,0.0014718321887521315,0.007323875899202903,0.005519370707820493,TRUE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Incident ischemic stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident non-hodgkin's lymphoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident oral cavity and pharyngeal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Incident prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Infiltrating endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Lethal prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Non-localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Myocardial injury following non cardiac surgery,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Nonsyndromic cleft lip with or without cleft palate,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Obesity (BMI≥30),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Obesity prevalence,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Ovarian endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Pancreatic cancer (0-10 years of follow-up),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2477,18 +2388,14 @@ Hispanic or Latin American,Train: Multi incl. EUR,Pediatric Steroid-Sensitive Ne
 Hispanic or Latin American,Train: Multi incl. EUR,Pediatric asthma,0.039999999999999925,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Peritoneal endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Prevalent Coronary Artery Disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Prevalent Myocardial Infarction,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Prevalent Myocardial Infarction and Coronary Revascularization procedure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Prevalent heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Prevelant hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Primary open-angle glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Prostate cancer in male carriers of BRCA1/2 mutations,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Prostate cancer incidence in men with symptoms,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Proximal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Psoriatic arthritis diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Radiographic osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Rectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Renal disease age of onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Rheumatoid arhtirits diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Risk of endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2498,10 +2405,10 @@ Hispanic or Latin American,Train: Multi incl. EUR,Severe COVID-19 course,NA,NA,N
 Hispanic or Latin American,Train: Multi incl. EUR,Spondyloarthropathy diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Stroke excluding subarachnoid hemorrhage,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Systemic lupus erythematosus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Thyroid cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Total prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi incl. EUR,Type 2 diabetes,0.04899999999999993,0.0356794827284969,0.048431803034829905,5,TRUE,0.03388231338279506,0.05644320147201182,0.06995704882808763,0.08152906879290596,FALSE
+Hispanic or Latin American,Train: Multi incl. EUR,Type 2 diabetes,0.0475000000000001,0.023013284020446726,0.20474343839152728,6,TRUE,0.014950694938273813,0.41075120583967445,0.2559292979894091,0.47394369904577816,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Type 2 diabetes (T2D),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Ulcerative colitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,Uterine cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2512,9 +2419,8 @@ Hispanic or Latin American,Train: Multi incl. EUR,coronary atherosclerosis,NA,NA
 Hispanic or Latin American,Train: Multi incl. EUR,incident fibromyalgia cases,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,type 1 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi incl. EUR,type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,10 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,10-year risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,5 year colorectal cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,5-year incident prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Abdominal aortic aneurysm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Acute appendicitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Adenomyosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2524,44 +2430,37 @@ Middle Eastern or North African,Train: Multi incl. EUR,Apparent Treatment-Resist
 Middle Eastern or North African,Train: Multi incl. EUR,Asthma,0.04899999999999993,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,"Asthma ever, at age 8 years",NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Atherosclerotic cardiovascular disease (incident and prevalent),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Atrial Fibrillation (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Atrial fibrillation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,BMI adjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,BMI unadjusted obstructive sleep apnea,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Cardiomyopathy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Chronic kidney disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Chronic obstructive pulmonary disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Clear cell renal cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Clinical osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Colorectal advanced neoplasm,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Colorectal non-advanced adenoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Coronary artery calcium score > 20,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Coronary artery calcium score > 300,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Coronary artery disease (personal history),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Coronary artery disease in childhood cancer survivors aged <10 years at diagnosis and treated with >25 Gy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Coronary heart disease,0.04572172094288274,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Coronary heart disease (incident and prevalent),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Crohn's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Diabetes autoantibody positive insulin sensitive,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Distal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Early-onset colorectal cancer (men),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Early-onset colorectal cancer (women),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Endometriosis - other subtype,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Epithelial ovarian cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Familial / early-onset colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Full lifetime risk of colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Gleason <=7 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Gleason >=8 prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Gout,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Heart Failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Hepatocellular carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with a body mass index ≥30,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with no cirrhosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Hepatocellular carcinoma in individuals with type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Hypertrophic cardiomyopathy,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Idiopathic pulmonary fibrosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Incident Lymphocytic Leukemia,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Incident T2D in prediabetics,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2574,19 +2473,18 @@ Middle Eastern or North African,Train: Multi incl. EUR,Incident colorectal cance
 Middle Eastern or North African,Train: Multi incl. EUR,Incident coronary artery disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Incident coronary heart disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Incident endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Incident ischemic stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Incident non-hodgkin's lymphoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Incident oral cavity and pharyngeal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Incident pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Incident prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Infiltrating endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Kidney cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Lethal prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Lung cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Non-localized prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Myocardial injury following non cardiac surgery,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Nonsyndromic cleft lip with or without cleft palate,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Obesity (BMI≥30),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Obstructive CAD,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Obesity prevalence,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Ovarian endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Pancreatic cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Pancreatic cancer (0-10 years of follow-up),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2595,18 +2493,14 @@ Middle Eastern or North African,Train: Multi incl. EUR,Pediatric asthma,NA,NA,NA
 Middle Eastern or North African,Train: Multi incl. EUR,Peritoneal endometriosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Prediabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Prevalent Coronary Artery Disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Prevalent Myocardial Infarction,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Prevalent Myocardial Infarction and Coronary Revascularization procedure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Prevalent heart failure,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Prevelant hypertension,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Primary open-angle glaucoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Prostate cancer in male carriers of BRCA1/2 mutations,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Prostate cancer incidence in men with symptoms,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Proximal colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Psoriatic arthritis diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Radiographic osteoarthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Rectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Renal disease age of onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Rheumatoid arhtirits diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Risk of endometrial cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2616,10 +2510,10 @@ Middle Eastern or North African,Train: Multi incl. EUR,Severe COVID-19 course,NA
 Middle Eastern or North African,Train: Multi incl. EUR,Spondyloarthropathy diagnosis in patient with arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Stroke,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Stroke excluding subarachnoid hemorrhage,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Systemic lupus erythematosus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Thyroid cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Total hip replacement,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Total prostate cancer risk in 10 years,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi incl. EUR,Type 2 diabetes,0.008399999999999963,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi incl. EUR,Type 2 diabetes,0.08989999999999998,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Type 2 diabetes (T2D),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Ulcerative colitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi incl. EUR,Uterine cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2676,6 +2570,7 @@ East Asian,Train: East Asian-only,Cancer suspected or other,NA,NA,NA,0,FALSE,NA,
 East Asian,Train: East Asian-only,Cancer within the respiratory system,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Carbuncle and furuncle,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Cardiac dysrhythmias,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: East Asian-only,Cardiovascular disease in patients with type II diabetes Mellitus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Cataract,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Cellulitis and abscess of fingers toes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Central origin vertigo,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2699,7 +2594,6 @@ East Asian,Train: East Asian-only,Chronic sinusitis,NA,NA,NA,0,FALSE,NA,NA,NA,NA
 East Asian,Train: East Asian-only,Chronic thyroiditis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Cirrhosis of liver without mention of alcohol,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Class III/IV lupus nephritis in anti-sm positive systemic lupus erythematosus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: East Asian-only,Class V lupus nephritis in anti-sm positive systemic lupus erythematosus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Clinically significant prostate cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Colon cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: East Asian-only,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2913,11 +2807,11 @@ Middle Eastern or North African,Train: East Asian-only,Prediabetes,NA,NA,NA,0,FA
 Middle Eastern or North African,Train: East Asian-only,Systemic lupus erythematosus,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,Asthma onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,Breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: Multi excl. EUR,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,ER-negative breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,ER-positive breast cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,Multiple sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-African,Train: Multi excl. EUR,Parkinson's disease (age at onset),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,Rheumatoid arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,Total cholesterol levels,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,Type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2925,38 +2819,39 @@ African,Train: Multi excl. EUR,glioblastoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: Multi excl. EUR,head and neck squamous cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,Asthma onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,Atrial fibrillation,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi excl. EUR,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,Incident type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,Multiple sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+East Asian,Train: Multi excl. EUR,Nasopharyngeal carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-East Asian,Train: Multi excl. EUR,Parkinson's disease (age at onset),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,Rheumatoid arthritis,0,NA,NA,1,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,Type 2 diabetes,0.006999999999999895,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,glioblastoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 East Asian,Train: Multi excl. EUR,head and neck squamous cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi excl. EUR,Asthma onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+South Asian,Train: Multi excl. EUR,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi excl. EUR,Incident type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi excl. EUR,Multiple sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi excl. EUR,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-South Asian,Train: Multi excl. EUR,Parkinson's disease (age at onset),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi excl. EUR,Rheumatoid arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi excl. EUR,Type 2 diabetes,0.014999999999999902,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi excl. EUR,glioblastoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 South Asian,Train: Multi excl. EUR,head and neck squamous cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi excl. EUR,Asthma onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Hispanic or Latin American,Train: Multi excl. EUR,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi excl. EUR,Multiple sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi excl. EUR,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Hispanic or Latin American,Train: Multi excl. EUR,Parkinson's disease (age at onset),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi excl. EUR,Rheumatoid arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi excl. EUR,Type 2 diabetes,0.04899999999999993,NA,NA,2,TRUE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi excl. EUR,glioblastoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi excl. EUR,head and neck squamous cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Hispanic or Latin American,Train: Multi excl. EUR,type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi excl. EUR,Asthma onset,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+Middle Eastern or North African,Train: Multi excl. EUR,Colorectal cancer,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi excl. EUR,Coronary heart disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi excl. EUR,Incident T2D in prediabetics,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi excl. EUR,Multiple sclerosis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi excl. EUR,Parkinson's disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
-Middle Eastern or North African,Train: Multi excl. EUR,Parkinson's disease (age at onset),NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi excl. EUR,Prediabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi excl. EUR,Rheumatoid arthritis,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 Middle Eastern or North African,Train: Multi excl. EUR,Type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
@@ -2964,6 +2859,7 @@ Middle Eastern or North African,Train: Multi excl. EUR,glioblastoma,NA,NA,NA,0,F
 Middle Eastern or North African,Train: Multi excl. EUR,head and neck squamous cell carcinoma,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: African-only,Age-related macular degeneration,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: African-only,Chronic kidney disease,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
+African,Train: African-only,Type 2 diabetes,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: African-only,breast cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: African-only,estrogen-receptor nagetive breast cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
 African,Train: African-only,estrogen-receptor negative breast cancer risk,NA,NA,NA,0,FALSE,NA,NA,NA,NA,FALSE
