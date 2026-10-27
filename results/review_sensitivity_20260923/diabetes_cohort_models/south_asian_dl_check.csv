@@ -1,0 +1,4 @@
+estimate,delta_hat,lo,hi,Q,I2,k,note
+"IVW, all 12 scores",-1.447644403060121e-4,-0.004174780046823121,0.0038852511662110967,50.10568143892262,78.0464017570369,12,Current DerSimonian-Laird on three DeltaAUC values. Not one of the new ancestry models.
+"IVW, 3 independent scores",-0.016023825708426986,-0.022255109636068783,-0.009792541780785188,4.0812726364831144,50.9956776197283,3,Current DerSimonian-Laird on three DeltaAUC values. Not one of the new ancestry models.
+"Random effects (DL), 3 independent scores",-0.013423307275401837,-0.026573445325007584,-2.731692257960886e-4,4.0812726364831144,50.9956776197283,3,Current DerSimonian-Laird on three DeltaAUC values. Not one of the new ancestry models.

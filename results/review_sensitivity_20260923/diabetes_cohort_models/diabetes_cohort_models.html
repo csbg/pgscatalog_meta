@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang='en'><head><meta charset='utf-8'>
+<title>Type 2 diabetes cohort models — questions for Georg</title>
+<style>
+body { font-family: DejaVu Sans, Helvetica, Arial, sans-serif; margin: 24px; color: #1a1a1a; line-height: 1.45; max-width: 1100px; }
+h1 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+h2 { font-size: 1.25rem; margin-top: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 0.25rem; }
+h3 { font-size: 1.05rem; margin-top: 1.4rem; }
+.lead { background: #f4f7fb; border-left: 4px solid #332288; padding: 12px 14px; margin: 12px 0 20px; }
+.box { background: #fafafa; border: 1px solid #ddd; padding: 12px 14px; margin: 12px 0; }
+.q { background: #fff8e8; border-left: 4px solid #E69F00; padding: 10px 12px; margin: 10px 0 18px; font-weight: 600; }
+table { border-collapse: collapse; width: 100%; font-size: 0.86rem; margin: 10px 0 18px; }
+th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; vertical-align: top; }
+th { background: #f0f0f0; }
+tr.ref { background: #eef6ee; font-weight: 600; }
+code { font-family: DejaVu Sans Mono, Menlo, monospace; font-size: 0.9em; }
+ul { margin-top: 0.4rem; }
+.small { color: #444; font-size: 0.9rem; }
+</style>
+</head><body>
+<h1>Type 2 diabetes cohort models</h1>
+<p class='small'>Catalog stamp 20260923. Side analysis only. Script 09 and the DerSimonian-Laird fit are unchanged. The tables below are Nikolaus's four models. The cohort in the mixed models is the sample-set id.</p>
+<div class='lead'>
+<p><strong>Scope.</strong> A row is one evaluation: one score, one sample set, one ancestry, one AUC, and one SE. 
+It is not the Stage 1 average. A cohort random effect marks which of those rows share a group. 
+It does not make the AUCs independent.</p>
+<p>The dependence model is being chosen on type 2 diabetes first. 
+After that choice, the same model would replace DerSimonian-Laird in script 09 for diabetes and for the next two shared-sample-set comparisons: 
+breast cancer (European-only training, South Asian target; 11 scores, 10 on one sample set) and 
+stroke excluding subarachnoid hemorrhage (multi-ancestry training, South Asian target; 10 scores on the same two sample sets).</p>
+</div>
+<h2>What the current DerSimonian-Laird fit is</h2>
+<div class='box'>
+<p>For European-only training, South Asian target, the current script 09 fit keeps one score per target sample set, then fits DerSimonian-Laird to those ΔAUC values. There is no cohort term. I² is disagreement among the three kept ΔAUC values.</p>
+<ul>
+<li>12 scores. Inverse-variance pool of all 12: <strong>-0.0001</strong> (-0.0042 to 0.0039).</li>
+<li>Pool of the 3 kept scores: <strong>-0.0160</strong> (-0.0223 to -0.0098).</li>
+<li>DerSimonian-Laird of those 3: <strong>-0.0134</strong> (-0.0266 to -0.0003). Q = <strong>4.081</strong>, I² = <strong>50.996%</strong> (df = 2).</li>
+</ul>
+<p class='small'>These numbers match <code>09_dependence_cells.csv</code>. They are the meeting example. 
+Commit 7a552c1 (one evaluation per score × sample set × ancestry) did not change this cell, 
+or the European-only East Asian / Hispanic or Latin American diabetes cells.</p>
+<p class='small'>European-only Hispanic or Latin American: 10 scores on one All of Us sample set (PSS011736). Random effects are not fit there under the current rule.</p>
+<p class='small'>Diabetes cells that did change after that commit: 
+Multi-ancestry Hispanic or Latin American: 5 scores to 6; Multi-ancestry African: 1 score to 2; Multi-ancestry Middle Eastern or North African: 1 score on 1 sample set to 2 scores on 2 sample sets
+.</p>
+</div>
+<h2>Cell counts across Figure 1C</h2>
+<div class='box'>
+<p>The notes' 15 of 28 matches the tables before commit 7a552c1. 
+It is the count of comparisons in which every score sat on the same target sample set. 
+Seven further comparisons had only one score. It is not the count of cells with exactly one target sample set (that was 18 of 28).</p>
+<ul>
+<li>Current tables: <strong>30</strong> Figure 1C cells.</li>
+<li>Current: every score shares one target sample set in <strong>17</strong> of the k≥2 cells.</li>
+<li>Current: <strong>19</strong> of 30 cells have exactly one target sample set.</li>
+<li>Current: <strong>20</strong> of 30 cells have exactly one target study name.</li>
+</ul>
+<p>Inside a cell with one target cohort, a cohort variance cannot be estimated from the target side alone. 
+A reply that puts this random effect on all 30 current comparisons would overclaim. 
+The diabetes model below uses European and target AUC rows together, so the cohort term is estimable when several scores share a sample set.</p>
+</div>
+<h2>Evaluation table used here</h2>
+<div class='box'>
+<p>71 evaluation rows. 18 scores. 29 sample sets. 12 study names. 
+Corrected logit values from <code>auc_ci_to_logit()</code>. 
+AUC models use the delta-method SE (<code>SE_logit × AUC × (1 − AUC)</code>). 
+Fits are separate inside each training bucket. European is the reference ancestry.</p>
+<p class='small'>South Asian European-only target sample sets in this table:</p><ul>
+<li>PSS011749 — UK Biobank (UKB), 10 evaluation(s)</li>
+<li>PSS004315 — UK Biobank (UKB), 1 evaluation(s)</li>
+<li>PSS011249 — Genes &amp; Health (G&amp;H), 1 evaluation(s)</li>
+<li>PSS011291 — UK Biobank (UKB), 1 evaluation(s)</li>
+</ul>
+<p class='small'>CSV: <code>diabetes_evaluation_rows.csv</code>.</p>
+</div>
+<h2>What is not in the tables</h2>
+<div class='box'>
+<p>The study-name cohort was fit and is stored in <code>diabetes_model_coefficients.csv</code>. It is not a second version of the sample-set model. 
+Under that coding, every UK Biobank evaluation shares one intercept, including East Asian, European, and South Asian. 
+European-only East Asian then moves from the Figure 1C value 0.0179 to -0.0043.
+ That happens because the cohort label and the ancestry label are no longer separate.</p>
+<p>metafor::rma.mv, on the AUC and on the logit, is the weight check. lmer rescales the published standard errors; rma.mv keeps them fixed. 
+For European-only South Asian those two AUC fits are -0.0107 and -0.0111. 
+The check does not agree in the sparser multi-ancestry cells, which is why those rows are not on this page. 
+One Middle Eastern row has no cohort text and would enter a study-name fit as its own group.</p>
+<p>In the multi-ancestry bucket a sample-set cohort variance is barely estimated: 
+21 rows, 19 sample sets, and 2 of those sets contain more than one score.
+</p>
+</div>
+<h2>Ancestry estimates — Train: European-only</h2>
+<h3>East Asian</h3>
+<table>
+<thead><tr>
+<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>
+</tr></thead><tbody>
+<tr class='ref'><td>Figure 1C IVW (delta_fixed) (k=11)</td><td>—</td><td>0.0179</td><td>0.0002 to 0.0355</td><td>yes</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS)</td><td>— (not used)</td><td>0.0270</td><td>0.0088 to 0.0453</td><td>yes</td><td>Shared people are not marked.</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</td><td>— (not used)</td><td>0.0170</td><td>-0.0127 to 0.0466</td><td>no</td><td>Point matches Figure 1C (0.0179). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0108</td><td>-0.0200 to 0.0416</td><td>no</td><td>lmer convergence warning.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0151</td><td>-0.0163 to 0.0465</td><td>no</td><td>lmer convergence warning. 12 scores as random intercepts.</td></tr>
+</tbody></table>
+<h3>Hispanic or Latin American</h3>
+<table>
+<thead><tr>
+<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>
+</tr></thead><tbody>
+<tr class='ref'><td>Figure 1C IVW (delta_fixed) (k=10)</td><td>—</td><td>0.0521</td><td>0.0495 to 0.0548</td><td>yes</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS)</td><td>— (not used)</td><td>0.0538</td><td>0.0347 to 0.0728</td><td>yes</td><td>Shared people are not marked.</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</td><td>— (not used)</td><td>0.0512</td><td>0.0467 to 0.0557</td><td>yes</td><td>Point matches Figure 1C (0.0521). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0432</td><td>0.0192 to 0.0671</td><td>yes</td><td>lmer convergence warning.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0474</td><td>0.0226 to 0.0723</td><td>yes</td><td>lmer convergence warning. 12 scores as random intercepts.</td></tr>
+</tbody></table>
+<h3>South Asian</h3>
+<table>
+<thead><tr>
+<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>
+</tr></thead><tbody>
+<tr class='ref'><td>Figure 1C IVW (delta_fixed) (k=12)</td><td>—</td><td>-0.0001</td><td>-0.0042 to 0.0039</td><td>no</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS)</td><td>— (not used)</td><td>0.0031</td><td>-0.0137 to 0.0199</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</td><td>— (not used)</td><td>-0.0001</td><td>-0.0069 to 0.0066</td><td>no</td><td>Point matches Figure 1C (-0.0001). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>-0.0107</td><td>-0.0254 to 0.0040</td><td>no</td><td>lmer convergence warning.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>-0.0099</td><td>-0.0251 to 0.0052</td><td>no</td><td>lmer convergence warning. 12 scores as random intercepts.</td></tr>
+</tbody></table>
+<h2>Ancestry estimates — Train: Multi incl. EUR</h2>
+<h3>African</h3>
+<table>
+<thead><tr>
+<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>
+</tr></thead><tbody>
+<tr class='ref'><td>Figure 1C IVW (delta_fixed) (k=2)</td><td>—</td><td>-0.0585</td><td>-0.0659 to -0.0511</td><td>yes</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS)</td><td>— (not used)</td><td>-0.0675</td><td>-0.1390 to 0.0041</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</td><td>— (not used)</td><td>-0.0587</td><td>-0.1118 to -0.0056</td><td>yes</td><td>Point matches Figure 1C (-0.0585). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>-0.0633</td><td>-0.1377 to 0.0110</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>-0.0500</td><td>-0.1641 to 0.0642</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+</tbody></table>
+<h3>East Asian</h3>
+<table>
+<thead><tr>
+<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>
+</tr></thead><tbody>
+<tr class='ref'><td>Figure 1C IVW (delta_fixed) (k=2)</td><td>—</td><td>0.0356</td><td>-0.0045 to 0.0757</td><td>no</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS)</td><td>— (not used)</td><td>0.0194</td><td>-0.0618 to 0.1007</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</td><td>— (not used)</td><td>0.0157</td><td>-0.2845 to 0.3159</td><td>no</td><td>Point is 0.0157; Figure 1C is 0.0356. This joint regression is not the cell-wise pool. Shared people are not marked.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0342</td><td>-0.0509 to 0.1193</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0460</td><td>-0.0868 to 0.1789</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+</tbody></table>
+<h3>Hispanic or Latin American</h3>
+<table>
+<thead><tr>
+<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>
+</tr></thead><tbody>
+<tr class='ref'><td>Figure 1C IVW (delta_fixed) (k=6)</td><td>—</td><td>0.0230</td><td>0.0187 to 0.0273</td><td>yes</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS)</td><td>— (not used)</td><td>0.0302</td><td>-0.0220 to 0.0825</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</td><td>— (not used)</td><td>0.0240</td><td>-0.0083 to 0.0563</td><td>no</td><td>Point matches Figure 1C (0.0230). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0267</td><td>-0.0316 to 0.0851</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0267</td><td>-0.0722 to 0.1255</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+</tbody></table>
+<h3>Middle Eastern or North African</h3>
+<table>
+<thead><tr>
+<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>
+</tr></thead><tbody>
+<tr class='ref'><td>Figure 1C IVW (delta_fixed) (k=2)</td><td>—</td><td>0.1267</td><td>0.1164 to 0.1370</td><td>yes</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS)</td><td>— (not used)</td><td>0.1063</td><td>0.0251 to 0.1876</td><td>yes</td><td>Shared people are not marked.</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</td><td>— (not used)</td><td>0.1331</td><td>0.0562 to 0.2101</td><td>yes</td><td>Point is 0.1331; Figure 1C is 0.1267. This joint regression is not the cell-wise pool. Shared people are not marked.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.1083</td><td>0.0255 to 0.1911</td><td>yes</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0418</td><td>-0.0890 to 0.1727</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+</tbody></table>
+<h3>South Asian</h3>
+<table>
+<thead><tr>
+<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>
+</tr></thead><tbody>
+<tr class='ref'><td>Figure 1C IVW (delta_fixed) (k=2)</td><td>—</td><td>0.0184</td><td>0.0033 to 0.0335</td><td>yes</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS)</td><td>— (not used)</td><td>0.0434</td><td>-0.0378 to 0.1247</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</td><td>— (not used)</td><td>0.0083</td><td>-0.1036 to 0.1201</td><td>no</td><td>Point is 0.0083; Figure 1C is 0.0184. This joint regression is not the cell-wise pool. Shared people are not marked.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0572</td><td>-0.0278 to 0.1422</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</td><td>sample-set id</td><td>0.0674</td><td>-0.0655 to 0.2002</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+</tbody></table>
+<h2>Questions for Georg — one per model</h2>
+<h3>Unweighted regression: lm(AUC ~ ancestry + PGS)</h3>
+<p>Each score has its own baseline. Every evaluation has the same weight. Shared people are not marked.</p>
+<p class='small'>Ancestry estimates:</p>
+<table><thead><tr><th>Bucket</th><th>Cohort</th><th>Ancestry</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th></tr></thead><tbody>
+<tr><td>Train: European-only</td><td>— (not used)</td><td>East Asian</td><td>0.0270</td><td>0.0088 to 0.0453</td><td>yes</td><td>Shared people are not marked.</td></tr>
+<tr><td>Train: European-only</td><td>— (not used)</td><td>Hispanic or Latin American</td><td>0.0538</td><td>0.0347 to 0.0728</td><td>yes</td><td>Shared people are not marked.</td></tr>
+<tr><td>Train: European-only</td><td>— (not used)</td><td>South Asian</td><td>0.0031</td><td>-0.0137 to 0.0199</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>African</td><td>-0.0675</td><td>-0.1390 to 0.0041</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>East Asian</td><td>0.0194</td><td>-0.0618 to 0.1007</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>Hispanic or Latin American</td><td>0.0302</td><td>-0.0220 to 0.0825</td><td>no</td><td>Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>Middle Eastern or North African</td><td>0.1063</td><td>0.0251 to 0.1876</td><td>yes</td><td>Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>South Asian</td><td>0.0434</td><td>-0.0378 to 0.1247</td><td>no</td><td>Shared people are not marked.</td></tr>
+</tbody></table>
+<div class='q'>Should the unweighted regression be the dependence model?</div>
+<h3>Weighted regression: lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</h3>
+<p>Each score still has its own baseline, and a precise AUC pulls harder. Shared people are not marked. The point matches Figure 1C for European-only South Asian and Hispanic or Latin American. It is not the cell-wise Figure 1C pool in the multi-ancestry cells, where one very precise European row dominates the joint fit.</p>
+<p class='small'>Ancestry estimates:</p>
+<table><thead><tr><th>Bucket</th><th>Cohort</th><th>Ancestry</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th></tr></thead><tbody>
+<tr><td>Train: European-only</td><td>— (not used)</td><td>East Asian</td><td>0.0170</td><td>-0.0127 to 0.0466</td><td>no</td><td>Point matches Figure 1C (0.0179). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>Train: European-only</td><td>— (not used)</td><td>Hispanic or Latin American</td><td>0.0512</td><td>0.0467 to 0.0557</td><td>yes</td><td>Point matches Figure 1C (0.0521). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>Train: European-only</td><td>— (not used)</td><td>South Asian</td><td>-0.0001</td><td>-0.0069 to 0.0066</td><td>no</td><td>Point matches Figure 1C (-0.0001). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>African</td><td>-0.0587</td><td>-0.1118 to -0.0056</td><td>yes</td><td>Point matches Figure 1C (-0.0585). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>East Asian</td><td>0.0157</td><td>-0.2845 to 0.3159</td><td>no</td><td>Point is 0.0157; Figure 1C is 0.0356. This joint regression is not the cell-wise pool. Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>Hispanic or Latin American</td><td>0.0240</td><td>-0.0083 to 0.0563</td><td>no</td><td>Point matches Figure 1C (0.0230). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>Middle Eastern or North African</td><td>0.1331</td><td>0.0562 to 0.2101</td><td>yes</td><td>Point is 0.1331; Figure 1C is 0.1267. This joint regression is not the cell-wise pool. Shared people are not marked.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>— (not used)</td><td>South Asian</td><td>0.0083</td><td>-0.1036 to 0.1201</td><td>no</td><td>Point is 0.0083; Figure 1C is 0.0184. This joint regression is not the cell-wise pool. Shared people are not marked.</td></tr>
+</tbody></table>
+<div class='q'>Should the weighted regression be the dependence model?</div>
+<h3>Cohort random effect, score fixed: lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</h3>
+<p>The cohort is the sample-set id. Evaluations from the same sample set share an offset, and the score stays a fixed intercept. The largest European-only sample sets contain only one ancestry, so that offset and the ancestry coefficient compete for the same shift. Ten South Asian scores share PSS011749, and all of them are South Asian.</p>
+<p class='small'>Ancestry estimates:</p>
+<table><thead><tr><th>Bucket</th><th>Cohort</th><th>Ancestry</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th></tr></thead><tbody>
+<tr><td>Train: European-only</td><td>sample-set id</td><td>East Asian</td><td>0.0108</td><td>-0.0200 to 0.0416</td><td>no</td><td>lmer convergence warning.</td></tr>
+<tr><td>Train: European-only</td><td>sample-set id</td><td>Hispanic or Latin American</td><td>0.0432</td><td>0.0192 to 0.0671</td><td>yes</td><td>lmer convergence warning.</td></tr>
+<tr><td>Train: European-only</td><td>sample-set id</td><td>South Asian</td><td>-0.0107</td><td>-0.0254 to 0.0040</td><td>no</td><td>lmer convergence warning.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>African</td><td>-0.0633</td><td>-0.1377 to 0.0110</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>East Asian</td><td>0.0342</td><td>-0.0509 to 0.1193</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>Hispanic or Latin American</td><td>0.0267</td><td>-0.0316 to 0.0851</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>Middle Eastern or North African</td><td>0.1083</td><td>0.0255 to 0.1911</td><td>yes</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>South Asian</td><td>0.0572</td><td>-0.0278 to 0.1422</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated.</td></tr>
+</tbody></table>
+<div class='q'>Should the cohort random effect with the score kept fixed be the dependence model?</div>
+<h3>Score and cohort random: lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</h3>
+<p>The cohort is again the sample-set id. The score is a random intercept as well. European-only training has 12 scores. Multi-ancestry training has 6. The same ancestry-versus-cohort overlap applies.</p>
+<p class='small'>Ancestry estimates:</p>
+<table><thead><tr><th>Bucket</th><th>Cohort</th><th>Ancestry</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th></tr></thead><tbody>
+<tr><td>Train: European-only</td><td>sample-set id</td><td>East Asian</td><td>0.0151</td><td>-0.0163 to 0.0465</td><td>no</td><td>lmer convergence warning. 12 scores as random intercepts.</td></tr>
+<tr><td>Train: European-only</td><td>sample-set id</td><td>Hispanic or Latin American</td><td>0.0474</td><td>0.0226 to 0.0723</td><td>yes</td><td>lmer convergence warning. 12 scores as random intercepts.</td></tr>
+<tr><td>Train: European-only</td><td>sample-set id</td><td>South Asian</td><td>-0.0099</td><td>-0.0251 to 0.0052</td><td>no</td><td>lmer convergence warning. 12 scores as random intercepts.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>African</td><td>-0.0500</td><td>-0.1641 to 0.0642</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>East Asian</td><td>0.0460</td><td>-0.0868 to 0.1789</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>Hispanic or Latin American</td><td>0.0267</td><td>-0.0722 to 0.1255</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>Middle Eastern or North African</td><td>0.0418</td><td>-0.0890 to 0.1727</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+<tr><td>Train: Multi incl. EUR</td><td>sample-set id</td><td>South Asian</td><td>0.0674</td><td>-0.0655 to 0.2002</td><td>no</td><td>lmer convergence warning. 21 rows and 19 sample sets; 2 sample sets contain more than one score. The cohort variance is barely estimated. 6 scores as random intercepts.</td></tr>
+</tbody></table>
+<div class='q'>Should treating both the score and the cohort as random be the dependence model?</div>
+<h2>If dropping rows is preferred to modelling the sharing</h2>
+<div class='box'>
+<p>Two reduction rules, counted on the diabetes evaluation table above. The page does not pick a rule.</p>
+<ul>
+<li>One score per sample set (lowest PGS ID within sample set × ancestry): keeps 33 rows, drops 38 of 71.</li>
+<li>Largest cohort when one score is evaluated more than once within ancestry: keeps 65 rows, drops 6 of 71.</li>
+</ul>
+</div>
+<div class='q'>If you would rather drop rows than model the sharing, which rule do you prefer: one score per sample set, or the largest cohort when one score is evaluated more than once?</div>
+<h2>Files</h2>
+<ul>
+<li><code>diabetes_evaluation_rows.csv</code></li>
+<li><code>diabetes_model_coefficients.csv</code> — the four models, plus the study-name fits and the metafor weight check</li>
+<li><code>south_asian_dl_check.csv</code></li>
+<li><code>diabetes_reduced_rule_counts.csv</code></li>
+<li><code>diabetes_cohort_models.html</code> (this page)</li>
+</ul>
+</body></html>
