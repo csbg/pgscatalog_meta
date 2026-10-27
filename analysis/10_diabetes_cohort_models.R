@@ -21,6 +21,7 @@ suppressPackageStartupMessages({
   library(janitor)
   library(lme4)
   library(metafor)
+  library(jsonlite)
 })
 
 if (!file.exists("R/load.R")) {
@@ -220,15 +221,11 @@ fp_ppm   <- catalog_bulk_file("performance_metrics", stamp)
 fp_dep   <- file.path("results", paste0("review_sensitivity_", stamp), "tables", "09_dependence_cells.csv")
 fp_pairs <- file.path("results", paste0("review_sensitivity_", stamp), "tables", "10_covariates_pairs.csv")
 fp_ids   <- file.path("results", paste0("review_sensitivity_", stamp), "tables", "13_cell_identifiers_long.csv")
-fp_share <- file.path(
-  "results", paste0("review_sensitivity_", stamp), "tables",
-  "07_within_cell_sampleset_sharing_summary.csv"
-)
 
 stopifnot(
   file.exists(fp_eval), file.exists(fp_s1f), file.exists(fp_pss),
   file.exists(fp_ppm), file.exists(fp_dep), file.exists(fp_pairs),
-  file.exists(fp_ids), file.exists(fp_share)
+  file.exists(fp_ids)
 )
 
 eval_raw <- read_csv(fp_eval, show_col_types = FALSE)
@@ -239,7 +236,6 @@ pairs_t2d <- read_csv(fp_pairs, show_col_types = FALSE) %>%
   filter(trait_label == "Type 2 diabetes")
 ids_t2d <- read_csv(fp_ids, show_col_types = FALSE) %>%
   filter(trait_label == "Type 2 diabetes")
-share_summary <- read_csv(fp_share, show_col_types = FALSE)
 
 pss <- read_csv(fp_pss, show_col_types = FALSE, col_types = cols(.default = col_character())) %>%
   clean_names() %>%
@@ -834,31 +830,24 @@ cell_table_html <- function(bucket, ancestry) {
   c(lines, "</tbody></table>")
 }
 
-# Scope counts
-n_cells_now <- share_summary$n_cells_total[[1]]
-n_share_one_now <- share_summary$n_cells_k_ge_2_all_pgs_same_target_pss[[1]]
-share_cells <- read_csv(
-  file.path("results", paste0("review_sensitivity_", stamp), "tables", "07_within_cell_sampleset_sharing.csv"),
-  show_col_types = FALSE
+fig_dir <- file.path(
+  "results", paste0("review_sensitivity_", stamp), "q_random_effects_t2d_illustrations"
 )
-n_tgt1_now <- sum(share_cells$tgt_n_sample_sets == 1)
-ids_all <- read_csv(
-  file.path("results", paste0("review_sensitivity_", stamp), "tables", "13_cell_identifiers_long.csv"),
-  show_col_types = FALSE
-)
-n_study1_now <- ids_all %>%
-  filter(side == "Target") %>%
-  mutate(study = normalize_study(cohort_txt)) %>%
-  group_by(trait_label, trained_bucket, target_ancestry) %>%
-  summarise(n_study = n_distinct(study), .groups = "drop") %>%
-  summarise(n = sum(n_study == 1)) %>%
-  pull(n)
-
-multi_changed <- c(
-  "Multi-ancestry Hispanic or Latin American: 5 scores to 6",
-  "Multi-ancestry African: 1 score to 2",
-  "Multi-ancestry Middle Eastern or North African: 1 score on 1 sample set to 2 scores on 2 sample sets"
-)
+embed_png <- function(filename, alt) {
+  path <- file.path(fig_dir, filename)
+  if (!file.exists(path)) {
+    stop(
+      "Missing ", path, ". Run tests/q_random_effects_t2d_illustrations.R first.",
+      call. = FALSE
+    )
+  }
+  raw <- readBin(path, "raw", file.info(path)$size)
+  b64 <- gsub("[\r\n]", "", jsonlite::base64_enc(raw))
+  sprintf(
+    "<img class='fig' alt='%s' src='data:image/png;base64,%s'>",
+    html_escape(alt), b64
+  )
+}
 
 buckets <- sort(unique(diabetes_eval$train_bucket))
 target_ancestries_by_bucket <- lapply(buckets, function(b) {
@@ -881,6 +870,8 @@ tr.ref { background: #eef6ee; font-weight: 600; }
 code { font-family: DejaVu Sans Mono, Menlo, monospace; font-size: 0.9em; }
 ul { margin-top: 0.4rem; }
 .small { color: #444; font-size: 0.9rem; }
+img.fig { max-width: 100%; height: auto; border: 1px solid #ddd; margin: 8px 0 4px; }
+.cap { color: #444; font-size: 0.9rem; margin: 0 0 22px; }
 "
 
 html <- c(
@@ -892,16 +883,21 @@ html <- c(
   "<h1>Type 2 diabetes cohort models</h1>",
   paste0(
     "<p class='small'>Catalog stamp ", html_escape(stamp),
-    ". The tables below are the four ancestry models. The cohort in the mixed models is the sample-set id.</p>"
+    ". The figures show where a cohort term can be fit. The tables are the four ancestry models. ",
+    "The cohort in the mixed models is the sample-set id.</p>"
   ),
 
   "<div class='lead'>",
   "<p><strong>Scope.</strong> A row is one evaluation: one score, one sample set, one ancestry, one AUC, and one SE. ",
   "It is not the Stage 1 average. A cohort random effect marks which of those rows share a group. ",
   "It does not make the AUCs independent.</p>",
-  "<p>The dependence model is being chosen on type 2 diabetes first. ",
-  "The same choice would then be applied to breast cancer (European-only training, South Asian target; 11 scores, 10 on one sample set) and ",
-  "stroke excluding subarachnoid hemorrhage (multi-ancestry training, South Asian target; 10 scores on the same two sample sets).</p>",
+  "<p>The four models are fit on type 2 diabetes. A cohort term can be fit where more than one target cohort remains. ",
+  "That is 8 of the 30 Figure 1C comparisons. Seven are type 2 diabetes. ",
+  "The eighth is breast cancer in South Asian participants, European-only training.</p>",
+  "<p>Seventeen comparisons have several scores and one target cohort left. ",
+  "Ancestry and that cohort are the same column, so these models cannot separate them. ",
+  "Five comparisons have one score. The question at the end is which of the four models to use ",
+  "where a cohort term can be fit.</p>",
   "</div>",
 
   "<h2>South Asian comparison</h2>",
@@ -915,21 +911,26 @@ html <- c(
   "</ul>",
   "</div>",
 
-  "<h2>Cell counts across Figure 1C</h2>",
-  "<div class='box'>",
-  "<p>The notes' 15 of 28 matches the tables before commit 7a552c1. ",
-  "It is the count of comparisons in which every score sat on the same target sample set. ",
-  "Seven further comparisons had only one score. It is not the count of cells with exactly one target sample set (that was 18 of 28).</p>",
-  "<ul>",
-  sprintf("<li>Current tables: <strong>%d</strong> Figure 1C cells.</li>", n_cells_now),
-  sprintf("<li>Current: every score shares one target sample set in <strong>%d</strong> of the k≥2 cells.</li>", n_share_one_now),
-  sprintf("<li>Current: <strong>%d</strong> of %d cells have exactly one target sample set.</li>", n_tgt1_now, n_cells_now),
-  sprintf("<li>Current: <strong>%d</strong> of %d cells have exactly one target study name.</li>", n_study1_now, n_cells_now),
-  "</ul>",
-  "<p>Inside a cell with one target cohort, a cohort variance cannot be estimated from the target side alone. ",
-  "A reply that puts this random effect on all 30 current comparisons would overclaim. ",
-  "The diabetes model below uses European and target AUC rows together, so the cohort term is estimable when several scores share a sample set.</p>",
-  "</div>",
+  "<h2>Where a cohort term can be fit</h2>",
+  "<p>Each dot in the first figure is one comparison: one trait, one training bucket, one target ancestry. ",
+  "The length is the number of scores. The label is how many target cohorts remain after one score is kept per cohort.</p>",
+  embed_png("01_two_shapes.png", "Thirty comparisons split into 8, 17, and 5"),
+  "<p class='cap'>Eight comparisons leave more than one target cohort. Seventeen leave one. Five have one score.</p>",
+
+  embed_png("02_south_asian_one_of_eight.png", "South Asian type 2 diabetes, one of the eight"),
+  "<p class='cap'>One of the eight. Ten of the twelve South Asian scores share PSS011749, and other target cohorts remain. ",
+  "The black line is the pool of all twelve.</p>",
+
+  embed_png("03_hispanic_one_of_seventeen.png", "Hispanic or Latin American type 2 diabetes, one of the seventeen"),
+  "<p class='cap'>One of the seventeen. All ten scores use PSS011736. ",
+  "The red interval keeps the average and uses the smallest standard error. It still excludes 0.</p>",
+
+  embed_png("04_seventeen_smallest_se.png", "Seventeen comparisons, inverse-variance interval and smallest standard error"),
+  "<p class='cap'>The same correction in all seventeen. The point stays. Three red intervals include 0 where the black interval does not. ",
+  "This correction is not one of the four models below.</p>",
+
+  embed_png("05_eight_one_score_per_cohort.png", "Eight comparisons, all scores and one score per target cohort"),
+  "<p class='cap'>The eight. Purple is one score per target cohort. The four models below are for this situation.</p>",
 
   "<h2>Evaluation table used here</h2>",
   "<div class='box'>",

@@ -1,20 +1,27 @@
 #!/usr/bin/env Rscript
 
 # ============================================================
-# Didactic walkthrough of the type 2 diabetes random-effects ΔAUC
-# DerSimonian-Laird is fit only after keeping one PGS per target
-# sample set, and only when at least two ΔAUC values remain.
+# Two shapes of shared sample sets, for the cohort model Georg
+# is being asked about.
 #
-# Worked cells:
-#   European-only training, South Asian target
-#     12 scores, 3 target sample-set groups.
-#     The pool of 12 includes 0. The pool of 3, and the random-effects
-#     pool of those 3, are both negative and exclude 0. I² is about 51.
-#   European-only training, Hispanic or Latin American target
-#     10 scores, 1 target sample set. Random effects are not fit.
-#   Multi-ancestry training, Hispanic or Latin American target
-#     5 scores, 4 target sample sets. I² is about 97.
-#     The random-effects interval is wide and still excludes 0.
+# A comparison is one trait, one training bucket, one target ancestry.
+# Several scores on the same people are the same dependence in both shapes.
+#
+#   8 comparisons leave more than one target cohort after one score
+#   is kept per cohort. Nikolaus's
+#     AUC ~ ancestry + PGS + (1|cohort)
+#   has more than one target cohort to attach to. Seven are type 2
+#   diabetes. The eighth is breast cancer in South Asian participants,
+#   European-only training.
+#
+#   17 comparisons leave one target cohort. Ancestry and that cohort
+#   are the same column, so the cohort model cannot separate them.
+#   The average stays. Its standard error becomes the smallest
+#   standard error among the scores.
+#
+#   5 comparisons have one score. Nothing is shared.
+#
+# DerSimonian-Laird is a different random effect and is not drawn.
 #
 # Run from the repository root, after analysis/09_review_sensitivity.R:
 #   Rscript tests/q_random_effects_t2d_illustrations.R
@@ -23,7 +30,6 @@
 suppressPackageStartupMessages({
   library(dplyr)
   library(ggplot2)
-  library(patchwork)
   library(readr)
   library(tibble)
 })
@@ -38,13 +44,37 @@ table_dir <- file.path("results", paste0("review_sensitivity_", stamp), "tables"
 root_dir <- file.path("results", paste0("review_sensitivity_", stamp), "q_random_effects_t2d_illustrations")
 dir.create(root_dir, recursive = TRUE, showWarnings = FALSE)
 
+old_names <- c(
+  "01_twelve_scores_three_sample_sets",
+  "02_three_summaries",
+  "03_tau_squared",
+  "04_one_sample_set",
+  "05_four_independent_scores",
+  "worked_hispanic_multi_scores",
+  "worked_south_asian_pools"
+)
+for (nm in old_names) {
+  unlink(file.path(root_dir, paste0(nm, ".png")))
+  unlink(file.path(root_dir, paste0(nm, ".pdf")))
+  unlink(file.path(root_dir, paste0(nm, ".csv")))
+}
+
 pair_path <- file.path(table_dir, "10_covariates_pairs.csv")
 dep_path <- file.path(table_dir, "09_dependence_cells.csv")
 id_path <- file.path(table_dir, "13_cell_identifiers_long.csv")
-stopifnot(file.exists(pair_path), file.exists(dep_path), file.exists(id_path))
+coef_path <- file.path(
+  "results", paste0("review_sensitivity_", stamp),
+  "diabetes_cohort_models", "diabetes_model_coefficients.csv"
+)
+stopifnot(file.exists(pair_path), file.exists(dep_path), file.exists(id_path), file.exists(coef_path))
 
 fmt <- function(x, digits = 3) formatC(x, format = "f", digits = digits)
 fmt_n <- function(x) format(as.integer(round(x)), big.mark = ",")
+excludes_zero <- function(lo, hi) lo > 0 | hi < 0
+
+train_short <- function(x) {
+  ifelse(x == "Train: European-only", "European-only training", "Multi-ancestry training")
+}
 
 theme_lesson <- function(base = 13) {
   theme_minimal(base_size = base, base_family = "DejaVu Sans") +
@@ -62,17 +92,10 @@ theme_lesson <- function(base = 13) {
       axis.text = element_text(colour = "#222222"),
       legend.position = "bottom",
       legend.title = element_blank(),
+      strip.text = element_text(face = "bold", hjust = 0, size = base - 1, colour = "#1a1a1a"),
+      strip.background = element_rect(fill = "#F3F3F3", colour = NA),
       plot.margin = margin(12, 18, 12, 12)
     )
-}
-
-ann_theme <- function() {
-  theme(
-    plot.title = element_text(face = "bold", size = 15, family = "DejaVu Sans", colour = "#1a1a1a"),
-    plot.subtitle = element_text(size = 11, family = "DejaVu Sans", colour = "#333333", lineheight = 1.15),
-    plot.caption = element_text(size = 9.5, family = "DejaVu Sans", colour = "#444444", hjust = 0, lineheight = 1.15),
-    plot.margin = margin(8, 12, 8, 12)
-  )
 }
 
 save_lesson <- function(plot, filename, width, height) {
@@ -83,51 +106,155 @@ save_lesson <- function(plot, filename, width, height) {
   message("Wrote ", png_path)
 }
 
-pool_delta <- function(delta, se, model = c("fixed", "random_dl")) {
-  model <- match.arg(model)
+pool_delta <- function(delta, se) {
   w <- 1 / se^2
   sw <- sum(w)
   dh <- sum(w * delta) / sw
-  Q <- sum(w * (delta - dh)^2)
-  k <- length(delta)
-  df <- k - 1
-  tau2 <- 0
-  if (model == "random_dl" && k >= 2) {
-    C <- sw - sum(w^2) / sw
-    tau2 <- if (is.finite(C) && C > 0) max(0, (Q - df) / C) else 0
-  }
-  ws <- 1 / (se^2 + tau2)
-  dh2 <- sum(ws * delta) / sum(ws)
-  se_hat <- sqrt(1 / sum(ws))
-  I2 <- if (k >= 2 && Q > 0) max(0, (Q - df) / Q) * 100 else NA_real_
   tibble(
-    delta_hat = dh2, se_hat = se_hat,
-    lo = dh2 - 1.96 * se_hat, hi = dh2 + 1.96 * se_hat,
-    tau2 = tau2, Q = Q, df = df, I2 = I2, k = k,
-    C = if (k >= 2) sw - sum(w^2) / sw else NA_real_
+    delta_hat = dh,
+    se_hat = sqrt(1 / sw),
+    lo = dh - 1.96 * sqrt(1 / sw),
+    hi = dh + 1.96 * sqrt(1 / sw),
+    k = length(delta)
   )
 }
 
-group_colours <- c("#332288", "#E41A1C", "#01665E", "#6A3D9A")
-col_ivw12 <- "#222222"
-col_ivw_indep <- "#6A3D9A"
-col_re <- "#01665E"
+col_share <- "#332288"
+col_ivw <- "#222222"
+col_min <- "#E41A1C"
+col_kept <- "#6A3D9A"
 
-pairs <- read_csv(pair_path, show_col_types = FALSE) %>%
-  filter(trait_label == "Type 2 diabetes")
-dep <- read_csv(dep_path, show_col_types = FALSE) %>%
-  filter(trait_label == "Type 2 diabetes")
+# -----------------------------------------------------------------
+# Classify the 30 Figure 1C comparisons
+# -----------------------------------------------------------------
+pairs <- read_csv(pair_path, show_col_types = FALSE)
+dep <- read_csv(dep_path, show_col_types = FALSE)
+
+se_by_cell <- pairs %>%
+  group_by(trait_label, trained_bucket, target_ancestry) %>%
+  summarise(
+    se_min = min(delta_se),
+    se_median = median(delta_se),
+    .groups = "drop"
+  )
+
+cells <- dep %>%
+  left_join(se_by_cell, by = c("trait_label", "trained_bucket", "target_ancestry")) %>%
+  mutate(
+    shape = case_when(
+      n_pairs == 1 ~ "One score",
+      single_pgs_sensitivity ~ "One target cohort left",
+      re_applicable ~ "More than one target cohort",
+      TRUE ~ "Unclassified"
+    ),
+    lo_min = delta_fixed - 1.96 * se_min,
+    hi_min = delta_fixed + 1.96 * se_min,
+    sig_min = excludes_zero(lo_min, hi_min),
+    lo_med = delta_fixed - 1.96 * se_median,
+    hi_med = delta_fixed + 1.96 * se_median,
+    sig_med = excludes_zero(lo_med, hi_med),
+    call_changes_min_se = shape == "One target cohort left" & sig_fixed != sig_min,
+    call_changes_one_per = shape == "More than one target cohort" & sig_fixed != sig_one_per_pss,
+    label = sprintf("%s — %s, %s", trait_label, target_ancestry, train_short(trained_bucket))
+  )
+
+stopifnot(!any(cells$shape == "Unclassified"))
+stopifnot(nrow(cells) == 30L)
+stopifnot(sum(cells$shape == "More than one target cohort") == 8L)
+stopifnot(sum(cells$shape == "One target cohort left") == 17L)
+stopifnot(sum(cells$shape == "One score") == 5L)
+stopifnot(all(cells$sig_min[cells$shape == "One target cohort left"] ==
+  cells$sig_med[cells$shape == "One target cohort left"]))
+
+eight <- cells %>% filter(shape == "More than one target cohort")
+seventeen <- cells %>% filter(shape == "One target cohort left")
+
+stopifnot(sum(eight$trait_label == "Type 2 diabetes") == 7L)
+stopifnot(any(eight$trait_label == "Breast cancer" & eight$target_ancestry == "South Asian"))
+stopifnot(any(
+  seventeen$trait_label == "Type 2 diabetes" &
+    seventeen$target_ancestry == "Hispanic or Latin American" &
+    seventeen$trained_bucket == "Train: European-only"
+))
+stopifnot(any(
+  seventeen$trait_label == "Stroke excluding subarachnoid hemorrhage" &
+    seventeen$tgt_n_sample_sets == 2L
+))
+
+flip17 <- seventeen %>% filter(call_changes_min_se) %>% arrange(trait_label, target_ancestry)
+flip8 <- eight %>% filter(call_changes_one_per) %>% arrange(trait_label, target_ancestry)
+stopifnot(nrow(flip17) == 3L, nrow(flip8) == 3L)
+
+write_csv(
+  cells %>%
+    select(
+      trait_label, trained_bucket, target_ancestry, shape,
+      n_pairs, n_pairs_one_per_pss, tgt_n_sample_sets,
+      delta_fixed, se_fixed, lo_fixed, hi_fixed, sig_fixed,
+      se_min, lo_min, hi_min, sig_min,
+      delta_one_per_pss, lo_one_per_pss, hi_one_per_pss, sig_one_per_pss,
+      call_changes_min_se, call_changes_one_per
+    ),
+  file.path(root_dir, "comparison_shapes.csv")
+)
+
+# -----------------------------------------------------------------
+# 1. The 30 comparisons, split by whether a cohort term has
+#    more than one target cohort
+# -----------------------------------------------------------------
+shape_levels <- c(
+  "More than one target cohort",
+  "One target cohort left",
+  "One score"
+)
+map_df <- cells %>%
+  mutate(
+    shape = factor(shape, levels = shape_levels),
+    y = factor(label, levels = rev(label[order(shape, n_pairs, trait_label)])),
+    cohorts_left = sprintf(
+      "%d cohort%s left",
+      n_pairs_one_per_pss,
+      ifelse(n_pairs_one_per_pss == 1, "", "s")
+    )
+  )
+
+p_map <- ggplot(map_df, aes(x = n_pairs, y = y)) +
+  geom_segment(aes(x = 0, xend = n_pairs, yend = y), colour = "#D9D9D9", linewidth = 0.6) +
+  geom_point(size = 2.8, colour = col_share) +
+  geom_text(
+    aes(label = cohorts_left),
+    hjust = -0.15, size = 2.7, family = "DejaVu Sans", colour = "#333333"
+  ) +
+  scale_x_continuous(
+    name = "Scores in the comparison",
+    limits = c(0, 18),
+    breaks = c(1, 2, 5, 10, 12)
+  ) +
+  facet_grid(shape ~ ., scales = "free_y", space = "free_y") +
+  labs(
+    title = "1.  Thirty comparisons. The cohort model can be fit in eight of them.",
+    subtitle = "Each row is one trait, one training bucket, and one target ancestry.\nA cohort term needs more than one target cohort. That is the top panel. The middle panel is the same sharing with one target cohort left.",
+    y = NULL,
+    caption = "Catalog stamp 20260923, after one evaluation per score, sample set, and ancestry.\nStroke is in the middle panel: ten scores sit on two South Asian sample sets, and one score per set of cohorts leaves a single ancestry difference.\nThe bottom panel has one score. Nothing is shared, so neither check applies."
+  ) +
+  theme_lesson(11) +
+  theme(panel.grid.major.x = element_line(colour = "#EEEEEE"))
+save_lesson(p_map, "01_two_shapes", 12.4, 13.2)
+
+# -----------------------------------------------------------------
+# Worked cell: South Asian type 2 diabetes, one of the 8
+# -----------------------------------------------------------------
 ids <- read_csv(id_path, show_col_types = FALSE) %>%
-  filter(trait_label == "Type 2 diabetes", side == "Target")
+  filter(side == "Target")
 
 tgt_meta <- ids %>%
-  group_by(trained_bucket, target_ancestry, pgs_id, sampleset_id) %>%
+  group_by(trait_label, trained_bucket, target_ancestry, pgs_id, sampleset_id) %>%
   summarise(
     n_individuals = max(n_individuals),
     cohort_txt = paste(unique(trimws(cohort_txt)), collapse = "+"),
     .groups = "drop"
   ) %>%
-  group_by(trained_bucket, target_ancestry, pgs_id) %>%
+  group_by(trait_label, trained_bucket, target_ancestry, pgs_id) %>%
   summarise(
     tgt_key = paste(sort(unique(sampleset_id)), collapse = ";"),
     group_label = paste(
@@ -137,12 +264,12 @@ tgt_meta <- ids %>%
     .groups = "drop"
   )
 
-cell_pairs <- function(bucket, ancestry) {
+cell_pairs <- function(trait, bucket, ancestry) {
   pairs %>%
-    filter(trained_bucket == bucket, target_ancestry == ancestry) %>%
+    filter(trait_label == trait, trained_bucket == bucket, target_ancestry == ancestry) %>%
     left_join(
-      tgt_meta %>% filter(trained_bucket == bucket, target_ancestry == ancestry),
-      by = c("trained_bucket", "target_ancestry", "pgs_id")
+      tgt_meta %>% filter(trait_label == trait, trained_bucket == bucket, target_ancestry == ancestry),
+      by = c("trait_label", "trained_bucket", "target_ancestry", "pgs_id")
     )
 }
 
@@ -154,35 +281,17 @@ keep_one <- function(d) {
     ungroup()
 }
 
-expect_cell <- function(bucket, ancestry, got_all, got_one, got_re) {
-  published <- dep %>% filter(trained_bucket == bucket, target_ancestry == ancestry)
-  stopifnot(nrow(published) == 1L)
-  stopifnot(abs(got_all$delta_hat - published$delta_fixed) < 1e-8)
-  stopifnot(got_one$k == published$n_pairs_one_per_pss)
-  stopifnot(abs(got_one$delta_hat - published$delta_one_per_pss) < 1e-8)
-  if (published$re_applicable) {
-    stopifnot(abs(got_re$delta_hat - published$delta_random) < 1e-8)
-    stopifnot(abs(got_re$I2 - published$I2_stage2) < 1e-6)
-    stopifnot(abs(got_re$tau2 - published$tau2_random) < 1e-12)
-  } else {
-    stopifnot(got_one$k == 1L)
-    stopifnot(is.na(published$delta_random))
-  }
-  published
-}
+sa <- keep_one(cell_pairs("Type 2 diabetes", "Train: European-only", "South Asian"))
+stopifnot(nrow(sa) == 12L, sum(sa$kept) == 3L, any(grepl("PSS011749", sa$tgt_key) & sa$n_in_group == 10L))
+sa_all <- pool_delta(sa$delta, sa$delta_se)
+sa_one <- pool_delta(sa$delta[sa$kept], sa$delta_se[sa$kept])
+sa_pub <- cells %>%
+  filter(trait_label == "Type 2 diabetes", trained_bucket == "Train: European-only", target_ancestry == "South Asian")
+stopifnot(abs(sa_all$delta_hat - sa_pub$delta_fixed) < 1e-8)
+stopifnot(abs(sa_one$delta_hat - sa_pub$delta_one_per_pss) < 1e-8)
+stopifnot(isTRUE(sa_pub$sig_one_per_pss), !isTRUE(sa_pub$sig_fixed))
 
-# -----------------------------------------------------------------
-# European-only, South Asian: 12 scores, 3 independent ΔAUC
-# -----------------------------------------------------------------
-sa <- keep_one(cell_pairs("Train: European-only", "South Asian"))
-stopifnot(nrow(sa) == 12L, sum(sa$kept) == 3L)
-sa_all <- pool_delta(sa$delta, sa$delta_se, "fixed")
-sa_one <- pool_delta(sa$delta[sa$kept], sa$delta_se[sa$kept], "fixed")
-sa_re <- pool_delta(sa$delta[sa$kept], sa$delta_se[sa$kept], "random_dl")
-sa_pub <- expect_cell("Train: European-only", "South Asian", sa_all, sa_one, sa_re)
-stopifnot(isTRUE(sa_pub$sig_one_per_pss), isTRUE(sa_pub$sig_random), !isTRUE(sa_pub$sig_fixed))
-
-sa <- keep_one(cell_pairs("Train: European-only", "South Asian")) %>%
+sa <- sa %>%
   group_by(tgt_key) %>%
   mutate(group_label = if_else(
     n() > 1,
@@ -195,264 +304,221 @@ write_csv(
   sa %>% select(pgs_id, delta, delta_se, tgt_key, group_label, kept, n_in_group),
   file.path(root_dir, "worked_south_asian_scores.csv")
 )
-write_csv(
-  bind_rows(
-    sa_all %>% mutate(estimate = "IVW, all 12 scores"),
-    sa_one %>% mutate(estimate = "IVW, 3 independent scores"),
-    sa_re %>% mutate(estimate = "Random effects, 3 independent scores")
-  ),
-  file.path(root_dir, "worked_south_asian_pools.csv")
-)
+
+georg_sa <- read_csv(coef_path, show_col_types = FALSE) %>%
+  filter(
+    train_bucket == "Train: European-only",
+    ancestry == "South Asian",
+    cohort_def == "sample-set id",
+    model == "lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)"
+  )
+stopifnot(nrow(georg_sa) == 1L)
 
 sa_forest <- sa %>%
   mutate(
     axis = factor(pgs_id, levels = rev(pgs_id[order(group_label, pgs_id)])),
-    role = if_else(kept, "Kept for this sample set", "Extra score on that sample set")
+    role = if_else(kept, "Kept for this cohort", "Further score on that cohort")
   )
 
-p1 <- ggplot(sa_forest, aes(x = delta, y = axis, colour = group_label)) +
+p_sa <- ggplot(sa_forest, aes(x = delta, y = axis, colour = group_label)) +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
   geom_errorbar(
     aes(xmin = delta - 1.96 * delta_se, xmax = delta + 1.96 * delta_se),
     orientation = "y", width = 0.2, linewidth = 0.6
   ) +
   geom_point(aes(shape = role), size = 2.8) +
-  geom_vline(xintercept = sa_all$delta_hat, linetype = "solid", colour = col_ivw12, linewidth = 0.4) +
+  geom_vline(xintercept = sa_all$delta_hat, colour = col_ivw, linewidth = 0.45) +
   scale_shape_manual(values = c(
-    "Kept for this sample set" = 17,
-    "Extra score on that sample set" = 16
+    "Kept for this cohort" = 17,
+    "Further score on that cohort" = 16
   ), guide = "none") +
   labs(
-    title = "1.  Twelve South Asian ΔAUC values, and three target sample sets",
-    subtitle = "Type 2 diabetes, European-only training. Triangles are the score kept for each sample set (lowest PGS ID).\nCircles are further scores on a sample set that already has a triangle. The black line is the inverse-variance pool of all twelve.",
+    title = "2.  One of the eight. Ten scores share PSS011749, and other target cohorts remain.",
+    subtitle = "Type 2 diabetes, South Asian target, European-only training.\nTriangles are the score kept for each target cohort. Circles are further scores on a cohort that already has a triangle. The black line is the inverse-variance pool of all twelve.",
     x = "ΔAUC (South Asian − European) with 95% CI",
     y = NULL,
-    caption = "Ten scores share one UK Biobank South Asian sample set. Pooling all twelve counts that sample ten times.\nThe pool of twelve is about 0 and its interval includes 0. Plots 2 and 3 use the three triangles only."
+    caption = sprintf(
+      "The pool of twelve is %s (%s to %s) and includes 0. One score per target cohort leaves three values. Their pool is %s (%s to %s) and excludes 0.\nOn the page for Georg, lmer(AUC ~ ancestry + PGS + (1|cohort)) gives %s for South Asian in this training bucket (%s to %s).\nThat number is an ancestry coefficient from the joint model. It is not a point on this ΔAUC axis. The interval includes 0.",
+      fmt(sa_all$delta_hat, 4), fmt(sa_all$lo, 4), fmt(sa_all$hi, 4),
+      fmt(sa_one$delta_hat, 3), fmt(sa_one$lo, 3), fmt(sa_one$hi, 3),
+      fmt(georg_sa$estimate, 3), fmt(georg_sa$lo, 3), fmt(georg_sa$hi, 3)
+    )
   ) +
   guides(colour = guide_legend(nrow = 3)) +
   theme_lesson(11) +
   theme(
-    legend.position = "bottom",
     legend.box = "vertical",
     legend.text = element_text(size = 8)
   )
-save_lesson(p1, "01_twelve_scores_three_sample_sets", 11.6, 8.6)
+save_lesson(p_sa, "02_south_asian_one_of_eight", 11.8, 8.8)
 
 # -----------------------------------------------------------------
-# 2. Fixed effect of 12, fixed effect of 3, random effects of 3
+# Worked cell: Hispanic type 2 diabetes, one of the 17
 # -----------------------------------------------------------------
-three <- sa %>%
-  filter(kept) %>%
-  arrange(delta)
-
-summary_rows <- bind_rows(
-  three %>% transmute(
-    axis = pgs_id,
-    estimate = delta, lo = delta - 1.96 * delta_se, hi = delta + 1.96 * delta_se,
-    kind = "score"
-  ),
-  tibble(
-    axis = c("IVW of all 12", "IVW of these 3", "Random effects of these 3"),
-    estimate = c(sa_all$delta_hat, sa_one$delta_hat, sa_re$delta_hat),
-    lo = c(sa_all$lo, sa_one$lo, sa_re$lo),
-    hi = c(sa_all$hi, sa_one$hi, sa_re$hi),
-    kind = c("ivw12", "ivw3", "re")
+hisp <- keep_one(cell_pairs(
+  "Type 2 diabetes", "Train: European-only", "Hispanic or Latin American"
+))
+stopifnot(nrow(hisp) == 10L, n_distinct(hisp$tgt_key) == 1L, all(hisp$tgt_key == "PSS011736"))
+hisp_all <- pool_delta(hisp$delta, hisp$delta_se)
+hisp_pub <- cells %>%
+  filter(
+    trait_label == "Type 2 diabetes",
+    trained_bucket == "Train: European-only",
+    target_ancestry == "Hispanic or Latin American"
   )
-) %>%
-  mutate(axis = factor(axis, levels = rev(axis)))
+stopifnot(abs(hisp_all$delta_hat - hisp_pub$delta_fixed) < 1e-8)
+stopifnot(isTRUE(hisp_pub$sig_fixed), isTRUE(hisp_pub$sig_min), !isTRUE(hisp_pub$call_changes_min_se))
 
-p2 <- ggplot(summary_rows, aes(x = estimate, y = axis, colour = kind)) +
-  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
-  geom_errorbar(aes(xmin = lo, xmax = hi), orientation = "y", width = 0.18, linewidth = 0.75) +
-  geom_point(aes(shape = kind), size = 3.2) +
-  scale_colour_manual(values = c(
-    score = "#332288", ivw12 = col_ivw12, ivw3 = col_ivw_indep, re = col_re
-  ), guide = "none") +
-  scale_shape_manual(values = c(score = 17, ivw12 = 18, ivw3 = 18, re = 15), guide = "none") +
-  labs(
-    title = "2.  The twelve-score pool and the three-score pools answer different questions",
-    subtitle = "Purple diamond: inverse-variance fixed effect of the three independent scores.\nGreen square: DerSimonian-Laird random effects of those same three. Both exclude 0. The black diamond, all twelve, does not.",
-    x = "ΔAUC (South Asian − European) with 95% CI",
-    y = NULL,
-    caption = sprintf(
-      "IVW of 12: %s (%s to %s).  IVW of 3: %s (%s to %s).  Random effects: %s (%s to %s).\nPGS004106, evaluated in Genes & Health and in UK Biobank, carries most of the fixed-effect weight among the three.\nRandom effects gives the other two scores a little more say. The interval widens and still excludes 0.",
-      fmt(sa_all$delta_hat, 3), fmt(sa_all$lo, 3), fmt(sa_all$hi, 3),
-      fmt(sa_one$delta_hat, 3), fmt(sa_one$lo, 3), fmt(sa_one$hi, 3),
-      fmt(sa_re$delta_hat, 3), fmt(sa_re$lo, 3), fmt(sa_re$hi, 3)
-    )
-  ) +
-  theme_lesson(12)
-save_lesson(p2, "02_three_summaries", 11.2, 6.4)
-
-# -----------------------------------------------------------------
-# 3. The τ² arithmetic
-# -----------------------------------------------------------------
-kept3 <- three
-w <- 1 / kept3$delta_se^2
-ws <- 1 / (kept3$delta_se^2 + sa_re$tau2)
-weight_df <- bind_rows(
-  tibble(pgs_id = kept3$pgs_id, share = w / sum(w), model = "Fixed effect\nweight = 1 / SE²"),
-  tibble(pgs_id = kept3$pgs_id, share = ws / sum(ws), model = "Random effects\nweight = 1 / (SE² + τ²)")
-)
-
-p3_w <- ggplot(weight_df, aes(x = model, y = share, fill = pgs_id)) +
-  geom_col(width = 0.62, colour = "white") +
-  geom_text(
-    data = function(d) dplyr::filter(d, share >= 0.08),
-    aes(label = sprintf("%s\n%s%%", pgs_id, fmt(100 * share, 0))),
-    position = position_stack(vjust = 0.5),
-    family = "DejaVu Sans", size = 3.1, colour = "white", lineheight = 0.9
-  ) +
-  scale_y_continuous(name = "Share of the weight", labels = function(x) paste0(round(100 * x), "%"), expand = c(0, 0)) +
-  scale_x_discrete(name = NULL) +
-  scale_fill_manual(values = setNames(c("#332288", "#E41A1C", "#01665E"), kept3$pgs_id), guide = "none") +
-  labs(title = "Who holds the weight") +
-  theme_lesson(12)
-
-arith <- c(
-  "Three independent ΔAUC values",
-  "",
-  sprintf("Q  =  Σ  w (Δ − Δ_IVW)²   =   %s", fmt(sa_re$Q, 2)),
-  "df  =  k − 1  =  2",
-  sprintf("τ²  =  max(0, (Q − df) / C)   =   %s", fmt(sa_re$tau2, 5)),
-  sprintf("I²  =  max(0, (Q − df) / Q) × 100   =   %s", fmt(sa_re$I2, 1)),
-  "",
-  "C is the usual DerSimonian-Laird denominator,",
-  "sum(w) − sum(w²) / sum(w).",
-  "",
-  "τ² is added to every SE² before the weights",
-  "are rebuilt. The pooled ΔAUC moves only",
-  "because those weights move.",
-  "",
-  sprintf("Pooled random-effects ΔAUC = %s", fmt(sa_re$delta_hat, 3)),
-  sprintf("95%% interval %s to %s", fmt(sa_re$lo, 3), fmt(sa_re$hi, 3))
-)
-p3_txt <- ggplot() +
-  annotate(
-    "text", x = 0, y = rev(seq_along(arith)), label = arith,
-    hjust = 0, family = "DejaVu Sans Mono", size = 3.15, colour = "#1a1a1a"
-  ) +
-  xlim(-0.02, 1.05) +
-  ylim(0.2, length(arith) + 0.8) +
-  theme_void() +
-  theme(plot.margin = margin(18, 8, 8, 8))
-
-p3 <- p3_w + p3_txt +
-  plot_layout(widths = c(0.85, 1.15)) +
-  plot_annotation(
-    title = "3.  Random effects on these three scores adds a small τ² and keeps the deficit",
-    subtitle = "I² near 51 means about half of Q is scatter beyond the sampling error expected for three estimates.\nτ² is small next to the variance of the most precise score, so the weights shift and the conclusion stays a deficit.",
-    caption = "Q and I² are computed from the fixed-effect weights, then τ² rebuilds the weights. The same arithmetic, on the same three ΔAUC values, is what the review figure draws in green for this cell.",
-    theme = ann_theme()
-  )
-save_lesson(p3, "03_tau_squared", 12.2, 6.6)
-
-# -----------------------------------------------------------------
-# 4. One sample set: random effects are not fit
-# -----------------------------------------------------------------
-hisp_eur <- keep_one(cell_pairs("Train: European-only", "Hispanic or Latin American"))
-hisp_eur_all <- pool_delta(hisp_eur$delta, hisp_eur$delta_se, "fixed")
-hisp_eur_one <- pool_delta(hisp_eur$delta[hisp_eur$kept], hisp_eur$delta_se[hisp_eur$kept], "fixed")
-hisp_eur_pub <- expect_cell(
-  "Train: European-only", "Hispanic or Latin American",
-  hisp_eur_all, hisp_eur_one, hisp_eur_one
-)
-stopifnot(n_distinct(hisp_eur$tgt_key) == 1L, sum(hisp_eur$kept) == 1L)
-
-kept_id <- hisp_eur$pgs_id[hisp_eur$kept]
-hisp_plot <- hisp_eur %>%
-  mutate(
-    axis = factor(pgs_id, levels = rev(sort(pgs_id))),
-    role = if_else(kept, "Kept", "Same sample set")
-  )
-
-p4 <- ggplot(hisp_plot, aes(x = delta, y = axis, colour = role)) +
-  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
-  geom_errorbar(
-    aes(xmin = delta - 1.96 * delta_se, xmax = delta + 1.96 * delta_se),
-    orientation = "y", width = 0.2, linewidth = 0.6
-  ) +
-  geom_point(size = 2.6) +
-  geom_vline(xintercept = hisp_eur_all$delta_hat, colour = col_ivw12, linewidth = 0.4) +
-  scale_colour_manual(values = c(Kept = "#E41A1C", "Same sample set" = "#332288")) +
-  labs(
-    title = "4.  Ten Hispanic or Latin American scores, one target sample set: no random effect",
-    subtitle = sprintf(
-      "European-only training. Every score uses %s.\n%s is the kept score. The black line is the inverse-variance pool of all ten, which is the only pooled estimate drawn.",
-      unique(hisp_eur$group_label), kept_id
-    ),
-    x = "ΔAUC (Hispanic or Latin American − European) with 95% CI",
-    y = NULL,
-    caption = "After one score per target sample set, a single ΔAUC remains. τ² is not estimated from one number.\nThe review figure draws the fixed effect of all ten and the single retained score. It does not draw a random-effects point."
-  ) +
-  theme_lesson(11)
-save_lesson(p4, "04_one_sample_set", 11.0, 7.4)
-
-# -----------------------------------------------------------------
-# 5. Multi-ancestry Hispanic: four independent scores, large I²
-# -----------------------------------------------------------------
-hisp_multi <- keep_one(cell_pairs("Train: Multi incl. EUR", "Hispanic or Latin American"))
-stopifnot(nrow(hisp_multi) == 5L, sum(hisp_multi$kept) == 4L)
-hm_all <- pool_delta(hisp_multi$delta, hisp_multi$delta_se, "fixed")
-hm_one <- pool_delta(hisp_multi$delta[hisp_multi$kept], hisp_multi$delta_se[hisp_multi$kept], "fixed")
-hm_re <- pool_delta(hisp_multi$delta[hisp_multi$kept], hisp_multi$delta_se[hisp_multi$kept], "random_dl")
-hm_pub <- expect_cell("Train: Multi incl. EUR", "Hispanic or Latin American", hm_all, hm_one, hm_re)
-stopifnot(isTRUE(hm_pub$sig_fixed), isTRUE(hm_pub$sig_one_per_pss), isTRUE(hm_pub$sig_random))
-
-hm_rows <- bind_rows(
-  hisp_multi %>% transmute(
+hisp_rows <- bind_rows(
+  hisp %>% transmute(
     axis = pgs_id,
     estimate = delta,
     lo = delta - 1.96 * delta_se,
     hi = delta + 1.96 * delta_se,
-    kind = if_else(kept, "Independent score", "Second score on a sample set already kept")
+    kind = "Score on PSS011736"
   ),
   tibble(
-    axis = c("IVW of all 5", "IVW of the 4", "Random effects of the 4"),
-    estimate = c(hm_all$delta_hat, hm_one$delta_hat, hm_re$delta_hat),
-    lo = c(hm_all$lo, hm_one$lo, hm_re$lo),
-    hi = c(hm_all$hi, hm_one$hi, hm_re$hi),
-    kind = c("IVW of all 5", "IVW of the 4", "Random effects of the 4")
+    axis = c("Inverse-variance of all 10", "Same average, smallest SE"),
+    estimate = hisp_all$delta_hat,
+    lo = c(hisp_all$lo, hisp_pub$lo_min),
+    hi = c(hisp_all$hi, hisp_pub$hi_min),
+    kind = c("Inverse-variance of all 10", "Same average, smallest SE")
   )
 ) %>%
-  mutate(axis = factor(axis, levels = rev(axis)), kind = factor(kind, levels = unique(kind)))
+  mutate(axis = factor(axis, levels = rev(axis)))
 
-write_csv(
-  hisp_multi %>% select(pgs_id, delta, delta_se, tgt_key, group_label, kept),
-  file.path(root_dir, "worked_hispanic_multi_scores.csv")
-)
-
-p5 <- ggplot(hm_rows, aes(x = estimate, y = axis, colour = kind)) +
+p_hisp <- ggplot(hisp_rows, aes(x = estimate, y = axis, colour = kind)) +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
-  geom_errorbar(aes(xmin = lo, xmax = hi), orientation = "y", width = 0.18, linewidth = 0.7) +
-  geom_point(size = 2.8) +
+  geom_errorbar(aes(xmin = lo, xmax = hi), orientation = "y", width = 0.2, linewidth = 0.65) +
+  geom_point(size = 2.6) +
   scale_colour_manual(values = c(
-    "Independent score" = "#332288",
-    "Second score on a sample set already kept" = "#B0B0B0",
-    "IVW of all 5" = col_ivw12,
-    "IVW of the 4" = col_ivw_indep,
-    "Random effects of the 4" = col_re
+    "Score on PSS011736" = col_share,
+    "Inverse-variance of all 10" = col_ivw,
+    "Same average, smallest SE" = col_min
   )) +
   labs(
-    title = "5.  Four independent Hispanic or Latin American ΔAUC values, and a wide random-effects interval",
-    subtitle = sprintf(
-      "Multi-ancestry training. Two scores share one All of Us sample set; the higher PGS ID is the grey point and leaves the random-effects pool.\nI² = %s. The fixed-effect interval of all five is narrow. The random-effects interval runs from %s to %s and still excludes 0.",
-      fmt(hm_re$I2, 0), fmt(hm_re$lo, 3), fmt(hm_re$hi, 3)
-    ),
+    title = "3.  One of the seventeen. Ten scores, and the only target cohort is PSS011736.",
+    subtitle = "Type 2 diabetes, Hispanic or Latin American target, European-only training.\nThe rows that are Hispanic are the rows that are this sample set. A cohort term and the ancestry term are the same column.",
     x = "ΔAUC (Hispanic or Latin American − European) with 95% CI",
     y = NULL,
-    caption = "One of the four independent scores is negative and the other three are positive, which is why Q is large.\nRandom effects is the interval that treats that disagreement as extra uncertainty. Here the extra uncertainty is not enough to include 0.\nThis cell, and the South Asian cell in plots 1–3, are the type 2 diabetes random-effects results with three or more independent ΔAUC values."
+    caption = sprintf(
+      "The black interval is the inverse-variance pool, %s (%s to %s). It counts the same people ten times, so it is too narrow.\nThe red interval keeps that average and uses the smallest standard error, %s. It runs from %s to %s and still excludes 0.\nThis comparison does not change its call. Three of the seventeen do. They are marked on the next plot.",
+      fmt(hisp_all$delta_hat, 3), fmt(hisp_all$lo, 3), fmt(hisp_all$hi, 3),
+      fmt(hisp_pub$se_min, 4), fmt(hisp_pub$lo_min, 3), fmt(hisp_pub$hi_min, 3)
+    )
   ) +
   theme_lesson(11) +
   theme(legend.text = element_text(size = 8))
-save_lesson(p5, "05_four_independent_scores", 11.4, 7.2)
+save_lesson(p_hisp, "03_hispanic_one_of_seventeen", 11.4, 7.6)
+
+# -----------------------------------------------------------------
+# 4. All 17: keep the average, replace the standard error
+# -----------------------------------------------------------------
+sev_long <- bind_rows(
+  seventeen %>% transmute(
+    label, delta_fixed, call_changes_min_se,
+    estimate = delta_fixed, lo = lo_fixed, hi = hi_fixed,
+    kind = "Inverse-variance interval"
+  ),
+  seventeen %>% transmute(
+    label, delta_fixed, call_changes_min_se,
+    estimate = delta_fixed, lo = lo_min, hi = hi_min,
+    kind = "Same average, smallest SE"
+  )
+) %>%
+  mutate(
+    y_label = if_else(
+      call_changes_min_se,
+      paste0(label, "\ncall changes"),
+      label
+    ),
+    y_label = factor(y_label, levels = rev(unique(y_label[order(delta_fixed, label)])))
+  )
+
+pd <- position_dodge(width = 0.62)
+p_17 <- ggplot(sev_long, aes(x = estimate, y = y_label, colour = kind)) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
+  geom_errorbar(
+    aes(xmin = lo, xmax = hi),
+    position = pd, orientation = "y", width = 0.28, linewidth = 0.65
+  ) +
+  geom_point(position = pd, size = 2.3) +
+  scale_colour_manual(values = c(
+    "Inverse-variance interval" = col_ivw,
+    "Same average, smallest SE" = col_min
+  )) +
+  labs(
+    title = "4.  The seventeen. The point stays. The interval returns to one score.",
+    subtitle = "Black is the inverse-variance interval. Red is the same average with the smallest standard error among the scores.\nThree red intervals include 0 where the black interval does not.",
+    x = "ΔAUC (target − European) with 95% CI",
+    y = NULL,
+    caption = paste(
+      "The three whose call changes are coronary heart disease, incident and prevalent, in Hispanic or Latin American participants;",
+      "incident coronary heart disease in South Asian participants; and seropositive rheumatoid arthritis in South Asian participants.",
+      "Stroke has two South Asian sample sets. All ten scores use both, so one key remains and the cohort model still has a single ancestry difference.",
+      "The median standard error gives the same call as the smallest in all seventeen.",
+      sep = "\n"
+    )
+  ) +
+  theme_lesson(10) +
+  theme(legend.text = element_text(size = 8), axis.text.y = element_text(size = 8))
+save_lesson(p_17, "04_seventeen_smallest_se", 12.6, 11.4)
+
+# -----------------------------------------------------------------
+# 5. All 8: one score per target cohort moves the estimate
+# -----------------------------------------------------------------
+eight_long <- bind_rows(
+  eight %>% transmute(
+    label, delta_fixed, call_changes_one_per,
+    estimate = delta_fixed, lo = lo_fixed, hi = hi_fixed,
+    kind = "All scores"
+  ),
+  eight %>% transmute(
+    label, delta_fixed, call_changes_one_per,
+    estimate = delta_one_per_pss, lo = lo_one_per_pss, hi = hi_one_per_pss,
+    kind = "One score per target cohort"
+  )
+) %>%
+  mutate(
+    y_label = if_else(
+      call_changes_one_per,
+      paste0(label, "\ncall changes"),
+      label
+    ),
+    y_label = factor(y_label, levels = rev(unique(y_label[order(delta_fixed, label)])))
+  )
+
+p_8 <- ggplot(eight_long, aes(x = estimate, y = y_label, colour = kind)) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
+  geom_errorbar(
+    aes(xmin = lo, xmax = hi),
+    position = pd, orientation = "y", width = 0.28, linewidth = 0.7
+  ) +
+  geom_point(position = pd, size = 2.5) +
+  scale_colour_manual(values = c(
+    "All scores" = col_ivw,
+    "One score per target cohort" = col_kept
+  )) +
+  labs(
+    title = "5.  The eight. One score per target cohort is the check, because more than one cohort remains.",
+    subtitle = "Black is every score. Purple is one score per target cohort, the lowest PGS identifier.\nThe cohort model Georg is looking at is the model for this panel. It is not the correction drawn in red on the previous plot.",
+    x = "ΔAUC (target − European) with 95% CI",
+    y = NULL,
+    caption = paste(
+      "The call changes in three: both European-only type 2 diabetes comparisons, and breast cancer in South Asian participants.",
+      "South Asian, European-only, moves from about 0 to a deficit. East Asian, European-only, and breast cancer move from excluding 0 to including it.",
+      "The other five, including Hispanic or Latin American type 2 diabetes with multi-ancestry training, keep the same call.",
+      sep = "\n"
+    )
+  ) +
+  theme_lesson(11) +
+  theme(legend.text = element_text(size = 8), axis.text.y = element_text(size = 8))
+save_lesson(p_8, "05_eight_one_score_per_cohort", 12.4, 8.2)
 
 message(sprintf(
-  "South Asian: IVW12 = %.4f, IVW3 = %.4f, RE = %.4f, I2 = %.1f",
-  sa_all$delta_hat, sa_one$delta_hat, sa_re$delta_hat, sa_re$I2
+  "Shapes: %d with more than one target cohort, %d with one target cohort left, %d with one score.",
+  nrow(eight), nrow(seventeen), sum(cells$shape == "One score")
 ))
-message(sprintf(
-  "Hispanic multi: IVW5 = %.4f, IVW4 = %.4f, RE = %.4f, I2 = %.1f",
-  hm_all$delta_hat, hm_one$delta_hat, hm_re$delta_hat, hm_re$I2
-))
-message("Random-effects illustrations: ", normalizePath(root_dir))
+message("Call changes in the 8: ", paste(flip8$label, collapse = " | "))
+message("Call changes in the 17: ", paste(flip17$label, collapse = " | "))
+message("Illustrations: ", normalizePath(root_dir))
