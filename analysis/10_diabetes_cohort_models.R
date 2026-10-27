@@ -4,8 +4,13 @@
 # Script: 10_diabetes_cohort_models.R
 # Project: pgscatalog_meta
 # Purpose: Type 2 diabetes side analysis. Fit ancestry models that
-#          mark shared cohorts, write an HTML page for Georg, and leave
+#          mark shared sample sets, write an HTML page for Georg, and leave
 #          script 09 / DerSimonian-Laird unchanged.
+#
+# Reader-facing words, matching tests/q_random_effects_t2d_illustrations.R:
+#   PGS, evaluation, sample set, pair, comparison, training set.
+#   In the model formula, (1|cohort) means the sample set. Say that once.
+#   Do not write cell, code, cohorts left, key, bucket, or k on the page.
 # Inputs:  eval_df_final_auc_ci, Stage-1 I2-filtered cells, sample sets,
 #          09_dependence_cells.csv
 # Outputs: results/review_sensitivity_<STAMP>/diabetes_cohort_models/
@@ -650,20 +655,20 @@ model_blurbs <- tribble(
   ~model_key, ~title, ~blurb, ~question,
   "lm_unweighted",
   "Unweighted regression: lm(AUC ~ ancestry + PGS)",
-  "Each score has its own baseline. Every evaluation has the same weight. Shared people are not marked.",
+  "Each PGS has its own baseline. Every evaluation has the same weight. A shared sample set is not marked.",
   "Should the unweighted regression be the dependence model?",
   "lm_weighted",
   "Weighted regression: lm(AUC ~ ancestry + PGS, weights = 1/SE^2)",
-  "Each score still has its own baseline, and a precise AUC pulls harder. Shared people are not marked. The point matches Figure 1C for European-only South Asian and Hispanic or Latin American. It is not the cell-wise Figure 1C pool in the multi-ancestry cells, where one very precise European row dominates the joint fit.",
+  "Each PGS has its own baseline, and a precise AUC pulls harder. A shared sample set is not marked. For some ancestry groups the point matches All PGS IVW. The interval is the regression interval, not the All PGS IVW interval.",
   "Should the weighted regression be the dependence model?",
   "lmer_pgs_fixed",
-  "Cohort random effect, score fixed: lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)",
-  "The cohort is the sample-set id. Evaluations from the same sample set share an offset, and the score stays a fixed intercept. The largest European-only sample sets contain only one ancestry, so that offset and the ancestry coefficient compete for the same shift. Ten South Asian scores share PSS011749, and all of them are South Asian.",
-  "Should the cohort random effect with the score kept fixed be the dependence model?",
+  "Sample-set term, PGS fixed: lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)",
+  "In this model, cohort is the sample set. Evaluations from the same sample set share an offset, and the PGS stays a fixed intercept. Ten South Asian PGS share PSS011749, and all of them are South Asian, so the sample-set offset and the ancestry coefficient compete for the same shift.",
+  "Should the model with a sample-set term and a fixed PGS be the dependence model?",
   "lmer_pgs_random",
-  "Score and cohort random: lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)",
-  "The cohort is again the sample-set id. The score is a random intercept as well. European-only training has 12 scores. Multi-ancestry training has 6. The same ancestry-versus-cohort overlap applies.",
-  "Should treating both the score and the cohort as random be the dependence model?"
+  "PGS and sample set both random: lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)",
+  "Cohort is again the sample set. The PGS is a random intercept as well. European-only training has 12 PGS. Multi-ancestry training has 6.",
+  "Should the model with both the PGS and the sample set random be the dependence model?"
 )
 
 map_model_key <- function(model) {
@@ -704,19 +709,19 @@ cohort_support <- diabetes_eval %>%
 page_note <- function(r) {
   bits <- character()
   if (identical(r$model_key, "lm_unweighted")) {
-    bits <- c(bits, "Shared people are not marked.")
+    bits <- c(bits, "A shared sample set is not marked.")
   }
   if (identical(r$model_key, "lm_weighted")) {
     ref <- ref_rows %>%
       filter(train_bucket == r$train_bucket, ancestry == r$ancestry)
     if (nrow(ref) == 1L && abs(r$estimate - ref$estimate) < 0.002) {
       bits <- c(bits, sprintf(
-        "Point matches Figure 1C (%s). The interval is the regression interval, not the Figure 1C interval. Shared people are not marked.",
+        "Point matches All PGS IVW (%s). The interval is the regression interval, not the All PGS IVW interval. A shared sample set is not marked.",
         fmt4(ref$estimate)
       ))
     } else if (nrow(ref) == 1L) {
       bits <- c(bits, sprintf(
-        "Point is %s; Figure 1C is %s. This joint regression is not the cell-wise pool. Shared people are not marked.",
+        "Point is %s; All PGS IVW is %s. This joint regression is not the All PGS IVW pool for that comparison. A shared sample set is not marked.",
         fmt4(r$estimate), fmt4(ref$estimate)
       ))
     }
@@ -728,12 +733,12 @@ page_note <- function(r) {
     support <- cohort_support %>% filter(train_bucket == r$train_bucket)
     if (nrow(support) == 1L && grepl("Multi", r$train_bucket)) {
       bits <- c(bits, sprintf(
-        "%d rows and %d sample sets; %d sample sets contain more than one score. The cohort variance is barely estimated.",
+        "%d evaluations and %d sample sets; %d sample sets contain more than one PGS. The sample-set term is barely estimated.",
         support$n_rows_bucket, support$n_sets, support$n_sets_repeated
       ))
     }
     if (identical(r$model_key, "lmer_pgs_random") && !is.na(r$n_pgs)) {
-      bits <- c(bits, sprintf("%d scores as random intercepts.", r$n_pgs))
+      bits <- c(bits, sprintf("%d PGS as random intercepts.", r$n_pgs))
     }
   }
   if (!length(bits)) "" else paste(bits, collapse = " ")
@@ -748,7 +753,7 @@ ref_rows <- dep_cells %>%
     hi = hi_fixed,
     excludes_zero = sig_fixed,
     n_pairs,
-    source = "Figure 1C IVW (delta_fixed)"
+    source = "All PGS IVW"
   )
 
 # Cohort composition for European-only South Asian / Hispanic notes
@@ -799,18 +804,18 @@ cell_table_html <- function(bucket, ancestry) {
   lines <- c(
     "<table>",
     "<thead><tr>",
-    "<th>Source</th><th>Cohort definition</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>",
+    "<th>Source</th><th>Sample set in the model</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th>",
     "</tr></thead><tbody>"
   )
   if (nrow(ref) == 1L) {
     lines <- c(lines, sprintf(
-      "<tr class='ref'><td>%s (k=%s)</td><td>—</td><td>%s</td><td>%s to %s</td><td>%s</td><td>Corrected Figure 1C inverse-variance ΔAUC</td></tr>",
-      html_escape(ref$source), ref$n_pairs,
+      "<tr class='ref'><td>%s</td><td>—</td><td>%s</td><td>%s to %s</td><td>%s</td><td></td></tr>",
+      html_escape(ref$source),
       fmt4(ref$estimate), fmt4(ref$lo), fmt4(ref$hi),
       ifelse(isTRUE(ref$excludes_zero), "yes", "no")
     ))
   } else {
-    lines <- c(lines, "<tr class='ref'><td colspan='6'>No Figure 1C reference row for this cell.</td></tr>")
+    lines <- c(lines, "<tr class='ref'><td colspan='6'>No All PGS IVW row for this comparison.</td></tr>")
   }
   if (nrow(rows) == 0L) {
     lines <- c(lines, "<tr><td colspan='6'>No model estimate for this ancestry in this bucket.</td></tr>")
@@ -877,65 +882,67 @@ img.fig { max-width: 100%; height: auto; border: 1px solid #ddd; margin: 8px 0 4
 html <- c(
   "<!DOCTYPE html>",
   "<html lang='en'><head><meta charset='utf-8'>",
-  "<title>Type 2 diabetes cohort models — questions for Georg</title>",
+  "<title>Type 2 diabetes — which model for PGS that share a sample set</title>",
   paste0("<style>", css, "</style>"),
   "</head><body>",
-  "<h1>Type 2 diabetes cohort models</h1>",
+  "<h1>Type 2 diabetes: PGS that share a sample set</h1>",
   paste0(
     "<p class='small'>Catalog stamp ", html_escape(stamp),
-    ". The figures show where a cohort term can be fit. The tables are the four ancestry models. ",
-    "The cohort in the mixed models is the sample-set id.</p>"
+    ". In the models, cohort means the sample set.</p>"
   ),
 
+  "<div class='q'>",
+  "The input I need: which of the four models should account for several PGS evaluated on the same sample set, ",
+  "or whether you would rather drop rows than model the sharing.",
+  "</div>",
+  "<ul>",
+  "<li><code>lm(AUC ~ ancestry + PGS)</code></li>",
+  "<li><code>lm(AUC ~ ancestry + PGS, weights = 1/SE^2)</code></li>",
+  "<li><code>lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)</code></li>",
+  "<li><code>lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)</code></li>",
+  "</ul>",
+
   "<div class='lead'>",
-  "<p><strong>Scope.</strong> A row is one evaluation: one score, one sample set, one ancestry, one AUC, and one SE. ",
-  "It is not the Stage 1 average. A cohort random effect marks which of those rows share a group. ",
-  "It does not make the AUCs independent.</p>",
-  "<p>The four models are fit on type 2 diabetes. A cohort term can be fit where more than one target cohort remains. ",
-  "That is 8 of the 30 Figure 1C comparisons. Seven are type 2 diabetes. ",
-  "The eighth is breast cancer in South Asian participants, European-only training.</p>",
-  "<p>Seventeen comparisons have several scores and one target cohort left. ",
-  "Ancestry and that cohort are the same column, so these models cannot separate them. ",
-  "Five comparisons have one score. The question at the end is which of the four models to use ",
-  "where a cohort term can be fit.</p>",
+  "<p>An evaluation is one AUC: one PGS, one sample set, one ancestry group, and one standard error. ",
+  "The sample-set term marks which evaluations share a sample set. It does not make the AUCs independent.</p>",
+  "<p>The four models are fit on type 2 diabetes. They can separate an ancestry group from a sample set only when a comparison uses more than one target sample set. ",
+  "Eight comparisons do. Seven are type 2 diabetes. The eighth is breast cancer, Europeans and South Asian participants, European-only training.</p>",
+  "<p>Seventeen comparisons have several PGS and one target sample set. Ancestry group and sample set are the same column there. ",
+  "The four models are not for that case. Five comparisons have one PGS.</p>",
   "</div>",
 
   "<h2>South Asian comparison</h2>",
   "<div class='box'>",
-  "<p>European-only training. Twelve scores, ten of them on one UK Biobank sample set.</p>",
+  "<p>Europeans and South Asian participants, European-only training. Twelve PGS, ten of them on one UK Biobank sample set.</p>",
   "<ul>",
   sprintf("<li>Inverse-variance pool of all 12: <strong>%s</strong> (%s to %s).</li>",
           fmt4(sa_all$delta_hat), fmt4(sa_all$lo), fmt4(sa_all$hi)),
-  sprintf("<li>Pool of the 3 kept scores, one per sample set: <strong>%s</strong> (%s to %s).</li>",
+  sprintf("<li>Pool of the 3 kept PGS, one per sample set: <strong>%s</strong> (%s to %s).</li>",
           fmt4(sa_one$delta_hat), fmt4(sa_one$lo), fmt4(sa_one$hi)),
   "</ul>",
   "</div>",
 
-  "<h2>Where a cohort term can be fit</h2>",
-  "<p>Each dot in the first figure is one comparison: one trait, one training bucket, one target ancestry. ",
-  "The length is the number of scores. The label is how many target cohorts remain after one score is kept per cohort.</p>",
-  embed_png("01_two_shapes.png", "Thirty comparisons split into 8, 17, and 5"),
-  "<p class='cap'>Eight comparisons leave more than one target cohort. Seventeen leave one. Five have one score.</p>",
+  "<h2>Two comparisons</h2>",
+  "<p>South Asian participants, below, are one of the eight. ",
+  "Hispanic or Latin American participants are one of the seventeen, shown so the boundary is visible. ",
+  "The third figure lists the eight comparisons the question applies to.</p>",
 
-  embed_png("02_south_asian_one_of_eight.png", "South Asian type 2 diabetes, one of the eight"),
-  "<p class='cap'>One of the eight. Ten of the twelve South Asian scores share PSS011749, and other target cohorts remain. ",
-  "The black line is the pool of all twelve.</p>",
+  embed_png("02_south_asian_one_of_eight.png", "Type 2 diabetes, Europeans and South Asian participants, European-only training"),
+  "<p class='cap'>Twelve PGS. Ten share PSS011749. Two other target sample sets are in the comparison. ",
+  "The black line is All PGS IVW, the pool of all twelve, about 0. One PGS per target sample set is −0.016 and excludes 0.</p>",
 
-  embed_png("03_hispanic_one_of_seventeen.png", "Hispanic or Latin American type 2 diabetes, one of the seventeen"),
-  "<p class='cap'>One of the seventeen. All ten scores use PSS011736. ",
-  "The red interval keeps the average and uses the smallest standard error. It still excludes 0.</p>",
+  embed_png("03_hispanic_one_of_seventeen.png", "Type 2 diabetes, Europeans and Hispanic or Latin American participants, European-only training"),
+  "<p class='cap'>Ten PGS, all on PSS011736. Ancestry group and sample set are the same column. ",
+  "This comparison is not one of the four models.</p>",
 
-  embed_png("04_seventeen_smallest_se.png", "Seventeen comparisons, inverse-variance interval and smallest standard error"),
-  "<p class='cap'>The same correction in all seventeen. The point stays. Three red intervals include 0 where the black interval does not. ",
-  "This correction is not one of the four models below.</p>",
-
-  embed_png("05_eight_one_score_per_cohort.png", "Eight comparisons, all scores and one score per target cohort"),
-  "<p class='cap'>The eight. Purple is one score per target cohort. The four models below are for this situation.</p>",
+  embed_png("05_eight_one_score_per_cohort.png", "Eight comparisons: every PGS, and one PGS per target sample set"),
+  "<p class='cap'>Black is All PGS IVW, the same points as in the tables below. Purple is one PGS per target sample set. ",
+  "The four models below are for these eight comparisons.</p>",
 
   "<h2>Evaluation table used here</h2>",
   "<div class='box'>",
   sprintf(
-    "<p>%d evaluation rows. %d scores. %d sample sets. %d study names. ",
+    "<p>%d evaluations. %d PGS. %d sample sets. %d study names. ",
     nrow(diabetes_eval),
     n_distinct(diabetes_eval$pgs_id),
     n_distinct(diabetes_eval$sampleset_id),
@@ -943,8 +950,8 @@ html <- c(
   ),
   "Corrected logit values from <code>auc_ci_to_logit()</code>. ",
   "AUC models use the delta-method SE (<code>SE_logit × AUC × (1 − AUC)</code>). ",
-  "Fits are separate inside each training bucket. European is the reference ancestry.</p>",
-  "<p class='small'>South Asian European-only target sample sets in this table:</p><ul>",
+  "Fits are separate for each training set. European is the reference ancestry group.</p>",
+  "<p class='small'>South Asian sample sets in the European-only training set:</p><ul>",
   paste(sprintf(
     "<li>%s — %s (%s), %d evaluation(s)</li>",
     html_escape(sa_cohorts$sampleset_id),
@@ -954,51 +961,15 @@ html <- c(
   ), collapse = "\n"),
   "</ul>",
   "<p class='small'>CSV: <code>diabetes_evaluation_rows.csv</code>.</p>",
-  "</div>",
-
-  "<h2>What is not in the tables</h2>",
-  "<div class='box'>",
-  "<p>The study-name cohort was fit and is stored in <code>diabetes_model_coefficients.csv</code>. It is not a second version of the sample-set model. ",
-  "Under that coding, every UK Biobank evaluation shares one intercept, including East Asian, European, and South Asian. ",
-  if (nrow(eas_ref) == 1L && nrow(eas_study) == 1L) {
-    sprintf(
-      "European-only East Asian then moves from the Figure 1C value %s to %s.",
-      fmt4(eas_ref$estimate), fmt4(eas_study$estimate)
-    )
-  } else {
-    "European-only East Asian changes sign under that coding."
-  },
-  " That happens because the cohort label and the ancestry label are no longer separate.</p>",
-  "<p>metafor::rma.mv, on the AUC and on the logit, is the weight check. lmer rescales the published standard errors; rma.mv keeps them fixed. ",
-  if (nrow(sas_lmer) == 1L && nrow(sas_rma) == 1L) {
-    sprintf(
-      "For European-only South Asian those two AUC fits are %s and %s. ",
-      fmt4(sas_lmer$estimate), fmt4(sas_rma$estimate)
-    )
-  } else {
-    ""
-  },
-  "The check does not agree in the sparser multi-ancestry cells, which is why those rows are not on this page. ",
-  "One Middle Eastern row has no cohort text and would enter a study-name fit as its own group.</p>",
-  "<p>In the multi-ancestry bucket a sample-set cohort variance is barely estimated: ",
-  {
-    multi_support <- cohort_support %>% filter(grepl("Multi", train_bucket))
-    if (nrow(multi_support) == 1L) {
-      sprintf(
-        "%d rows, %d sample sets, and %d of those sets contain more than one score.",
-        multi_support$n_rows_bucket, multi_support$n_sets, multi_support$n_sets_repeated
-      )
-    } else {
-      "most sample sets contain a single row."
-    }
-  },
-  "</p>",
   "</div>"
 )
 
 # Per-bucket comparison tables
+bucket_title <- function(bucket) {
+  if (grepl("European-only", bucket)) "European-only training" else "Multi-ancestry training"
+}
 for (bucket in buckets) {
-  html <- c(html, sprintf("<h2>Ancestry estimates — %s</h2>", html_escape(bucket)))
+  html <- c(html, sprintf("<h2>%s</h2>", html_escape(bucket_title(bucket))))
   for (anc in target_ancestries_by_bucket[[bucket]]) {
     html <- c(
       html,
@@ -1028,7 +999,7 @@ for (i in seq_len(nrow(model_blurbs))) {
       r <- sub[j, ]
       html <- c(html, sprintf(
         "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s to %s</td><td>%s</td><td>%s</td></tr>",
-        html_escape(r$train_bucket), html_escape(r$cohort_def), html_escape(r$ancestry),
+        html_escape(bucket_title(r$train_bucket)), html_escape(r$cohort_def), html_escape(r$ancestry),
         fmt4(r$estimate), fmt4(r$lo), fmt4(r$hi),
         ifelse(isTRUE(r$excludes_zero), "yes", ifelse(isFALSE(r$excludes_zero), "no", "NA")),
         html_escape(page_note(r))
@@ -1046,21 +1017,19 @@ html <- c(
   html,
   "<h2>If dropping rows is preferred to modelling the sharing</h2>",
   "<div class='box'>",
-  "<p>Two reduction rules, counted on the diabetes evaluation table above. The page does not pick a rule.</p>",
+  "<p>Two ways to drop rows, counted on the 71 type 2 diabetes evaluations. The page does not pick one.</p>",
   "<ul>",
   sprintf(
-    "<li>%s: keeps %d rows, drops %d of %d.</li>",
-    html_escape(drop_counts$rule[[1]]),
+    "<li>One PGS per sample set, the lowest PGS identifier: keeps %d evaluations, drops %d of %d.</li>",
     drop_counts$n_rows_kept[[1]], drop_counts$n_rows_dropped[[1]], drop_counts$n_rows_total[[1]]
   ),
   sprintf(
-    "<li>%s: keeps %d rows, drops %d of %d.</li>",
-    html_escape(drop_counts$rule[[2]]),
+    "<li>The largest sample set when one PGS is evaluated more than once in an ancestry group: keeps %d evaluations, drops %d of %d.</li>",
     drop_counts$n_rows_kept[[2]], drop_counts$n_rows_dropped[[2]], drop_counts$n_rows_total[[2]]
   ),
   "</ul>",
   "</div>",
-  "<div class='q'>If you would rather drop rows than model the sharing, which rule do you prefer: one score per sample set, or the largest cohort when one score is evaluated more than once?</div>",
+  "<div class='q'>If you would rather drop rows than model the sharing, which rule do you prefer: one PGS per sample set, or the largest sample set when one PGS is evaluated more than once?</div>",
 
   "<h2>Files</h2>",
   "<ul>",

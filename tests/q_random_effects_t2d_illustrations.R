@@ -1,25 +1,32 @@
 #!/usr/bin/env Rscript
 
 # ============================================================
-# Two shapes of shared sample sets, for the cohort model Georg
-# is being asked about.
+# Words used in the figure text. Column names in the tables are unchanged.
 #
-# A comparison is one trait, one training bucket, one target ancestry.
-# Several scores on the same people are the same dependence in both shapes.
+#   PGS            one score, one PGS identifier
+#   evaluation     one AUC: one PGS, one sample set, one ancestry group
+#   sample set     the people, a PSS identifier. In the model, (1|cohort)
+#                  is this sample set.
+#   pair           one PGS in Europeans and in one non-European ancestry
+#                  group, and the difference in AUC
+#   comparison     all the pairs for one trait, one training set, and one
+#                  non-European ancestry group. Figure 1C has 30.
+#   training set   European-only, or multi-ancestry
 #
-#   8 comparisons leave more than one target cohort after one score
-#   is kept per cohort. Nikolaus's
-#     AUC ~ ancestry + PGS + (1|cohort)
-#   has more than one target cohort to attach to. Seven are type 2
-#   diabetes. The eighth is breast cancer in South Asian participants,
-#   European-only training.
+# Do not write "cell", "code", "cohorts left", "key", "bucket", or "k"
+# in titles, subtitles, or captions.
 #
-#   17 comparisons leave one target cohort. Ancestry and that cohort
-#   are the same column, so the cohort model cannot separate them.
-#   The average stays. Its standard error becomes the smallest
-#   standard error among the scores.
+# Eight comparisons use more than one target sample set, so the sample-set
+# term can be fit. Seven are type 2 diabetes. The eighth is breast cancer
+# in South Asian and European participants, European-only training.
 #
-#   5 comparisons have one score. Nothing is shared.
+# Seventeen comparisons have several PGS and one target sample set the
+# model can tell apart. Ancestry group and that sample set are the same
+# column. The average stays. Its standard error becomes the smallest
+# standard error among the PGS. Stroke uses two sample sets, and every
+# PGS uses both, so it counts with these seventeen.
+#
+# Five comparisons have one PGS. Nothing is shared.
 #
 # DerSimonian-Laird is a different random effect and is not drawn.
 #
@@ -142,9 +149,9 @@ cells <- dep %>%
   left_join(se_by_cell, by = c("trait_label", "trained_bucket", "target_ancestry")) %>%
   mutate(
     shape = case_when(
-      n_pairs == 1 ~ "One score",
-      single_pgs_sensitivity ~ "One target cohort left",
-      re_applicable ~ "More than one target cohort",
+      n_pairs == 1 ~ "One PGS",
+      single_pgs_sensitivity ~ "One target sample set",
+      re_applicable ~ "Several target sample sets",
       TRUE ~ "Unclassified"
     ),
     lo_min = delta_fixed - 1.96 * se_min,
@@ -153,21 +160,21 @@ cells <- dep %>%
     lo_med = delta_fixed - 1.96 * se_median,
     hi_med = delta_fixed + 1.96 * se_median,
     sig_med = excludes_zero(lo_med, hi_med),
-    call_changes_min_se = shape == "One target cohort left" & sig_fixed != sig_min,
-    call_changes_one_per = shape == "More than one target cohort" & sig_fixed != sig_one_per_pss,
+    call_changes_min_se = shape == "One target sample set" & sig_fixed != sig_min,
+    call_changes_one_per = shape == "Several target sample sets" & sig_fixed != sig_one_per_pss,
     label = sprintf("%s — %s, %s", trait_label, target_ancestry, train_short(trained_bucket))
   )
 
 stopifnot(!any(cells$shape == "Unclassified"))
 stopifnot(nrow(cells) == 30L)
-stopifnot(sum(cells$shape == "More than one target cohort") == 8L)
-stopifnot(sum(cells$shape == "One target cohort left") == 17L)
-stopifnot(sum(cells$shape == "One score") == 5L)
-stopifnot(all(cells$sig_min[cells$shape == "One target cohort left"] ==
-  cells$sig_med[cells$shape == "One target cohort left"]))
+stopifnot(sum(cells$shape == "Several target sample sets") == 8L)
+stopifnot(sum(cells$shape == "One target sample set") == 17L)
+stopifnot(sum(cells$shape == "One PGS") == 5L)
+stopifnot(all(cells$sig_min[cells$shape == "One target sample set"] ==
+  cells$sig_med[cells$shape == "One target sample set"]))
 
-eight <- cells %>% filter(shape == "More than one target cohort")
-seventeen <- cells %>% filter(shape == "One target cohort left")
+eight <- cells %>% filter(shape == "Several target sample sets")
+seventeen <- cells %>% filter(shape == "One target sample set")
 
 stopifnot(sum(eight$trait_label == "Type 2 diabetes") == 7L)
 stopifnot(any(eight$trait_label == "Breast cancer" & eight$target_ancestry == "South Asian"))
@@ -199,46 +206,31 @@ write_csv(
 )
 
 # -----------------------------------------------------------------
-# 1. The 30 comparisons, split by whether a cohort term has
-#    more than one target cohort
+# 1. The 30 comparisons, split by how many target sample sets the PGS use
 # -----------------------------------------------------------------
 shape_levels <- c(
-  "More than one target cohort",
-  "One target cohort left",
-  "One score"
+  "Several target sample sets",
+  "One target sample set",
+  "One PGS"
 )
 map_df <- cells %>%
   mutate(
     shape = factor(shape, levels = shape_levels),
-    y = factor(label, levels = rev(label[order(shape, n_pairs, trait_label)])),
-    cohorts_left = sprintf(
-      "%d cohort%s left",
-      n_pairs_one_per_pss,
-      ifelse(n_pairs_one_per_pss == 1, "", "s")
-    )
+    y = factor(label, levels = rev(label[order(shape, n_pairs, trait_label)]))
   )
 
-p_map <- ggplot(map_df, aes(x = n_pairs, y = y)) +
-  geom_segment(aes(x = 0, xend = n_pairs, yend = y), colour = "#D9D9D9", linewidth = 0.6) +
-  geom_point(size = 2.8, colour = col_share) +
-  geom_text(
-    aes(label = cohorts_left),
-    hjust = -0.15, size = 2.7, family = "DejaVu Sans", colour = "#333333"
-  ) +
-  scale_x_continuous(
-    name = "Scores in the comparison",
-    limits = c(0, 18),
-    breaks = c(1, 2, 5, 10, 12)
-  ) +
+p_map <- ggplot(map_df, aes(y = y)) +
+  geom_point(aes(x = 1), size = 2.2, colour = col_share) +
+  scale_x_continuous(limits = c(0.6, 1.4), breaks = NULL, name = NULL) +
   facet_grid(shape ~ ., scales = "free_y", space = "free_y") +
   labs(
-    title = "1.  Thirty comparisons. The cohort model can be fit in eight of them.",
-    subtitle = "Each row is one trait, one training bucket, and one target ancestry.\nA cohort term needs more than one target cohort. That is the top panel. The middle panel is the same sharing with one target cohort left.",
+    title = "1.  Which comparisons can use the sample-set term",
+    subtitle = "Each row is one comparison: one trait, one training set, and Europeans compared with the ancestry group named here.\nThe top panel uses more than one target sample set. The middle panel does not. The bottom panel has one PGS.",
     y = NULL,
-    caption = "Catalog stamp 20260923, after one evaluation per score, sample set, and ancestry.\nStroke is in the middle panel: ten scores sit on two South Asian sample sets, and one score per set of cohorts leaves a single ancestry difference.\nThe bottom panel has one score. Nothing is shared, so neither check applies."
+    caption = "Catalog stamp 20260923. In (1|cohort), cohort means the sample set.\nStroke is in the middle panel. It uses two South Asian sample sets, and every PGS uses both, so those sample sets are not separate from the ancestry group.\nThis list is not on the page for Georg."
   ) +
   theme_lesson(11) +
-  theme(panel.grid.major.x = element_line(colour = "#EEEEEE"))
+  theme(panel.grid.major.x = element_blank())
 save_lesson(p_map, "01_two_shapes", 12.4, 13.2)
 
 # -----------------------------------------------------------------
@@ -317,7 +309,7 @@ stopifnot(nrow(georg_sa) == 1L)
 sa_forest <- sa %>%
   mutate(
     axis = factor(pgs_id, levels = rev(pgs_id[order(group_label, pgs_id)])),
-    role = if_else(kept, "Kept for this cohort", "Further score on that cohort")
+    role = if_else(kept, "Kept for this sample set", "Further PGS on that sample set")
   )
 
 p_sa <- ggplot(sa_forest, aes(x = delta, y = axis, colour = group_label)) +
@@ -329,16 +321,16 @@ p_sa <- ggplot(sa_forest, aes(x = delta, y = axis, colour = group_label)) +
   geom_point(aes(shape = role), size = 2.8) +
   geom_vline(xintercept = sa_all$delta_hat, colour = col_ivw, linewidth = 0.45) +
   scale_shape_manual(values = c(
-    "Kept for this cohort" = 17,
-    "Further score on that cohort" = 16
+    "Kept for this sample set" = 17,
+    "Further PGS on that sample set" = 16
   ), guide = "none") +
   labs(
-    title = "2.  One of the eight. Ten scores share PSS011749, and other target cohorts remain.",
-    subtitle = "Type 2 diabetes, South Asian target, European-only training.\nTriangles are the score kept for each target cohort. Circles are further scores on a cohort that already has a triangle. The black line is the inverse-variance pool of all twelve.",
+    title = "2.  One of the eight. Ten PGS share PSS011749, and two other target sample sets are in the comparison.",
+    subtitle = "Type 2 diabetes, Europeans and South Asian participants, European-only training.\nTriangles are the PGS kept for each target sample set. Circles are further PGS on a sample set that already has a triangle. The black line is All PGS IVW, the inverse-variance pool of all twelve.",
     x = "ΔAUC (South Asian − European) with 95% CI",
     y = NULL,
     caption = sprintf(
-      "The pool of twelve is %s (%s to %s) and includes 0. One score per target cohort leaves three values. Their pool is %s (%s to %s) and excludes 0.\nOn the page for Georg, lmer(AUC ~ ancestry + PGS + (1|cohort)) gives %s for South Asian in this training bucket (%s to %s).\nThat number is an ancestry coefficient from the joint model. It is not a point on this ΔAUC axis. The interval includes 0.",
+      "The pool of twelve is %s (%s to %s) and includes 0. One PGS per target sample set leaves three values. Their pool is %s (%s to %s) and excludes 0.\nOn the page for Georg, lmer(AUC ~ ancestry + PGS + (1|cohort)) gives %s for South Asian participants in this training set (%s to %s). Here cohort means the sample set.\nThat number is an ancestry coefficient from the joint model. It is not a point on this axis. The interval includes 0.",
       fmt(sa_all$delta_hat, 4), fmt(sa_all$lo, 4), fmt(sa_all$hi, 4),
       fmt(sa_one$delta_hat, 3), fmt(sa_one$lo, 3), fmt(sa_one$hi, 3),
       fmt(georg_sa$estimate, 3), fmt(georg_sa$lo, 3), fmt(georg_sa$hi, 3)
@@ -375,14 +367,14 @@ hisp_rows <- bind_rows(
     estimate = delta,
     lo = delta - 1.96 * delta_se,
     hi = delta + 1.96 * delta_se,
-    kind = "Score on PSS011736"
+    kind = "PGS on PSS011736"
   ),
   tibble(
-    axis = c("Inverse-variance of all 10", "Same average, smallest SE"),
+    axis = c("All PGS IVW", "Same average, smallest SE"),
     estimate = hisp_all$delta_hat,
     lo = c(hisp_all$lo, hisp_pub$lo_min),
     hi = c(hisp_all$hi, hisp_pub$hi_min),
-    kind = c("Inverse-variance of all 10", "Same average, smallest SE")
+    kind = c("All PGS IVW", "Same average, smallest SE")
   )
 ) %>%
   mutate(axis = factor(axis, levels = rev(axis)))
@@ -392,17 +384,17 @@ p_hisp <- ggplot(hisp_rows, aes(x = estimate, y = axis, colour = kind)) +
   geom_errorbar(aes(xmin = lo, xmax = hi), orientation = "y", width = 0.2, linewidth = 0.65) +
   geom_point(size = 2.6) +
   scale_colour_manual(values = c(
-    "Score on PSS011736" = col_share,
-    "Inverse-variance of all 10" = col_ivw,
+    "PGS on PSS011736" = col_share,
+    "All PGS IVW" = col_ivw,
     "Same average, smallest SE" = col_min
   )) +
   labs(
-    title = "3.  One of the seventeen. Ten scores, and the only target cohort is PSS011736.",
-    subtitle = "Type 2 diabetes, Hispanic or Latin American target, European-only training.\nThe rows that are Hispanic are the rows that are this sample set. A cohort term and the ancestry term are the same column.",
+    title = "3.  One of the seventeen. Ten PGS, and the only target sample set is PSS011736.",
+    subtitle = "Type 2 diabetes, Europeans and Hispanic or Latin American participants, European-only training.\nThe rows that are Hispanic or Latin American are the rows that are this sample set. In the model, ancestry group and sample set are the same column.",
     x = "ΔAUC (Hispanic or Latin American − European) with 95% CI",
     y = NULL,
     caption = sprintf(
-      "The black interval is the inverse-variance pool, %s (%s to %s). It counts the same people ten times, so it is too narrow.\nThe red interval keeps that average and uses the smallest standard error, %s. It runs from %s to %s and still excludes 0.\nThis comparison does not change its call. Three of the seventeen do. They are marked on the next plot.",
+      "All PGS IVW, the black interval, is %s (%s to %s). It counts the same people ten times, so it is too narrow.\nThe red interval keeps that average and uses the smallest standard error, %s. It runs from %s to %s and still excludes 0.\nThis comparison does not change its call. Three of the seventeen do. They are marked on the next plot.",
       fmt(hisp_all$delta_hat, 3), fmt(hisp_all$lo, 3), fmt(hisp_all$hi, 3),
       fmt(hisp_pub$se_min, 4), fmt(hisp_pub$lo_min, 3), fmt(hisp_pub$hi_min, 3)
     )
@@ -418,7 +410,7 @@ sev_long <- bind_rows(
   seventeen %>% transmute(
     label, delta_fixed, call_changes_min_se,
     estimate = delta_fixed, lo = lo_fixed, hi = hi_fixed,
-    kind = "Inverse-variance interval"
+    kind = "All PGS IVW"
   ),
   seventeen %>% transmute(
     label, delta_fixed, call_changes_min_se,
@@ -444,18 +436,18 @@ p_17 <- ggplot(sev_long, aes(x = estimate, y = y_label, colour = kind)) +
   ) +
   geom_point(position = pd, size = 2.3) +
   scale_colour_manual(values = c(
-    "Inverse-variance interval" = col_ivw,
+    "All PGS IVW" = col_ivw,
     "Same average, smallest SE" = col_min
   )) +
   labs(
-    title = "4.  The seventeen. The point stays. The interval returns to one score.",
-    subtitle = "Black is the inverse-variance interval. Red is the same average with the smallest standard error among the scores.\nThree red intervals include 0 where the black interval does not.",
-    x = "ΔAUC (target − European) with 95% CI",
+    title = "4.  The seventeen. The point stays. The interval returns to one PGS.",
+    subtitle = "Black is All PGS IVW. Red is the same average with the smallest standard error among the PGS.\nThree red intervals include 0 where the black interval does not.",
+    x = "ΔAUC (non-European − European) with 95% CI",
     y = NULL,
     caption = paste(
       "The three whose call changes are coronary heart disease, incident and prevalent, in Hispanic or Latin American participants;",
       "incident coronary heart disease in South Asian participants; and seropositive rheumatoid arthritis in South Asian participants.",
-      "Stroke has two South Asian sample sets. All ten scores use both, so one key remains and the cohort model still has a single ancestry difference.",
+      "Stroke has two South Asian sample sets. All ten PGS use both, so the comparison has one ancestry difference.",
       "The median standard error gives the same call as the smallest in all seventeen.",
       sep = "\n"
     )
@@ -465,18 +457,18 @@ p_17 <- ggplot(sev_long, aes(x = estimate, y = y_label, colour = kind)) +
 save_lesson(p_17, "04_seventeen_smallest_se", 12.6, 11.4)
 
 # -----------------------------------------------------------------
-# 5. All 8: one score per target cohort moves the estimate
+# 5. All 8: one PGS per target sample set moves the estimate
 # -----------------------------------------------------------------
 eight_long <- bind_rows(
   eight %>% transmute(
     label, delta_fixed, call_changes_one_per,
     estimate = delta_fixed, lo = lo_fixed, hi = hi_fixed,
-    kind = "All scores"
+    kind = "All PGS IVW"
   ),
   eight %>% transmute(
     label, delta_fixed, call_changes_one_per,
     estimate = delta_one_per_pss, lo = lo_one_per_pss, hi = hi_one_per_pss,
-    kind = "One score per target cohort"
+    kind = "One PGS per target sample set"
   )
 ) %>%
   mutate(
@@ -496,13 +488,13 @@ p_8 <- ggplot(eight_long, aes(x = estimate, y = y_label, colour = kind)) +
   ) +
   geom_point(position = pd, size = 2.5) +
   scale_colour_manual(values = c(
-    "All scores" = col_ivw,
-    "One score per target cohort" = col_kept
+    "All PGS IVW" = col_ivw,
+    "One PGS per target sample set" = col_kept
   )) +
   labs(
-    title = "5.  The eight. One score per target cohort is the check, because more than one cohort remains.",
-    subtitle = "Black is every score. Purple is one score per target cohort, the lowest PGS identifier.\nThe cohort model Georg is looking at is the model for this panel. It is not the correction drawn in red on the previous plot.",
-    x = "ΔAUC (target − European) with 95% CI",
+    title = "5.  The eight. One PGS per target sample set is the check, because more than one sample set is in the comparison.",
+    subtitle = "Black is All PGS IVW. Purple is one PGS per target sample set, the lowest PGS identifier.\nThe model Georg is looking at, with (1|cohort) equal to the sample set, is the model for this panel. It is not the red interval on the previous plot.",
+    x = "ΔAUC (non-European − European) with 95% CI",
     y = NULL,
     caption = paste(
       "The call changes in three: both European-only type 2 diabetes comparisons, and breast cancer in South Asian participants.",
@@ -516,8 +508,8 @@ p_8 <- ggplot(eight_long, aes(x = estimate, y = y_label, colour = kind)) +
 save_lesson(p_8, "05_eight_one_score_per_cohort", 12.4, 8.2)
 
 message(sprintf(
-  "Shapes: %d with more than one target cohort, %d with one target cohort left, %d with one score.",
-  nrow(eight), nrow(seventeen), sum(cells$shape == "One score")
+  "Comparisons: %d with several target sample sets, %d with one target sample set, %d with one PGS.",
+  nrow(eight), nrow(seventeen), sum(cells$shape == "One PGS")
 ))
 message("Call changes in the 8: ", paste(flip8$label, collapse = " | "))
 message("Call changes in the 17: ", paste(flip17$label, collapse = " | "))
