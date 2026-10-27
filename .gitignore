@@ -53,3 +53,6 @@ data/pgs_cache/
 
 # Per-trait exploratory PDFs. Paper Stage-1/Stage-2 tables live under results/.
 diagnostics/
+
+# Local Cursor rules. Not part of the project history.
+.cursor/
