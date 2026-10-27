@@ -37,6 +37,7 @@
 suppressPackageStartupMessages({
   library(dplyr)
   library(ggplot2)
+  library(patchwork)
   library(readr)
   library(tibble)
 })
@@ -206,34 +207,6 @@ write_csv(
 )
 
 # -----------------------------------------------------------------
-# 1. The 30 comparisons, split by how many target sample sets the PGS use
-# -----------------------------------------------------------------
-shape_levels <- c(
-  "Several target sample sets",
-  "One target sample set",
-  "One PGS"
-)
-map_df <- cells %>%
-  mutate(
-    shape = factor(shape, levels = shape_levels),
-    y = factor(label, levels = rev(label[order(shape, n_pairs, trait_label)]))
-  )
-
-p_map <- ggplot(map_df, aes(y = y)) +
-  geom_point(aes(x = 1), size = 2.2, colour = col_share) +
-  scale_x_continuous(limits = c(0.6, 1.4), breaks = NULL, name = NULL) +
-  facet_grid(shape ~ ., scales = "free_y", space = "free_y") +
-  labs(
-    title = "1.  Which comparisons can use the sample-set term",
-    subtitle = "Each row is one comparison: one trait, one training set, and Europeans compared with the ancestry group named here.\nThe top panel uses more than one target sample set. The middle panel does not. The bottom panel has one PGS.",
-    y = NULL,
-    caption = "Catalog stamp 20260923. In (1|cohort), cohort means the sample set.\nStroke is in the middle panel. It uses two South Asian sample sets, and every PGS uses both, so those sample sets are not separate from the ancestry group.\nThis list is not on the page for Georg."
-  ) +
-  theme_lesson(11) +
-  theme(panel.grid.major.x = element_blank())
-save_lesson(p_map, "01_two_shapes", 12.4, 13.2)
-
-# -----------------------------------------------------------------
 # Worked cell: South Asian type 2 diabetes, one of the 8
 # -----------------------------------------------------------------
 ids <- read_csv(id_path, show_col_types = FALSE) %>%
@@ -296,6 +269,155 @@ write_csv(
   sa %>% select(pgs_id, delta, delta_se, tgt_key, group_label, kept, n_in_group),
   file.path(root_dir, "worked_south_asian_scores.csv")
 )
+
+# -----------------------------------------------------------------
+# 1.2  Stage 1 keeps one evaluation per score. One score per sample set
+#      is a separate check. Not on the page for Georg.
+# -----------------------------------------------------------------
+pss10 <- sa %>%
+  filter(tgt_key == "PSS011749") %>%
+  mutate(axis = factor(pgs_id, levels = rev(sort(pgs_id))))
+stopifnot(n_distinct(pss10$pgs_id) == 10L, sum(pss10$kept) == 1L)
+
+p_stage1 <- ggplot(pss10, aes(x = delta, y = axis)) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
+  geom_errorbar(
+    aes(xmin = delta - 1.96 * delta_se, xmax = delta + 1.96 * delta_se),
+    orientation = "y", width = 0.2, linewidth = 0.6, colour = col_share
+  ) +
+  geom_point(size = 2.6, colour = col_share) +
+  labs(
+    title = "Stage 1 keeps all ten",
+    subtitle = "PSS011749, South Asian participants.\nOne evaluation for each of these ten scores.",
+    x = "ΔAUC (South Asian − European) with 95% CI",
+    y = NULL
+  ) +
+  theme_lesson(11)
+
+ivw10 <- pool_delta(pss10$delta, pss10$delta_se)
+nikolaus <- read_csv(coef_path, show_col_types = FALSE) %>%
+  filter(
+    train_bucket == "Train: European-only",
+    ancestry == "South Asian",
+    cohort_def == "sample-set id",
+    model == "lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)"
+  )
+stopifnot(nrow(nikolaus) == 1L)
+kept_id <- pss10$pgs_id[pss10$kept]
+stopifnot(length(kept_id) == 1L)
+
+role_kept <- sprintf("%s kept", kept_id)
+role_rest <- "Other nine scores"
+role_ivw <- "All PGS IVW"
+role_tight <- "Average of all scores, tightest interval"
+role_lmer <- "lmer(AUC ~ ancestry + PGS + (1|cohort))"
+tight_id <- pss10$pgs_id[which.min(pss10$delta_se)]
+se_tight <- min(pss10$delta_se)
+stopifnot(length(tight_id) == 1L)
+
+later_rows <- bind_rows(
+  pss10 %>% transmute(
+    axis = pgs_id,
+    estimate = delta,
+    lo = delta - 1.96 * delta_se,
+    hi = delta + 1.96 * delta_se,
+    role = if_else(kept, role_kept, role_rest)
+  ),
+  tibble(
+    axis = c(role_ivw, role_tight, role_lmer),
+    estimate = c(ivw10$delta_hat, ivw10$delta_hat, nikolaus$estimate),
+    lo = c(ivw10$lo, ivw10$delta_hat - 1.96 * se_tight, nikolaus$lo),
+    hi = c(ivw10$hi, ivw10$delta_hat + 1.96 * se_tight, nikolaus$hi),
+    role = c(role_ivw, role_tight, role_lmer)
+  )
+) %>%
+  mutate(axis = factor(axis, levels = rev(unique(axis))))
+
+p_later <- ggplot(later_rows, aes(x = estimate, y = axis, colour = role)) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
+  geom_errorbar(
+    aes(xmin = lo, xmax = hi),
+    orientation = "y", width = 0.2, linewidth = 0.6
+  ) +
+  geom_point(size = 2.6) +
+  scale_colour_manual(values = setNames(
+    c("#E41A1C", "#B0B0B0", col_ivw, "#E69F00", "#01665E"),
+    c(role_kept, role_rest, role_ivw, role_tight, role_lmer)
+  )) +
+  labs(
+    title = "One score kept, All PGS IVW, tightest interval, and Nikolaus's lmer",
+    subtitle = "Same ten scores as on the left, all on PSS011749.\nThe orange row keeps the All PGS IVW average and uses the smallest standard error. No score is dropped.",
+    x = "ΔAUC (South Asian − European) with 95% CI",
+    y = NULL
+  ) +
+  theme_lesson(10) +
+  theme(
+    legend.text = element_text(size = 8),
+    legend.position = "bottom"
+  ) +
+  guides(colour = guide_legend(nrow = 3))
+
+drop_path <- file.path(
+  "results", paste0("pgs_catalog_", stamp), "stage1",
+  paste0("stage1_one_evaluation_dropped_", stamp, ".csv")
+)
+tie_rows <- read_csv(id_path, show_col_types = FALSE) %>%
+  filter(
+    pgs_id == "PGS005345",
+    sampleset_id == "PSS012140",
+    evaluation_ancestry == "European"
+  ) %>%
+  distinct(performance_id, .keep_all = TRUE)
+dropped_ids <- read_csv(drop_path, show_col_types = FALSE) %>%
+  filter(pgs_id == "PGS005345", sampleset_id == "PSS012140") %>%
+  pull(performance_id)
+stopifnot(nrow(tie_rows) == 2L, length(dropped_ids) == 1L, dropped_ids %in% tie_rows$performance_id)
+
+tie_plot <- tie_rows %>%
+  mutate(
+    role = if_else(performance_id %in% dropped_ids, "Dropped by Stage 1", "Kept by Stage 1"),
+    axis = if_else(
+      performance_id %in% dropped_ids,
+      paste0(performance_id, "\nabsolute risk"),
+      paste0(performance_id, "\nscore only")
+    )
+  )
+
+p_tie <- ggplot(tie_plot, aes(x = auc, y = axis, colour = role)) +
+  geom_errorbar(
+    aes(xmin = estimate_ci_lower, xmax = estimate_ci_upper),
+    orientation = "y", width = 0.15, linewidth = 0.7
+  ) +
+  geom_point(size = 3) +
+  scale_colour_manual(values = c(
+    "Kept by Stage 1" = col_share,
+    "Dropped by Stage 1" = "#B0B0B0"
+  )) +
+  labs(
+    title = "What Stage 1 does drop",
+    subtitle = "PGS005345, PSS012140, European participants.\nSame score, same sample set, two evaluations.",
+    x = "AUC with reported 95% CI",
+    y = NULL
+  ) +
+  theme_lesson(11) +
+  theme(legend.text = element_text(size = 8))
+
+p_12 <- (p_stage1 | p_later) / p_tie +
+  plot_layout(heights = c(2.3, 1)) +
+  plot_annotation(
+    title = "1.2  Stage 1 is not one score per sample set",
+    subtitle = "Left: Stage 1 keeps one evaluation per score, sample set, and ancestry group. Different scores on PSS011749 all stay.\nRight: the same ten scores, with the one score kept, All PGS IVW, the tightest interval, and Nikolaus's lmer.",
+    caption = sprintf(
+      "Catalog stamp 20260923. The orange interval is the average of these ten scores, %s, with the smallest standard error, %s, from %s. On this sample set that is also the score the identifier rule keeps. The average is not that score's own difference.\nThe green row is Nikolaus's lmer from the European-only fit. This figure is not on the page for Georg.",
+      fmt(ivw10$delta_hat, 3), fmt(se_tight, 4), tight_id
+    ),
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 16, family = "DejaVu Sans", colour = "#1a1a1a"),
+      plot.subtitle = element_text(size = 11, family = "DejaVu Sans", colour = "#333333"),
+      plot.caption = element_text(size = 9, family = "DejaVu Sans", colour = "#444444", hjust = 0)
+    )
+  )
+save_lesson(p_12, "01b_stage1_versus_one_score", 13.2, 11.2)
 
 georg_sa <- read_csv(coef_path, show_col_types = FALSE) %>%
   filter(
@@ -360,6 +482,48 @@ hisp_pub <- cells %>%
   )
 stopifnot(abs(hisp_all$delta_hat - hisp_pub$delta_fixed) < 1e-8)
 stopifnot(isTRUE(hisp_pub$sig_fixed), isTRUE(hisp_pub$sig_min), !isTRUE(hisp_pub$call_changes_min_se))
+
+# -----------------------------------------------------------------
+# 1. Every comparison, drawn like figure 3: the average of all scores.
+#    Not on the page for Georg.
+# -----------------------------------------------------------------
+forest <- cells %>%
+  mutate(
+    panel = factor(
+      case_when(
+        shape == "Several target sample sets" ~ "Several target sample sets",
+        shape == "One target sample set" ~ "One target sample set",
+        TRUE ~ "One score"
+      ),
+      levels = c("Several target sample sets", "One target sample set", "One score")
+    ),
+    y_label = if_else(
+      trait_label == "Stroke excluding subarachnoid hemorrhage",
+      paste0(label, "\n2 sample sets, every score uses both"),
+      label
+    )
+  ) %>%
+  arrange(panel, delta_fixed, y_label) %>%
+  mutate(y_label = factor(y_label, levels = rev(unique(y_label))))
+
+p_map <- ggplot(forest, aes(x = delta_fixed, y = y_label)) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
+  geom_errorbar(
+    aes(xmin = lo_fixed, xmax = hi_fixed),
+    orientation = "y", width = 0.25, linewidth = 0.6, colour = col_ivw
+  ) +
+  geom_point(size = 2.4, colour = col_ivw) +
+  facet_grid(panel ~ ., scales = "free_y", space = "free_y") +
+  labs(
+    title = "1.  All PGS IVW in each comparison",
+    subtitle = "Each row is one comparison: one trait, one training set, and Europeans compared with the ancestry group named here.\nThe top panel uses more than one target sample set, so the sample-set term can be fit. The middle panel uses one. The bottom panel has one score.",
+    x = "ΔAUC (non-European − European) with 95% CI",
+    y = NULL,
+    caption = "Catalog stamp 20260923. In (1|cohort), cohort means the sample set.\nStroke is in the middle panel. It uses two South Asian sample sets, and every score uses both.\nThis figure is not on the page for Georg."
+  ) +
+  theme_lesson(10) +
+  theme(axis.text.y = element_text(size = 8))
+save_lesson(p_map, "01_two_shapes", 12.2, 12.8)
 
 hisp_rows <- bind_rows(
   hisp %>% transmute(
