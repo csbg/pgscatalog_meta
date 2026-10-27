@@ -892,8 +892,7 @@ html <- c(
   "<h1>Type 2 diabetes cohort models</h1>",
   paste0(
     "<p class='small'>Catalog stamp ", html_escape(stamp),
-    ". Side analysis only. Script 09 and the DerSimonian-Laird fit are unchanged. ",
-    "The tables below are Nikolaus's four models. The cohort in the mixed models is the sample-set id.</p>"
+    ". The tables below are the four ancestry models. The cohort in the mixed models is the sample-set id.</p>"
   ),
 
   "<div class='lead'>",
@@ -901,32 +900,19 @@ html <- c(
   "It is not the Stage 1 average. A cohort random effect marks which of those rows share a group. ",
   "It does not make the AUCs independent.</p>",
   "<p>The dependence model is being chosen on type 2 diabetes first. ",
-  "After that choice, the same model would replace DerSimonian-Laird in script 09 for diabetes and for the next two shared-sample-set comparisons: ",
-  "breast cancer (European-only training, South Asian target; 11 scores, 10 on one sample set) and ",
+  "The same choice would then be applied to breast cancer (European-only training, South Asian target; 11 scores, 10 on one sample set) and ",
   "stroke excluding subarachnoid hemorrhage (multi-ancestry training, South Asian target; 10 scores on the same two sample sets).</p>",
   "</div>",
 
-  "<h2>What the current DerSimonian-Laird fit is</h2>",
+  "<h2>South Asian comparison</h2>",
   "<div class='box'>",
-  "<p>For European-only training, South Asian target, the current script 09 fit keeps one score per target sample set, then fits DerSimonian-Laird to those ΔAUC values. There is no cohort term. I² is disagreement among the three kept ΔAUC values.</p>",
+  "<p>European-only training. Twelve scores, ten of them on one UK Biobank sample set.</p>",
   "<ul>",
-  sprintf("<li>12 scores. Inverse-variance pool of all 12: <strong>%s</strong> (%s to %s).</li>",
+  sprintf("<li>Inverse-variance pool of all 12: <strong>%s</strong> (%s to %s).</li>",
           fmt4(sa_all$delta_hat), fmt4(sa_all$lo), fmt4(sa_all$hi)),
-  sprintf("<li>Pool of the 3 kept scores: <strong>%s</strong> (%s to %s).</li>",
+  sprintf("<li>Pool of the 3 kept scores, one per sample set: <strong>%s</strong> (%s to %s).</li>",
           fmt4(sa_one$delta_hat), fmt4(sa_one$lo), fmt4(sa_one$hi)),
-  sprintf("<li>DerSimonian-Laird of those 3: <strong>%s</strong> (%s to %s). Q = <strong>%s</strong>, I² = <strong>%s%%</strong> (df = 2).</li>",
-          fmt4(sa_re$delta_hat), fmt4(sa_re$lo), fmt4(sa_re$hi), fmt3(sa_re$Q), fmt3(sa_re$I2)),
   "</ul>",
-  "<p class='small'>These numbers match <code>09_dependence_cells.csv</code>. They are the meeting example. ",
-  "Commit 7a552c1 (one evaluation per score × sample set × ancestry) did not change this cell, ",
-  "or the European-only East Asian / Hispanic or Latin American diabetes cells.</p>",
-  paste0(
-    "<p class='small'>European-only Hispanic or Latin American: 10 scores on one All of Us sample set (",
-    if (nrow(hisp_cohorts)) html_escape(hisp_cohorts$sampleset_id[[1]]) else "PSS011736",
-    "). Random effects are not fit there under the current rule.</p>"
-  ),
-  "<p class='small'>Diabetes cells that did change after that commit: ",
-  paste(html_escape(multi_changed), collapse = "; "), ".</p>",
   "</div>",
 
   "<h2>Cell counts across Figure 1C</h2>",
@@ -1079,7 +1065,6 @@ html <- c(
   "<ul>",
   "<li><code>diabetes_evaluation_rows.csv</code></li>",
   "<li><code>diabetes_model_coefficients.csv</code> — the four models, plus the study-name fits and the metafor weight check</li>",
-  "<li><code>south_asian_dl_check.csv</code></li>",
   "<li><code>diabetes_reduced_rule_counts.csv</code></li>",
   "<li><code>diabetes_cohort_models.html</code> (this page)</li>",
   "</ul>",

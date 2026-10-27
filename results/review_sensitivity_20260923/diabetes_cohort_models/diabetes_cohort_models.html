@@ -19,31 +19,22 @@ ul { margin-top: 0.4rem; }
 </style>
 </head><body>
 <h1>Type 2 diabetes cohort models</h1>
-<p class='small'>Catalog stamp 20260923. Side analysis only. Script 09 and the DerSimonian-Laird fit are unchanged. The tables below are Nikolaus's four models. The cohort in the mixed models is the sample-set id.</p>
+<p class='small'>Catalog stamp 20260923. The tables below are the four ancestry models. The cohort in the mixed models is the sample-set id.</p>
 <div class='lead'>
 <p><strong>Scope.</strong> A row is one evaluation: one score, one sample set, one ancestry, one AUC, and one SE. 
 It is not the Stage 1 average. A cohort random effect marks which of those rows share a group. 
 It does not make the AUCs independent.</p>
 <p>The dependence model is being chosen on type 2 diabetes first. 
-After that choice, the same model would replace DerSimonian-Laird in script 09 for diabetes and for the next two shared-sample-set comparisons: 
-breast cancer (European-only training, South Asian target; 11 scores, 10 on one sample set) and 
+The same choice would then be applied to breast cancer (European-only training, South Asian target; 11 scores, 10 on one sample set) and 
 stroke excluding subarachnoid hemorrhage (multi-ancestry training, South Asian target; 10 scores on the same two sample sets).</p>
 </div>
-<h2>What the current DerSimonian-Laird fit is</h2>
+<h2>South Asian comparison</h2>
 <div class='box'>
-<p>For European-only training, South Asian target, the current script 09 fit keeps one score per target sample set, then fits DerSimonian-Laird to those ΔAUC values. There is no cohort term. I² is disagreement among the three kept ΔAUC values.</p>
+<p>European-only training. Twelve scores, ten of them on one UK Biobank sample set.</p>
 <ul>
-<li>12 scores. Inverse-variance pool of all 12: <strong>-0.0001</strong> (-0.0042 to 0.0039).</li>
-<li>Pool of the 3 kept scores: <strong>-0.0160</strong> (-0.0223 to -0.0098).</li>
-<li>DerSimonian-Laird of those 3: <strong>-0.0134</strong> (-0.0266 to -0.0003). Q = <strong>4.081</strong>, I² = <strong>50.996%</strong> (df = 2).</li>
+<li>Inverse-variance pool of all 12: <strong>-0.0001</strong> (-0.0042 to 0.0039).</li>
+<li>Pool of the 3 kept scores, one per sample set: <strong>-0.0160</strong> (-0.0223 to -0.0098).</li>
 </ul>
-<p class='small'>These numbers match <code>09_dependence_cells.csv</code>. They are the meeting example. 
-Commit 7a552c1 (one evaluation per score × sample set × ancestry) did not change this cell, 
-or the European-only East Asian / Hispanic or Latin American diabetes cells.</p>
-<p class='small'>European-only Hispanic or Latin American: 10 scores on one All of Us sample set (PSS011736). Random effects are not fit there under the current rule.</p>
-<p class='small'>Diabetes cells that did change after that commit: 
-Multi-ancestry Hispanic or Latin American: 5 scores to 6; Multi-ancestry African: 1 score to 2; Multi-ancestry Middle Eastern or North African: 1 score on 1 sample set to 2 scores on 2 sample sets
-.</p>
 </div>
 <h2>Cell counts across Figure 1C</h2>
 <div class='box'>
@@ -248,7 +239,6 @@ One Middle Eastern row has no cohort text and would enter a study-name fit as it
 <ul>
 <li><code>diabetes_evaluation_rows.csv</code></li>
 <li><code>diabetes_model_coefficients.csv</code> — the four models, plus the study-name fits and the metafor weight check</li>
-<li><code>south_asian_dl_check.csv</code></li>
 <li><code>diabetes_reduced_rule_counts.csv</code></li>
 <li><code>diabetes_cohort_models.html</code> (this page)</li>
 </ul>
