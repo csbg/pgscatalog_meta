@@ -1,0 +1,128 @@
+trait_label,trained_bucket,target_ancestry,pgs_id,european_auc,non_european_auc,difference
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005237,0.6825096646967125,0.578,-0.10450966469671252
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005238,0.6996547649173532,0.5919999999999999,-0.10765476491735337
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005239,0.6859430603170292,0.596,-0.08994306031702926
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005240,0.6949520492562624,0.553,-0.14195204925626237
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005241,0.6473067936638022,0.55,-0.09730679366380213
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005237,0.6825096646967125,0.7259999999999999,0.043490335303287386
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005238,0.6996547649173532,0.742,0.04234523508264676
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005239,0.6859430603170292,0.709,0.023056939682970734
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005240,0.6949520492562624,0.699,0.004047950743737538
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005241,0.6473067936638022,0.594,-0.0533067936638022
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,PGS002238,0.68,0.666,-0.014000000000000012
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,PGS002239,0.679,0.663,-0.016000000000000014
+Breast Carcinoma,Train: European-only,African,PGS005345,0.6416624947535509,0.626,-0.01566249475355086
+Breast Carcinoma,Train: European-only,African,PGS005346,0.6637407756698931,0.5919999999999999,-0.07174077566989323
+Breast Carcinoma,Train: European-only,African,PGS005347,0.6589734026596237,0.598,-0.0609734026596237
+Breast Carcinoma,Train: European-only,African,PGS005348,0.6624653677862106,0.607,-0.055465367786210584
+Breast Carcinoma,Train: European-only,South Asian,PGS005345,0.6416624947535509,0.6589999999999999,0.01733750524644906
+Breast Carcinoma,Train: European-only,South Asian,PGS005346,0.6637407756698931,0.67,0.0062592243301069495
+Breast Carcinoma,Train: European-only,South Asian,PGS005347,0.6589734026596237,0.678,0.019026597340376372
+Breast Carcinoma,Train: European-only,South Asian,PGS005348,0.6624653677862106,0.657,-0.00546536778621054
+Breast cancer,Train: European-only,African,PGS000004,0.7,0.5734258512811957,-0.12657414871880424
+Breast cancer,Train: European-only,East Asian,PGS000004,0.7,0.64,-0.05999999999999994
+Breast cancer,Train: European-only,East Asian,PGS001336,0.8085258595410928,0.7602,-0.04832585954109281
+Breast cancer,Train: Multi incl. EUR,East Asian,PGS000028,0.6299999999999999,0.62,-0.009999999999999898
+Breast cancer,Train: European-only,South Asian,PGS001336,0.8085258595410928,0.83564,0.027114140458907254
+Breast cancer,Train: European-only,South Asian,PGS003983,0.6463816592549446,0.6102149570101991,-0.0361667022447455
+Breast cancer,Train: European-only,South Asian,PGS003999,0.6472870008543842,0.6204964523215648,-0.02679054853281937
+Breast cancer,Train: European-only,South Asian,PGS004025,0.6542117922695923,0.6186141747828695,-0.035597617486722744
+Breast cancer,Train: European-only,South Asian,PGS004040,0.6544881893388007,0.6183167669779875,-0.036171422360813166
+Breast cancer,Train: European-only,South Asian,PGS004053,0.6480851940790464,0.6130561646447642,-0.03502902943428221
+Breast cancer,Train: European-only,South Asian,PGS004069,0.6506926705143116,0.6172405064731935,-0.03345216404111806
+Breast cancer,Train: European-only,South Asian,PGS004083,0.6501440711893776,0.6208692593883886,-0.02927481180098901
+Breast cancer,Train: European-only,South Asian,PGS004107,0.61644140593879,0.5933445480927249,-0.02309685784606519
+Breast cancer,Train: European-only,South Asian,PGS004123,0.6244108881015868,0.6013674235889979,-0.023043464512588985
+Breast cancer,Train: European-only,South Asian,PGS004153,0.6582519390211554,0.630220039956027,-0.028031899065128374
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000004,0.6,0.55,-0.04999999999999993
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000015,0.61,0.56,-0.04999999999999993
+Colorectal cancer,Train: European-only,African,PGS003851,0.6453262112082871,0.5382772245470867,-0.10704898666120044
+Colorectal cancer,Train: Multi incl. EUR,African,PGS003850,0.61,0.58,-0.030000000000000027
+Colorectal cancer,Train: Multi incl. EUR,African,PGS003852,0.65,0.59,-0.06000000000000005
+Colorectal cancer,Train: European-only,East Asian,PGS003851,0.6453262112082871,0.601,-0.04432621120828717
+Colorectal cancer,Train: European-only,Hispanic or Latin American,PGS003851,0.6453262112082871,0.5946089262242725,-0.05071728498401462
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,PGS003850,0.61,0.59,-0.020000000000000018
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,PGS003852,0.65,0.62,-0.030000000000000027
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000011,0.75,0.7630000000000001,0.013000000000000123
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000013,0.77,0.771,0.0010000000000000009
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000018,0.772,0.775,0.0030000000000000027
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000200,0.748,0.7630000000000001,0.015000000000000124
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000011,0.75,0.7689999999999999,0.018999999999999906
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000013,0.77,0.7760000000000001,0.006000000000000116
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000018,0.772,0.794,0.02200000000000002
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000200,0.748,0.771,0.02300000000000002
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,PGS002250,0.588,0.538,-0.04999999999999993
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,PGS003394,0.595,0.542,-0.052999999999999936
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,PGS001800,0.739,0.635,-0.10399999999999998
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,PGS001801,0.739,0.635,-0.10399999999999998
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004696,0.774,0.762,-0.01200000000000001
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004697,0.773,0.756,-0.017000000000000015
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004698,0.773,0.748,-0.025000000000000022
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004696,0.774,0.803,0.029000000000000026
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004697,0.773,0.803,0.030000000000000027
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004698,0.773,0.7859999999999999,0.0129999999999999
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004696,0.774,0.706,-0.06800000000000006
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004697,0.773,0.708,-0.06500000000000006
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004698,0.773,0.699,-0.07400000000000007
+Seropositive RA,Train: Multi incl. EUR,South Asian,PGS004118,0.589897193211258,0.6537917400000001,0.06389454678874207
+Seropositive RA,Train: Multi incl. EUR,South Asian,PGS004133,0.594525946615601,0.62630388,0.03177793338439905
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS003984,0.5391736537013785,0.5319041362310171,-0.00726951747036142
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004000,0.5319858957582397,0.5130099989925749,-0.0189758967656648
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004015,0.5363805942966962,0.5416046070875377,0.0052240127908415035
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004041,0.541378765061592,0.5429242467721682,0.0015454817105762242
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004054,0.542939116366216,0.5383003506201426,-0.004638765746073359
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004070,0.5434887840066052,0.5393056926093038,-0.004183091397301331
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004098,0.5380748011037313,0.5482663276699838,0.010191526566252551
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004108,0.5189563336386053,0.5070293294876077,-0.011927004150997567
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004124,0.5268880662007275,0.5366013053049042,0.009713239104176763
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004154,0.5439222806620223,0.5329968883628509,-0.010925392299171444
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS000804,0.6586,0.568,-0.09060000000000001
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS004859,0.77,0.7509633436780165,-0.01903665632198348
+Type 2 diabetes,Train: European-only,East Asian,PGS000330,0.7259999999999999,0.714,-0.0119999999999999
+Type 2 diabetes,Train: European-only,East Asian,PGS000713,0.712,0.754,0.04200000000000004
+Type 2 diabetes,Train: European-only,East Asian,PGS000729,0.712,0.718,0.006000000000000005
+Type 2 diabetes,Train: European-only,East Asian,PGS000805,0.707,0.7339999999999999,0.026999999999999913
+Type 2 diabetes,Train: European-only,East Asian,PGS000864,0.687,0.7,0.0129999999999999
+Type 2 diabetes,Train: European-only,East Asian,PGS000868,0.696,0.727,0.031000000000000028
+Type 2 diabetes,Train: European-only,East Asian,PGS001295,0.6850058613595111,0.83509,0.15008413864048886
+Type 2 diabetes,Train: European-only,East Asian,PGS001818,0.709,0.7339999999999999,0.02499999999999991
+Type 2 diabetes,Train: European-only,East Asian,PGS002026,0.714,0.722,0.008000000000000007
+Type 2 diabetes,Train: European-only,East Asian,PGS002671,0.7040000000000001,0.737,0.03299999999999992
+Type 2 diabetes,Train: European-only,East Asian,PGS002771,0.7349999999999999,0.728,-0.006999999999999895
+Type 2 diabetes,Train: European-only,East Asian,PGS002780,0.6940000000000001,0.712,0.017999999999999905
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS003443,0.7310000000000001,0.738,0.006999999999999895
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS004859,0.77,0.84,0.06999999999999995
+Type 2 diabetes,Train: European-only,South Asian,PGS000330,0.7259999999999999,0.724,-0.0019999999999998908
+Type 2 diabetes,Train: European-only,South Asian,PGS000713,0.712,0.721,0.009000000000000008
+Type 2 diabetes,Train: European-only,South Asian,PGS000729,0.712,0.717,0.0050000000000000044
+Type 2 diabetes,Train: European-only,South Asian,PGS000805,0.707,0.721,0.014000000000000012
+Type 2 diabetes,Train: European-only,South Asian,PGS000864,0.687,0.693,0.005999999999999894
+Type 2 diabetes,Train: European-only,South Asian,PGS000868,0.696,0.711,0.015000000000000013
+Type 2 diabetes,Train: European-only,South Asian,PGS001295,0.6850058613595111,0.65806,-0.02694586135951116
+Type 2 diabetes,Train: European-only,South Asian,PGS001818,0.709,0.723,0.014000000000000012
+Type 2 diabetes,Train: European-only,South Asian,PGS002026,0.714,0.724,0.010000000000000009
+Type 2 diabetes,Train: European-only,South Asian,PGS002671,0.7040000000000001,0.721,0.016999999999999904
+Type 2 diabetes,Train: European-only,South Asian,PGS002771,0.7349999999999999,0.742,0.007000000000000117
+Type 2 diabetes,Train: European-only,South Asian,PGS002780,0.6940000000000001,0.713,0.018999999999999906
+Type 2 diabetes,Train: European-only,South Asian,PGS004106,0.5683789866480483,0.5497141687800193,-0.018664817868028982
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS003443,0.7310000000000001,0.746,0.014999999999999902
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS004859,0.77,0.8800000000000001,0.1100000000000001
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000330,0.7259999999999999,0.768,0.04200000000000015
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000713,0.712,0.762,0.050000000000000044
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000729,0.712,0.761,0.049000000000000044
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000805,0.707,0.764,0.05700000000000005
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000864,0.687,0.745,0.05799999999999994
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000868,0.696,0.758,0.062000000000000055
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS001818,0.709,0.762,0.05300000000000005
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002026,0.714,0.764,0.050000000000000044
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002671,0.7040000000000001,0.761,0.05699999999999994
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002771,0.7349999999999999,0.775,0.04000000000000015
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002780,0.6940000000000001,0.756,0.061999999999999944
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS000804,0.6586,0.6249,-0.03369999999999995
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS002308,0.7929999999999999,0.8510000000000001,0.05800000000000016
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS003443,0.7310000000000001,0.78,0.04899999999999993
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS003867,0.7299999999999999,0.7760000000000001,0.04600000000000026
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS004859,0.77,0.84,0.06999999999999995
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS005242,0.761,0.753,-0.008000000000000007
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS000804,0.825,0.83,0.0050000000000000044
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS003867,0.7299999999999999,0.7383999999999998,0.008399999999999963
