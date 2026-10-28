@@ -1705,6 +1705,39 @@ training_label <- c(
   "Train: European-only" = "European-only training",
   "Train: Multi incl. EUR" = "Multi-ancestry training"
 )
+focus_class_label <- c(
+  "None (PRS only)" = "Does not use covariates",
+  "Age/sex/PCs/technical" = "Age, sex, and principal components",
+  "Clinical or other covariates" = "Clinical covariates"
+)
+pal_focus_class <- c(
+  "Does not use covariates" = "#882255",
+  "Age, sex, and principal components" = "#332288",
+  "Clinical covariates" = "#E41A1C"
+)
+
+# One row per covariate class. Several scores become their IVW.
+# A class with one score stays that score.
+focus_class_estimate <- function(d) {
+  if (nrow(d) == 1L) {
+    return(tibble(
+      estimate = "One score",
+      row_label = d$pgs_id[[1]],
+      n_scores = 1L,
+      delta = d$delta[[1]],
+      delta_se = d$delta_se[[1]]
+    ))
+  }
+  averaged <- pool_delta(d$delta, d$delta_se, model = "fixed")
+  tibble(
+    estimate = "IVW",
+    row_label = paste0("IVW of ", nrow(d), " scores"),
+    n_scores = nrow(d),
+    delta = averaged$delta_hat,
+    delta_se = averaged$se_hat
+  )
+}
+
 focus_deltas <- pair_cov %>%
   inner_join(
     cov_colour_tbl %>%
@@ -1712,13 +1745,13 @@ focus_deltas <- pair_cov %>%
       select(trait_label, trained_bucket, target_ancestry),
     by = c("trait_label", "trained_bucket", "target_ancestry")
   ) %>%
+  group_by(trait_label, trained_bucket, target_ancestry, covariate_class) %>%
+  group_modify(~ focus_class_estimate(.x)) %>%
+  ungroup() %>%
   mutate(
-    model = if_else(
-      covariate_class == "None (PRS only)",
-      "Does not use covariates",
-      "Uses covariates"
-    ),
-    model = factor(model, levels = c("Uses covariates", "Does not use covariates")),
+    class_label = unname(focus_class_label[covariate_class]),
+    class_label = factor(class_label, levels = names(pal_focus_class)),
+    estimate = factor(estimate, levels = c("IVW", "One score")),
     training = unname(training_label[as.character(trained_bucket)]),
     strip = paste0(wrap_trait(trait_label), "\n", training, "\n", target_ancestry),
     lo = delta - 1.96 * delta_se,
@@ -1738,59 +1771,87 @@ strip_levels <- focus_deltas %>%
 focus_deltas <- focus_deltas %>%
   mutate(strip = factor(strip, levels = strip_levels)) %>%
   arrange(strip, delta) %>%
-  mutate(score = factor(
-    paste(pgs_id, strip, sep = " | "),
-    levels = unique(paste(pgs_id, strip, sep = " | "))
+  mutate(row_id = factor(
+    paste(row_label, strip, sep = " | "),
+    levels = unique(paste(row_label, strip, sep = " | "))
   ))
 
-both_colours <- focus_deltas %>%
-  group_by(strip) %>%
-  summarise(n_model = n_distinct(model), .groups = "drop")
-if (any(both_colours$n_model < 2L)) {
-  stop("A comparison marked as both kinds of score has only one kind.", call. = FALSE)
+if (any(focus_deltas %>% count(strip) %>% pull(n) < 2L)) {
+  stop("A comparison on the covariate figure has only one estimate.", call. = FALSE)
 }
+focus_check <- focus_deltas %>%
+  mutate(strip_key = paste(trait_label, trained_bucket, target_ancestry, sep = " | "))
+stopifnot(
+  any(focus_check$strip_key == "Breast cancer | Train: European-only | South Asian" &
+        focus_check$covariate_class == "None (PRS only)" & focus_check$n_scores == 10L),
+  any(focus_check$row_label == "PGS001336"),
+  any(focus_check$strip_key == "Type 2 diabetes | Train: European-only | South Asian" &
+        focus_check$covariate_class == "Age/sex/PCs/technical" & focus_check$n_scores == 12L),
+  any(focus_check$row_label == "PGS004106"),
+  sum(focus_check$strip_key == "Type 2 diabetes | Train: Multi incl. EUR | African" &
+        focus_check$estimate == "One score") == 2L,
+  any(focus_check$strip_key == "Type 2 diabetes | Train: Multi incl. EUR | Hispanic or Latin American" &
+        focus_check$covariate_class == "Age/sex/PCs/technical" & focus_check$n_scores == 4L),
+  all(c("PGS000804", "PGS005242") %in% focus_check$row_label)
+)
+
+write_tbl(
+  focus_deltas %>%
+    transmute(
+      trait_label, trained_bucket, target_ancestry, covariate_class, class_label,
+      estimate, row_label, n_scores, delta, delta_se, lo, hi
+    ),
+  "10b_covariates_class_estimates"
+)
 
 focus_span <- range(c(focus_deltas$lo, focus_deltas$hi), na.rm = TRUE)
 focus_pad <- max(0.01, 0.08 * diff(focus_span))
 
-p_focus <- ggplot(focus_deltas, aes(x = delta, y = score, colour = model)) +
+p_focus <- ggplot(focus_deltas, aes(x = delta, y = row_id, colour = class_label, shape = estimate)) +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
-  geom_errorbar(aes(xmin = lo, xmax = hi), width = 0, linewidth = 0.5, orientation = "y") +
-  geom_point(size = 2.3) +
-  scale_colour_manual(values = pal_cov_colour, name = NULL, drop = TRUE) +
+  geom_errorbar(aes(xmin = lo, xmax = hi), width = 0, linewidth = 0.55, orientation = "y") +
+  geom_point(size = 3) +
+  scale_colour_manual(values = pal_focus_class, name = NULL, drop = TRUE) +
+  scale_shape_manual(values = c("IVW" = 18, "One score" = 16), name = NULL) +
   scale_y_discrete(labels = function(x) sub(" \\|.*", "", x)) +
   scale_x_continuous(labels = label_number(accuracy = 0.02, style_negative = "minus")) +
   coord_cartesian(xlim = c(focus_span[1] - focus_pad, focus_span[2] + focus_pad)) +
   facet_grid(strip ~ ., scales = "free_y", space = "free_y", switch = "y") +
   labs(
-    title = "Scores in comparisons that include both kinds",
-    subtitle = str_wrap(
-      "Each point is one score. The European side and the non-European side use the same covariate class.",
-      width = 100
-    ),
+    title = "IVW of the larger covariate class, and the single score of each other class",
+    subtitle = str_wrap(paste0(
+      "Comparisons that include more than one covariate class. ",
+      "A class with several scores is their IVW. ",
+      "A class with one score stays that score."
+    ), width = 105),
     x = "ΔAUC (non-European − European) with 95% CI",
     y = NULL,
     caption = str_wrap(paste0(
-      "These are the comparisons whose average includes a score with no covariates and a score that uses covariates. ",
-      "Does not use covariates: both sides are None (PRS only). ",
-      "Uses covariates: both sides include covariates. Age, sex, and principal components count as covariates."
-    ), width = 110)
+      "The European side and the non-European side of every estimate use the same covariate class. ",
+      "Does not use covariates: None (PRS only). ",
+      "Age, sex, and principal components are separate from clinical covariates. ",
+      "Breast cancer, South Asian participants: IVW of 10 scores with no covariates, and PGS001336. ",
+      "Type 2 diabetes, South Asian participants, European-only training: IVW of 12 scores with age, sex, and principal components, and PGS004106. ",
+      "African participants: PGS000804 and PGS004859, one score each. ",
+      "Hispanic or Latin American participants: IVW of 4 scores with age, sex, and principal components, PGS000804, and PGS005242."
+    ), width = 120)
   ) +
   theme_reviewer(base_size = 9) +
   theme(
     strip.placement = "outside",
     strip.text.y.left = element_text(angle = 0, hjust = 1, size = 8, face = "bold", lineheight = 0.9),
     strip.background = element_rect(fill = "grey95", colour = NA),
-    panel.spacing.y = unit(0.45, "lines"),
+    panel.spacing.y = unit(0.7, "lines"),
     panel.grid.major.y = element_blank(),
     plot.caption = element_text(hjust = 0, size = 7.5),
-    plot.title = element_text(size = 10.5)
+    plot.title = element_text(size = 10.5),
+    legend.box = "vertical"
   )
 save_plot(
   "10b_covariates_by_phenotype",
   p_focus,
-  width = 8.6,
-  height = max(8.4, 0.28 * nrow(focus_deltas) + 1.1 * nlevels(focus_deltas$strip) + 2),
+  width = 8.8,
+  height = max(6.4, 0.42 * nrow(focus_deltas) + 1.15 * nlevels(focus_deltas$strip) + 2.4),
   limitsize = FALSE
 )
 old_chd <- file.path(dir_plots, c("10b_covariates_chd.png", "10b_covariates_chd.pdf"))

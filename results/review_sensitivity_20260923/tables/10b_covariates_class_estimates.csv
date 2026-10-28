@@ -1,0 +1,10 @@
+trait_label,trained_bucket,target_ancestry,covariate_class,class_label,estimate,row_label,n_scores,delta,delta_se,lo,hi
+Type 2 diabetes,Train: European-only,South Asian,None (PRS only),Does not use covariates,One score,PGS004106,1,-0.018664817868028982,0.003530332420122733,-0.02558426941146954,-0.011745366324588426
+Type 2 diabetes,Train: European-only,South Asian,Age/sex/PCs/technical,"Age, sex, and principal components",IVW,IVW of 12 scores,12,0.009776990814936172,0.002413694312526895,0.005046149962383457,0.014507831667488886
+Type 2 diabetes,Train: Multi incl. EUR,African,None (PRS only),Does not use covariates,One score,PGS000804,1,-0.09060000000000001,0.005088816773137515,-0.10057408087534954,-0.08062591912465049
+Type 2 diabetes,Train: Multi incl. EUR,African,Age/sex/PCs/technical,"Age, sex, and principal components",One score,PGS004859,1,-0.01903665632198348,0.005636000649182799,-0.03008321759438177,-0.007990095049585194
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,None (PRS only),Does not use covariates,One score,PGS000804,1,-0.03369999999999995,0.0051360677184111225,-0.043766692728085754,-0.02363330727191415
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,Clinical or other covariates,Clinical covariates,One score,PGS005242,1,-0.008000000000000007,0.004905717679551949,-0.017615206651921827,0.0016152066519218126
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,Age/sex/PCs/technical,"Age, sex, and principal components",IVW,IVW of 4 scores,4,0.04983857730008872,0.0027930682575569078,0.04436416351527718,0.05531299108490026
+Breast cancer,Train: European-only,South Asian,None (PRS only),Does not use covariates,IVW,IVW of 10 scores,10,-0.030608120148101065,0.0046140403576584174,-0.03965163924911157,-0.021564601047090567
+Breast cancer,Train: European-only,South Asian,Age/sex/PCs/technical,"Age, sex, and principal components",One score,PGS001336,1,0.027114140458907254,0.011970684805512038,0.0036515982401036616,0.050576682677710844
