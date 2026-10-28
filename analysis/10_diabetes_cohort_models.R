@@ -285,14 +285,19 @@ eval_proc <- eval_raw %>%
     pss %>% select(sampleset_id, n = n_individuals, cases = n_cases, controls = n_controls),
     by = "sampleset_id"
   ) %>%
-  left_join(ppm_cov, by = "performance_id")
+  left_join(ppm_cov, by = "performance_id") %>%
+  mutate(covariate_class = classify_covariates(covariates))
 
 interval_issue <- auc_interval_issue(eval_proc$estimate_ci_lower, eval_proc$estimate_ci_upper)
 if (any(!is.na(interval_issue))) {
   stop("Bad AUC intervals reached the diabetes table.", call. = FALSE)
 }
 
-one_eval <- keep_one_evaluation(eval_proc, return_dropped = FALSE)
+one_eval <- keep_one_evaluation(
+  eval_proc,
+  class_col = "covariate_class",
+  return_dropped = FALSE
+)
 
 diabetes_stage1_cells <- stage1_f %>%
   filter(trait_label == "Type 2 diabetes") %>%
@@ -300,6 +305,7 @@ diabetes_stage1_cells <- stage1_f %>%
     pgs_id = as.character(pgs_id),
     trait_label,
     ancestry_display = as.character(ancestry_display),
+    covariate_class = as.character(covariate_class),
     eta_stage1 = eta,
     se_stage1 = se,
     auc_pooled_stage1 = auc_pooled,
@@ -312,8 +318,8 @@ diabetes_rows <- one_eval %>%
   filter(trait_label == "Type 2 diabetes") %>%
   filter(grepl(paste(keep_bucket_pattern, collapse = "|"), train_bucket, ignore.case = TRUE)) %>%
   inner_join(
-    diabetes_stage1_cells %>% select(pgs_id, trait_label, ancestry_display),
-    by = c("pgs_id", "trait_label", "ancestry_display")
+    diabetes_stage1_cells %>% select(pgs_id, trait_label, ancestry_display, covariate_class),
+    by = c("pgs_id", "trait_label", "ancestry_display", "covariate_class")
   ) %>%
   left_join(pss %>% select(sampleset_id, cohort_txt, n_individuals), by = "sampleset_id") %>%
   mutate(
@@ -344,13 +350,16 @@ diabetes_eval <- diabetes_rows %>%
 
 # Stage-1 logit check: within-cell IVW of the evaluation logits must match.
 stage1_check <- diabetes_eval %>%
-  group_by(pgs_id, trait_label, ancestry_display) %>%
+  group_by(pgs_id, trait_label, ancestry_display, covariate_class) %>%
   summarise(
     pooled = list(ivw_pool_logit(eta, se)),
     .groups = "drop"
   ) %>%
   unnest_wider(pooled) %>%
-  inner_join(diabetes_stage1_cells, by = c("pgs_id", "trait_label", "ancestry_display")) %>%
+  inner_join(
+    diabetes_stage1_cells,
+    by = c("pgs_id", "trait_label", "ancestry_display", "covariate_class")
+  ) %>%
   mutate(
     abs_eta_diff = abs(eta - eta_stage1),
     abs_se_diff = abs(se - se_stage1)
@@ -358,7 +367,7 @@ stage1_check <- diabetes_eval %>%
 
 bad_check <- stage1_check %>% filter(abs_eta_diff > 1e-8 | abs_se_diff > 1e-8)
 if (nrow(bad_check) > 0) {
-  print(bad_check %>% select(pgs_id, ancestry_display, eta, eta_stage1, se, se_stage1))
+  print(bad_check %>% select(pgs_id, ancestry_display, covariate_class, eta, eta_stage1, se, se_stage1))
   stop("Diabetes evaluation logits do not match Stage-1 I2-filtered cells.", call. = FALSE)
 }
 message(glue::glue(
@@ -373,7 +382,7 @@ write_csv(
       performance_id, pgs_id, sampleset_id, cohort_txt, study_name,
       ancestry_display, train_bucket, trait_label,
       auc, estimate_ci_lower, estimate_ci_upper,
-      eta, se, se_auc, n_individuals, covariates
+      eta, se, se_auc, n_individuals, covariates, covariate_class
     ),
   file.path(out_dir, "diabetes_evaluation_rows.csv")
 )
@@ -413,7 +422,7 @@ sa_kept <- sa_pairs %>%
   mutate(kept = row_number() == 1L) %>%
   ungroup()
 
-stopifnot(nrow(sa_kept) == 12L, sum(sa_kept$kept) == 3L)
+stopifnot(nrow(sa_kept) == 13L, sum(sa_kept$kept) == 3L)
 sa_all <- pool_delta_check(sa_kept$delta, sa_kept$delta_se, "fixed")
 sa_one <- pool_delta_check(sa_kept$delta[sa_kept$kept], sa_kept$delta_se[sa_kept$kept], "fixed")
 sa_re  <- pool_delta_check(sa_kept$delta[sa_kept$kept], sa_kept$delta_se[sa_kept$kept], "random_dl")
@@ -427,7 +436,7 @@ stopifnot(abs(sa_re$delta_hat - sa_pub$delta_random) < 1e-8)
 stopifnot(abs(sa_re$I2 - sa_pub$I2_stage2) < 1e-6)
 
 sa_check <- tibble(
-  estimate = c("IVW, all 12 scores", "IVW, 3 independent scores", "Random effects (DL), 3 independent scores"),
+  estimate = c("IVW, all 13 scores", "IVW, 3 independent scores", "Random effects (DL), 3 independent scores"),
   delta_hat = c(sa_all$delta_hat, sa_one$delta_hat, sa_re$delta_hat),
   lo = c(sa_all$lo, sa_one$lo, sa_re$lo),
   hi = c(sa_all$hi, sa_one$hi, sa_re$hi),
@@ -438,7 +447,7 @@ sa_check <- tibble(
 )
 write_csv(sa_check, file.path(out_dir, "south_asian_dl_check.csv"))
 message(glue::glue(
-  ">> South Asian check: IVW12={fmt4(sa_all$delta_hat)}, IVW3={fmt4(sa_one$delta_hat)}, ",
+  ">> South Asian check: IVW13={fmt4(sa_all$delta_hat)}, IVW3={fmt4(sa_one$delta_hat)}, ",
   "RE={fmt4(sa_re$delta_hat)}, Q={fmt3(sa_re$Q)}, I2={fmt3(sa_re$I2)}"
 ))
 
@@ -631,7 +640,7 @@ one_per_pss <- diabetes_eval %>%
 # Largest cohort when one score is evaluated more than once within ancestry.
 # Keep the row with the largest n_individuals within (pgs, ancestry); ties by sampleset_id.
 largest_cohort <- diabetes_eval %>%
-  group_by(train_bucket, ancestry_display, pgs_id) %>%
+  group_by(train_bucket, ancestry_display, pgs_id, covariate_class) %>%
   arrange(desc(n_individuals), sampleset_id, .by_group = TRUE) %>%
   mutate(keep = row_number() == 1L) %>%
   ungroup()
@@ -663,11 +672,11 @@ model_blurbs <- tribble(
   "Should the weighted regression be the dependence model?",
   "lmer_pgs_fixed",
   "Sample-set term, PGS fixed: lmer(AUC ~ ancestry + PGS + (1|cohort), weights = 1/SE^2)",
-  "In this model, cohort is the sample set. Evaluations from the same sample set share an offset, and the PGS stays a fixed intercept. Ten South Asian PGS share PSS011749, and all of them are South Asian, so the sample-set offset and the ancestry coefficient compete for the same shift.",
+  "In this model, cohort is the sample set. Evaluations from the same sample set share an offset, and the PGS stays a fixed intercept. Eleven South Asian PGS share PSS011749, and all of them are South Asian, so the sample-set offset and the ancestry coefficient compete for the same shift.",
   "Should the model with a sample-set term and a fixed PGS be the dependence model?",
   "lmer_pgs_random",
   "PGS and sample set both random: lmer(AUC ~ ancestry + (1|PGS) + (1|cohort), weights = 1/SE^2)",
-  "Cohort is again the sample set. The PGS is a random intercept as well. European-only training has 12 PGS. Multi-ancestry training has 6.",
+  "Cohort is again the sample set. The PGS is a random intercept as well. European-only training has 13 PGS. Multi-ancestry training has 6.",
   "Should the model with both the PGS and the sample set random be the dependence model?"
 )
 
@@ -906,16 +915,16 @@ html <- c(
   "<p>An evaluation is one AUC: one PGS, one sample set, one ancestry group, and one standard error. ",
   "The sample-set term marks which evaluations share a sample set. It does not make the AUCs independent.</p>",
   "<p>The four models are fit on type 2 diabetes. They can separate an ancestry group from a sample set only when a comparison uses more than one target sample set. ",
-  "Eight comparisons do. Seven are type 2 diabetes. The eighth is breast cancer, Europeans and South Asian participants, European-only training.</p>",
-  "<p>Seventeen comparisons have several PGS and one target sample set. Ancestry group and sample set are the same column there. ",
+  "Nine comparisons do. Seven are type 2 diabetes. The other two are breast cancer, European-only training: South Asian participants, and East Asian participants.</p>",
+  "<p>Eighteen comparisons have several PGS and one target sample set. Ancestry group and sample set are the same column there. ",
   "The four models are not for that case. Five comparisons have one PGS.</p>",
   "</div>",
 
   "<h2>South Asian comparison</h2>",
   "<div class='box'>",
-  "<p>Europeans and South Asian participants, European-only training. Twelve PGS, ten of them on one UK Biobank sample set.</p>",
+  "<p>Europeans and South Asian participants, European-only training. Thirteen PGS, eleven of them on one UK Biobank sample set.</p>",
   "<ul>",
-  sprintf("<li>Inverse-variance pool of all 12: <strong>%s</strong> (%s to %s).</li>",
+  sprintf("<li>Inverse-variance pool of all 13: <strong>%s</strong> (%s to %s).</li>",
           fmt4(sa_all$delta_hat), fmt4(sa_all$lo), fmt4(sa_all$hi)),
   sprintf("<li>Pool of the 3 kept PGS, one per sample set: <strong>%s</strong> (%s to %s).</li>",
           fmt4(sa_one$delta_hat), fmt4(sa_one$lo), fmt4(sa_one$hi)),
@@ -923,21 +932,21 @@ html <- c(
   "</div>",
 
   "<h2>Two comparisons</h2>",
-  "<p>South Asian participants, below, are one of the eight. ",
-  "Hispanic or Latin American participants are one of the seventeen, shown so the boundary is visible. ",
-  "The third figure lists the eight comparisons the question applies to.</p>",
+  "<p>South Asian participants, below, are one of the nine. ",
+  "Hispanic or Latin American participants are one of the eighteen, shown so the boundary is visible. ",
+  "The third figure lists the nine comparisons the question applies to.</p>",
 
   embed_png("02_south_asian_one_of_eight.png", "Type 2 diabetes, Europeans and South Asian participants, European-only training"),
-  "<p class='cap'>Twelve PGS. Ten share PSS011749. Two other target sample sets are in the comparison. ",
-  "The black line is All PGS IVW, the pool of all twelve, about 0. One PGS per target sample set is −0.016 and excludes 0.</p>",
+  "<p class='cap'>Thirteen PGS. Eleven share PSS011749. Two other target sample sets are in the comparison. ",
+  "The black line is All PGS IVW, the pool of all thirteen, about 0. One PGS per target sample set is −0.016 and excludes 0.</p>",
 
   embed_png("03_hispanic_one_of_seventeen.png", "Type 2 diabetes, Europeans and Hispanic or Latin American participants, European-only training"),
-  "<p class='cap'>Ten PGS, all on PSS011736. Ancestry group and sample set are the same column. ",
+  "<p class='cap'>Eleven PGS, all on PSS011736. Ancestry group and sample set are the same column. ",
   "This comparison is not one of the four models.</p>",
 
-  embed_png("05_eight_one_score_per_cohort.png", "Eight comparisons: every PGS, and one PGS per target sample set"),
+  embed_png("05_eight_one_score_per_cohort.png", "Nine comparisons: every PGS, and one PGS per target sample set"),
   "<p class='cap'>Black is All PGS IVW, the same points as in the tables below. Purple is one PGS per target sample set. ",
-  "The four models below are for these eight comparisons.</p>",
+  "The four models below are for these nine comparisons.</p>",
 
   "<h2>Evaluation table used here</h2>",
   "<div class='box'>",

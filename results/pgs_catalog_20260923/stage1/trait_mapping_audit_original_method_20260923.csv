@@ -1,26 +1,26 @@
 trait_id,trait_label,efo_id,efo_label,reported_trait,n_rows
-custom:type_2_diabetes,Type 2 diabetes,NA,NA,Type 2 diabetes,256
+custom:type_2_diabetes,Type 2 diabetes,NA,NA,Type 2 diabetes,262
+custom:breast_cancer,Breast cancer,NA,NA,Breast cancer,109
 custom:prediabetes,Prediabetes,NA,NA,Prediabetes,107
 custom:type_2_diabetes,Type 2 diabetes,NA,NA,Type 2 Diabetes,107
-custom:breast_cancer,Breast cancer,NA,NA,Breast cancer,105
 custom:incident_t2d_in_prediabetics,Incident T2D in prediabetics,NA,NA,Incident T2D in prediabetics,101
 custom:gout,Gout,NA,NA,Gout,89
 custom:inflammatory_bowel_disease,Inflammatory bowel disease,NA,NA,Inflammatory bowel disease,88
-custom:prostate_cancer,Prostate cancer,NA,NA,Prostate cancer,83
+custom:prostate_cancer,Prostate cancer,NA,NA,Prostate cancer,84
 custom:chronic_kidney_disease_or_dialysis,Chronic kidney disease or dialysis,NA,NA,Chronic kidney disease or dialysis,78
 custom:stroke_excluding_subarachnoid_hemorrhage,Stroke excluding subarachnoid hemorrhage,NA,NA,Stroke excluding subarachnoid hemorrhage,78
+custom:colorectal_cancer,Colorectal cancer,NA,NA,Colorectal cancer,70
 custom:breast_cancer,Breast cancer,NA,NA,Breast cancer [female],69
-custom:colorectal_cancer,Colorectal cancer,NA,NA,Colorectal cancer,68
 custom:seropositive_ra,Seropositive RA,NA,NA,Seropositive RA,60
 custom:type_1_diabetes,Type 1 diabetes,NA,NA,T1D,60
+custom:5_year_incident_prostate_cancer,5-year incident prostate cancer,NA,NA,5-year incident prostate cancer,50
+custom:breast_carcinoma,Breast Carcinoma,NA,NA,Breast Carcinoma,50
 custom:hypertension,Hypertension,NA,NA,Hypertension,48
 custom:incident_type_2_diabetes,Incident type 2 diabetes,NA,NA,Incident type 2 diabetes,48
 custom:prostate_cancer,Prostate cancer,NA,NA,Cancer of prostate,33
 custom:coronary_heart_disease,Coronary heart disease,NA,NA,Coronary heart disease,28
 custom:coronary_heart_disease,Coronary heart disease,NA,NA,Coronary artery disease,27
 custom:thyroid_cancer,Thyroid cancer,NA,NA,Thyroid cancer,27
-custom:5_year_incident_prostate_cancer,5-year incident prostate cancer,NA,NA,5-year incident prostate cancer,25
-custom:breast_carcinoma,Breast Carcinoma,NA,NA,Breast Carcinoma,25
 custom:melanomas_of_skin_dx_or_hx,"Melanomas of skin, dx or hx",NA,NA,"Melanomas of skin, dx or hx",25
 custom:smoking_status,Smoking Status,NA,NA,Smoking Status,25
 custom:ad,AD,NA,NA,AD,21
@@ -30,16 +30,16 @@ custom:coronary_heart_disease_incident_and_prevalent_,Coronary heart disease (in
 custom:basal_cell_carcinoma,Basal cell carcinoma,NA,NA,Basal cell carcinoma,17
 custom:skin_cancer,Skin cancer,NA,NA,Skin cancer,17
 custom:rheumatoid_arthritis,Rheumatoid arthritis,NA,NA,Rheumatoid arthritis,16
+custom:systemic_lupus_erythematosus,Systemic lupus erythematosus,NA,NA,Systemic lupus erythematosus,16
 custom:ankylosing_spondylitis,Ankylosing spondylitis,NA,NA,Ankylosing spondylitis,15
 custom:cancer_of_bladder,Cancer of bladder,NA,NA,Cancer of bladder,15
 custom:incident_coronary_heart_disease,Incident coronary heart disease,NA,NA,Incident coronary heart disease,15
 custom:psoriasis,Psoriasis,NA,NA,Psoriasis,15
 custom:sleep_apnea,Sleep Apnea,NA,NA,Sleep Apnea,15
 custom:asthma,Asthma,NA,NA,Asthma,14
-custom:systemic_lupus_erythematosus,Systemic lupus erythematosus,NA,NA,Systemic lupus erythematosus,14
+custom:glaucoma,Glaucoma,NA,NA,Glaucoma,13
 custom:colon_cancer,Colon cancer,NA,NA,Colon cancer,12
 custom:other_non_epithelial_cancer_of_skin,Other non-epithelial cancer of skin,NA,NA,Other non-epithelial cancer of skin,12
-custom:glaucoma,Glaucoma,NA,NA,Glaucoma,11
 custom:lung_cancer,Lung cancer,NA,NA,Lung cancer,11
 custom:multiple_sclerosis,Multiple sclerosis,NA,NA,Multiple sclerosis,11
 custom:squamous_cell_carcinoma,Squamous cell carcinoma,NA,NA,Squamous cell carcinoma,11
@@ -62,6 +62,8 @@ custom:triple_negative_breast_cancer_risk,triple negative breast cancer risk,NA,
 custom:alzheimer_s_disease,Alzheimer's disease,NA,NA,Alzheimer's disease,7
 custom:cancer_of_mouth,Cancer of mouth,NA,NA,Cancer of mouth,7
 custom:coeliac_disease,Coeliac disease,NA,NA,Coeliac disease,7
+custom:incident_breast_cancer,Incident breast cancer,NA,NA,Incident breast cancer,7
+custom:incident_colorectal_cancer,Incident colorectal cancer,NA,NA,Incident colorectal cancer,7
 custom:malignant_neoplasm_of_uterus,Malignant neoplasm of uterus,NA,NA,Malignant neoplasm of uterus,7
 custom:prevalent_ischemic_stroke_cases,prevalent ischemic stroke cases,NA,NA,prevalent ischemic stroke cases,7
 custom:all_cause_dementia,All-cause dementia,NA,NA,All-cause dementia,6
@@ -91,6 +93,7 @@ custom:hypertensive_heart_disease,Hypertensive heart disease,NA,NA,Hypertensive 
 custom:hypothyroidism,Hypothyroidism,NA,NA,Hypothyroidism,6
 custom:hypothyroidism_nos,Hypothyroidism NOS,NA,NA,Hypothyroidism NOS,6
 custom:incident_invasive_melanoma,Incident invasive melanoma,NA,NA,Incident invasive melanoma,6
+custom:incident_lung_cancer,Incident lung cancer,NA,NA,Incident lung cancer,6
 custom:lupus_localized_and_systemic,Lupus localized and systemic,NA,NA,Lupus localized and systemic,6
 custom:lymphoid_leukemia_chronic,"Lymphoid leukemia, chronic",NA,NA,"Lymphoid leukemia, chronic",6
 custom:melanoma,Melanoma,NA,NA,Melanoma,6
@@ -164,6 +167,7 @@ custom:chronic_obstructive_asthma,Chronic obstructive asthma,NA,NA,Chronic obstr
 custom:chronic_pharyngitis_and_nasopharyngitis,Chronic pharyngitis and nasopharyngitis,NA,NA,Chronic pharyngitis and nasopharyngitis,5
 custom:chronic_renal_failure_ckd,Chronic renal failure CKD,NA,NA,Chronic renal failure CKD,5
 custom:chronic_sinusitis,Chronic sinusitis,NA,NA,Chronic sinusitis,5
+custom:cirrhosis,Cirrhosis,NA,NA,Cirrhosis,5
 custom:cirrhosis_of_liver_without_mention_of_alcohol,Cirrhosis of liver without mention of alcohol,NA,NA,Cirrhosis of liver without mention of alcohol,5
 custom:coronary_atherosclerosis,Coronary atherosclerosis,NA,NA,Coronary atherosclerosis,5
 custom:cough,Cough,NA,NA,Cough,5
@@ -211,8 +215,7 @@ custom:hyperglyceridemia,Hyperglyceridemia,NA,NA,Hyperglyceridemia,5
 custom:hyperlipidemia,Hyperlipidemia,NA,NA,Hyperlipidemia,5
 custom:hyperplasia_of_prostate,Hyperplasia of prostate,NA,NA,Hyperplasia of prostate,5
 custom:impaired_fasting_glucose,Impaired fasting glucose,NA,NA,Impaired fasting glucose,5
-custom:incident_breast_cancer,Incident breast cancer,NA,NA,Incident breast cancer,5
-custom:incident_colorectal_cancer,Incident colorectal cancer,NA,NA,Incident colorectal cancer,5
+custom:incident_prostate_cancer,Incident prostate cancer,NA,NA,Incident prostate cancer,5
 custom:inflammatory_and_toxic_neuropathy,Inflammatory and toxic neuropathy,NA,NA,Inflammatory and toxic neuropathy,5
 custom:intracerebral_hemorrhage,Intracerebral hemorrhage,NA,NA,Intracerebral hemorrhage,5
 custom:intracranial_hemorrhage,Intracranial hemorrhage,NA,NA,Intracranial hemorrhage,5
@@ -354,7 +357,6 @@ custom:cholecystitis,Cholecystitis,NA,NA,Cholecystitis,4
 custom:chronic_bronchitis_emphysema_fh_,Chronic bronchitis/emphysema (FH),NA,NA,Chronic bronchitis/emphysema (FH),4
 custom:chronic_obstructive_airways_disease_copd,Chronic obstructive airways disease/copd,NA,NA,Chronic obstructive airways disease/copd,4
 custom:chronic_rhinosinusitis,Chronic rhinosinusitis,NA,NA,Chronic rhinosinusitis,4
-custom:cirrhosis,Cirrhosis,NA,NA,Cirrhosis,4
 custom:coffee_consumed,Coffee consumed,NA,NA,Coffee consumed,4
 custom:coffee_type_ground_coffee_include_espresso_filter_etc_,"Coffee type: Ground coffee (include espresso, filter etc)",NA,NA,"Coffee type: Ground coffee (include espresso, filter etc)",4
 custom:coffee_type_instant_coffee,Coffee type: Instant coffee,NA,NA,Coffee type: Instant coffee,4
@@ -374,6 +376,7 @@ custom:ease_of_skin_tanning_never_tan_only_burn_,"Ease of skin tanning (Never ta
 custom:eczema_dermatitis,Eczema/dermatitis,NA,NA,Eczema/dermatitis,4
 custom:emphysema,Emphysema,NA,NA,Emphysema,4
 custom:enlarged_prostate,Enlarged prostate,NA,NA,Enlarged prostate,4
+custom:enthesitis_related_arthritis,Enthesitis-related Arthritis,NA,NA,Enthesitis-related Arthritis,4
 custom:epithelial_non_mucinous_ovarian_cancer,Epithelial non-mucinous ovarian cancer,NA,NA,Epithelial non-mucinous ovarian cancer,4
 custom:epithelial_ovarian_cancer,Epithelial ovarian cancer,NA,NA,Epithelial ovarian cancer,4
 custom:estrogen_receptor_positive_breast_cancer_risk,estrogen-receptor positive breast cancer risk,NA,NA,estrogen-receptor positive breast cancer risk,4
@@ -406,12 +409,14 @@ custom:high_bp_fh_,High BP (FH),NA,NA,High BP (FH),4
 custom:high_cholesterol,High cholesterol,NA,NA,High cholesterol,4
 custom:hodgkin_s_disease,Hodgkin's disease,NA,NA,Hodgkin's disease,4
 custom:hyperthyroidism_thyrotoxicosis,Hyperthyroidism/thyrotoxicosis,NA,NA,Hyperthyroidism/thyrotoxicosis,4
+custom:hypertrophic_cardiomyopathy,Hypertrophic cardiomyopathy,NA,NA,Hypertrophic cardiomyopathy,4
 custom:hypothyroidism_myxoedema,Hypothyroidism/myxoedema,NA,NA,Hypothyroidism/myxoedema,4
 custom:ibuprofen_e_g_nurofen_,Ibuprofen (e.g. Nurofen),NA,NA,Ibuprofen (e.g. Nurofen),4
 custom:ibuprofen_use_self_reported,Ibuprofen use self-reported,NA,NA,Ibuprofen use self-reported,4
 custom:incident_chronic_obstructive_pulmonary_disease_before_age_50_years,Incident chronic obstructive pulmonary disease before age 50 years,NA,NA,Incident chronic obstructive pulmonary disease before age 50 years,4
-custom:incident_lung_cancer,Incident lung cancer,NA,NA,Incident lung cancer,4
+custom:incident_primary_breast_cancer,Incident primary breast cancer,NA,NA,Incident primary breast cancer,4
 custom:jcv_seropositivity_for_human_polyomavirus_jcv,JCV seropositivity for Human Polyomavirus JCV,NA,NA,JCV seropositivity for Human Polyomavirus JCV,4
+custom:juvenile_idiopathic_arthritis,Juvenile Idiopathic Arthritis,NA,NA,Juvenile Idiopathic Arthritis,4
 custom:ldl_c_blood_concentration,LDL-c blood concentration,NA,NA,LDL-c blood concentration,4
 custom:leisure_social_activities_attend_adult_edication_class_in_once_a_week_or_more_often_,Leisure/social activities (attend adult edication class in once a week or more often),NA,NA,Leisure/social activities (attend adult edication class in once a week or more often),4
 custom:leisure_social_activities_attend_any_of_the_followings_in_once_a_week_or_more_often_sports_club_gym_pub_social_club_religious_group_adult_edication_class_or_other_group_activity_,"Leisure/social activities (attend any of the followings in once a week or more often: sports club, gym, pub, social club, religious group, adult edication class, or other group activity)",NA,NA,"Leisure/social activities (attend any of the followings in once a week or more often: sports club, gym, pub, social club, religious group, adult edication class, or other group activity)",4
@@ -436,6 +441,7 @@ custom:obesity_bmi_30_,Obesity (BMI≥30),NA,NA,Obesity (BMI≥30),4
 custom:occurrence_of_breast_cancer,Occurrence of breast cancer,NA,NA,Occurrence of breast cancer,4
 custom:oestradiol_212_pmol_l,Oestradiol > 212 pmol/L,NA,NA,Oestradiol > 212 pmol/L,4
 custom:often_felt_loved_as_a_child,Often felt loved as a child,NA,NA,Often felt loved as a child,4
+custom:oligoarthritis_juvenile_idiophatic_arthritis,Oligoarthritis Juvenile Idiophatic Arthritis,NA,NA,Oligoarthritis Juvenile Idiophatic Arthritis,4
 custom:osteoarthritis,Osteoarthritis,NA,NA,Osteoarthritis,4
 custom:osteoporosis,Osteoporosis,NA,NA,Osteoporosis,4
 custom:pancreatic_cancer,Pancreatic cancer,NA,NA,Pancreatic cancer,4
@@ -447,12 +453,15 @@ custom:pediatric_asthma,Pediatric asthma,NA,NA,Pediatric asthma,4
 custom:polymyalgia_rheumatica,Polymyalgia rheumatica,NA,NA,Polymyalgia rheumatica,4
 custom:prevelant_hypertension,Prevelant hypertension,NA,NA,Prevelant hypertension,4
 custom:previous_smoker,Previous Smoker,NA,NA,Previous Smoker,4
+custom:primary_open_angle_glaucoma_poag_,Primary open-angle glaucoma (POAG),NA,NA,Primary open-angle glaucoma (POAG),4
 custom:prolapsed_disc_slipped_disc,Prolapsed disc/slipped disc,NA,NA,Prolapsed disc/slipped disc,4
 custom:prostate_cancer_fh_,Prostate cancer (FH),NA,NA,Prostate cancer (FH),4
 custom:pulmonary_fibrosis,Pulmonary fibrosis,NA,NA,Pulmonary fibrosis,4
 custom:retinal_detachment,Retinal detachment,NA,NA,Retinal detachment,4
 custom:rheumatoid_arhtirits_diagnosis_in_patient_with_arthritis,Rheumatoid arhtirits diagnosis in patient with arthritis,NA,NA,Rheumatoid arhtirits diagnosis in patient with arthritis,4
 custom:rheumatoid_factor_16_iu_ml,Rheumatoid factor > 16 IU/mL,NA,NA,Rheumatoid factor > 16 IU/mL,4
+custom:rheumatoid_factor_negative_polyarthritis,Rheumatoid-factor-negative Polyarthritis,NA,NA,Rheumatoid-factor-negative Polyarthritis,4
+custom:risk_of_hospitalization_covid_19_,Risk of hospitalization (COVID-19),NA,NA,Risk of hospitalization (COVID-19),4
 custom:risk_taking,Risk taking,NA,NA,Risk taking,4
 custom:schizophrenia,Schizophrenia,NA,NA,Schizophrenia,4
 custom:sensitivity_hurt_feelings,Sensitivity / hurt feelings,NA,NA,Sensitivity / hurt feelings,4
@@ -559,15 +568,15 @@ custom:diagnosed_with_coeliac_disease_or_gluten_sensitivity,Diagnosed with coeli
 custom:discrimination_of_type_1_diabetes_from_type_2_diabetes,Discrimination of Type 1 diabetes from Type 2 diabetes,NA,NA,Discrimination of Type 1 diabetes from Type 2 diabetes,3
 custom:genetic_haematological_disorder,Genetic haematological disorder,NA,NA,Genetic haematological disorder,3
 custom:hair_colour_natural_before_greying_blonde,"Hair colour (natural, before greying) blonde",NA,NA,"Hair colour (natural, before greying) blonde",3
-custom:hypertrophic_cardiomyopathy,Hypertrophic cardiomyopathy,NA,NA,Hypertrophic cardiomyopathy,3
 custom:iga_nephropathy,IgA nephropathy,NA,NA,IgA nephropathy,3
 custom:incident_fibromyalgia_cases,incident fibromyalgia cases,NA,NA,incident fibromyalgia cases,3
 custom:incident_kidney_cancer,Incident kidney cancer,NA,NA,Incident kidney cancer,3
-custom:incident_prostate_cancer,Incident prostate cancer,NA,NA,Incident prostate cancer,3
 custom:invasive_breast_cancer,Invasive breast cancer,NA,NA,Invasive breast cancer,3
 custom:iritis,Iritis,NA,NA,Iritis,3
 custom:malabsorption_coeliac_disease,Malabsorption/coeliac disease,NA,NA,Malabsorption/coeliac disease,3
+custom:obstructive_cad,Obstructive CAD,NA,NA,Obstructive CAD,3
 custom:paradoxical_eczema_in_biologic_treated_psoriasis,Paradoxical eczema in biologic-treated  psoriasis,NA,NA,Paradoxical eczema in biologic-treated  psoriasis,3
+custom:parkinson_s_disease,Parkinson's disease,NA,NA,Parkinson's disease,3
 custom:primary_open_angle_glaucoma,Primary open-angle glaucoma,NA,NA,Primary open-angle glaucoma,3
 custom:risk_of_endometrial_cancer,Risk of endometrial cancer,NA,NA,Risk of endometrial cancer,3
 custom:sarcoidosis,Sarcoidosis,NA,NA,Sarcoidosis,3
@@ -590,24 +599,33 @@ custom:tte_vitamin_b12_deficiency_anaemia,TTE vitamin b12 deficiency anaemia,NA,
 custom:type_1_diabetes_diagnosis,Type 1 diabetes diagnosis,NA,NA,Type 1 diabetes diagnosis,3
 custom:type_2_diabetes,type 2 diabetes,NA,NA,type 2 diabetes,3
 custom:age_related_macular_degeneration,Age-related macular degeneration,NA,NA,Age-related macular degeneration,2
+custom:atrial_fibrillation_personal_history_,Atrial Fibrillation (personal history),NA,NA,Atrial Fibrillation (personal history),2
+custom:bmi_adjusted_obstructive_sleep_apnea,BMI adjusted obstructive sleep apnea,NA,NA,BMI adjusted obstructive sleep apnea,2
 custom:bmi_unadjusted_obstructive_sleep_apnea,BMI unadjusted obstructive sleep apnea,NA,NA,BMI unadjusted obstructive sleep apnea,2
+custom:breast_cancer_personal_history_,Breast Cancer (personal history),NA,NA,Breast Cancer (personal history),2
 custom:cancer_of_brain_and_nervous_system,Cancer of brain and nervous system,NA,NA,Cancer of brain and nervous system,2
 custom:cancer_of_other_male_genital_organs,Cancer of other male genital organs,NA,NA,Cancer of other male genital organs,2
+custom:cardiovascular_disease_in_patients_with_type_ii_diabetes_mellitus,Cardiovascular disease in patients with type II diabetes Mellitus,NA,NA,Cardiovascular disease in patients with type II diabetes Mellitus,2
+custom:childhood_asthma_by_age_11,Childhood asthma by age 11,NA,NA,Childhood asthma by age 11,2
+custom:childhood_asthma_by_age_8,Childhood asthma by age 8,NA,NA,Childhood asthma by age 8,2
 custom:chronic_kidney_disease,Chronic kidney disease,NA,NA,Chronic kidney disease,2
 custom:chronic_kidney_disease_egfr_60_ml_min_per_1_73_m2_or_uacr_3_0_mg_mmol_,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),NA,NA,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2 or UACR >3.0 mg/mmol),2
 custom:chronic_kidney_disease_stage_3_or_greater_,Chronic Kidney Disease (stage 3 or greater),NA,NA,Chronic Kidney Disease (stage 3 or greater),2
 custom:chronic_obstructive_pulmonary_disease,Chronic obstructive pulmonary disease,NA,NA,Chronic obstructive pulmonary disease,2
 custom:colorectal_advanced_neoplasm,Colorectal advanced neoplasm,NA,NA,Colorectal advanced neoplasm,2
+custom:coronary_artery_calcium_score_20,Coronary artery calcium score > 20,NA,NA,Coronary artery calcium score > 20,2
+custom:coronary_artery_calcium_score_300,Coronary artery calcium score > 300,NA,NA,Coronary artery calcium score > 300,2
+custom:coronary_artery_disease_personal_history_,Coronary artery disease (personal history),NA,NA,Coronary artery disease (personal history),2
 custom:crohn_s_disease,Crohn's disease,NA,NA,Crohn's disease,2
 custom:dilated_cardiomyopathy,Dilated cardiomyopathy,NA,NA,Dilated cardiomyopathy,2
 custom:diverticular_disease,Diverticular disease,NA,NA,Diverticular disease,2
 custom:dupuytren_s_contracture,Dupuytren's contracture,NA,NA,Dupuytren's contracture,2
-custom:enthesitis_related_arthritis,Enthesitis-related Arthritis,NA,NA,Enthesitis-related Arthritis,2
 custom:esophageal_adenocarcinoma,esophageal adenocarcinoma,NA,NA,esophageal adenocarcinoma,2
 custom:estrogen_receptor_nagetive_breast_cancer_risk,estrogen-receptor nagetive breast cancer risk,NA,NA,estrogen-receptor nagetive breast cancer risk,2
 custom:estrogen_receptor_negative_breast_cancer,Estrogen-receptor negative breast cancer,NA,NA,Estrogen-receptor negative breast cancer,2
 custom:estrogen_receptor_negative_breast_cancer_risk,estrogen-receptor negative breast cancer risk,NA,NA,estrogen-receptor negative breast cancer risk,2
 custom:estrogen_receptor_positive_breast_cancer,Estrogen-receptor positive breast cancer,NA,NA,Estrogen-receptor positive breast cancer,2
+custom:familial_early_onset_colorectal_cancer,Familial / early-onset colorectal cancer,NA,NA,Familial / early-onset colorectal cancer,2
 custom:gout_diagnosis_in_patient_with_arthritis,Gout diagnosis in patient with arthritis,NA,NA,Gout diagnosis in patient with arthritis,2
 custom:hair_colour_natural_before_greying_red,"Hair colour (natural, before greying) red",NA,NA,"Hair colour (natural, before greying) red",2
 custom:hepatocellular_carcinoma_in_individuals_with_a_body_mass_index_30,Hepatocellular carcinoma in individuals with a body mass index ≥30,NA,NA,Hepatocellular carcinoma in individuals with a body mass index ≥30,2
@@ -621,6 +639,8 @@ custom:incident_coronary_artery_disease,Incident coronary artery disease,NA,NA,I
 custom:incident_endometrial_cancer,Incident endometrial cancer,NA,NA,Incident endometrial cancer,2
 custom:incident_hip_fracture,Incident hip fracture,NA,NA,Incident hip fracture,2
 custom:incident_hypertension,Incident hypertension,NA,NA,Incident hypertension,2
+custom:incident_hypothyroidism,Incident hypothyroidism,NA,NA,Incident hypothyroidism,2
+custom:incident_ischemic_stroke,Incident ischemic stroke,NA,NA,Incident ischemic stroke,2
 custom:incident_lymphocytic_leukemia,Incident Lymphocytic Leukemia,NA,NA,Incident Lymphocytic Leukemia,2
 custom:incident_major_osteoporotic_fracture,Incident major osteoporotic fracture,NA,NA,Incident major osteoporotic fracture,2
 custom:incident_melanoma,Incident melanoma,NA,NA,Incident melanoma,2
@@ -629,13 +649,12 @@ custom:incident_non_hodgkin_s_lymphoma,Incident non-hodgkin's lymphoma,NA,NA,Inc
 custom:incident_oral_cavity_and_pharyngeal_cancer,Incident oral cavity and pharyngeal cancer,NA,NA,Incident oral cavity and pharyngeal cancer,2
 custom:incident_ovarian_cancer,Incident ovarian cancer,NA,NA,Incident ovarian cancer,2
 custom:incident_pancreatic_cancer,Incident pancreatic cancer,NA,NA,Incident pancreatic cancer,2
-custom:incident_primary_breast_cancer,Incident primary breast cancer,NA,NA,Incident primary breast cancer,2
 custom:incident_testicular_cancer,Incident testicular cancer,NA,NA,Incident testicular cancer,2
 custom:incident_thyroid_cancer,Incident thyroid cancer,NA,NA,Incident thyroid cancer,2
-custom:juvenile_idiopathic_arthritis,Juvenile Idiopathic Arthritis,NA,NA,Juvenile Idiopathic Arthritis,2
 custom:kidney_cancer,Kidney cancer,NA,NA,Kidney cancer,2
 custom:malignant_neoplasm_of_kidney_except_pelvis,"Malignant neoplasm of kidney, except pelvis",NA,NA,"Malignant neoplasm of kidney, except pelvis",2
 custom:malignant_neoplasm_of_rectum_rectosigmoid_junction_and_anus,"Malignant neoplasm of rectum, rectosigmoid junction, and anus",NA,NA,"Malignant neoplasm of rectum, rectosigmoid junction, and anus",2
+custom:nasopharyngeal_carcinoma,Nasopharyngeal carcinoma,NA,NA,Nasopharyngeal carcinoma,2
 custom:nodular_lymphoma,Nodular lymphoma,NA,NA,Nodular lymphoma,2
 custom:non_hodgkins_lymphoma,Non-Hodgkins lymphoma,NA,NA,Non-Hodgkins lymphoma,2
 custom:nonalcoholic_fatty_liver_disease_severity_nafld_activity_score_above_5_,Nonalcoholic fatty liver disease severity (NAFLD activity score above 5),NA,NA,Nonalcoholic fatty liver disease severity (NAFLD activity score above 5),2
@@ -646,18 +665,17 @@ custom:obesity_in_individuals_aged_18_23_9,Obesity in individuals aged 18-23.9,N
 custom:obesity_in_individuals_aged_24_29_9,Obesity in individuals aged 24-29.9,NA,NA,Obesity in individuals aged 24-29.9,2
 custom:obesity_in_individuals_aged_30_69_9,Obesity in individuals aged 30-69.9,NA,NA,Obesity in individuals aged 30-69.9,2
 custom:obesity_prevalence,Obesity prevalence,NA,NA,Obesity prevalence,2
-custom:oligoarthritis_juvenile_idiophatic_arthritis,Oligoarthritis Juvenile Idiophatic Arthritis,NA,NA,Oligoarthritis Juvenile Idiophatic Arthritis,2
 custom:overweight_in_individuals_aged_12_15_9,Overweight in individuals aged 12-15.9,NA,NA,Overweight in individuals aged 12-15.9,2
 custom:overweight_in_individuals_aged_14_29_9,Overweight in individuals aged 14-29.9,NA,NA,Overweight in individuals aged 14-29.9,2
 custom:overweight_in_individuals_aged_16_17_9,Overweight in individuals aged 16-17.9,NA,NA,Overweight in individuals aged 16-17.9,2
 custom:overweight_in_individuals_aged_18_23_9,Overweight in individuals aged 18-23.9,NA,NA,Overweight in individuals aged 18-23.9,2
 custom:overweight_in_individuals_aged_30_69_9,Overweight in individuals aged 30-69.9,NA,NA,Overweight in individuals aged 30-69.9,2
-custom:parkinson_s_disease,Parkinson's disease,NA,NA,Parkinson's disease,2
+custom:paroxysmal_atrial_fibrillation,Paroxysmal atrial fibrillation,NA,NA,Paroxysmal atrial fibrillation,2
+custom:prevalent_gout_cases,Prevalent gout cases,NA,NA,Prevalent gout cases,2
 custom:prevalent_type_2_diabetes,Prevalent type 2 diabetes,NA,NA,Prevalent type 2 diabetes,2
-custom:primary_open_angle_glaucoma_poag_,Primary open-angle glaucoma (POAG),NA,NA,Primary open-angle glaucoma (POAG),2
+custom:prostate_cancer_incidence_in_men_with_symptoms,Prostate cancer incidence in men with symptoms,NA,NA,Prostate cancer incidence in men with symptoms,2
 custom:psoriatic_arthritis_diagnosis_in_patient_with_arthritis,Psoriatic arthritis diagnosis in patient with arthritis,NA,NA,Psoriatic arthritis diagnosis in patient with arthritis,2
-custom:rheumatoid_factor_negative_polyarthritis,Rheumatoid-factor-negative Polyarthritis,NA,NA,Rheumatoid-factor-negative Polyarthritis,2
-custom:risk_of_hospitalization_covid_19_,Risk of hospitalization (COVID-19),NA,NA,Risk of hospitalization (COVID-19),2
+custom:risk_of_mitral_valve_prolapse,Risk of mitral valve prolapse,NA,NA,Risk of mitral valve prolapse,2
 custom:spondyloarthropathy_diagnosis_in_patient_with_arthritis,Spondyloarthropathy diagnosis in patient with arthritis,NA,NA,Spondyloarthropathy diagnosis in patient with arthritis,2
 custom:subsequent_thyroid_cancer_in_childhood_cancer_survivors_aged_40,Subsequent thyroid cancer in childhood cancer survivors aged 40,NA,NA,Subsequent thyroid cancer in childhood cancer survivors aged 40,2
 custom:systemic_lupus_erythematosus_diagnosis_in_patient_with_arthritis,Systemic lupus erythematosus diagnosis in patient with arthritis,NA,NA,Systemic lupus erythematosus diagnosis in patient with arthritis,2
@@ -672,21 +690,16 @@ custom:alzheimer_s_disease_or_dementia,Alzheimer's disease or dementia,NA,NA,Alz
 custom:alzheimer_s_disease_or_mild_cognitive_impairment,Alzheimer's disease or mild cognitive impairment,NA,NA,Alzheimer's disease or mild cognitive impairment,1
 custom:appendectomy,Appendectomy,NA,NA,Appendectomy,1
 custom:asthma_onset,Asthma onset,NA,NA,Asthma onset,1
-custom:atrial_fibrillation_personal_history_,Atrial Fibrillation (personal history),NA,NA,Atrial Fibrillation (personal history),1
 custom:bladder_cancer,Bladder cancer,NA,NA,Bladder cancer,1
 custom:breast_cancer,breast cancer,NA,NA,breast cancer,1
 custom:breast_cancer_latin_american_women_,Breast cancer (Latin american women),NA,NA,Breast cancer (Latin american women),1
-custom:breast_cancer_personal_history_,Breast Cancer (personal history),NA,NA,Breast Cancer (personal history),1
 custom:breast_cancer_us_latinas_,Breast cancer (US Latinas),NA,NA,Breast cancer (US Latinas),1
 custom:breast_carcinoma,Breast carcinoma,NA,NA,Breast carcinoma,1
 custom:cad,CAD,NA,NA,CAD,1
 custom:cancer_of_eye,Cancer of eye,NA,NA,Cancer of eye,1
 custom:cancer_of_other_female_genital_organs,Cancer of other female genital organs,NA,NA,Cancer of other female genital organs,1
 custom:cardiomyopathy,Cardiomyopathy,NA,NA,Cardiomyopathy,1
-custom:cardiovascular_disease_in_patients_with_type_ii_diabetes_mellitus,Cardiovascular disease in patients with type II diabetes Mellitus,NA,NA,Cardiovascular disease in patients with type II diabetes Mellitus,1
 custom:cervical_cancer,cervical cancer,NA,NA,cervical cancer,1
-custom:childhood_asthma_by_age_11,Childhood asthma by age 11,NA,NA,Childhood asthma by age 11,1
-custom:childhood_asthma_by_age_8,Childhood asthma by age 8,NA,NA,Childhood asthma by age 8,1
 custom:chronic_back_pain,Chronic back pain,NA,NA,Chronic back pain,1
 custom:chronic_lymphoid_leukemia,Chronic lymphoid leukemia,NA,NA,Chronic lymphoid leukemia,1
 custom:class_iii_iv_lupus_nephritis_in_anti_sm_positive_systemic_lupus_erythematosus,Class III/IV lupus nephritis in anti-sm positive systemic lupus erythematosus,NA,NA,Class III/IV lupus nephritis in anti-sm positive systemic lupus erythematosus,1
@@ -695,14 +708,12 @@ custom:clinically_significant_prostate_cancer,Clinically significant prostate ca
 custom:clinically_significant_prostate_cancer_in_screened_individuals,clinically significant prostate cancer in screened individuals,NA,NA,clinically significant prostate cancer in screened individuals,1
 custom:colorectal_cancer,colorectal cancer,NA,NA,colorectal cancer,1
 custom:colorectal_carcinoma,Colorectal carcinoma,NA,NA,Colorectal carcinoma,1
-custom:coronary_artery_calcium_score_20,Coronary artery calcium score > 20,NA,NA,Coronary artery calcium score > 20,1
-custom:coronary_artery_calcium_score_300,Coronary artery calcium score > 300,NA,NA,Coronary artery calcium score > 300,1
 custom:coronary_artery_disease,coronary artery disease,NA,NA,coronary artery disease,1
 custom:coronary_artery_disease_in_childhood_cancer_survivors_aged_10_years_at_diagnosis_and_treated_with_25_gy,Coronary artery disease in childhood cancer survivors aged <10 years at diagnosis and treated with >25 Gy,NA,NA,Coronary artery disease in childhood cancer survivors aged <10 years at diagnosis and treated with >25 Gy,1
-custom:coronary_artery_disease_personal_history_,Coronary artery disease (personal history),NA,NA,Coronary artery disease (personal history),1
 custom:cortical_amyloid_positivity,Cortical amyloid positivity,NA,NA,Cortical amyloid positivity,1
 custom:diffuse_large_b_cell_lymphoma,Diffuse large B-cell lymphoma,NA,NA,Diffuse large B-cell lymphoma,1
 custom:early_age_related_macular_degeneration_clinical_classification_,Early age-related macular degeneration (Clinical Classification),NA,NA,Early age-related macular degeneration (Clinical Classification),1
+custom:early_onset_acute_myocardial_infarction_following_percutaneous_coronary_intervention,Early onset acute myocardial infarction following  percutaneous coronary intervention,NA,NA,Early onset acute myocardial infarction following  percutaneous coronary intervention,1
 custom:early_onset_acute_myocardial_infarction_following_percutaneous_coronary_intervention,Early onset acute myocardial infarction following percutaneous coronary intervention,NA,NA,Early onset acute myocardial infarction following percutaneous coronary intervention,1
 custom:early_onset_colorectal_cancer,Early-onset colorectal cancer,NA,NA,Early-onset colorectal cancer,1
 custom:early_onset_lung_cancer_50_years_,Early onset lung cancer (< 50 years),NA,NA,Early onset lung cancer (< 50 years),1
@@ -716,7 +727,6 @@ custom:esophageal_cancer,Esophageal cancer,NA,NA,Esophageal cancer,1
 custom:estrogen_receptor_negative_breast_cancer,Estrogen receptor negative breast cancer,NA,NA,Estrogen receptor negative breast cancer,1
 custom:estrogen_receptor_positive_breast_cancer,Estrogen receptor positive breast cancer,NA,NA,Estrogen receptor positive breast cancer,1
 custom:familial_cutaneous_melanoma_in_non_carriers_of_a_cdkn2a_mutation,Familial cutaneous melanoma in non-carriers of a CDKN2A mutation,NA,NA,Familial cutaneous melanoma in non-carriers of a CDKN2A mutation,1
-custom:familial_early_onset_colorectal_cancer,Familial / early-onset colorectal cancer,NA,NA,Familial / early-onset colorectal cancer,1
 custom:follicular_lymphoma,Follicular lymphoma,NA,NA,Follicular lymphoma,1
 custom:full_lifetime_risk_of_colorectal_cancer,Full lifetime risk of colorectal cancer,NA,NA,Full lifetime risk of colorectal cancer,1
 custom:gastric_cancer,Gastric cancer,NA,NA,Gastric cancer,1
@@ -739,9 +749,7 @@ custom:incident_atherosclerotic_cardiovascular_disease_in_individuals_with_borde
 custom:incident_bladder_cancer,Incident bladder cancer,NA,NA,Incident bladder cancer,1
 custom:incident_cardiovascular_event,Incident cardiovascular event,NA,NA,Incident cardiovascular event,1
 custom:incident_epithelial_ovarian_cancer,Incident epithelial ovarian cancer,NA,NA,Incident epithelial ovarian cancer,1
-custom:incident_hypothyroidism,Incident hypothyroidism,NA,NA,Incident hypothyroidism,1
 custom:incident_idiopathic_pulmonary_fibrosis_cases,incident idiopathic pulmonary fibrosis cases,NA,NA,incident idiopathic pulmonary fibrosis cases,1
-custom:incident_ischemic_stroke,Incident ischemic stroke,NA,NA,Incident ischemic stroke,1
 custom:incident_pancreatic_cancer,Incident Pancreatic cancer,NA,NA,Incident Pancreatic cancer,1
 custom:incident_venous_thromboembolism_in_individuals_with_inflammatory_bowel_disease,Incident venous thromboembolism in individuals with inflammatory bowel disease,NA,NA,Incident venous thromboembolism in individuals with inflammatory bowel disease,1
 custom:infiltrating_endometriosis,Infiltrating endometriosis,NA,NA,Infiltrating endometriosis,1
@@ -770,7 +778,6 @@ custom:moderate_early_age_related_macular_degeneration_3cacss_,Moderate early ag
 custom:moderate_myopia_aged_18_years_,Moderate myopia (aged >18 years),NA,NA,Moderate myopia (aged >18 years),1
 custom:multiple_sclerosis,Multiple Sclerosis,NA,NA,Multiple Sclerosis,1
 custom:myocardial_injury_following_non_cardiac_surgery,Myocardial injury following non cardiac surgery,NA,NA,Myocardial injury following non cardiac surgery,1
-custom:nasopharyngeal_carcinoma,Nasopharyngeal carcinoma,NA,NA,Nasopharyngeal carcinoma,1
 custom:nicotine_metabolism_slow_vs_normal_in_treatment_seeking_smokers,Nicotine metabolism (slow vs normal) in treatment seeking smokers,NA,NA,Nicotine metabolism (slow vs normal) in treatment seeking smokers,1
 custom:non_monogenic_idiopathic_nephrotic_syndrome,Non-monogenic idiopathic nephrotic syndrome,NA,NA,Non-monogenic idiopathic nephrotic syndrome,1
 custom:nonalcoholic_fatty_liver_disease,Nonalcoholic fatty liver disease,NA,NA,Nonalcoholic fatty liver disease,1
@@ -779,13 +786,11 @@ custom:ovarian_cancer,Ovarian cancer,NA,NA,Ovarian cancer,1
 custom:ovarian_endometriosis,Ovarian endometriosis,NA,NA,Ovarian endometriosis,1
 custom:ovarian_serous_carcinoma,ovarian serous carcinoma,NA,NA,ovarian serous carcinoma,1
 custom:pancreatic_cancer_0_10_years_of_follow_up_,Pancreatic cancer (0-10 years of follow-up),NA,NA,Pancreatic cancer (0-10 years of follow-up),1
-custom:paroxysmal_atrial_fibrillation,Paroxysmal atrial fibrillation,NA,NA,Paroxysmal atrial fibrillation,1
 custom:pediatric_steroid_sensitive_nephrotic_syndrome,Pediatric Steroid-Sensitive Nephrotic Syndrome,NA,NA,Pediatric Steroid-Sensitive Nephrotic Syndrome,1
 custom:peripheral_arterial_disease,Peripheral arterial disease,NA,NA,Peripheral arterial disease,1
 custom:peritoneal_endometriosis,Peritoneal endometriosis,NA,NA,Peritoneal endometriosis,1
 custom:prevalent_coronary_artery_disease,Prevalent Coronary Artery Disease,NA,NA,Prevalent Coronary Artery Disease,1
 custom:prevalent_cutaneous_melanoma,Prevalent cutaneous melanoma,NA,NA,Prevalent cutaneous melanoma,1
-custom:prevalent_gout_cases,Prevalent gout cases,NA,NA,Prevalent gout cases,1
 custom:prevalent_heart_failure,Prevalent heart failure,NA,NA,Prevalent heart failure,1
 custom:prevalent_invasive_breast_cancer,Prevalent invasive breast cancer,NA,NA,Prevalent invasive breast cancer,1
 custom:prevalent_vte,Prevalent VTE,NA,NA,Prevalent VTE,1
@@ -797,16 +802,15 @@ custom:prostate_cancer_clinical_cases_,Prostate cancer (clinical cases),NA,NA,Pr
 custom:prostate_cancer_in_brca1_carriers,Prostate cancer in BRCA1 carriers,NA,NA,Prostate cancer in BRCA1 carriers,1
 custom:prostate_cancer_in_brca2_carriers,Prostate cancer in BRCA2 carriers,NA,NA,Prostate cancer in BRCA2 carriers,1
 custom:prostate_cancer_in_male_carriers_of_brca1_2_mutations,Prostate cancer in male carriers of BRCA1/2 mutations,NA,NA,Prostate cancer in male carriers of BRCA1/2 mutations,1
-custom:prostate_cancer_incidence_in_men_with_symptoms,Prostate cancer incidence in men with symptoms,NA,NA,Prostate cancer incidence in men with symptoms,1
 custom:prostate_cancer_metastasis_or_death,Prostate cancer metastasis or death,NA,NA,Prostate cancer metastasis or death,1
 custom:prostate_cancer_screening_trial_detected_,Prostate cancer (screening trial detected),NA,NA,Prostate cancer (screening trial detected),1
 custom:prostate_carcinoma,Prostate carcinoma,NA,NA,Prostate carcinoma,1
 custom:pulmonary_embolism,Pulmonary embolism,NA,NA,Pulmonary embolism,1
 custom:renal_disease_age_of_onset,Renal disease age of onset,NA,NA,Renal disease age of onset,1
-custom:risk_of_mitral_valve_prolapse,Risk of mitral valve prolapse,NA,NA,Risk of mitral valve prolapse,1
 custom:severe_covid_19_course,Severe COVID-19 course,NA,NA,Severe COVID-19 course,1
 custom:severe_early_age_related_macular_degeneration_3cacss_,Severe early age-related macular degeneration (3CACSS),NA,NA,Severe early age-related macular degeneration (3CACSS),1
 custom:severe_insulin_deficiency,Severe insulin deficiency,NA,NA,Severe insulin deficiency,1
+custom:short_stature_in_adulthood,Short stature in adulthood,NA,NA,Short stature in adulthood,1
 custom:short_stature_in_adulthood_females_,Short stature in adulthood (females),NA,NA,Short stature in adulthood (females),1
 custom:skin_cutaneous_melanoma,skin cutaneous melanoma,NA,NA,skin cutaneous melanoma,1
 custom:systemic_sclerosis,Systemic sclerosis,NA,NA,Systemic sclerosis,1

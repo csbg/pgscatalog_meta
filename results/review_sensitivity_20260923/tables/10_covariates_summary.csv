@@ -1,2 +1,2 @@
-n_pairs,n_pairs_covariate_matched,n_pairs_either_side_clinical,n_pairs_mixed_classes_within_side,n_cells,n_cells_estimable_matched_only,n_cells_matched_identical,n_cells_matched_reduced,n_cells_no_matched_pair,n_cells_inference_flip_matched_only
-120,95,16,25,30,26,21,5,4,1
+n_pairs,n_pairs_score_only,n_pairs_age_sex_pcs,n_pairs_clinical,n_pairs_class_mismatch,n_comparisons,n_comparisons_uses_covariates,n_comparisons_score_only,n_comparisons_both_kinds,n_pairs_rule_changed
+127,48,65,14,0,32,19,9,4,12

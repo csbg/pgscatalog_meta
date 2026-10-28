@@ -1,4 +1,5 @@
 pgs_id,group,pct,stage
+PGS000004,European,100,GWAS (variant associations)
 PGS000011,European,40.3,GWAS (variant associations)
 PGS000011,Multi-ancestry including European,53.3,GWAS (variant associations)
 PGS000011,South Asian,6.4,GWAS (variant associations)
@@ -8,6 +9,7 @@ PGS000013,European,75.3,GWAS (variant associations)
 PGS000013,Hispanic or Latin American,2.2,GWAS (variant associations)
 PGS000013,Middle Eastern or North African,1.2,GWAS (variant associations)
 PGS000013,South Asian,13.6,GWAS (variant associations)
+PGS000015,European,100,GWAS (variant associations)
 PGS000018,African,0.8,GWAS (variant associations)
 PGS000018,East Asian,3,GWAS (variant associations)
 PGS000018,European,37,GWAS (variant associations)
@@ -27,6 +29,7 @@ PGS000804,African,4,GWAS (variant associations)
 PGS000804,European,79.2,GWAS (variant associations)
 PGS000804,Hispanic or Latin American,1.5,GWAS (variant associations)
 PGS000804,Multi-ancestry excluding European,15.4,GWAS (variant associations)
+PGS000805,European,100,GWAS (variant associations)
 PGS000864,European,100,GWAS (variant associations)
 PGS000868,European,100,GWAS (variant associations)
 PGS001800,European,100,GWAS (variant associations)
@@ -179,7 +182,9 @@ PGS005345,European,100,GWAS (variant associations)
 PGS005346,European,100,GWAS (variant associations)
 PGS005347,European,100,GWAS (variant associations)
 PGS005348,European,100,GWAS (variant associations)
+PGS000004,European,100,Score development/training
 PGS000013,European,100,Score development/training
+PGS000015,European,100,Score development/training
 PGS000018,Multi-ancestry including European,100,Score development/training
 PGS000330,European,100,Score development/training
 PGS000713,European,100,Score development/training

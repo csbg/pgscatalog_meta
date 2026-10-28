@@ -3,9 +3,10 @@
 # ============================================================
 # Script: 06_meta_ivw.R
 # Project: pgscatalog_meta
-# Purpose: Perform Stage-1 inverse-variance weighted meta-analysis of AUC within each trait × PGS × ancestry cell.
+# Purpose: Perform Stage-1 inverse-variance weighted meta-analysis of AUC within each trait × PGS × ancestry × covariate class.
 # Inputs: results/pgs_auc_ci_audit_<DATE>/eval_df_final_auc_ci.csv
 # Outputs: results/pgs_catalog_<DATE>/stage1/stage1_pooled_cells_<DATE>.csv
+#          results/pgs_catalog_<DATE>/stage1/stage1_kept_evaluations_<DATE>.csv
 #          diagnostics/<DATE>/ exploratory PDFs (not manuscript Stage 2)
 # Run after: 05_pgs_auc_ci_audit.R
 # Run before: 07_i_square_filter.R
@@ -201,9 +202,14 @@ ppm_cov <- readr::read_csv(
 
 eval_proc <- eval_proc %>%
   left_join(pss_counts, by = "sampleset_id") %>%
-  left_join(ppm_cov, by = "performance_id")
+  left_join(ppm_cov, by = "performance_id") %>%
+  mutate(covariate_class = classify_covariates(covariates))
 
-one_eval <- keep_one_evaluation(eval_proc, return_dropped = TRUE)
+one_eval <- keep_one_evaluation(
+  eval_proc,
+  class_col = "covariate_class",
+  return_dropped = TRUE
+)
 one_eval_drop_fp <- file.path(
   dirs$tables,
   paste0("stage1_one_evaluation_dropped_", stamp, ".csv")
@@ -213,17 +219,35 @@ readr::write_csv(
   one_eval$dropped %>%
     select(
       pgs_id, sampleset_id, ancestry_eval, performance_id,
-      trait_label, auc, estimate_ci_lower, estimate_ci_upper,
+      trait_label, covariate_class, auc, estimate_ci_lower, estimate_ci_upper,
       n, cases, controls, covariates, one_eval_rank
     ),
   one_eval_drop_fp
 )
+kept_eval_fp <- file.path(dirs$tables, paste0("stage1_kept_evaluations_", stamp, ".csv"))
+readr::write_csv(
+  one_eval$kept %>%
+    transmute(
+      performance_id,
+      pgs_id,
+      sampleset_id,
+      trait_label,
+      ancestry_display,
+      covariate_class,
+      auc,
+      estimate_ci_lower,
+      estimate_ci_upper,
+      n, cases, controls,
+      covariates
+    ),
+  kept_eval_fp
+)
 eval_proc <- one_eval$kept %>%
   select(-any_of(c("n", "cases", "controls", "covariates")))
 message(glue(
-  ">> One evaluation per score × sample set × ancestry: ",
+  ">> One evaluation per score × sample set × ancestry × covariate class: ",
   "kept {nrow(eval_proc)}, dropped {nrow(one_eval$dropped)}. ",
-  "Log: {one_eval_drop_fp}"
+  "Log: {one_eval_drop_fp}. Kept evaluations: {kept_eval_fp}"
 ))
 
 # Audit: show how rows map to EFO vs reported
@@ -305,7 +329,7 @@ pool_stage1 <- function(df){
     tidyr::unnest_wider(tmp) %>%
     # extra safety: drop any non-finite logits/SE before grouping
     filter(is.finite(eta), is.finite(se), se > 0) %>%
-    group_by(pgs_id, trait_label, ancestry_display) %>%
+    group_by(pgs_id, trait_label, ancestry_display, covariate_class) %>%
     summarise(pooled = list(ivw_pool_logit(eta, se)), .groups = "drop") %>%
     tidyr::unnest_wider(pooled) %>%
     mutate(
@@ -360,14 +384,15 @@ plot_stage1_final <- function(pooled){
     h_dynamic <- max(5, h_dynamic)
     
     # 5. Plot
-    g <- ggplot(d_trait, aes(x = auc_pooled, y = pgs_id, color = ancestry_display)) +
+    g <- ggplot(d_trait, aes(x = auc_pooled, y = pgs_id, color = ancestry_display, group = covariate_class, shape = covariate_class)) +
       
       # Reference Line
       geom_vline(xintercept = 0.5, linetype = "solid", color = "gray85", linewidth = 0.5) +
       
-      # Error Bars & Dots
-      geom_errorbarh(aes(xmin = lo_pooled, xmax = hi_pooled), height = 0, linewidth = 0.6, alpha = 0.8) +
-      geom_point(size = 2.0) +
+      # Error Bars & Dots. Dodge so two covariate classes of one score both show.
+      geom_errorbarh(aes(xmin = lo_pooled, xmax = hi_pooled), height = 0, linewidth = 0.6, alpha = 0.8, position = position_dodge(width = 0.5)) +
+      geom_point(size = 2.0, position = position_dodge(width = 0.5)) +
+      scale_shape_manual(values = c(16, 17, 15), name = "Covariate class") +
       
       # FACET BY ANCESTRY
       # scales="free_y" removes empty rows. space="free_y" resizes panels to fit data.
@@ -379,7 +404,7 @@ plot_stage1_final <- function(pooled){
       
       labs(
         title = glue("Stage 1: {tr}"),
-        subtitle = glue("Pooled AUC grouped by Ancestry (Total {total_evals} evaluations)."),
+        subtitle = glue("Pooled AUC by ancestry and covariate class ({total_evals} rows)."),
         x = "Pooled AUC (95% CI)", y = NULL
       ) +
       
@@ -527,14 +552,16 @@ plot_pooling_combined <- function(raw_df, stage1_tbl){
         data = d_pooled,
         aes(y = pgs_id, x = auc_pooled,
             xmin = lo_pooled, xmax = hi_pooled,
-            color = ancestry_display),
+            color = ancestry_display, group = covariate_class),
         height   = 0,
-        linewidth = 0.8
+        linewidth = 0.8,
+        position = position_dodge(width = 0.5)
       ) +
       geom_point(
         data = d_pooled,
-        aes(y = pgs_id, x = auc_pooled, color = ancestry_display),
-        size = 2.0
+        aes(y = pgs_id, x = auc_pooled, color = ancestry_display, group = covariate_class),
+        size = 2.0,
+        position = position_dodge(width = 0.5)
       ) +
       
       facet_grid(ancestry_display ~ ., scales = "free_y", space = "free_y", switch = "y") +
@@ -568,7 +595,9 @@ plot_pooling_combined <- function(raw_df, stage1_tbl){
 # Manuscript Stage 2 is the paired ΔAUC IVW in script 08. This helper
 # pools Stage-1 AUCs across PGS within trait × ancestry for exploratory plots.
 pool_auc_across_pgs <- function(stage1_tbl){
+  # One class per score, so a second model of the same people is not averaged in.
   stage1_tbl %>%
+    pick_one_covariate_class(c("trait_label", "ancestry_display", "pgs_id")) %>%
     select(trait_label, ancestry_display, pgs_id, eta, se, I2, k_eval) %>%
     group_by(trait_label, ancestry_display) %>%
     summarise(pooled = list(ivw_pool_logit(eta, se)),
@@ -705,8 +734,24 @@ write(jsonlite::toJSON(list(
 ), pretty = TRUE, auto_unbox = TRUE),
 file = file.path(dirs$logs, "params.json"))
 
-# 1) Stage-1 pooling (within ancestry × PGS)
+# 1) Stage-1 pooling (within ancestry × PGS × covariate class)
 stage1_tbl <- pool_stage1(eval_for_stage)
+if (anyDuplicated(stage1_tbl %>% select(pgs_id, trait_label, ancestry_display, covariate_class))) {
+  stop("Stage 1 has more than one row per score, trait, ancestry, and covariate class.", call. = FALSE)
+}
+kept_n <- eval_for_stage %>%
+  count(pgs_id, trait_label, ancestry_display, covariate_class, name = "n_kept")
+k_check <- stage1_tbl %>%
+  left_join(kept_n, by = c("pgs_id", "trait_label", "ancestry_display", "covariate_class")) %>%
+  mutate(n_kept = coalesce(n_kept, 0L))
+if (any(k_check$k_eval != k_check$n_kept)) {
+  bad <- k_check %>% filter(k_eval != n_kept)
+  stop(
+    "Stage-1 k_eval does not match the kept evaluations.\n",
+    paste(capture.output(print(head(bad, 20))), collapse = "\n"),
+    call. = FALSE
+  )
+}
 
 # Save Stage-1 pooled cells for downstream I² + Wilcoxon scripts
 out_stage1 <- file.path(dirs$tables, paste0("stage1_pooled_cells_", stamp, ".csv"))

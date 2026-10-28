@@ -1,0 +1,33 @@
+trait_label,trained_bucket,target_ancestry,n_pairs,n_uses,n_none,covariate_colour
+5-year incident prostate cancer,Train: Multi incl. EUR,African,5,0,5,Does not use covariates
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,5,0,5,Does not use covariates
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,2,2,0,Uses covariates
+Breast Carcinoma,Train: European-only,African,4,0,4,Does not use covariates
+Breast Carcinoma,Train: European-only,South Asian,4,0,4,Does not use covariates
+Breast cancer,Train: European-only,African,1,1,0,Uses covariates
+Breast cancer,Train: European-only,East Asian,2,2,0,Uses covariates
+Breast cancer,Train: European-only,Hispanic or Latin American,2,0,2,Does not use covariates
+Breast cancer,Train: European-only,South Asian,11,1,10,Both kinds of score
+Breast cancer,Train: Multi incl. EUR,East Asian,1,0,1,Does not use covariates
+Colorectal cancer,Train: European-only,African,1,1,0,Uses covariates
+Colorectal cancer,Train: European-only,East Asian,1,1,0,Uses covariates
+Colorectal cancer,Train: European-only,Hispanic or Latin American,1,1,0,Uses covariates
+Colorectal cancer,Train: Multi incl. EUR,African,2,2,0,Uses covariates
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,2,2,0,Uses covariates
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,4,4,0,Uses covariates
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,4,4,0,Uses covariates
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,2,0,2,Does not use covariates
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,2,2,0,Uses covariates
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,3,3,0,Uses covariates
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,3,3,0,Uses covariates
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,3,3,0,Uses covariates
+Seropositive RA,Train: Multi incl. EUR,South Asian,2,0,2,Does not use covariates
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,10,0,10,Does not use covariates
+Type 2 diabetes,Train: European-only,East Asian,12,12,0,Uses covariates
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,11,11,0,Uses covariates
+Type 2 diabetes,Train: European-only,South Asian,13,12,1,Both kinds of score
+Type 2 diabetes,Train: Multi incl. EUR,African,2,1,1,Both kinds of score
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,2,2,0,Uses covariates
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,6,5,1,Both kinds of score
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,2,2,0,Uses covariates
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,2,2,0,Uses covariates

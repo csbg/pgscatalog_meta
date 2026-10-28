@@ -1,231 +1,116 @@
-pgs_id,sampleset_id,ancestry_eval,performance_id,trait_label,auc,estimate_ci_lower,estimate_ci_upper,n,cases,controls,covariates,one_eval_rank
-PGS000004,PSS000854,European,PPM001647,Incident breast cancer,0.633,0.624,0.641,400812,4340,396472,"family history of cancer (in first-degree relatives), genotyping array",2
-PGS000004,PSS009609,European,PPM012911,Incident primary breast cancer,0.64,0.62,0.66,54949,891,54058,"iCARE-Lit (Age at menarche, age at first live birth, parity, oral-contraceptive use, age at menopause, hormone-replacement-therapy use, type of hormone replacement therapy, alcohol intake, height, BMI, breast-cancer family history [i.e. presence or absence of breast cancer in at least one first-degree relative] and benign breast disease)",2
-PGS000004,PSS009610,European,PPM012912,Incident primary breast cancer,0.64,0.632,0.647,238663,5920,232743,"iCARE-Lit (Age at menarche, age at first live birth, parity, oral-contraceptive use, age at menopause, hormone-replacement-therapy use, type of hormone replacement therapy, alcohol intake, height, BMI, breast-cancer family history [i.e. presence or absence of breast cancer in at least one first-degree relative] and benign breast disease)",2
-PGS000007,PSS000218,European,PPM000386,Breast Cancer (personal history),0.78,0.7603687901181239,0.7984492658841302,9529,828,8701,"age, sex",2
-PGS000013,PSS000219,European,PPM000383,Coronary artery disease (personal history),0.86,0.8134482487382657,0.8964145698723589,11010,126,10884,"age, sex",2
-PGS000013,PSS007665,European,PPM009243,Coronary artery calcium score > 20,0.864,0.807,0.904,1132,62,1070,"Age, sex, PCs(1-5), systolic blood pressure, total cholesterol, high density lipoprotein cholesterol, triglycerides, current smoker, waist circumference",2
-PGS000013,PSS007666,European,PPM009246,Coronary artery calcium score > 300,0.855,0.805,0.887,663,93,570,"Age, sex, PCs(1-5), systolic blood pressure, total cholesterol, high density lipoprotein cholesterol, triglycerides, current smoker, body mass index",2
-PGS000013,PSS011315,East Asian,PPM020268,Early onset acute myocardial infarction following  percutaneous coronary intervention,0.92,0.9,0.94,901,265,636,"Current smoking, hypercholesterolemia, body mass index, hypertension, family history of coronary artery disease, diabetes mellitus",2
-PGS000013,PSS011679,European,PPM021297,Myocardial injury following non cardiac surgery,0.793,0.7646500702636152,0.8187444391677947,80865,382,80483,"High-risk surgery, history of ischemic heart disease, history of congestive heart failure, history of cerebrovascular disease, insulin therapy for diabetes mellitus, preoperative creatinine >2.0 mg/dL",2
-PGS000013,PSS011679,European,PPM021298,Myocardial injury following non cardiac surgery,0.912,0.8902918610871957,0.9297516420530828,80865,382,80483,"Age, admission type (admit and inpatient versus outpatient reference), composite RCRI score, history of a cardiac arrhythmia, history of fluid or electrolyte disorder, history of hypertension",3
-PGS000013,PSS011679,European,PPM021299,Myocardial injury following non cardiac surgery,0.921,0.9001142373165696,0.9378203040155236,80865,382,80483,"Age, admission type (admit and inpatient versus outpatient reference), composite RCRI score, history of a cardiac arrhythmia, history of fluid or electrolyte disorder, history of hypertension, case duration (hours), pRBC transfusion (units), crystalloid resuscitation (L), estimated blood loss (L), total epinephrine dose (100mcg), total ephedrine dose (50mcg), total norepinephrine dose (40mcg), total phenylephrine dose (1000mcg), total vasopressin dose (10 units), time with myocardial injury after non cardiac surgery < 50 mmHg (min).",4
-PGS000013,PSS012311,European,PPM036561,Obstructive CAD,0.64,0.6021419646175965,0.6761928726441947,943,670,273,"age, sex, hypertension, diabetes, smoking, dyslipidemia, family history of premature CAD and symptoms",2
-PGS000016,PSS000217,European,PPM000385,Atrial Fibrillation (personal history),0.78,0.7430862699449462,0.8129450275075109,10303,239,10064,"age, sex",2
-PGS000018,PSS012311,European,PPM036560,Obstructive CAD,0.63,0.591812416382826,0.666627456401209,943,670,273,"age, sex, hypertension, diabetes, smoking, dyslipidemia, family history of premature CAD and symptoms",2
-PGS000029,PSS000038,East Asian,PPM000058,Breast cancer,0.72,0.62,0.82,102,51,51,BCSC risk model,2
-PGS000036,PSS000054,European,PPM000081,Type 2 diabetes,0.73,0.725050547513933,0.7348929330731244,324870,13480,311390,"age, sex, genotyping array, first 6 PCs of ancestry",2
-PGS000039,PSS001082,European,PPM002221,Incident ischemic stroke,0.685,0.64,0.73,12792,173,12619,"Age, sex, smoking status (current or former versus never), systolic blood pressure, non-high-density lipoprotein cholesterol, high-density lipoprotein cholesterol, body mass index, alcohol consumption (current versus former or never consumption), family history of stroke (event occuring before the age of 50 in a first-degree relative), diabetes, randomization to aspirin",2
-PGS000114,PSS000179,European,PPM000262,Juvenile Idiopathic Arthritis,0.735,0.712,0.758,3513,559,2954,"sex, genetic PCs 1-10",2
-PGS000114,PSS000180,European,PPM000263,Juvenile Idiopathic Arthritis,0.738,0.705,0.77,940,362,578,"sex, genetic PCs 1-10",2
-PGS000126,PSS000233,European,PPM000406,Prevalent gout cases,0.84,0.8329318019092152,0.8468241546081268,334880,4908,329972,"age, sex",2
-PGS000137,PSS000245,European,PPM000422,Primary open-angle glaucoma (POAG),0.8,0.7317279108805844,0.854355878850496,1795,74,1721,"age, sex, self-reported family history",2
-PGS000137,PSS000247,European,PPM000429,Primary open-angle glaucoma (POAG),0.76,0.72,0.81,3112,112,3000,"age, sex",2
-PGS000137,PSS000248,European,PPM000424,Glaucoma,0.75,0.73,0.76,3112,112,3000,"age, sex",2
-PGS000137,PSS000249,South Asian,PPM000426,Glaucoma,0.76,0.73,0.79,7033,192,6841,"age, sex",2
-PGS000147,PSS000259,European,PPM000448,Colorectal cancer,0.63,0.6,0.66,4080,1336,2744,"environmental risk factors ( alcohol consumption, obesity, physical activity, red meat and vegetable consumption, nonsteroidal anti-inflammatory drug use), family history",2
-PGS000148,PSS000260,European,PPM000453,Colorectal cancer,0.62,0.61,0.63,5500,2568,2932,"age, family history, study, endoscopy history, E-score (height, body mass index, education, history of type 2 diabetes mellitus, smoking status, alcohol consumption, regular aspirin use, regular NSAIDs use, regular use of post-menopausal hormones, smoking pack-years, dietary factors, total-energy, physical activity)",2
-PGS000148,PSS000261,European,PPM000451,Colorectal cancer,0.63,0.62,0.64,4666,2307,2359,"age, family history, study, endoscopy history, E-score (height, body mass index, education, history of type 2 diabetes mellitus, smoking status, alcohol consumption, regular aspirin use, regular NSAIDs use, smoking pack-years, dietary factors, total-energy, physical activity)",2
-PGS000151,PSS000271,East Asian,PPM000471,Colorectal cancer,0.607,0.581,0.633,3523,1316,2207,smoking status,2
-PGS000324,PSS000429,European,PPM000873,Enthesitis-related Arthritis,0.75,0.68,0.82,3020,66,2954,"sex, genetic PCs 1-10",2
-PGS000324,PSS000432,European,PPM000874,Enthesitis-related Arthritis,0.93,0.86,0.99,594,16,578,"sex, genetic PCs 1-10",2
-PGS000325,PSS000430,European,PPM000875,Oligoarthritis Juvenile Idiophatic Arthritis,0.8,0.77,0.84,3157,203,2954,"sex, genetic PCs 1-10",2
-PGS000325,PSS000433,European,PPM000876,Oligoarthritis Juvenile Idiophatic Arthritis,0.79,0.76,0.83,737,159,578,"sex, genetic PCs 1-10",2
-PGS000326,PSS000431,European,PPM000877,Rheumatoid-factor-negative Polyarthritis,0.76,0.72,0.8,3089,135,2954,"sex, genetic PCs 1-10",2
-PGS000326,PSS000434,European,PPM000878,Rheumatoid-factor-negative Polyarthritis,0.74,0.68,0.8,653,75,578,"sex, genetic PCs 1-10",2
-PGS000329,PSS012311,European,PPM036559,Obstructive CAD,0.561,0.5211160402642602,0.6001112220302524,943,670,273,"age, sex, hypertension, diabetes, smoking, dyslipidemia, family history of premature CAD and symptoms",2
-PGS000348,PSS000501,European,PPM000986,Prostate cancer,0.64,0.6225824587859515,0.657056503629918,3891,1972,1919,Age,2
-PGS000662,PSS009945,European,PPM014987,Prostate cancer incidence in men with symptoms,0.782,0.755,0.81,6715,247,6468,"Age, family history, symptom profile",2
-PGS000662,PSS009970,European,PPM015512,Gleason <=7 prostate cancer risk in 10 years,0.943,0.928,0.959,854,432,422,NA,2
-PGS000662,PSS009970,European,PPM015513,Gleason >=8 prostate cancer risk in 10 years,0.942,0.919,0.964,854,432,422,NA,3
-PGS000662,PSS009970,European,PPM015514,Localized prostate cancer risk in 10 years,0.936,0.918,0.953,854,432,422,NA,4
-PGS000662,PSS009970,European,PPM015515,Non-localized prostate cancer risk in 10 years,0.948,0.922,0.974,854,432,422,NA,5
-PGS000662,PSS009970,European,PPM015516,Lethal prostate cancer risk in 10 years,0.961,0.941,0.982,854,432,422,NA,6
-PGS000667,PSS000605,European,PPM001395,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,0.611,0.603,0.617,113703,5938,107765,"Pooled Cohort Equations, measured lipoprotein(a)",2
-PGS000667,PSS000606,European,PPM001393,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,0.642,0.635,0.649,144350,5505,138845,"QRISK3, measured lipoprotein(a)",2
-PGS000716,PSS000875,European,PPM001705,Obesity in individuals aged 12-15.9,0.739,0.667,0.811,3124,37,3087,NA,2
-PGS000716,PSS000876,European,PPM001709,Overweight in individuals aged 12-15.9,0.656,0.626,0.686,3124,344,2780,NA,2
-PGS000716,PSS000877,European,PPM001706,Obesity in individuals aged 16-17.9,0.66,0.566,0.754,2896,30,2866,NA,2
-PGS000716,PSS000878,European,PPM001710,Overweight in individuals aged 16-17.9,0.623,0.589,0.657,2896,274,2622,NA,2
-PGS000716,PSS000879,European,PPM001707,Obesity in individuals aged 18-23.9,0.618,0.594,0.641,12179,542,11637,NA,2
-PGS000716,PSS000880,European,PPM001711,Overweight in individuals aged 18-23.9,0.601,0.589,0.612,12179,2898,9281,NA,2
-PGS000716,PSS000882,European,PPM001712,Overweight in individuals aged 14-29.9,0.591,0.582,0.6,17139,5775,11364,NA,2
-PGS000716,PSS000883,European,PPM001708,Obesity in individuals aged 30-69.9,0.569,0.564,0.574,62541,15112,47429,NA,2
-PGS000716,PSS000884,European,PPM001713,Overweight in individuals aged 30-69.9,0.568,0.563,0.573,62541,43408,19133,NA,2
-PGS000717,PSS000875,European,PPM001714,Obesity in individuals aged 12-15.9,0.664,0.574,0.753,3124,37,3087,NA,2
-PGS000717,PSS000876,European,PPM001719,Overweight in individuals aged 12-15.9,0.587,0.556,0.618,3124,344,2780,NA,2
-PGS000717,PSS000877,European,PPM001715,Obesity in individuals aged 16-17.9,0.691,0.589,0.793,2896,30,2866,NA,2
-PGS000717,PSS000878,European,PPM001720,Overweight in individuals aged 16-17.9,0.615,0.58,0.649,2896,274,2622,NA,2
-PGS000717,PSS000879,European,PPM001716,Obesity in individuals aged 18-23.9,0.624,0.601,0.646,12179,542,11637,NA,2
-PGS000717,PSS000880,European,PPM001721,Overweight in individuals aged 18-23.9,0.592,0.58,0.604,12179,2898,9281,NA,2
-PGS000717,PSS000881,European,PPM001717,Obesity in individuals aged 24-29.9,0.623,0.607,0.639,17139,1240,15899,NA,2
-PGS000717,PSS000882,European,PPM001722,Overweight in individuals aged 14-29.9,0.598,0.589,0.607,17139,5775,11364,NA,2
-PGS000717,PSS000883,European,PPM001718,Obesity in individuals aged 30-69.9,0.597,0.591,0.602,62541,15112,47429,NA,2
-PGS000717,PSS000884,European,PPM001723,Overweight in individuals aged 30-69.9,0.582,0.578,0.587,62541,43408,19133,NA,2
-PGS000719,PSS000860,European,PPM001645,Incident prostate cancer,0.669,0.661,0.676,400812,4430,396382,"family history of cancer (in first-degree relatives), genotyping array",2
-PGS000720,PSS000855,European,PPM001649,Incident colorectal cancer,0.613,0.602,0.624,400812,2458,398354,"family history of cancer (in first-degree relatives), genotyping array",2
-PGS000721,PSS000857,European,PPM001651,Incident lung cancer,0.615,0.6,0.629,400812,1508,399304,"family history of cancer (in first-degree relatives), genotyping array",2
-PGS000739,PSS011008,European,PPM018531,Hypertrophic cardiomyopathy,0.821,0.772,0.871,184511,NA,NA,"Clinical risk factors (obesity, HTN, AF, CAD), HCM-ACMG rare variant carrier status, age, sex, genotyping array, and PCs 1-5",2
-PGS000758,PSS000967,European,PPM001933,Short stature in adulthood (males),0.82,0.731,0.909,941,21,920,NA,2
-PGS000758,PSS000967,European,PPM001931,Short stature in adulthood,0.843,0.796,0.89,941,21,920,Sex,3
-PGS000765,PSS011409,European,PPM020785,Familial / early-onset colorectal cancer,0.905,0.8832117806224923,0.923077394854751,2059,417,1642,"Age at cancer diagnosis, sex, family history of colorectal cancer",2
-PGS000770,PSS000992,European,PPM001991,Obesity prevalence,0.127,0.04,0.22,177,50,127,"Age, sex, bootstrapping (n=1000)",2
-PGS000783,PSS001011,European,PPM002070,Incident breast cancer,0.626,0.6173643279651517,0.634556142443324,216273,4760,211513,"Age, genotyping array, PCs(1-15)",2
-PGS000785,PSS001013,European,PPM002071,Incident colorectal cancer,0.708,0.6968669935133123,0.7188890679625194,393723,2725,390998,"Age, sex,  genotyping array, PCs(1-15)",2
-PGS000789,PSS001017,European,PPM002072,Incident lung cancer,0.71,0.6951709139458955,0.7243936948797315,392539,1541,390998,"Age, sex,  genotyping array, PCs(1-15)",2
-PGS000789,PSS001017,European,PPM002073,Incident lung cancer in never smokers,0.723,0.7082801312801322,0.737252654047576,392539,1541,390998,"Age, sex, genotyping array, PCs(1-15), family history of lung cancer, PM2.5 level in 2010",3
-PGS000789,PSS001017,European,PPM002074,Incident lung cancer in smokers,0.808,0.7944993892712953,0.8208137063197649,392539,1541,390998,"Age, sex, genotyping array, PCs(1-15), family history of lung cancer, PM2.5 level in 2010, cigarettes per day, years of smoking, smoking status (former vs. current), years since quitting, (smoking status)*(cigarettes per day), (smoking status*years of smoking)",4
-PGS000795,PSS001023,European,PPM002069,Incident prostate cancer,0.766,0.7579219688848192,0.7738888889443427,184225,4740,179485,"Age, genotyping array, PCs(1-15)",2
-PGS000804,PSS001044,African,PPM002115,Type 2 diabetes,0.6701,0.6615,0.6788,15609,5972,9637,"Age, sex, body mass index, study, PCs(1-10)",2
-PGS000804,PSS001046,European,PPM002119,Type 2 diabetes,0.825,0.8222,0.8279,423729,19786,403943,"Age, sex, body mass index, PCs(1-10)",2
-PGS000804,PSS001047,Hispanic or Latin American,PPM002123,Type 2 diabetes,0.7293,0.721,0.7376,20486,4137,16349,"Age, sex, body mass index, study, PCs(1-10)",2
-PGS000805,PSS001046,European,PPM002120,Type 2 diabetes,0.8253,0.8224,0.8281,423729,19786,403943,"Age, sex, body mass index, PCs(1-10)",2
-PGS000806,PSS001044,African,PPM002116,Type 2 diabetes,0.6656,0.6569,0.6743,15609,5972,9637,"Age, sex, body mass index, study, PCs(1-10)",2
-PGS000808,PSS001047,Hispanic or Latin American,PPM002124,Type 2 diabetes,0.7202,0.7118,0.7286,20486,4137,16349,"Age, sex, body mass index, study, PCs(1-10)",2
-PGS000883,PSS011075,European,PPM018704,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),0.73,0.72,0.75,11813,NA,NA,"age, sex, alcohol, smoking, hypertension, diabetes, body mass index, nonsteroidal anti-inflammatory drug and angiotensin-converting enzyme inhibitor/angiotensin receptor blocker use, and visit year",2
-PGS000883,PSS011075,European,PPM018705,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),0.79,0.77,0.81,11813,NA,NA,"age, sex, alcohol, smoking, hypertension, diabetes, body mass index, nonsteroidal anti-inflammatory drug and angiotensin-converting enzyme inhibitor/angiotensin receptor blocker use, and visit year",3
-PGS000903,PSS009572,European,PPM012833,Parkinson's disease (age at onset),0.59,0.551,0.629,6378,1914,4464,"sex, age and first three PCs",2
-PGS001354,PSS003602,European,PPM005186,Subsequent thyroid cancer in childhood cancer survivors aged 50,0.72,0.6651660593238548,0.7689729880676553,6416,121,6295,"Clincial model (age at diagnosis, attained age modeled by restricted cubic splines, sex, combined treatment group)",2
-PGS001354,PSS003603,European,PPM005185,Subsequent thyroid cancer in childhood cancer survivors aged 50,0.82,0.7482875032811802,0.8747027568041258,2370,65,2305,"Clincial model (age at diagnosis, attained age modeled by restricted cubic splines, sex, combined treatment group)",2
-PGS001774,PSS007662,European,PPM009235,Parkinson's disease,0.55,0.5041606928253382,0.5950057585719118,699,235,464,NA,2
-PGS001774,PSS007662,European,PPM009234,Parkinson's disease,0.79,0.75,0.83,699,235,464,"Age, gender, head injury, family history of Parkinson's disease, depression, smoking (current or ever), body mass index",3
-PGS001774,PSS007662,European,PPM009236,Parkinson's disease,0.8,0.77,0.84,699,235,464,"Age, gender, head injury, family history of Parkinson's disease, depression, smoking (current or ever), body mass index",4
-PGS001776,PSS007664,European,PPM009240,10-year risk of colorectal cancer,0.674,0.665,0.683,403998,2992,401006,Family history,2
-PGS001777,PSS007667,European,PPM009251,Cirrhosis (males),0.671,0.6418311493779297,0.698907744198201,1390,917,473,NA,2
-PGS001777,PSS007667,European,PPM009252,Cirrhosis (females),0.65,0.6202233145425693,0.6786516509118845,1390,917,473,NA,3
-PGS001777,PSS007668,European,PPM009253,Cirrhosis (males),0.592,0.564494010698774,0.618941462722519,1766,1162,604,NA,2
-PGS001777,PSS007668,European,PPM009254,Cirrhosis (females),0.635,0.6083095512713075,0.6608856053501967,1766,1162,604,NA,3
-PGS001777,PSS007669,European,PPM009255,Cirrhosis (males),0.635,0.6097580259710089,0.6595209370275193,6898,594,6304,NA,2
-PGS001777,PSS007669,European,PPM009256,Cirrhosis (females),0.554,0.5290622235217057,0.5786688792784717,6898,594,6304,NA,3
-PGS001777,PSS007669,European,PPM009250,Cirrhosis,0.636,0.6107598654095685,0.660513189035222,6898,594,6304,"BMI, coffee",4
-PGS001778,PSS007670,European,PPM009262,Breast cancer,0.548,0.5211980843179397,0.5745263685622785,1780,880,900,Age,2
-PGS001778,PSS007670,European,PPM009263,Breast cancer,0.578,0.5513546505857674,0.6041988832933556,1780,880,900,Family history,3
-PGS001778,PSS007670,European,PPM009264,Breast cancer,0.578,0.5513546505857674,0.6041988832933556,1780,880,900,"Age, family history",4
-PGS001778,PSS007670,European,PPM009265,Breast cancer,0.6975,0.673,0.722,1780,880,900,"Age at interview, menopausal status, age at menarche, age at first full-term pregnancy(1-4), parous, breast feeding, smoking status, body mass index, height, hormone-replacement therapy ever use, family history",5
-PGS002237,PSS011075,European,PPM018707,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),0.71,0.7,0.73,11813,NA,NA,"age, sex, alcohol, smoking, hypertension, diabetes, body mass index, nonsteroidal anti-inflammatory drug and angiotensin-converting enzyme inhibitor/angiotensin receptor blocker use, and visit year",2
-PGS002237,PSS011075,European,PPM018708,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),0.78,0.75,0.8,11813,NA,NA,"age, sex, alcohol, smoking, hypertension, diabetes, body mass index, nonsteroidal anti-inflammatory drug and angiotensin-converting enzyme inhibitor/angiotensin receptor blocker use, and visit year",3
-PGS002248,PSS009557,European,PPM012794,Childhood asthma by age 11,0.71,0.61,0.8,898,116,782,CAPE model,2
-PGS002248,PSS009557,European,PPM012796,Childhood asthma by age 11,0.81,0.72,0.89,898,116,782,CAPP model,3
-PGS002248,PSS009558,European,PPM012793,Childhood asthma by age 8,0.65,0.53,0.77,1018,144,874,CAPE model,2
-PGS002248,PSS009558,European,PPM012795,Childhood asthma by age 8,0.85,0.77,0.92,1018,144,874,CAPP model,3
-PGS002252,PSS009566,European,PPM012806,Early-onset colorectal cancer (men),0.61,0.592,0.651,7376,3486,3890,"Age, family history, genotype platform, principal components",2
-PGS002252,PSS009566,European,PPM012807,Early-onset colorectal cancer (women),0.633,0.612,0.655,7376,3486,3890,"Age, family history, genotype platform, principal components",3
-PGS002252,PSS009566,European,PPM012808,Proximal colon cancer,0.592,0.554,0.63,7376,3486,3890,"Age, family history, genotype platform, principal components",4
-PGS002252,PSS009566,European,PPM012809,Distal colon cancer,0.643,0.614,0.671,7376,3486,3890,"Age, family history, genotype platform, principal components",5
-PGS002252,PSS009566,European,PPM012810,Rectal cancer,0.654,0.63,0.68,7376,3486,3890,"Age, family history, genotype platform, principal components",6
-PGS002265,PSS009918,European,PPM014885,Advanced colorectal neoplasia (FOB Gold model),0.53,0.516,0.545,5306,NA,NA,NA,2
-PGS002271,PSS009620,European,PPM012925,Risk of mitral valve prolapse,0.6614,0.641,0.6819,393229,691,392538,"Age, sex",2
-PGS002272,PSS009621,European,PPM012941,Risk of hospitalization (COVID-19),0.766,0.753,0.778,25353,NA,NA,"age, sex, PCs, BMI, CVD, hypertension, diabetes, CKD, COPD, Autoimmune",2
-PGS002272,PSS009621,European,PPM012942,Risk of severe disease (COVID-19),0.796,0.777,0.815,25353,NA,NA,"age, sex, PCs",3
-PGS002272,PSS009621,European,PPM012943,Risk of severe disease (COVID-19),0.814,0.769,0.832,25353,NA,NA,"age, sex, PCs, BMI, CVD, hypertension, diabetes, CKD, COPD, Autoimmune",4
-PGS002272,PSS009622,European,PPM012937,Risk of hospitalization (COVID-19),0.708,0.688,0.727,14320,NA,NA,"age, sex, PCs, BMI, CVD, hypertension, diabetes, CKD, COPD, Autoimmune",2
-PGS002272,PSS009622,European,PPM012938,Risk of severe disease (COVID-19),0.696,0.668,0.723,14320,NA,NA,"age, sex, PCs",3
-PGS002272,PSS009622,European,PPM012939,Risk of severe disease (COVID-19),0.75,0.723,0.776,14320,NA,NA,"age, sex, PCs, BMI, CVD, hypertension, diabetes, CKD, COPD, Autoimmune",4
-PGS002281,PSS009636,European,PPM012971,Multiple myeloma,0.628,0.605,0.65,2395,1426,969,"Age, sex, and geographic region of origin",2
-PGS002291,PSS009646,East Asian,PPM013011,Nasopharyngeal carcinoma,0.69,0.6701822931880891,0.7091437182819592,2893,1304,1589,Family history of NPC,2
-PGS002292,PSS009647,European,PPM013013,Keratoconus with ﻿corneal resistance factor variants,0.756,0.6972721501414363,0.8064966196772283,142595,102,142493,NA,2
-PGS002292,PSS009647,European,PPM013014,Keratoconus with central corneal thickness variants,0.755,0.6962384656763629,0.80556873435617,142595,102,142493,NA,3
-PGS002294,PSS009652,East Asian,PPM013022,Breast cancer,0.648,0.613,0.682,1104,368,736,"Nongenetic risk score (body mass index, waist-to-hip ratio (WHR), benign breast disease, age at menarche, age at first live birth, family history of breast cancer)",2
-PGS002728,PSS009889,European,PPM014786,Clinical osteoarthritis,0.53,0.47,0.59,1002,NA,NA,"Age, sex",2
-PGS002728,PSS009889,European,PPM014788,Total hip replacement,0.64,0.55,0.73,1002,NA,NA,"Age, sex",3
-PGS002728,PSS009891,European,PPM014785,Clinical osteoarthritis,0.62,0.56,0.68,14926,NA,NA,"Age, sex",2
-PGS002728,PSS009891,European,PPM014787,Total hip replacement,0.66,0.62,0.7,14926,NA,NA,"Age, sex",3
-PGS002729,PSS009889,European,PPM014793,Clinical osteoarthritis,0.6,0.55,0.65,1002,NA,NA,"Age, sex, BMI",2
-PGS002729,PSS009889,European,PPM014796,Total hip replacement,0.65,0.49,0.82,1002,NA,NA,"Age, sex, BMI",3
-PGS002729,PSS009890,European,PPM014794,Clinical osteoarthritis,0.52,0.41,0.63,407,NA,NA,"Age, BMI",2
-PGS002729,PSS009891,European,PPM014792,Clinical osteoarthritis,0.66,0.61,0.71,14926,NA,NA,"Age, sex, BMI",2
-PGS002729,PSS009891,European,PPM014795,Total hip replacement,0.66,0.61,0.71,14926,NA,NA,"Age, sex, BMI",3
-PGS003439,PSS010138,European,PPM017159,10 year colorectal cancer risk,0.72,0.7,0.74,66282,NA,NA,"age, first-degree CRC family history, sex, endoscopy history",2
-PGS003755,PSS011006,East Asian,PPM018526,Class V lupus nephritis in anti-sm positive systemic lupus erythematosus,0.681,0.602,0.76,1655,NA,NA,NA,2
-PGS003857,PSS011076,European,PPM018710,BMI adjusted obstructive sleep apnea,0.77,0.75,0.78,2023,NA,NA,"BMI, age, sex, genetic batch, PCs 1-10",2
-PGS003858,PSS011076,European,PPM018712,BMI adjusted obstructive sleep apnea,0.77,0.76,0.79,2023,NA,NA,"BMI, age, sex, genetic batch, PCs 1-10",2
-PGS003860,PSS011079,East Asian,PPM018725,Low myopia,0.653,0.619,0.687,978,NA,NA,NA,2
-PGS003860,PSS011079,East Asian,PPM018729,Moderate myopia,0.66,0.621,0.699,978,NA,NA,NA,3
-PGS003860,PSS011079,East Asian,PPM018733,High myopia (HM5),0.648,0.601,0.694,978,NA,NA,NA,4
-PGS003860,PSS011079,East Asian,PPM018737,High myopia (HM6),0.672,0.619,0.724,978,NA,NA,NA,5
-PGS003860,PSS011080,European,PPM018722,Low myopia,0.728,0.715,0.741,6000,NA,NA,NA,2
-PGS003860,PSS011080,European,PPM018726,Moderate myopia,0.754,0.738,0.77,6000,NA,NA,NA,3
-PGS003860,PSS011080,European,PPM018730,High myopia (HM5),0.774,0.75,0.798,6000,NA,NA,NA,4
-PGS003860,PSS011080,European,PPM018734,High myopia (HM6),0.783,0.754,0.812,6000,NA,NA,NA,5
-PGS003860,PSS011081,European,PPM018743,Low myopia,0.691,0.659,0.722,1649,NA,NA,NA,2
-PGS003860,PSS011081,European,PPM018745,Moderate myopia,0.691,0.624,0.754,1649,NA,NA,NA,3
-PGS003860,PSS011081,European,PPM018747,High myopia (HM6),0.739,0.619,0.851,1649,NA,NA,NA,4
-PGS003860,PSS011081,European,PPM018748,High myopia (HM6),0.783,0.754,0.812,1649,NA,NA,NA,5
-PGS003860,PSS011082,European,PPM018742,Low myopia,0.703,0.654,0.751,1277,NA,NA,NA,2
-PGS003860,PSS011082,European,PPM018744,Moderate myopia,0.735,0.6,0.854,1277,NA,NA,NA,3
-PGS003860,PSS011082,European,PPM018746,High myopia (HM5),0.579,0.567,0.592,1277,NA,NA,NA,4
-PGS003860,PSS011083,South Asian,PPM018724,Low myopia,0.647,0.631,0.664,4641,NA,NA,NA,2
-PGS003860,PSS011083,South Asian,PPM018728,Moderate myopia,0.686,0.664,0.708,4641,NA,NA,NA,3
-PGS003860,PSS011083,South Asian,PPM018732,High myopia (HM5),0.695,0.664,0.726,4641,NA,NA,NA,4
-PGS003860,PSS011083,South Asian,PPM018736,High myopia (HM6),0.706,0.668,0.743,4641,NA,NA,NA,5
-PGS003960,PSS011186,European,PPM019118,Systemic lupus erythematosus,0.89,0.87,0.9,1994,615,1379,phenotype risk score,2
-PGS003960,PSS011188,European,PPM019119,Systemic lupus erythematosus,0.87,0.85,0.89,1994,615,1379,phenotype risk score,2
-PGS004237,PSS011313,European,PPM020259,Prevalent Myocardial Infarction,0.772,0.7689179365506149,0.7750529822305766,403422,32475,370947,"Age, Sex and Genetic Principal Components (1 to 10)",2
-PGS004237,PSS011313,European,PPM020260,Prevalent Myocardial Infarction and Coronary Revascularization procedure,0.789,0.7859867681033308,0.7919820348380624,403422,32475,370947,"Age, Sex and Genetic Principal Components (1 to 10)",3
-PGS004238,PSS011317,East Asian,PPM020272,Cardiovascular disease in patients with type II diabetes Mellitus,0.78,0.717,0.843,385,68,317,"Age, gender, body mass index",2
-PGS004615,PSS011417,East Asian,PPM020793,Type 2 diabetes,0.639,0.6306319873028974,0.6472844670854037,26000,6000,20000,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
-PGS004615,PSS011417,East Asian,PPM020794,Type 2 diabetes,0.679,0.6707843048030891,0.6871063057270769,26000,6000,20000,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",3
-PGS004616,PSS011417,East Asian,PPM020796,Type 2 diabetes,0.653,0.6446763333302977,0.6612311428424743,26000,6000,20000,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
-PGS004617,PSS011417,East Asian,PPM020798,Type 2 diabetes,0.67,0.6617430865996511,0.6781533882129502,26000,6000,20000,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
-PGS004618,PSS011416,East Asian,PPM020800,Type 2 diabetes,0.649,0.642566023148484,0.6553802757255033,33096,11236,21860,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
-PGS004618,PSS011416,East Asian,PPM020801,Type 2 diabetes,0.693,0.686755759916894,0.6991742909433725,33096,11236,21860,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",3
-PGS004619,PSS011416,East Asian,PPM020803,Type 2 diabetes,0.659,0.6526026895621174,0.6653399162030906,33096,11236,21860,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
-PGS004620,PSS011416,East Asian,PPM020805,Type 2 diabetes,0.682,0.6757013351998173,0.6882327747530783,33096,11236,21860,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
-PGS004908,PSS011702,European,PPM021362,Clear cell renal cell carcinoma,0.74,0.72,0.76,324805,1696,323109,"Age, sex, PCs, BMI, smoking, hypertension",2
-PGS004909,PSS011703,European,PPM021365,Nicotine metabolism (slow vs normal) in treatment seeking smokers,0.78,0.71,0.86,196,NA,NA,NA,2
-PGS004912,PSS011705,European,PPM021371,Colorectal non-advanced adenoma,0.546,0.5377616154158167,0.5542132716429489,24322,6609,17713,"age, sex, family history, principal components, genotype platform",2
-PGS004912,PSS011706,East Asian,PPM021369,Colorectal non-advanced adenoma,0.556,0.5298127109788039,0.581879812521603,2344,672,1672,"age, sex, family history, principal components, genotype platform",2
-PGS005218,PSS012042,European,PPM022617,Incident hypothyroidism,0.859,0.821,0.897,431304,32304,399000,"age, sex, TSH, T4, anti-TPO, PC1, PC2, PC3, PC4",2
-PGS005236,PSS012227,European,PPM030663,Late CAD,0.549,0.525,0.573,18732,263,18469,PRS_CAD (PGS Catalog ID: PGS005236) + PRS_IS (this paper) + PRS_HF (this paper) combined to derive meta-PRS,2
-PGS005236,PSS012227,European,PPM030664,Early CAD,0.604,0.551,0.657,18732,263,18469,PRS_CAD (PGS Catalog ID: PGS005236) + PRS_IS (this paper) + PRS_HF (this paper) combined to derive meta-PRS,3
-PGS005237,PSS012053,European,PPM022715,5-year incident prostate cancer,0.706,0.676,0.736,1809,327,1482,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005237,PSS012054,European,PPM022710,5-year incident prostate cancer,0.715,0.686,0.744,6791,269,6522,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005237,PSS012055,African,PPM022705,5-year incident prostate cancer,0.796,0.756,0.835,3193,82,3111,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005237,PSS012056,European,PPM022695,5-year incident prostate cancer,0.781,0.774,0.788,184010,3133,180877,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005237,PSS012057,South Asian,PPM022700,5-year incident prostate cancer,0.845,0.793,0.897,5097,30,5067,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005238,PSS012053,European,PPM022716,5-year incident prostate cancer,0.725,0.696,0.754,1809,327,1482,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005238,PSS012054,European,PPM022711,5-year incident prostate cancer,0.741,0.714,0.768,6791,269,6522,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005238,PSS012055,African,PPM022706,5-year incident prostate cancer,0.798,0.759,0.838,3193,82,3111,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005238,PSS012056,European,PPM022696,5-year incident prostate cancer,0.789,0.782,0.796,184010,3133,180877,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005238,PSS012057,South Asian,PPM022701,5-year incident prostate cancer,0.842,0.79,0.894,5097,30,5067,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005239,PSS012053,European,PPM022717,5-year incident prostate cancer,0.712,0.682,0.741,1809,327,1482,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005239,PSS012054,European,PPM022712,5-year incident prostate cancer,0.722,0.694,0.751,6791,269,6522,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005239,PSS012055,African,PPM022707,5-year incident prostate cancer,0.8,0.761,0.84,3193,82,3111,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005239,PSS012056,European,PPM022697,5-year incident prostate cancer,0.782,0.775,0.789,184010,3133,180877,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005239,PSS012057,South Asian,PPM022702,5-year incident prostate cancer,0.834,0.778,0.889,5097,30,5067,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005240,PSS012053,European,PPM022718,5-year incident prostate cancer,0.713,0.683,0.742,1809,327,1482,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005240,PSS012054,European,PPM022713,5-year incident prostate cancer,0.736,0.709,0.763,6791,269,6522,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005240,PSS012055,African,PPM022708,5-year incident prostate cancer,0.793,0.755,0.831,3193,82,3111,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005240,PSS012056,European,PPM022698,5-year incident prostate cancer,0.787,0.78,0.794,184010,3133,180877,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005240,PSS012057,South Asian,PPM022703,5-year incident prostate cancer,0.836,0.78,0.893,5097,30,5067,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005241,PSS012053,European,PPM022719,5-year incident prostate cancer,0.705,0.675,0.736,1809,327,1482,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005241,PSS012054,European,PPM022714,5-year incident prostate cancer,0.689,0.661,0.718,6791,269,6522,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005241,PSS012055,African,PPM022709,5-year incident prostate cancer,0.788,0.747,0.829,3193,82,3111,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005241,PSS012056,European,PPM022699,5-year incident prostate cancer,0.758,0.751,0.766,184010,3133,180877,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005241,PSS012057,South Asian,PPM022704,5-year incident prostate cancer,0.805,0.743,0.868,5097,30,5067,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005345,PSS012137,European,PPM023172,Breast Carcinoma,0.647,0.609,0.686,2654,194,2460,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005345,PSS012138,European,PPM023167,Breast Carcinoma,0.638,0.598,0.679,8291,176,8115,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005345,PSS012139,African,PPM023177,Breast Carcinoma,0.621,0.526,0.716,4427,27,4400,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005345,PSS012140,European,PPM023162,Breast Carcinoma,0.645,0.635,0.655,212360,3083,209277,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005345,PSS012141,South Asian,PPM023182,Breast Carcinoma,0.635,0.559,0.712,4435,43,4392,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005346,PSS012137,European,PPM023173,Breast Carcinoma,0.676,0.636,0.715,2654,194,2460,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005346,PSS012138,European,PPM023168,Breast Carcinoma,0.656,0.616,0.696,8291,176,8115,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005346,PSS012139,African,PPM023178,Breast Carcinoma,0.59,0.488,0.691,4427,27,4400,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005346,PSS012140,European,PPM023163,Breast Carcinoma,0.667,0.657,0.676,212360,3083,209277,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005346,PSS012141,South Asian,PPM023183,Breast Carcinoma,0.642,0.558,0.727,4435,43,4392,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005347,PSS012137,European,PPM023174,Breast Carcinoma,0.663,0.625,0.701,2654,194,2460,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005347,PSS012138,European,PPM023169,Breast Carcinoma,0.656,0.616,0.696,8291,176,8115,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005347,PSS012139,African,PPM023179,Breast Carcinoma,0.592,0.489,0.695,4427,27,4400,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005347,PSS012140,European,PPM023164,Breast Carcinoma,0.662,0.652,0.672,212360,3083,209277,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005347,PSS012141,South Asian,PPM023184,Breast Carcinoma,0.653,0.569,0.737,4435,43,4392,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005348,PSS012137,European,PPM023175,Breast Carcinoma,0.66,0.621,0.699,2654,194,2460,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005348,PSS012138,European,PPM023170,Breast Carcinoma,0.646,0.607,0.685,8291,176,8115,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005348,PSS012139,African,PPM023180,Breast Carcinoma,0.611,0.514,0.707,4427,27,4400,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005348,PSS012140,European,PPM023165,Breast Carcinoma,0.667,0.657,0.676,212360,3083,209277,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005348,PSS012141,South Asian,PPM023185,Breast Carcinoma,0.639,0.556,0.723,4435,43,4392,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005349,PSS012137,European,PPM023176,Breast Carcinoma,0.713,0.678,0.748,2654,194,2460,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005349,PSS012138,European,PPM023171,Breast Carcinoma,0.645,0.605,0.685,8291,176,8115,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005349,PSS012139,African,PPM023181,Breast Carcinoma,0.585,0.485,0.685,4427,27,4400,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005349,PSS012140,European,PPM023166,Breast Carcinoma,0.644,0.634,0.654,212360,3083,209277,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005349,PSS012141,South Asian,PPM023186,Breast Carcinoma,0.647,0.564,0.731,4435,43,4392,Age-specific absolute risk adjusted by PGS relative risk,2
-PGS005388,PSS012177,East Asian,PPM023427,Paroxysmal atrial fibrillation,0.737,0.668,0.804,179,104,75,"sex, smoking, alcohol consumption, history of hypertension, diabetes mellitus, dyslipidemia, cerebral infarction, and family history of AF",2
+pgs_id,sampleset_id,ancestry_eval,performance_id,trait_label,covariate_class,auc,estimate_ci_lower,estimate_ci_upper,n,cases,controls,covariates,one_eval_rank
+PGS000013,PSS011679,European,PPM021297,Myocardial injury following non cardiac surgery,Clinical or other covariates,0.793,0.7646500702636152,0.8187444391677947,80865,382,80483,"High-risk surgery, history of ischemic heart disease, history of congestive heart failure, history of cerebrovascular disease, insulin therapy for diabetes mellitus, preoperative creatinine >2.0 mg/dL",2
+PGS000013,PSS011679,European,PPM021298,Myocardial injury following non cardiac surgery,Clinical or other covariates,0.912,0.8902918610871957,0.9297516420530828,80865,382,80483,"Age, admission type (admit and inpatient versus outpatient reference), composite RCRI score, history of a cardiac arrhythmia, history of fluid or electrolyte disorder, history of hypertension",3
+PGS000013,PSS011679,European,PPM021299,Myocardial injury following non cardiac surgery,Clinical or other covariates,0.921,0.9001142373165696,0.9378203040155236,80865,382,80483,"Age, admission type (admit and inpatient versus outpatient reference), composite RCRI score, history of a cardiac arrhythmia, history of fluid or electrolyte disorder, history of hypertension, case duration (hours), pRBC transfusion (units), crystalloid resuscitation (L), estimated blood loss (L), total epinephrine dose (100mcg), total ephedrine dose (50mcg), total norepinephrine dose (40mcg), total phenylephrine dose (1000mcg), total vasopressin dose (10 units), time with myocardial injury after non cardiac surgery < 50 mmHg (min).",4
+PGS000036,PSS000054,European,PPM000081,Type 2 diabetes,Age/sex/PCs/technical,0.73,0.725050547513933,0.7348929330731244,324870,13480,311390,"age, sex, genotyping array, first 6 PCs of ancestry",2
+PGS000148,PSS000260,European,PPM000453,Colorectal cancer,Clinical or other covariates,0.62,0.61,0.63,5500,2568,2932,"age, family history, study, endoscopy history, E-score (height, body mass index, education, history of type 2 diabetes mellitus, smoking status, alcohol consumption, regular aspirin use, regular NSAIDs use, regular use of post-menopausal hormones, smoking pack-years, dietary factors, total-energy, physical activity)",2
+PGS000148,PSS000261,European,PPM000451,Colorectal cancer,Clinical or other covariates,0.63,0.62,0.64,4666,2307,2359,"age, family history, study, endoscopy history, E-score (height, body mass index, education, history of type 2 diabetes mellitus, smoking status, alcohol consumption, regular aspirin use, regular NSAIDs use, smoking pack-years, dietary factors, total-energy, physical activity)",2
+PGS000662,PSS009970,European,PPM015512,Gleason <=7 prostate cancer risk in 10 years,None (PRS only),0.943,0.928,0.959,854,432,422,NA,2
+PGS000662,PSS009970,European,PPM015513,Gleason >=8 prostate cancer risk in 10 years,None (PRS only),0.942,0.919,0.964,854,432,422,NA,3
+PGS000662,PSS009970,European,PPM015514,Localized prostate cancer risk in 10 years,None (PRS only),0.936,0.918,0.953,854,432,422,NA,4
+PGS000662,PSS009970,European,PPM015515,Non-localized prostate cancer risk in 10 years,None (PRS only),0.948,0.922,0.974,854,432,422,NA,5
+PGS000662,PSS009970,European,PPM015516,Lethal prostate cancer risk in 10 years,None (PRS only),0.961,0.941,0.982,854,432,422,NA,6
+PGS000667,PSS000605,European,PPM001395,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,Clinical or other covariates,0.611,0.603,0.617,113703,5938,107765,"Pooled Cohort Equations, measured lipoprotein(a)",2
+PGS000667,PSS000606,European,PPM001393,Incident atherosclerotic cardiovascular disease in individuals with borderline-intermediate risk of atherosclerotic cardiovascular disease,Clinical or other covariates,0.642,0.635,0.649,144350,5505,138845,"QRISK3, measured lipoprotein(a)",2
+PGS000716,PSS000875,European,PPM001705,Obesity in individuals aged 12-15.9,None (PRS only),0.739,0.667,0.811,3124,37,3087,NA,2
+PGS000716,PSS000876,European,PPM001709,Overweight in individuals aged 12-15.9,None (PRS only),0.656,0.626,0.686,3124,344,2780,NA,2
+PGS000716,PSS000877,European,PPM001706,Obesity in individuals aged 16-17.9,None (PRS only),0.66,0.566,0.754,2896,30,2866,NA,2
+PGS000716,PSS000878,European,PPM001710,Overweight in individuals aged 16-17.9,None (PRS only),0.623,0.589,0.657,2896,274,2622,NA,2
+PGS000716,PSS000879,European,PPM001707,Obesity in individuals aged 18-23.9,None (PRS only),0.618,0.594,0.641,12179,542,11637,NA,2
+PGS000716,PSS000880,European,PPM001711,Overweight in individuals aged 18-23.9,None (PRS only),0.601,0.589,0.612,12179,2898,9281,NA,2
+PGS000716,PSS000882,European,PPM001712,Overweight in individuals aged 14-29.9,None (PRS only),0.591,0.582,0.6,17139,5775,11364,NA,2
+PGS000716,PSS000883,European,PPM001708,Obesity in individuals aged 30-69.9,None (PRS only),0.569,0.564,0.574,62541,15112,47429,NA,2
+PGS000716,PSS000884,European,PPM001713,Overweight in individuals aged 30-69.9,None (PRS only),0.568,0.563,0.573,62541,43408,19133,NA,2
+PGS000717,PSS000875,European,PPM001714,Obesity in individuals aged 12-15.9,None (PRS only),0.664,0.574,0.753,3124,37,3087,NA,2
+PGS000717,PSS000876,European,PPM001719,Overweight in individuals aged 12-15.9,None (PRS only),0.587,0.556,0.618,3124,344,2780,NA,2
+PGS000717,PSS000877,European,PPM001715,Obesity in individuals aged 16-17.9,None (PRS only),0.691,0.589,0.793,2896,30,2866,NA,2
+PGS000717,PSS000878,European,PPM001720,Overweight in individuals aged 16-17.9,None (PRS only),0.615,0.58,0.649,2896,274,2622,NA,2
+PGS000717,PSS000879,European,PPM001716,Obesity in individuals aged 18-23.9,None (PRS only),0.624,0.601,0.646,12179,542,11637,NA,2
+PGS000717,PSS000880,European,PPM001721,Overweight in individuals aged 18-23.9,None (PRS only),0.592,0.58,0.604,12179,2898,9281,NA,2
+PGS000717,PSS000881,European,PPM001717,Obesity in individuals aged 24-29.9,None (PRS only),0.623,0.607,0.639,17139,1240,15899,NA,2
+PGS000717,PSS000882,European,PPM001722,Overweight in individuals aged 14-29.9,None (PRS only),0.598,0.589,0.607,17139,5775,11364,NA,2
+PGS000717,PSS000883,European,PPM001718,Obesity in individuals aged 30-69.9,None (PRS only),0.597,0.591,0.602,62541,15112,47429,NA,2
+PGS000717,PSS000884,European,PPM001723,Overweight in individuals aged 30-69.9,None (PRS only),0.582,0.578,0.587,62541,43408,19133,NA,2
+PGS000758,PSS000967,European,PPM001933,Short stature in adulthood (males),None (PRS only),0.82,0.731,0.909,941,21,920,NA,2
+PGS000770,PSS000992,European,PPM001991,Obesity prevalence,Clinical or other covariates,0.127,0.04,0.22,177,50,127,"Age, sex, bootstrapping (n=1000)",2
+PGS000789,PSS001017,European,PPM002073,Incident lung cancer in never smokers,Clinical or other covariates,0.723,0.7082801312801322,0.737252654047576,392539,1541,390998,"Age, sex, genotyping array, PCs(1-15), family history of lung cancer, PM2.5 level in 2010",2
+PGS000789,PSS001017,European,PPM002074,Incident lung cancer in smokers,Clinical or other covariates,0.808,0.7944993892712953,0.8208137063197649,392539,1541,390998,"Age, sex, genotyping array, PCs(1-15), family history of lung cancer, PM2.5 level in 2010, cigarettes per day, years of smoking, smoking status (former vs. current), years since quitting, (smoking status)*(cigarettes per day), (smoking status*years of smoking)",3
+PGS000883,PSS011075,European,PPM018704,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),Clinical or other covariates,0.73,0.72,0.75,11813,NA,NA,"age, sex, alcohol, smoking, hypertension, diabetes, body mass index, nonsteroidal anti-inflammatory drug and angiotensin-converting enzyme inhibitor/angiotensin receptor blocker use, and visit year",2
+PGS000883,PSS011075,European,PPM018705,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),Clinical or other covariates,0.79,0.77,0.81,11813,NA,NA,"age, sex, alcohol, smoking, hypertension, diabetes, body mass index, nonsteroidal anti-inflammatory drug and angiotensin-converting enzyme inhibitor/angiotensin receptor blocker use, and visit year",3
+PGS000903,PSS009572,European,PPM012833,Parkinson's disease (age at onset),Age/sex/PCs/technical,0.59,0.551,0.629,6378,1914,4464,"sex, age and first three PCs",2
+PGS001354,PSS003602,European,PPM005186,Subsequent thyroid cancer in childhood cancer survivors aged 50,Clinical or other covariates,0.72,0.6651660593238548,0.7689729880676553,6416,121,6295,"Clincial model (age at diagnosis, attained age modeled by restricted cubic splines, sex, combined treatment group)",2
+PGS001354,PSS003603,European,PPM005185,Subsequent thyroid cancer in childhood cancer survivors aged 50,Clinical or other covariates,0.82,0.7482875032811802,0.8747027568041258,2370,65,2305,"Clincial model (age at diagnosis, attained age modeled by restricted cubic splines, sex, combined treatment group)",2
+PGS001774,PSS007662,European,PPM009236,Parkinson's disease,Clinical or other covariates,0.8,0.77,0.84,699,235,464,"Age, gender, head injury, family history of Parkinson's disease, depression, smoking (current or ever), body mass index",2
+PGS001774,PSS007662,European,PPM009235,Parkinson's disease,None (PRS only),0.55,0.5041606928253382,0.5950057585719118,699,235,464,NA,2
+PGS001776,PSS007664,European,PPM009240,10-year risk of colorectal cancer,Clinical or other covariates,0.674,0.665,0.683,403998,2992,401006,Family history,2
+PGS001777,PSS007667,European,PPM009251,Cirrhosis (males),None (PRS only),0.671,0.6418311493779297,0.698907744198201,1390,917,473,NA,2
+PGS001777,PSS007667,European,PPM009252,Cirrhosis (females),None (PRS only),0.65,0.6202233145425693,0.6786516509118845,1390,917,473,NA,3
+PGS001777,PSS007668,European,PPM009253,Cirrhosis (males),None (PRS only),0.592,0.564494010698774,0.618941462722519,1766,1162,604,NA,2
+PGS001777,PSS007668,European,PPM009254,Cirrhosis (females),None (PRS only),0.635,0.6083095512713075,0.6608856053501967,1766,1162,604,NA,3
+PGS001777,PSS007669,European,PPM009255,Cirrhosis (males),None (PRS only),0.635,0.6097580259710089,0.6595209370275193,6898,594,6304,NA,2
+PGS001777,PSS007669,European,PPM009256,Cirrhosis (females),None (PRS only),0.554,0.5290622235217057,0.5786688792784717,6898,594,6304,NA,3
+PGS001778,PSS007670,European,PPM009264,Breast cancer,Clinical or other covariates,0.578,0.5513546505857674,0.6041988832933556,1780,880,900,"Age, family history",2
+PGS001778,PSS007670,European,PPM009265,Breast cancer,Clinical or other covariates,0.6975,0.673,0.722,1780,880,900,"Age at interview, menopausal status, age at menarche, age at first full-term pregnancy(1-4), parous, breast feeding, smoking status, body mass index, height, hormone-replacement therapy ever use, family history",3
+PGS002237,PSS011075,European,PPM018707,Chronic kidney disease (eGFR <60 ml/min per 1.73 m2),Clinical or other covariates,0.71,0.7,0.73,11813,NA,NA,"age, sex, alcohol, smoking, hypertension, diabetes, body mass index, nonsteroidal anti-inflammatory drug and angiotensin-converting enzyme inhibitor/angiotensin receptor blocker use, and visit year",2
+PGS002237,PSS011075,European,PPM018708,Chronic kidney disease (eGFR <45 ml/min per 1.73 m2),Clinical or other covariates,0.78,0.75,0.8,11813,NA,NA,"age, sex, alcohol, smoking, hypertension, diabetes, body mass index, nonsteroidal anti-inflammatory drug and angiotensin-converting enzyme inhibitor/angiotensin receptor blocker use, and visit year",3
+PGS002248,PSS009557,European,PPM012796,Childhood asthma by age 11,Clinical or other covariates,0.81,0.72,0.89,898,116,782,CAPP model,2
+PGS002248,PSS009558,European,PPM012795,Childhood asthma by age 8,Clinical or other covariates,0.85,0.77,0.92,1018,144,874,CAPP model,2
+PGS002252,PSS009566,European,PPM012806,Early-onset colorectal cancer (men),Clinical or other covariates,0.61,0.592,0.651,7376,3486,3890,"Age, family history, genotype platform, principal components",2
+PGS002252,PSS009566,European,PPM012807,Early-onset colorectal cancer (women),Clinical or other covariates,0.633,0.612,0.655,7376,3486,3890,"Age, family history, genotype platform, principal components",3
+PGS002252,PSS009566,European,PPM012808,Proximal colon cancer,Clinical or other covariates,0.592,0.554,0.63,7376,3486,3890,"Age, family history, genotype platform, principal components",4
+PGS002252,PSS009566,European,PPM012809,Distal colon cancer,Clinical or other covariates,0.643,0.614,0.671,7376,3486,3890,"Age, family history, genotype platform, principal components",5
+PGS002252,PSS009566,European,PPM012810,Rectal cancer,Clinical or other covariates,0.654,0.63,0.68,7376,3486,3890,"Age, family history, genotype platform, principal components",6
+PGS002265,PSS009918,European,PPM014885,Advanced colorectal neoplasia (FOB Gold model),None (PRS only),0.53,0.516,0.545,5306,NA,NA,NA,2
+PGS002272,PSS009621,European,PPM012942,Risk of severe disease (COVID-19),Age/sex/PCs/technical,0.796,0.777,0.815,25353,NA,NA,"age, sex, PCs",2
+PGS002272,PSS009621,European,PPM012943,Risk of severe disease (COVID-19),Clinical or other covariates,0.814,0.769,0.832,25353,NA,NA,"age, sex, PCs, BMI, CVD, hypertension, diabetes, CKD, COPD, Autoimmune",2
+PGS002272,PSS009622,European,PPM012938,Risk of severe disease (COVID-19),Age/sex/PCs/technical,0.696,0.668,0.723,14320,NA,NA,"age, sex, PCs",2
+PGS002272,PSS009622,European,PPM012939,Risk of severe disease (COVID-19),Clinical or other covariates,0.75,0.723,0.776,14320,NA,NA,"age, sex, PCs, BMI, CVD, hypertension, diabetes, CKD, COPD, Autoimmune",2
+PGS002281,PSS009636,European,PPM012971,Multiple myeloma,Clinical or other covariates,0.628,0.605,0.65,2395,1426,969,"Age, sex, and geographic region of origin",2
+PGS002292,PSS009647,European,PPM013013,Keratoconus with ﻿corneal resistance factor variants,None (PRS only),0.756,0.6972721501414363,0.8064966196772283,142595,102,142493,NA,2
+PGS002292,PSS009647,European,PPM013014,Keratoconus with central corneal thickness variants,None (PRS only),0.755,0.6962384656763629,0.80556873435617,142595,102,142493,NA,3
+PGS002728,PSS009889,European,PPM014786,Clinical osteoarthritis,Age/sex/PCs/technical,0.53,0.47,0.59,1002,NA,NA,"Age, sex",2
+PGS002728,PSS009889,European,PPM014788,Total hip replacement,Age/sex/PCs/technical,0.64,0.55,0.73,1002,NA,NA,"Age, sex",3
+PGS002728,PSS009891,European,PPM014785,Clinical osteoarthritis,Age/sex/PCs/technical,0.62,0.56,0.68,14926,NA,NA,"Age, sex",2
+PGS002728,PSS009891,European,PPM014787,Total hip replacement,Age/sex/PCs/technical,0.66,0.62,0.7,14926,NA,NA,"Age, sex",3
+PGS002729,PSS009889,European,PPM014793,Clinical osteoarthritis,Clinical or other covariates,0.6,0.55,0.65,1002,NA,NA,"Age, sex, BMI",2
+PGS002729,PSS009889,European,PPM014796,Total hip replacement,Clinical or other covariates,0.65,0.49,0.82,1002,NA,NA,"Age, sex, BMI",3
+PGS002729,PSS009890,European,PPM014794,Clinical osteoarthritis,Clinical or other covariates,0.52,0.41,0.63,407,NA,NA,"Age, BMI",2
+PGS002729,PSS009891,European,PPM014792,Clinical osteoarthritis,Clinical or other covariates,0.66,0.61,0.71,14926,NA,NA,"Age, sex, BMI",2
+PGS002729,PSS009891,European,PPM014795,Total hip replacement,Clinical or other covariates,0.66,0.61,0.71,14926,NA,NA,"Age, sex, BMI",3
+PGS003439,PSS010138,European,PPM017159,10 year colorectal cancer risk,Clinical or other covariates,0.72,0.7,0.74,66282,NA,NA,"age, first-degree CRC family history, sex, endoscopy history",2
+PGS003755,PSS011006,East Asian,PPM018526,Class V lupus nephritis in anti-sm positive systemic lupus erythematosus,None (PRS only),0.681,0.602,0.76,1655,NA,NA,NA,2
+PGS003860,PSS011079,East Asian,PPM018725,Low myopia,None (PRS only),0.653,0.619,0.687,978,NA,NA,NA,2
+PGS003860,PSS011079,East Asian,PPM018729,Moderate myopia,None (PRS only),0.66,0.621,0.699,978,NA,NA,NA,3
+PGS003860,PSS011079,East Asian,PPM018733,High myopia (HM5),None (PRS only),0.648,0.601,0.694,978,NA,NA,NA,4
+PGS003860,PSS011079,East Asian,PPM018737,High myopia (HM6),None (PRS only),0.672,0.619,0.724,978,NA,NA,NA,5
+PGS003860,PSS011080,European,PPM018722,Low myopia,None (PRS only),0.728,0.715,0.741,6000,NA,NA,NA,2
+PGS003860,PSS011080,European,PPM018726,Moderate myopia,None (PRS only),0.754,0.738,0.77,6000,NA,NA,NA,3
+PGS003860,PSS011080,European,PPM018730,High myopia (HM5),None (PRS only),0.774,0.75,0.798,6000,NA,NA,NA,4
+PGS003860,PSS011080,European,PPM018734,High myopia (HM6),None (PRS only),0.783,0.754,0.812,6000,NA,NA,NA,5
+PGS003860,PSS011081,European,PPM018743,Low myopia,None (PRS only),0.691,0.659,0.722,1649,NA,NA,NA,2
+PGS003860,PSS011081,European,PPM018745,Moderate myopia,None (PRS only),0.691,0.624,0.754,1649,NA,NA,NA,3
+PGS003860,PSS011081,European,PPM018747,High myopia (HM6),None (PRS only),0.739,0.619,0.851,1649,NA,NA,NA,4
+PGS003860,PSS011081,European,PPM018748,High myopia (HM6),None (PRS only),0.783,0.754,0.812,1649,NA,NA,NA,5
+PGS003860,PSS011082,European,PPM018742,Low myopia,None (PRS only),0.703,0.654,0.751,1277,NA,NA,NA,2
+PGS003860,PSS011082,European,PPM018744,Moderate myopia,None (PRS only),0.735,0.6,0.854,1277,NA,NA,NA,3
+PGS003860,PSS011082,European,PPM018746,High myopia (HM5),None (PRS only),0.579,0.567,0.592,1277,NA,NA,NA,4
+PGS003860,PSS011083,South Asian,PPM018724,Low myopia,None (PRS only),0.647,0.631,0.664,4641,NA,NA,NA,2
+PGS003860,PSS011083,South Asian,PPM018728,Moderate myopia,None (PRS only),0.686,0.664,0.708,4641,NA,NA,NA,3
+PGS003860,PSS011083,South Asian,PPM018732,High myopia (HM5),None (PRS only),0.695,0.664,0.726,4641,NA,NA,NA,4
+PGS003860,PSS011083,South Asian,PPM018736,High myopia (HM6),None (PRS only),0.706,0.668,0.743,4641,NA,NA,NA,5
+PGS004237,PSS011313,European,PPM020259,Prevalent Myocardial Infarction,Age/sex/PCs/technical,0.772,0.7689179365506149,0.7750529822305766,403422,32475,370947,"Age, Sex and Genetic Principal Components (1 to 10)",2
+PGS004237,PSS011313,European,PPM020260,Prevalent Myocardial Infarction and Coronary Revascularization procedure,Age/sex/PCs/technical,0.789,0.7859867681033308,0.7919820348380624,403422,32475,370947,"Age, Sex and Genetic Principal Components (1 to 10)",3
+PGS004615,PSS011417,East Asian,PPM020793,Type 2 diabetes,Age/sex/PCs/technical,0.639,0.6306319873028974,0.6472844670854037,26000,6000,20000,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
+PGS004615,PSS011417,East Asian,PPM020794,Type 2 diabetes,Age/sex/PCs/technical,0.679,0.6707843048030891,0.6871063057270769,26000,6000,20000,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",3
+PGS004616,PSS011417,East Asian,PPM020796,Type 2 diabetes,Age/sex/PCs/technical,0.653,0.6446763333302977,0.6612311428424743,26000,6000,20000,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
+PGS004617,PSS011417,East Asian,PPM020798,Type 2 diabetes,Age/sex/PCs/technical,0.67,0.6617430865996511,0.6781533882129502,26000,6000,20000,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
+PGS004618,PSS011416,East Asian,PPM020800,Type 2 diabetes,Age/sex/PCs/technical,0.649,0.642566023148484,0.6553802757255033,33096,11236,21860,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
+PGS004618,PSS011416,East Asian,PPM020801,Type 2 diabetes,Age/sex/PCs/technical,0.693,0.686755759916894,0.6991742909433725,33096,11236,21860,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",3
+PGS004619,PSS011416,East Asian,PPM020803,Type 2 diabetes,Age/sex/PCs/technical,0.659,0.6526026895621174,0.6653399162030906,33096,11236,21860,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
+PGS004620,PSS011416,East Asian,PPM020805,Type 2 diabetes,Age/sex/PCs/technical,0.682,0.6757013351998173,0.6882327747530783,33096,11236,21860,"age, age2, sex, sex × age, sex × age2 and the top 20 principal components",2
+PGS004908,PSS011702,European,PPM021362,Clear cell renal cell carcinoma,Clinical or other covariates,0.74,0.72,0.76,324805,1696,323109,"Age, sex, PCs, BMI, smoking, hypertension",2
+PGS004909,PSS011703,European,PPM021365,Nicotine metabolism (slow vs normal) in treatment seeking smokers,None (PRS only),0.78,0.71,0.86,196,NA,NA,NA,2
+PGS004912,PSS011705,European,PPM021371,Colorectal non-advanced adenoma,Clinical or other covariates,0.546,0.5377616154158167,0.5542132716429489,24322,6609,17713,"age, sex, family history, principal components, genotype platform",2
+PGS004912,PSS011706,East Asian,PPM021369,Colorectal non-advanced adenoma,Clinical or other covariates,0.556,0.5298127109788039,0.581879812521603,2344,672,1672,"age, sex, family history, principal components, genotype platform",2
+PGS005236,PSS012227,European,PPM030663,Late CAD,Clinical or other covariates,0.549,0.525,0.573,18732,263,18469,PRS_CAD (PGS Catalog ID: PGS005236) + PRS_IS (this paper) + PRS_HF (this paper) combined to derive meta-PRS,2
+PGS005236,PSS012227,European,PPM030664,Early CAD,Clinical or other covariates,0.604,0.551,0.657,18732,263,18469,PRS_CAD (PGS Catalog ID: PGS005236) + PRS_IS (this paper) + PRS_HF (this paper) combined to derive meta-PRS,3

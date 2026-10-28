@@ -10,21 +10,22 @@
 #   pair           one PGS in Europeans and in one non-European ancestry
 #                  group, and the difference in AUC
 #   comparison     all the pairs for one trait, one training set, and one
-#                  non-European ancestry group. Figure 1C has 30.
+#                  non-European ancestry group. Figure 1C has 32.
 #   training set   European-only, or multi-ancestry
 #
 # Do not write "cell", "code", "cohorts left", "key", "bucket", or "k"
 # in titles, subtitles, or captions.
 #
-# Eight comparisons use more than one target sample set, so the sample-set
-# term can be fit. Seven are type 2 diabetes. The eighth is breast cancer
-# in South Asian and European participants, European-only training.
+# Nine comparisons use more than one target sample set, so the sample-set
+# term can be fit. Seven are type 2 diabetes. Breast cancer contributes
+# two: South Asian participants, and East Asian participants, both with
+# European-only training.
 #
-# Seventeen comparisons have several PGS and one target sample set the
+# Eighteen comparisons have several PGS and one target sample set the
 # model can tell apart. Ancestry group and that sample set are the same
 # column. The average stays. Its standard error becomes the smallest
 # standard error among the PGS. Stroke uses two sample sets, and every
-# PGS uses both, so it counts with these seventeen.
+# PGS uses both, so it counts with these eighteen.
 #
 # Five comparisons have one PGS. Nothing is shared.
 #
@@ -133,7 +134,7 @@ col_min <- "#E41A1C"
 col_kept <- "#6A3D9A"
 
 # -----------------------------------------------------------------
-# Classify the 30 Figure 1C comparisons
+# Classify the 32 Figure 1C comparisons
 # -----------------------------------------------------------------
 pairs <- read_csv(pair_path, show_col_types = FALSE)
 dep <- read_csv(dep_path, show_col_types = FALSE)
@@ -167,9 +168,9 @@ cells <- dep %>%
   )
 
 stopifnot(!any(cells$shape == "Unclassified"))
-stopifnot(nrow(cells) == 30L)
-stopifnot(sum(cells$shape == "Several target sample sets") == 8L)
-stopifnot(sum(cells$shape == "One target sample set") == 17L)
+stopifnot(nrow(cells) == 32L)
+stopifnot(sum(cells$shape == "Several target sample sets") == 9L)
+stopifnot(sum(cells$shape == "One target sample set") == 18L)
 stopifnot(sum(cells$shape == "One PGS") == 5L)
 stopifnot(all(cells$sig_min[cells$shape == "One target sample set"] ==
   cells$sig_med[cells$shape == "One target sample set"]))
@@ -247,7 +248,7 @@ keep_one <- function(d) {
 }
 
 sa <- keep_one(cell_pairs("Type 2 diabetes", "Train: European-only", "South Asian"))
-stopifnot(nrow(sa) == 12L, sum(sa$kept) == 3L, any(grepl("PSS011749", sa$tgt_key) & sa$n_in_group == 10L))
+stopifnot(nrow(sa) == 13L, sum(sa$kept) == 3L, any(grepl("PSS011749", sa$tgt_key) & sa$n_in_group == 11L))
 sa_all <- pool_delta(sa$delta, sa$delta_se)
 sa_one <- pool_delta(sa$delta[sa$kept], sa$delta_se[sa$kept])
 sa_pub <- cells %>%
@@ -277,7 +278,7 @@ write_csv(
 pss10 <- sa %>%
   filter(tgt_key == "PSS011749") %>%
   mutate(axis = factor(pgs_id, levels = rev(sort(pgs_id))))
-stopifnot(n_distinct(pss10$pgs_id) == 10L, sum(pss10$kept) == 1L)
+stopifnot(n_distinct(pss10$pgs_id) == 11L, sum(pss10$kept) == 1L)
 
 p_stage1 <- ggplot(pss10, aes(x = delta, y = axis)) +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
@@ -287,8 +288,8 @@ p_stage1 <- ggplot(pss10, aes(x = delta, y = axis)) +
   ) +
   geom_point(size = 2.6, colour = col_share) +
   labs(
-    title = "Stage 1 keeps all ten",
-    subtitle = "PSS011749, South Asian participants.\nOne evaluation for each of these ten scores.",
+    title = "Stage 1 keeps all eleven",
+    subtitle = "PSS011749, South Asian participants.\nOne evaluation for each of these eleven scores.",
     x = "ΔAUC (South Asian − European) with 95% CI",
     y = NULL
   ) +
@@ -346,7 +347,7 @@ p_later <- ggplot(later_rows, aes(x = estimate, y = axis, colour = role)) +
   )) +
   labs(
     title = "One score kept, All PGS IVW, tightest interval, and Nikolaus's lmer",
-    subtitle = "Same ten scores as on the left, all on PSS011749.\nThe orange row keeps the All PGS IVW average and uses the smallest standard error. No score is dropped.",
+    subtitle = "Same eleven scores as on the left, all on PSS011749.\nThe orange row keeps the All PGS IVW average and uses the smallest standard error. No score is dropped.",
     x = "ΔAUC (South Asian − European) with 95% CI",
     y = NULL
   ) +
@@ -357,29 +358,26 @@ p_later <- ggplot(later_rows, aes(x = estimate, y = axis, colour = role)) +
   ) +
   guides(colour = guide_legend(nrow = 3))
 
-drop_path <- file.path(
+kept_path <- file.path(
   "results", paste0("pgs_catalog_", stamp), "stage1",
-  paste0("stage1_one_evaluation_dropped_", stamp, ".csv")
+  paste0("stage1_kept_evaluations_", stamp, ".csv")
 )
-tie_rows <- read_csv(id_path, show_col_types = FALSE) %>%
-  filter(
-    pgs_id == "PGS005345",
-    sampleset_id == "PSS012140",
-    evaluation_ancestry == "European"
-  ) %>%
-  distinct(performance_id, .keep_all = TRUE)
-dropped_ids <- read_csv(drop_path, show_col_types = FALSE) %>%
-  filter(pgs_id == "PGS005345", sampleset_id == "PSS012140") %>%
+tie_rows <- read_csv(kept_path, show_col_types = FALSE) %>%
+  filter(pgs_id == "PGS005345", sampleset_id == "PSS012140", ancestry_display == "European")
+in_delta <- read_csv(id_path, show_col_types = FALSE) %>%
+  filter(pgs_id == "PGS005345", sampleset_id == "PSS012140", evaluation_ancestry == "European") %>%
+  distinct(performance_id) %>%
   pull(performance_id)
-stopifnot(nrow(tie_rows) == 2L, length(dropped_ids) == 1L, dropped_ids %in% tie_rows$performance_id)
+stopifnot(nrow(tie_rows) == 2L, length(in_delta) == 1L, in_delta %in% tie_rows$performance_id)
+stopifnot(tie_rows$covariate_class[tie_rows$performance_id == in_delta] == "None (PRS only)")
 
 tie_plot <- tie_rows %>%
   mutate(
-    role = if_else(performance_id %in% dropped_ids, "Dropped by Stage 1", "Kept by Stage 1"),
+    role = if_else(performance_id %in% in_delta, "In the delta", "Kept, other class"),
     axis = if_else(
-      performance_id %in% dropped_ids,
-      paste0(performance_id, "\nabsolute risk"),
-      paste0(performance_id, "\nscore only")
+      covariate_class == "None (PRS only)",
+      paste0(performance_id, "\nscore only"),
+      paste0(performance_id, "\nabsolute risk")
     )
   )
 
@@ -390,12 +388,12 @@ p_tie <- ggplot(tie_plot, aes(x = auc, y = axis, colour = role)) +
   ) +
   geom_point(size = 3) +
   scale_colour_manual(values = c(
-    "Kept by Stage 1" = col_share,
-    "Dropped by Stage 1" = "#B0B0B0"
+    "In the delta" = col_share,
+    "Kept, other class" = "#B0B0B0"
   )) +
   labs(
-    title = "What Stage 1 does drop",
-    subtitle = "PGS005345, PSS012140, European participants.\nSame score, same sample set, two evaluations.",
+    title = "Both classes are kept. The delta uses the score-only one.",
+    subtitle = "PGS005345, PSS012140, European participants.\nSame score, same sample set, two covariate classes.",
     x = "AUC with reported 95% CI",
     y = NULL
   ) +
@@ -406,9 +404,9 @@ p_12 <- (p_stage1 | p_later) / p_tie +
   plot_layout(heights = c(2.3, 1)) +
   plot_annotation(
     title = "1.2  Stage 1 is not one score per sample set",
-    subtitle = "Left: Stage 1 keeps one evaluation per score, sample set, and ancestry group. Different scores on PSS011749 all stay.\nRight: the same ten scores, with the one score kept, All PGS IVW, the tightest interval, and Nikolaus's lmer.",
+    subtitle = "Left: Stage 1 keeps one evaluation per score, sample set, ancestry, and covariate class. Different scores on PSS011749 all stay.\nRight: the same eleven scores, with the one score kept, All PGS IVW, the tightest interval, and Nikolaus's lmer.",
     caption = sprintf(
-      "Catalog stamp 20260923. The orange interval is the average of these ten scores, %s, with the smallest standard error, %s, from %s. On this sample set that is also the score the identifier rule keeps. The average is not that score's own difference.\nThe green row is Nikolaus's lmer from the European-only fit. This figure is not on the page for Georg.",
+      "Catalog stamp 20260923. The orange interval is the average of these eleven scores, %s, with the smallest standard error, %s, from %s. On this sample set that is also the score the identifier rule keeps. The average is not that score's own difference.\nThe green row is Nikolaus's lmer from the European-only fit. This figure is not on the page for Georg.",
       fmt(ivw10$delta_hat, 3), fmt(se_tight, 4), tight_id
     ),
     theme = theme(
@@ -447,12 +445,12 @@ p_sa <- ggplot(sa_forest, aes(x = delta, y = axis, colour = group_label)) +
     "Further PGS on that sample set" = 16
   ), guide = "none") +
   labs(
-    title = "2.  One of the eight. Ten PGS share PSS011749, and two other target sample sets are in the comparison.",
-    subtitle = "Type 2 diabetes, Europeans and South Asian participants, European-only training.\nTriangles are the PGS kept for each target sample set. Circles are further PGS on a sample set that already has a triangle. The black line is All PGS IVW, the inverse-variance pool of all twelve.",
+    title = "2.  One of the nine. Eleven PGS share PSS011749, and two other target sample sets are in the comparison.",
+    subtitle = "Type 2 diabetes, Europeans and South Asian participants, European-only training.\nTriangles are the PGS kept for each target sample set. Circles are further PGS on a sample set that already has a triangle. The black line is All PGS IVW, the inverse-variance pool of all thirteen.",
     x = "ΔAUC (South Asian − European) with 95% CI",
     y = NULL,
     caption = sprintf(
-      "The pool of twelve is %s (%s to %s) and includes 0. One PGS per target sample set leaves three values. Their pool is %s (%s to %s) and excludes 0.\nOn the page for Georg, lmer(AUC ~ ancestry + PGS + (1|cohort)) gives %s for South Asian participants in this training set (%s to %s). Here cohort means the sample set.\nThat number is an ancestry coefficient from the joint model. It is not a point on this axis. The interval includes 0.",
+      "The pool of thirteen is %s (%s to %s) and includes 0. One PGS per target sample set leaves three values. Their pool is %s (%s to %s) and excludes 0.\nOn the page for Georg, lmer(AUC ~ ancestry + PGS + (1|cohort)) gives %s for South Asian participants in this training set (%s to %s). Here cohort means the sample set.\nThat number is an ancestry coefficient from the joint model. It is not a point on this axis. The interval includes 0.",
       fmt(sa_all$delta_hat, 4), fmt(sa_all$lo, 4), fmt(sa_all$hi, 4),
       fmt(sa_one$delta_hat, 3), fmt(sa_one$lo, 3), fmt(sa_one$hi, 3),
       fmt(georg_sa$estimate, 3), fmt(georg_sa$lo, 3), fmt(georg_sa$hi, 3)
@@ -472,7 +470,7 @@ save_lesson(p_sa, "02_south_asian_one_of_eight", 11.8, 8.8)
 hisp <- keep_one(cell_pairs(
   "Type 2 diabetes", "Train: European-only", "Hispanic or Latin American"
 ))
-stopifnot(nrow(hisp) == 10L, n_distinct(hisp$tgt_key) == 1L, all(hisp$tgt_key == "PSS011736"))
+stopifnot(nrow(hisp) == 11L, n_distinct(hisp$tgt_key) == 1L, all(hisp$tgt_key == "PSS011736"))
 hisp_all <- pool_delta(hisp$delta, hisp$delta_se)
 hisp_pub <- cells %>%
   filter(
@@ -553,12 +551,12 @@ p_hisp <- ggplot(hisp_rows, aes(x = estimate, y = axis, colour = kind)) +
     "Same average, smallest SE" = col_min
   )) +
   labs(
-    title = "3.  One of the seventeen. Ten PGS, and the only target sample set is PSS011736.",
+    title = "3.  One of the eighteen. Eleven PGS, and the only target sample set is PSS011736.",
     subtitle = "Type 2 diabetes, Europeans and Hispanic or Latin American participants, European-only training.\nThe rows that are Hispanic or Latin American are the rows that are this sample set. In the model, ancestry group and sample set are the same column.",
     x = "ΔAUC (Hispanic or Latin American − European) with 95% CI",
     y = NULL,
     caption = sprintf(
-      "All PGS IVW, the black interval, is %s (%s to %s). It counts the same people ten times, so it is too narrow.\nThe red interval keeps that average and uses the smallest standard error, %s. It runs from %s to %s and still excludes 0.\nThis comparison does not change its call. Three of the seventeen do. They are marked on the next plot.",
+      "All PGS IVW, the black interval, is %s (%s to %s). It counts the same people eleven times, so it is too narrow.\nThe red interval keeps that average and uses the smallest standard error, %s. It runs from %s to %s and still excludes 0.\nThis comparison does not change its call. Three of the eighteen do. They are marked on the next plot.",
       fmt(hisp_all$delta_hat, 3), fmt(hisp_all$lo, 3), fmt(hisp_all$hi, 3),
       fmt(hisp_pub$se_min, 4), fmt(hisp_pub$lo_min, 3), fmt(hisp_pub$hi_min, 3)
     )
@@ -604,7 +602,7 @@ p_17 <- ggplot(sev_long, aes(x = estimate, y = y_label, colour = kind)) +
     "Same average, smallest SE" = col_min
   )) +
   labs(
-    title = "4.  The seventeen. The point stays. The interval returns to one PGS.",
+    title = "4.  The eighteen. The point stays. The interval returns to one PGS.",
     subtitle = "Black is All PGS IVW. Red is the same average with the smallest standard error among the PGS.\nThree red intervals include 0 where the black interval does not.",
     x = "ΔAUC (non-European − European) with 95% CI",
     y = NULL,
@@ -612,7 +610,7 @@ p_17 <- ggplot(sev_long, aes(x = estimate, y = y_label, colour = kind)) +
       "The three whose call changes are coronary heart disease, incident and prevalent, in Hispanic or Latin American participants;",
       "incident coronary heart disease in South Asian participants; and seropositive rheumatoid arthritis in South Asian participants.",
       "Stroke has two South Asian sample sets. All ten PGS use both, so the comparison has one ancestry difference.",
-      "The median standard error gives the same call as the smallest in all seventeen.",
+      "The median standard error gives the same call as the smallest in all eighteen.",
       sep = "\n"
     )
   ) +
@@ -656,14 +654,14 @@ p_8 <- ggplot(eight_long, aes(x = estimate, y = y_label, colour = kind)) +
     "One PGS per target sample set" = col_kept
   )) +
   labs(
-    title = "5.  The eight. One PGS per target sample set is the check, because more than one sample set is in the comparison.",
+    title = "5.  The nine. One PGS per target sample set is the check, because more than one sample set is in the comparison.",
     subtitle = "Black is All PGS IVW. Purple is one PGS per target sample set, the lowest PGS identifier.\nThe model Georg is looking at, with (1|cohort) equal to the sample set, is the model for this panel. It is not the red interval on the previous plot.",
     x = "ΔAUC (non-European − European) with 95% CI",
     y = NULL,
     caption = paste(
       "The call changes in three: both European-only type 2 diabetes comparisons, and breast cancer in South Asian participants.",
       "South Asian, European-only, moves from about 0 to a deficit. East Asian, European-only, and breast cancer move from excluding 0 to including it.",
-      "The other five, including Hispanic or Latin American type 2 diabetes with multi-ancestry training, keep the same call.",
+      "The other six, including Hispanic or Latin American type 2 diabetes with multi-ancestry training, keep the same call.",
       sep = "\n"
     )
   ) +
@@ -675,6 +673,6 @@ message(sprintf(
   "Comparisons: %d with several target sample sets, %d with one target sample set, %d with one PGS.",
   nrow(eight), nrow(seventeen), sum(cells$shape == "One PGS")
 ))
-message("Call changes in the 8: ", paste(flip8$label, collapse = " | "))
-message("Call changes in the 17: ", paste(flip17$label, collapse = " | "))
+message("Call changes in the 9: ", paste(flip8$label, collapse = " | "))
+message("Call changes in the 18: ", paste(flip17$label, collapse = " | "))
 message("Illustrations: ", normalizePath(root_dir))

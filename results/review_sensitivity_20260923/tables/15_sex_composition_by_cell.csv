@@ -9,8 +9,12 @@ Breast Carcinoma,Train: European-only,African,European,3,3,0,0,0,TRUE,TRUE
 Breast Carcinoma,Train: European-only,African,Target,1,1,0,0,0,TRUE,TRUE
 Breast Carcinoma,Train: European-only,South Asian,European,3,3,0,0,0,TRUE,TRUE
 Breast Carcinoma,Train: European-only,South Asian,Target,1,1,0,0,0,TRUE,TRUE
-Breast cancer,Train: European-only,East Asian,European,2,0,NA,NA,NA,TRUE,FALSE
-Breast cancer,Train: European-only,East Asian,Target,1,0,NA,NA,NA,TRUE,FALSE
+Breast cancer,Train: European-only,African,European,1,1,0,0,0,TRUE,TRUE
+Breast cancer,Train: European-only,African,Target,3,3,0,0,0,TRUE,TRUE
+Breast cancer,Train: European-only,East Asian,European,3,1,0,0,0,TRUE,TRUE
+Breast cancer,Train: European-only,East Asian,Target,2,1,0,0,0,TRUE,TRUE
+Breast cancer,Train: European-only,Hispanic or Latin American,European,1,1,0,0,0,TRUE,TRUE
+Breast cancer,Train: European-only,Hispanic or Latin American,Target,1,1,0,0,0,TRUE,TRUE
 Breast cancer,Train: European-only,South Asian,European,6,4,0,0,0,TRUE,TRUE
 Breast cancer,Train: European-only,South Asian,Target,3,2,0,0,0,TRUE,TRUE
 Breast cancer,Train: Multi incl. EUR,East Asian,European,1,1,0,0,0,TRUE,TRUE
@@ -25,9 +29,9 @@ Colorectal cancer,Train: Multi incl. EUR,African,European,1,1,52.75,52.75,52.75,
 Colorectal cancer,Train: Multi incl. EUR,African,Target,1,1,44,44,44,FALSE,FALSE
 Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,European,1,1,52.75,52.75,52.75,FALSE,FALSE
 Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,Target,1,1,47.5,47.5,47.5,FALSE,FALSE
-Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,European,2,2,45.8,44.6,47,FALSE,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,European,1,1,44.6,44.6,44.6,FALSE,FALSE
 Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,Target,1,1,31,31,31,FALSE,FALSE
-Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,European,2,2,45.8,44.6,47,FALSE,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,European,1,1,44.6,44.6,44.6,FALSE,FALSE
 Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,Target,1,1,36.2,36.2,36.2,FALSE,FALSE
 Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,European,1,1,0,0,0,TRUE,TRUE
 Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,Target,1,1,0,0,0,TRUE,TRUE

@@ -256,7 +256,7 @@ if (!"trained_bucket" %in% names(stage1_tbl)) {
 
 required_cols <- c(
   "trait_label", "ancestry_display", "pgs_id",
-  "auc_pooled", "se", "trained_bucket", "k_eval"
+  "auc_pooled", "se", "trained_bucket", "k_eval", "covariate_class"
 )
 missing_cols <- setdiff(required_cols, names(stage1_tbl))
 
@@ -274,6 +274,7 @@ stage1_tbl <- stage1_tbl %>%
     ancestry_display = as.character(ancestry_display),
     pgs_id           = as.character(pgs_id),
     trained_bucket   = as.character(trained_bucket),
+    covariate_class  = as.character(covariate_class),
     auc_pooled       = as.numeric(auc_pooled),
     se               = as.numeric(se),
     k_eval           = as.numeric(k_eval)
@@ -293,6 +294,7 @@ dat <- stage1_tbl %>%
     ancestry = as.character(ancestry_display),
     bucket   = trained_bucket,
     pgs_id,
+    covariate_class,
     auc      = auc_pooled,
     se,
     k_eval
@@ -325,9 +327,17 @@ for (b in bucket_levels) {
     dat_bt <- dat_b %>%
       filter(ancestry %in% c("European", anc_t))
     
+    dup_bt <- dat_bt %>%
+      count(trait, ancestry, pgs_id, covariate_class) %>%
+      filter(n > 1L)
+    if (nrow(dup_bt) > 0) {
+      stop("Stage 1 has more than one row per score, ancestry, and covariate class.", call. = FALSE)
+    }
+
     wide_bt <- dat_bt %>%
-      select(trait, ancestry, pgs_id, auc, se, k_eval) %>%
+      select(trait, ancestry, pgs_id, covariate_class, auc, se, k_eval) %>%
       pivot_wider(
+        id_cols = c(trait, pgs_id, covariate_class),
         names_from  = ancestry,
         values_from = c(auc, se, k_eval),
         names_sep   = "_"
@@ -342,6 +352,22 @@ for (b in bucket_levels) {
     
     needed_here <- c(auc_eur_col, auc_tgt_col, se_eur_col, se_tgt_col)
     if (!all(needed_here %in% names(wide_bt))) next
+
+    # Pair on covariate class, then keep one class per score so n_pairs
+    # counts scores and not score-by-class rows.
+    wide_bt <- wide_bt %>%
+      mutate(
+        trait_label = as.character(trait),
+        trained_bucket = b,
+        target_ancestry = anc_t
+      ) %>%
+      filter(
+        is.finite(.data[[auc_eur_col]]), is.finite(.data[[auc_tgt_col]]),
+        is.finite(.data[[se_eur_col]]), is.finite(.data[[se_tgt_col]]),
+        .data[[se_eur_col]] > 0, .data[[se_tgt_col]] > 0
+      ) %>%
+      pick_one_class_per_score()
+    if (nrow(wide_bt) == 0) next
     
     res_bt <- wide_bt %>%
       group_by(trait) %>%
@@ -354,6 +380,9 @@ for (b in bucket_levels) {
         ok <- is.finite(eur_auc) & is.finite(tgt_auc) &
           is.finite(eur_se) & is.finite(tgt_se) &
           eur_se > 0 & tgt_se > 0
+        if (anyDuplicated(.x$pgs_id)) {
+          stop("A score contributed more than one delta to a comparison.", call. = FALSE)
+        }
         
         n_pairs <- sum(ok)
         
@@ -525,6 +554,7 @@ if (nrow(heatmap_df) == 0) {
 message(glue(">> Buckets selected for reproduction gate: {paste(unique(heatmap_df$bucket_panel), collapse = ', ')}"))
 message(glue(">> Traits before min-2-PGS gate: {dplyr::n_distinct(heatmap_df$trait_wrapped)}"))
 
+# n_pairs counts distinct scores. One class per score was chosen before this gate.
 heatmap_df <- heatmap_df %>%
   dplyr::group_by(trait_wrapped) %>%
   dplyr::filter(any(n_pairs >= 2, na.rm = TRUE)) %>%
@@ -566,7 +596,8 @@ scat_df <- stage1_tbl %>%
     auc_pooled,
     se,
     k_eval,
-    trained_bucket
+    trained_bucket,
+    covariate_class
   ) %>%
   filter(
     ancestry_display != "Not reported",
@@ -580,46 +611,37 @@ if (nrow(scat_df) == 0) {
   stop("No Stage-1 rows left for the selected training buckets and traits. Check keep_bucket_pattern.")
 }
 
-eur_df <- scat_df %>%
-  filter(ancestry_display == "European") %>%
-  transmute(
-    trait_label, pgs_id, trained_bucket,
-    eur_auc = auc_pooled,
-    eur_se  = se,
-    eur_k   = k_eval,
-    eur_lo  = auc_pooled - 1.96 * auc_scale_se(auc_pooled, se, "delta_method"),
-    eur_hi  = auc_pooled + 1.96 * auc_scale_se(auc_pooled, se, "delta_method"),
-    eur_lo_logit_as_submitted = auc_pooled - 1.96 * se,
-    eur_hi_logit_as_submitted = auc_pooled + 1.96 * se
-  )
+paired_df <- pick_one_class_per_score(pair_stage1_by_class(scat_df, se_col = "se"))
+if (anyDuplicated(paired_df[c("trait_label", "trained_bucket", "target_ancestry", "pgs_id")])) {
+  stop("A score contributed more than one delta to a comparison.", call. = FALSE)
+}
+if (anyNA(paired_df$covariate_class) || any(!paired_df$covariate_class %in% covariate_class_levels)) {
+  stop("A paired delta is missing its covariate class.", call. = FALSE)
+}
 
-tgt_df <- scat_df %>%
-  filter(ancestry_display != "European") %>%
-  transmute(
-    trait_label, pgs_id, trained_bucket,
-    target_ancestry = ancestry_display,
-    tgt_auc = auc_pooled,
-    tgt_se  = se,
-    tgt_k   = k_eval,
-    tgt_lo  = auc_pooled - 1.96 * auc_scale_se(auc_pooled, se, "delta_method"),
-    tgt_hi  = auc_pooled + 1.96 * auc_scale_se(auc_pooled, se, "delta_method"),
-    tgt_lo_logit_as_submitted = auc_pooled - 1.96 * se,
-    tgt_hi_logit_as_submitted = auc_pooled + 1.96 * se
-  )
-
-paired_df <- tgt_df %>%
-  inner_join(eur_df, by = c("trait_label", "pgs_id", "trained_bucket")) %>%
+paired_df <- paired_df %>%
   mutate(
-    is_pooled = (eur_k >= 2) & (tgt_k >= 2),
     target_ancestry = factor(
       target_ancestry,
       levels = intersect(display_levels, unique(target_ancestry)),
       ordered = TRUE
     )
-  ) %>%
-  filter(is.finite(eur_auc), is.finite(tgt_auc))
+  )
 
 message(glue(">> Forest paired data: {nrow(paired_df)} paired rows across {n_distinct(paired_df$trait_label)} traits"))
+
+out_paired <- file.path(tables_stage2, paste0("deltaAUC_forest_faceted_pairs_", stamp, ".csv"))
+readr::write_csv(
+  paired_df %>%
+    transmute(
+      trait_label, trained_bucket,
+      target_ancestry = as.character(target_ancestry),
+      pgs_id, covariate_class,
+      eur_auc, eur_se, eur_k, tgt_auc, tgt_se, tgt_k, is_pooled
+    ),
+  out_paired
+)
+message(glue(">> Wrote faceted forest pairs: {out_paired}"))
 
 if (nrow(paired_df) == 0) {
   stop("No paired EUR/target data available for the faceted forest.")
@@ -636,9 +658,15 @@ delta_submitted <- pool_stage2_cells(paired_df, se_scale = "logit_as_implemented
     hi_logit_as_submitted = hi
   )
 
+cov_colour <- paired_df %>%
+  mutate(across(all_of(scale_keys), as.character)) %>%
+  group_by(trait_label, trained_bucket, target_ancestry) %>%
+  summarise(covariate_colour = comparison_covariate_colour(covariate_class), .groups = "drop")
+
 delta_df <- pool_stage2_cells(paired_df, se_scale = "delta_method") %>%
   mutate(across(all_of(scale_keys), as.character)) %>%
   left_join(delta_submitted, by = scale_keys) %>%
+  left_join(cov_colour, by = scale_keys) %>%
   mutate(
     pooled_group    = all_not_pooled,
     trait_clean     = wrap_trait(trait_label),

@@ -1,13 +1,14 @@
 item,value,check
 Catalog stamp,20260923,20260923
 Figure 1C traits,12,12
-Figure 1C unique cells,30,30
+Figure 1C unique cells,32,32
 "Cells excluding zero, logit-scale SE as submitted",3,3
-"Cells excluding zero, delta-method SE",20,20
+"Cells excluding zero, delta-method SE",21,21
 Rebuilt delta-method cells matching published (max |dAUC|),8.673617379884035e-18,near zero if script 08 used delta-method SEs
-Rebuilt delta-method cells matching published (max |SE|),8.673617379884035e-18,near zero if script 08 used delta-method SEs
+Rebuilt delta-method cells matching published (max |SE|),9.107298248878237e-18,near zero if script 08 used delta-method SEs
 PGS pairs with overlapping performance_id,0,should be 0
 Figure 1C cells with Multi-ancestry including European,0,should be 0 under the single-ancestry rule
 I2 values outside 0-100 (pipeline tables),0,should be 0
 Catalog All of Us evaluations,717,flag only; not a count lock
-Figure 1C rows whose cohort is All of Us,56,flag only; not a count lock
+Figure 1C rows whose cohort is All of Us,60,flag only; not a count lock
+Pairs whose two sides differ in covariate class,0,should be 0

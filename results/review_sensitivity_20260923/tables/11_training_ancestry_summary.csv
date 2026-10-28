@@ -1,2 +1,2 @@
 n_pairs,n_pairs_target_in_gwas,n_pairs_target_in_dev,n_pairs_multi_incl_eur_ambiguous,n_pairs_eur_only_bucket_but_target_represented,n_cells,n_cells_strict_portability,n_cells_strict_and_significant
-120,34,3,2,0,30,20,14
+127,34,3,2,0,32,22,15

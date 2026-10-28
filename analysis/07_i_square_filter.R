@@ -56,7 +56,7 @@ if (!file.exists(fp_stage1)) {
 message(glue(">> Loading Stage-1 data from: {fp_stage1}"))
 df <- read_csv(fp_stage1, show_col_types = FALSE)
 
-required_cols <- c("trait_label", "pgs_id", "ancestry_display", "I2", "k_eval")
+required_cols <- c("trait_label", "pgs_id", "ancestry_display", "covariate_class", "I2", "k_eval")
 missing_cols  <- setdiff(required_cols, names(df))
 if (length(missing_cols) > 0) {
   stop(glue("Stage-1 file is missing required columns: {paste(missing_cols, collapse = ', ')}"))
@@ -77,8 +77,8 @@ if (nrow(df_i2) == 0) {
 }
 
 i2_summary <- df_i2 %>%
-  arrange(trait_label, ancestry_display, pgs_id) %>%
-  select(trait_label, pgs_id, ancestry_display, I2, k_eval, dplyr::any_of(c("Q", "auc_pooled")))
+  arrange(trait_label, ancestry_display, pgs_id, covariate_class) %>%
+  select(trait_label, pgs_id, ancestry_display, covariate_class, I2, k_eval, dplyr::any_of(c("Q", "auc_pooled")))
 
 out_summary <- file.path(tables_dir, paste0("stage1_I2_summary_", stamp, ".csv"))
 write_csv(i2_summary, out_summary)
@@ -150,10 +150,30 @@ for (tr in traits) {
       pull(pgs_id)
   }
 
+  # A second covariate class of the same score is its own bar.
+  class_n <- d_tr %>%
+    group_by(pgs_id) %>%
+    summarise(n_class = n_distinct(covariate_class), .groups = "drop")
   d_tr <- d_tr %>%
-    mutate(pgs_id = factor(pgs_id, levels = pgs_order))
+    left_join(class_n, by = "pgs_id") %>%
+    mutate(
+      pgs_axis = if_else(
+        n_class > 1,
+        paste0(pgs_id, "\n", covariate_class),
+        as.character(pgs_id)
+      )
+    )
+  axis_levels <- d_tr %>%
+    distinct(pgs_id, covariate_class, pgs_axis) %>%
+    mutate(
+      pgs_id = factor(pgs_id, levels = pgs_order),
+      class_ord = match(covariate_class, covariate_class_levels)
+    ) %>%
+    arrange(pgs_id, class_ord) %>%
+    pull(pgs_axis)
+  d_tr <- d_tr %>% mutate(pgs_axis = factor(pgs_axis, levels = axis_levels))
 
-  g <- ggplot(d_tr, aes(x = pgs_id, y = I2, fill = ancestry_display)) +
+  g <- ggplot(d_tr, aes(x = pgs_axis, y = I2, fill = ancestry_display)) +
     geom_col(position = position_dodge(width = 0.9)) +
     geom_hline(yintercept = 80, linetype = "dashed", linewidth = 0.5, color = "grey40") +
     scale_fill_manual(values = pal_ancestry, name = "Ancestry") +
@@ -165,7 +185,7 @@ for (tr in traits) {
     labs(
       title    = glue("Heterogeneity (I²) by PGS and ancestry — {tr}"),
       subtitle = "Dashed line at 80%: evaluations above this threshold are excluded from downstream analyses.",
-      x        = "PGS ID",
+      x        = "PGS",
       y        = "I² (%)"
     ) +
     theme_minimal(base_size = 11) +

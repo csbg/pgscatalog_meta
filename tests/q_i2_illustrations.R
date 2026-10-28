@@ -194,9 +194,17 @@ render_lesson <- function(ex) {
       ancestry_display == ex$ancestry,
       trait_label == ex$trait
     )
-  stopifnot(nrow(published) == 1L)
-  stopifnot(abs(published$Q - Q) < 1e-6)
-  stopifnot(abs(published$I2 - I2) < 1e-6)
+  if (identical(ex$style, "split")) {
+    # These two studies use different covariate classes, so Stage 1 does not
+    # average them. The arithmetic above is what that average would have been.
+    stopifnot(nrow(published) == 2L)
+    stopifnot(all(published$k_eval == 1))
+    stopifnot(dplyr::n_distinct(published$covariate_class) == 2L)
+  } else {
+    stopifnot(nrow(published) == 1L)
+    stopifnot(abs(published$Q - Q) < 1e-6)
+    stopifnot(abs(published$I2 - I2) < 1e-6)
+  }
 
   worked <- studies %>%
     transmute(

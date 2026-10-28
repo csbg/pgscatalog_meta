@@ -59,12 +59,17 @@ write_tbl <- function(x, name) write_csv(x, file.path(dir_tables, paste0(name, "
 # Shared Stage-1 helpers come from R/. Stage-2 rebuilds below keep the
 # extra SE scales and the random-effects model used only in this script.
 
-pool_stage1 <- function(df) {
+pool_stage1 <- function(df, by_class = TRUE) {
+  if (isTRUE(by_class) && !"covariate_class" %in% names(df)) {
+    stop("Stage 1 needs covariate_class.", call. = FALSE)
+  }
+  groups <- c("pgs_id", "trait_label", "ancestry_display")
+  if (isTRUE(by_class)) groups <- c(groups, "covariate_class")
   df %>%
     mutate(tmp = pmap(list(auc, estimate_ci_lower, estimate_ci_upper), auc_ci_to_logit)) %>%
     tidyr::unnest_wider(tmp) %>%
     filter(is.finite(eta), is.finite(se), se > 0) %>%
-    group_by(pgs_id, trait_label, ancestry_display) %>%
+    group_by(across(all_of(groups))) %>%
     summarise(pooled = list(ivw_pool_logit(eta, se)), .groups = "drop") %>%
     tidyr::unnest_wider(pooled) %>%
     mutate(
@@ -110,13 +115,17 @@ keep_bucket_pattern <- c("European-only", "Multi incl")
 se_scale_levels <- c("logit_as_implemented", "delta_method", "from_ci")
 
 stage1_to_scatter <- function(stage1_tbl, keep_traits) {
+  if (!"covariate_class" %in% names(stage1_tbl)) {
+    stage1_tbl$covariate_class <- NA_character_
+  }
   stage1_tbl %>%
     transmute(
       trait_label,
       ancestry_display = as.character(ancestry_display),
       pgs_id,
       auc_pooled, lo_pooled, hi_pooled,
-      se_logit = se, k_eval, trained_bucket
+      se_logit = se, k_eval, trained_bucket,
+      covariate_class = as.character(covariate_class)
     ) %>%
     filter(
       ancestry_display != "Not reported",
@@ -132,34 +141,42 @@ stage1_to_scatter <- function(stage1_tbl, keep_traits) {
 pair_stage1 <- function(scat_df, se_scale = "logit_as_implemented") {
   se_scale <- match.arg(se_scale, se_scale_levels)
   se_col <- c(logit_as_implemented = "se_logit", delta_method = "se_delta_method", from_ci = "se_from_ci")[[se_scale]]
-  scat_df <- scat_df %>% mutate(se_use = .data[[se_col]])
+  if (!"covariate_class" %in% names(scat_df) || anyNA(scat_df$covariate_class)) {
+    stop("Stage-1 rows are missing covariate_class.", call. = FALSE)
+  }
+  pair_stage1_by_class(scat_df, se_col = se_col) %>%
+    pick_one_class_per_score() %>%
+    mutate(
+      delta    = tgt_auc - eur_auc,
+      delta_se = sqrt(tgt_se^2 + eur_se^2),
+      se_scale = se_scale
+    ) %>%
+    filter(is.finite(delta), is.finite(delta_se), delta_se > 0)
+}
 
+# The pairing used before covariate class was part of the join. Kept only
+# to record which deltas change under the class rule.
+pair_stage1_ignoring_class <- function(scat_df, se_col) {
   eur_df <- scat_df %>%
     filter(ancestry_display == "European") %>%
     transmute(
       trait_label, pgs_id, trained_bucket,
-      eur_auc = auc_pooled, eur_lo = lo_pooled, eur_hi = hi_pooled,
-      eur_se = se_use, eur_se_logit = se_logit, eur_k = k_eval
+      eur_auc = auc_pooled, eur_se = .data[[se_col]], eur_k = k_eval
     )
-
   tgt_df <- scat_df %>%
     filter(ancestry_display != "European") %>%
     transmute(
       trait_label, pgs_id, trained_bucket,
       target_ancestry = ancestry_display,
-      tgt_auc = auc_pooled, tgt_lo = lo_pooled, tgt_hi = hi_pooled,
-      tgt_se = se_use, tgt_se_logit = se_logit, tgt_k = k_eval
+      tgt_auc = auc_pooled, tgt_se = .data[[se_col]], tgt_k = k_eval
     )
-
   tgt_df %>%
     inner_join(eur_df, by = c("trait_label", "pgs_id", "trained_bucket")) %>%
     mutate(
-      is_pooled = (eur_k >= 2) & (tgt_k >= 2),
-      delta     = tgt_auc - eur_auc,
-      delta_se  = sqrt(tgt_se^2 + eur_se^2),
-      se_scale  = se_scale
+      delta = tgt_auc - eur_auc,
+      delta_se = sqrt(tgt_se^2 + eur_se^2)
     ) %>%
-    filter(is.finite(eur_auc), is.finite(tgt_auc), is.finite(delta), is.finite(delta_se), delta_se > 0)
+    filter(is.finite(delta), is.finite(delta_se), delta_se > 0)
 }
 
 pool_delta <- function(delta, se, model = "fixed") {
@@ -281,9 +298,11 @@ x_labels_forest <- label_number(accuracy = 0.1, style_negative = "minus")
 forest_compare_plot <- function(long_df, pal, shapes, title, subtitle, caption,
                                 lost_df = NULL, lost_label = "not estimable",
                                 trait_levels, x_lim = x_lim_forest, x_lab = x_lab_pos,
+                                x_breaks = x_breaks_forest, x_accuracy = 0.1,
                                 label_mode = c("all", "first_k_others_star"),
                                 show_k = TRUE) {
   label_mode <- match.arg(label_mode)
+  x_labels <- label_number(accuracy = x_accuracy, style_negative = "minus")
   long_df <- long_df %>%
     mutate(
       trait_wrapped = factor(wrap_trait(trait_label), levels = trait_levels),
@@ -331,7 +350,7 @@ forest_compare_plot <- function(long_df, pal, shapes, title, subtitle, caption,
   p +
     scale_colour_manual(values = pal, name = NULL) +
     scale_shape_manual(values = shapes, name = NULL) +
-    scale_x_continuous(breaks = x_breaks_forest, labels = x_labels_forest) +
+    scale_x_continuous(breaks = x_breaks, labels = x_labels) +
     coord_cartesian(xlim = x_lim, clip = "off") +
     facet_grid(trait_wrapped ~ trained_bucket, scales = "free_y", space = "free_y", switch = "y") +
     labs(title = title, subtitle = subtitle, x = "ΔAUC (target − European) with 95% CI", y = NULL, caption = caption) +
@@ -462,6 +481,12 @@ write_tbl(
   "00_catalog_all_of_us_summary"
 )
 
+if (!"covariate_class" %in% names(stage1) || !"covariate_class" %in% names(stage1_f)) {
+  stop(
+    "Stage-1 tables have no covariate_class. Re-run 06_meta_ivw.R and 07_i_square_filter.R.",
+    call. = FALSE
+  )
+}
 stage1   <- attach_train_bucket(stage1, eval_df)
 stage1_f <- attach_train_bucket(stage1_f, eval_df)
 
@@ -484,9 +509,46 @@ delta_dm    <- rebuilt_dm$cells
 rebuilt_ci  <- rebuild_paired_delta(stage1_f, keep_traits, se_scale = "from_ci")
 delta_ci    <- rebuilt_ci$cells
 
-usable_keys <- eval_df %>%
-  filter(has_auc, has_ci) %>%
-  select(performance_id, pgs_id, trait_label, ancestry_display, sampleset_id, train_bucket, ci_source)
+fp_kept <- file.path(catalog_results_dir(stamp), "stage1", paste0("stage1_kept_evaluations_", stamp, ".csv"))
+if (!file.exists(fp_kept)) {
+  stop("Kept-evaluation table not found: ", fp_kept, ". Re-run 06_meta_ivw.R.", call. = FALSE)
+}
+kept_eval <- read_csv(fp_kept, show_col_types = FALSE)
+usable_keys <- kept_eval %>%
+  transmute(
+    performance_id = as.character(performance_id),
+    pgs_id = as.character(pgs_id),
+    trait_label = as.character(trait_label),
+    ancestry_display = as.character(ancestry_display),
+    sampleset_id = as.character(sampleset_id),
+    covariate_class = as.character(covariate_class),
+    covariates = as.character(covariates)
+  ) %>%
+  left_join(eval_df %>% distinct(performance_id, ci_source), by = "performance_id")
+if (anyNA(usable_keys$ci_source)) {
+  stop("A kept evaluation has no CI source in the audit table.", call. = FALSE)
+}
+kept_n <- usable_keys %>%
+  count(pgs_id, trait_label, ancestry_display, covariate_class, name = "n_kept")
+k_check <- stage1 %>%
+  mutate(
+    pgs_id = as.character(pgs_id),
+    trait_label = as.character(trait_label),
+    ancestry_display = as.character(ancestry_display),
+    covariate_class = as.character(covariate_class)
+  ) %>%
+  left_join(kept_n, by = c("pgs_id", "trait_label", "ancestry_display", "covariate_class")) %>%
+  mutate(n_kept = coalesce(n_kept, 0L))
+if (any(k_check$k_eval != k_check$n_kept)) {
+  bad <- k_check %>%
+    filter(k_eval != n_kept) %>%
+    select(pgs_id, trait_label, ancestry_display, covariate_class, k_eval, n_kept)
+  stop(
+    "Kept evaluations do not match the Stage-1 average.\n",
+    paste(capture.output(print(head(bad, 20))), collapse = "\n"),
+    call. = FALSE
+  )
+}
 
 # ===========================================================================
 # 1) Pipeline funnel
@@ -514,7 +576,7 @@ funnel <- tibble(
     "3b. AUC with Hanley-McNeil recovered CI",
     "3c. AUC dropped (no published CI and not recoverable)",
     "4. Evaluations entering IVW (usable 95% CI)",
-    "5. Stage-1 cells (trait x PGS x evaluation ancestry)",
+    "5. Stage-1 averages (trait x score x ancestry x covariate class)",
     "6. Stage-1 cells after I2 > 80% filter",
     "7. Figure 1C traits / trait-bucket-ancestry cells"
   ),
@@ -749,10 +811,10 @@ independence_rows <- paired_main %>%
   mutate(pair_id = paste(trait_label, trained_bucket, target_ancestry, pgs_id, sep = "||")) %>%
   rowwise() %>%
   mutate(
-    eur_perf = list(eval_keys$performance_id[eval_keys$pgs_id == pgs_id & eval_keys$trait_label == trait_label & eval_keys$ancestry_display == "European"]),
-    tgt_perf = list(eval_keys$performance_id[eval_keys$pgs_id == pgs_id & eval_keys$trait_label == trait_label & eval_keys$ancestry_display == target_ancestry]),
-    eur_pss  = list(eval_keys$sampleset_id[eval_keys$pgs_id == pgs_id & eval_keys$trait_label == trait_label & eval_keys$ancestry_display == "European"]),
-    tgt_pss  = list(eval_keys$sampleset_id[eval_keys$pgs_id == pgs_id & eval_keys$trait_label == trait_label & eval_keys$ancestry_display == target_ancestry])
+    eur_perf = list(eval_keys$performance_id[eval_keys$pgs_id == pgs_id & eval_keys$trait_label == trait_label & eval_keys$ancestry_display == "European" & eval_keys$covariate_class == covariate_class]),
+    tgt_perf = list(eval_keys$performance_id[eval_keys$pgs_id == pgs_id & eval_keys$trait_label == trait_label & eval_keys$ancestry_display == target_ancestry & eval_keys$covariate_class == covariate_class]),
+    eur_pss  = list(eval_keys$sampleset_id[eval_keys$pgs_id == pgs_id & eval_keys$trait_label == trait_label & eval_keys$ancestry_display == "European" & eval_keys$covariate_class == covariate_class]),
+    tgt_pss  = list(eval_keys$sampleset_id[eval_keys$pgs_id == pgs_id & eval_keys$trait_label == trait_label & eval_keys$ancestry_display == target_ancestry & eval_keys$covariate_class == covariate_class])
   ) %>%
   ungroup() %>%
   mutate(
@@ -763,7 +825,7 @@ independence_rows <- paired_main %>%
     target_is_multi_incl_eur = grepl("Multi-ancestry including European", target_ancestry, ignore.case = TRUE)
   ) %>%
   select(
-    trait_label, trained_bucket, target_ancestry, pgs_id,
+    trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class,
     eur_k, tgt_k, n_eur_eval, n_tgt_eval,
     n_overlap_performance_id, n_overlap_sampleset_id,
     target_is_multi_incl_eur, delta, delta_se
@@ -869,7 +931,16 @@ message(">> [6] Hanley-McNeil sensitivity on both standard-error scales")
 
 eval_reported <- eval_df %>%
   filter(has_auc, has_ci, ci_source == "reported_native_or_parsed") %>%
-  filter(is.finite(auc), is.finite(estimate_ci_lower), is.finite(estimate_ci_upper))
+  filter(is.finite(auc), is.finite(estimate_ci_lower), is.finite(estimate_ci_upper)) %>%
+  mutate(covariate_class = classify_covariates(covariates_txt)) %>%
+  keep_one_evaluation(
+    n_col = "n_individuals",
+    cases_col = "n_cases",
+    controls_col = "n_controls",
+    covariates_col = "covariates_txt",
+    ancestry_col = "ancestry_display",
+    class_col = "covariate_class"
+  )
 
 stage1_rep   <- pool_stage1(eval_reported)
 stage1_rep_f <- i2_filter(stage1_rep) %>% attach_train_bucket(eval_df)
@@ -964,36 +1035,60 @@ hm_dm   <- run_hm_sensitivity(delta_dm,   "delta_method",         "06b", "delta-
 
 message(">> [7] Within-cell sample-set sharing")
 
-cell_pss_sharing <- paired_main %>%
-  distinct(trait_label, trained_bucket, target_ancestry) %>%
-  mutate(cell_id = row_number()) %>%
-  rowwise() %>%
-  mutate(
-    pgs_in_cell = list(paired_main$pgs_id[
-      paired_main$trait_label == trait_label & paired_main$trained_bucket == trained_bucket & paired_main$target_ancestry == target_ancestry
-    ]),
-    eur_tbl = list(
-      usable_keys %>%
-        filter(pgs_id %in% pgs_in_cell, trait_label == .env$trait_label, ancestry_display == "European") %>%
-        group_by(sampleset_id) %>% summarise(n_pgs = n_distinct(pgs_id), .groups = "drop")
-    ),
-    tgt_tbl = list(
-      usable_keys %>%
-        filter(pgs_id %in% pgs_in_cell, trait_label == .env$trait_label, ancestry_display == .env$target_ancestry) %>%
-        group_by(sampleset_id) %>% summarise(n_pgs = n_distinct(pgs_id), .groups = "drop")
+pair_sides <- paired_main %>%
+  select(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class)
+
+sample_set_counts <- function(keys_side) {
+  keys_side %>%
+    group_by(trait_label, trained_bucket, target_ancestry, sampleset_id) %>%
+    summarise(n_pgs = n_distinct(pgs_id), .groups = "drop") %>%
+    group_by(trait_label, trained_bucket, target_ancestry) %>%
+    summarise(
+      n_sample_sets = n(),
+      max_pgs_sharing_one_sample_set = max(n_pgs),
+      .groups = "drop"
     )
+}
+
+eur_sets <- pair_sides %>%
+  inner_join(
+    usable_keys %>%
+      filter(ancestry_display == "European") %>%
+      select(pgs_id, trait_label, covariate_class, sampleset_id),
+    by = c("pgs_id", "trait_label", "covariate_class"),
+    relationship = "many-to-many"
   ) %>%
-  ungroup() %>%
+  sample_set_counts() %>%
+  rename(
+    eur_n_sample_sets = n_sample_sets,
+    eur_max_pgs_sharing_one_sample_set = max_pgs_sharing_one_sample_set
+  )
+
+tgt_sets <- pair_sides %>%
+  inner_join(
+    usable_keys %>%
+      select(pgs_id, trait_label, ancestry_display, covariate_class, sampleset_id),
+    by = c("pgs_id", "trait_label", "covariate_class", "target_ancestry" = "ancestry_display")
+  ) %>%
+  sample_set_counts() %>%
+  rename(
+    tgt_n_sample_sets = n_sample_sets,
+    tgt_max_pgs_sharing_one_sample_set = max_pgs_sharing_one_sample_set
+  )
+
+cell_pss_sharing <- paired_main %>%
+  group_by(trait_label, trained_bucket, target_ancestry) %>%
+  summarise(n_pairs = n_distinct(pgs_id), .groups = "drop") %>%
+  left_join(eur_sets, by = c("trait_label", "trained_bucket", "target_ancestry")) %>%
+  left_join(tgt_sets, by = c("trait_label", "trained_bucket", "target_ancestry")) %>%
   mutate(
-    n_pairs = lengths(pgs_in_cell),
-    eur_n_sample_sets = map_int(eur_tbl, nrow),
-    eur_max_pgs_sharing_one_sample_set = map_int(eur_tbl, ~ if (nrow(.x)) max(.x$n_pgs) else 0L),
-    tgt_n_sample_sets = map_int(tgt_tbl, nrow),
-    tgt_max_pgs_sharing_one_sample_set = map_int(tgt_tbl, ~ if (nrow(.x)) max(.x$n_pgs) else 0L),
+    eur_n_sample_sets = coalesce(eur_n_sample_sets, 0L),
+    eur_max_pgs_sharing_one_sample_set = coalesce(eur_max_pgs_sharing_one_sample_set, 0L),
+    tgt_n_sample_sets = coalesce(tgt_n_sample_sets, 0L),
+    tgt_max_pgs_sharing_one_sample_set = coalesce(tgt_max_pgs_sharing_one_sample_set, 0L),
     all_pgs_share_one_target_sample_set = n_pairs >= 2 & tgt_max_pgs_sharing_one_sample_set == n_pairs,
     all_pgs_share_one_eur_sample_set    = n_pairs >= 2 & eur_max_pgs_sharing_one_sample_set == n_pairs
   ) %>%
-  select(-cell_id, -pgs_in_cell, -eur_tbl, -tgt_tbl) %>%
   arrange(desc(n_pairs), trait_label, trained_bucket, target_ancestry)
 
 write_tbl(cell_pss_sharing, "07_within_cell_sampleset_sharing")
@@ -1161,18 +1256,38 @@ write_tbl(mixed_bounds, "08_scale_fix_mixed_scale_pgs_bounds")
 
 message(">> [9] Dependence sensitivities")
 
-pair_tgt_pss <- paired_dm %>%
-  select(trait_label, trained_bucket, target_ancestry, pgs_id) %>%
-  rowwise() %>%
-  mutate(
-    tgt_pss_key = paste(sort(unique(usable_keys$sampleset_id[
-      usable_keys$pgs_id == pgs_id & usable_keys$trait_label == trait_label & usable_keys$ancestry_display == target_ancestry
-    ])), collapse = ";"),
-    eur_pss_key = paste(sort(unique(usable_keys$sampleset_id[
-      usable_keys$pgs_id == pgs_id & usable_keys$trait_label == trait_label & usable_keys$ancestry_display == "European"
-    ])), collapse = ";")
+pair_class <- paired_dm %>%
+  select(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class)
+
+pss_key_for <- function(pairs, ancestry_match) {
+  pairs %>%
+    inner_join(
+      ancestry_match,
+      by = c("pgs_id", "trait_label", "covariate_class"),
+      relationship = "many-to-many"
+    ) %>%
+    group_by(trait_label, trained_bucket, target_ancestry, pgs_id) %>%
+    summarise(pss_key = paste(sort(unique(sampleset_id)), collapse = ";"), .groups = "drop")
+}
+
+eur_pss_key <- pss_key_for(
+  pair_class,
+  usable_keys %>%
+    filter(ancestry_display == "European") %>%
+    select(pgs_id, trait_label, covariate_class, sampleset_id)
+) %>%
+  rename(eur_pss_key = pss_key)
+
+tgt_pss_key <- pair_class %>%
+  inner_join(
+    usable_keys %>% select(pgs_id, trait_label, ancestry_display, covariate_class, sampleset_id),
+    by = c("pgs_id", "trait_label", "covariate_class", "target_ancestry" = "ancestry_display")
   ) %>%
-  ungroup()
+  group_by(trait_label, trained_bucket, target_ancestry, pgs_id) %>%
+  summarise(tgt_pss_key = paste(sort(unique(sampleset_id)), collapse = ";"), .groups = "drop")
+
+pair_tgt_pss <- eur_pss_key %>%
+  inner_join(tgt_pss_key, by = c("trait_label", "trained_bucket", "target_ancestry", "pgs_id"))
 
 paired_one_per_pss <- paired_dm %>%
   inner_join(pair_tgt_pss, by = c("trait_label", "trained_bucket", "target_ancestry", "pgs_id")) %>%
@@ -1322,136 +1437,365 @@ p_dep <- p_dep +
 save_plot("09_dependence_forest", p_dep, width = 13.2, height = max(8.2, 0.44 * n_row_plot + 3.8), limitsize = FALSE)
 
 # ===========================================================================
-# 10) Covariate adjustment
-#     Classify the 'Covariates Included in the Model' field per PPM; compare
-#     EUR vs target sides; re-pool cells restricted to covariate-matched pairs.
+# 10) Covariate class
+#     Every delta is one score and one class on both sides. Colour says
+#     whether the comparison's scores are score-only, covariate-adjusted,
+#     or both kinds.
 # ===========================================================================
 
 message(">> [10] Covariate class")
 
-demo_tech_regex <- paste0(
-  "^(age|sex|gender|pc\\d*|pcs?|principal|genetic pc|genotyp|array|batch|cent(er|re)|birth|",
-  "deprivation|townsend|assessment|recruitment|ancestry|region|study|cohort|site|platform|chip|country|",
-  "year|season|ses\\b|socio|education|income|\\d+\\s*pcs?|pc\\s*1|genetic principal|first \\d+ pc|top \\d+ pc|",
-  "ehr|electronic health|duration of|follow-?up|enrol)"
-)
-
-classify_covariates <- function(txt) {
-  x <- tolower(trimws(coalesce(txt, "")))
-  if (x == "" || x %in% c("0", "none", "no", "na", "n/a", "unadjusted", "no covariates", "-")) return("None (PRS only)")
-  toks <- str_split(x, "[,;+/]|\\band\\b|\\bwith\\b")[[1]]
-  toks <- trimws(toks)
-  toks <- toks[toks != ""]
-  if (!length(toks)) return("None (PRS only)")
-  demo <- grepl(demo_tech_regex, toks, perl = TRUE) |
-    grepl("(pc|principal component|genotyp|array|batch|age|sex)", toks, perl = TRUE)
-  if (all(demo)) "Age/sex/PCs/technical" else "Clinical or other covariates"
-}
-
-ppm_cov <- usable_keys %>%
-  left_join(ppm_meta %>% select(performance_id, covariates_txt), by = "performance_id") %>%
-  mutate(covariate_class = map_chr(covariates_txt, classify_covariates))
-
 write_tbl(
-  ppm_cov %>% count(covariate_class, name = "n_evaluations") %>% mutate(share = n_evaluations / sum(n_evaluations)),
+  usable_keys %>%
+    count(covariate_class, name = "n_evaluations") %>%
+    mutate(share = n_evaluations / sum(n_evaluations)),
   "10_covariates_class_overall"
 )
 
-# Per pair: covariate classes on each side
-pair_cov <- paired_dm %>%
-  select(trait_label, trained_bucket, target_ancestry, pgs_id, delta, delta_se, is_pooled, eur_k, tgt_k) %>%
-  rowwise() %>%
+class_pairs <- pair_stage1_by_class(
+  stage1_to_scatter(stage1_f, keep_traits),
+  se_col = "se_delta_method"
+) %>%
   mutate(
-    eur_classes = paste(sort(unique(ppm_cov$covariate_class[ppm_cov$pgs_id == pgs_id & ppm_cov$trait_label == trait_label & ppm_cov$ancestry_display == "European"])), collapse = " | "),
-    tgt_classes = paste(sort(unique(ppm_cov$covariate_class[ppm_cov$pgs_id == pgs_id & ppm_cov$trait_label == trait_label & ppm_cov$ancestry_display == target_ancestry])), collapse = " | "),
-    eur_covariates_txt = paste(unique(coalesce(ppm_cov$covariates_txt[ppm_cov$pgs_id == pgs_id & ppm_cov$trait_label == trait_label & ppm_cov$ancestry_display == "European"], "")), collapse = " || "),
-    tgt_covariates_txt = paste(unique(coalesce(ppm_cov$covariates_txt[ppm_cov$pgs_id == pgs_id & ppm_cov$trait_label == trait_label & ppm_cov$ancestry_display == target_ancestry], "")), collapse = " || ")
+    delta = tgt_auc - eur_auc,
+    delta_se = sqrt(tgt_se^2 + eur_se^2)
   ) %>%
-  ungroup() %>%
-  mutate(
-    covariate_matched = eur_classes == tgt_classes & !grepl("\\|", eur_classes),
-    either_side_clinical = grepl("Clinical", eur_classes) | grepl("Clinical", tgt_classes),
-    either_side_mixed_classes = grepl("\\|", eur_classes) | grepl("\\|", tgt_classes)
+  filter(is.finite(delta), is.finite(delta_se), delta_se > 0)
+
+not_chosen <- class_pairs %>%
+  anti_join(
+    pick_one_class_per_score(class_pairs) %>%
+      select(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class),
+    by = c("trait_label", "trained_bucket", "target_ancestry", "pgs_id", "covariate_class")
+  ) %>%
+  group_by(trait_label, trained_bucket, target_ancestry, pgs_id) %>%
+  summarise(
+    covariate_class_not_chosen = paste(covariate_class, collapse = " | "),
+    delta_not_chosen = paste(sprintf("%.6f", delta), collapse = " | "),
+    .groups = "drop"
   )
+
+cov_txt <- usable_keys %>%
+  group_by(pgs_id, trait_label, ancestry_display, covariate_class) %>%
+  summarise(
+    covariates_txt = paste(unique(coalesce(covariates, "")), collapse = " || "),
+    .groups = "drop"
+  )
+
+pair_cov <- paired_dm %>%
+  select(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class, delta, delta_se, is_pooled, eur_k, tgt_k) %>%
+  left_join(
+    cov_txt %>% filter(ancestry_display == "European") %>%
+      select(pgs_id, trait_label, covariate_class, eur_covariates_txt = covariates_txt),
+    by = c("pgs_id", "trait_label", "covariate_class")
+  ) %>%
+  left_join(
+    cov_txt %>%
+      select(pgs_id, trait_label, ancestry_display, covariate_class, tgt_covariates_txt = covariates_txt),
+    by = c("pgs_id", "trait_label", "covariate_class", "target_ancestry" = "ancestry_display")
+  ) %>%
+  left_join(not_chosen, by = c("trait_label", "trained_bucket", "target_ancestry", "pgs_id"))
+
+if (anyDuplicated(pair_cov[c("trait_label", "trained_bucket", "target_ancestry", "pgs_id")])) {
+  stop("A score contributed more than one delta to a comparison.", call. = FALSE)
+}
+if (anyNA(pair_cov$covariate_class) || any(!pair_cov$covariate_class %in% covariate_class_levels)) {
+  stop("A paired delta is missing its covariate class.", call. = FALSE)
+}
+n_class_mismatch <- 0L
+chosen_vs_dm <- pair_cov %>%
+  select(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class, delta) %>%
+  full_join(
+    paired_dm %>% select(trait_label, trained_bucket, target_ancestry, pgs_id, class_dm = covariate_class, delta_dm = delta),
+    by = c("trait_label", "trained_bucket", "target_ancestry", "pgs_id")
+  )
+if (
+  anyNA(chosen_vs_dm$covariate_class) || anyNA(chosen_vs_dm$class_dm) ||
+    any(chosen_vs_dm$covariate_class != chosen_vs_dm$class_dm) ||
+    any(abs(chosen_vs_dm$delta - chosen_vs_dm$delta_dm) > 1e-8)
+) {
+  stop("Paired deltas do not match the class chosen for each score.", call. = FALSE)
+}
 
 write_tbl(pair_cov, "10_covariates_pairs")
 
-cells_cov_matched <- paired_dm %>%
-  inner_join(pair_cov %>% filter(covariate_matched) %>% select(trait_label, trained_bucket, target_ancestry, pgs_id),
-             by = c("trait_label", "trained_bucket", "target_ancestry", "pgs_id")) %>%
-  pool_stage2(model = "fixed")
-
-cov_cells <- delta_dm %>%
-  transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_all = delta_hat, lo_all = lo, hi_all = hi, sig_all = ci_excludes_zero) %>%
-  left_join(
-    pair_cov %>% group_by(trait_label, trained_bucket, target_ancestry) %>%
-      summarise(n_pairs_covariate_matched = sum(covariate_matched), n_pairs_either_clinical = sum(either_side_clinical),
-                n_pairs_mixed_classes = sum(either_side_mixed_classes), .groups = "drop"),
-    by = c("trait_label", "trained_bucket", "target_ancestry")
-  ) %>%
-  left_join(
-    cells_cov_matched %>% transmute(trait_label, trained_bucket, target_ancestry,
-                                    delta_matched = delta_hat, lo_matched = lo, hi_matched = hi, sig_matched = ci_excludes_zero),
-    by = c("trait_label", "trained_bucket", "target_ancestry")
-  ) %>%
-  mutate(
-    inference_flip_matched = !is.na(sig_matched) & sig_matched != sig_all,
-    # A second point is a different estimate only when matching drops at least one pair and leaves at least one.
-    matched_reduced = n_pairs_covariate_matched > 0 & n_pairs_covariate_matched < n_pairs
+pre_input <- eval_df %>%
+  filter(
+    has_auc, has_ci,
+    ancestry_display %in% evaluation_display_levels,
+    is.finite(auc), is.finite(estimate_ci_lower), is.finite(estimate_ci_upper)
   )
+pre_kept <- keep_one_evaluation(
+  pre_input,
+  n_col = "n_individuals",
+  cases_col = "n_cases",
+  controls_col = "n_controls",
+  covariates_col = "covariates_txt",
+  ancestry_col = "ancestry_display"
+)
+pre_paired <- pair_stage1_ignoring_class(
+  stage1_to_scatter(
+    i2_filter(pool_stage1(pre_kept, by_class = FALSE)) %>% attach_train_bucket(eval_df),
+    keep_traits
+  ),
+  se_col = "se_delta_method"
+)
 
-write_tbl(cov_cells, "10_covariates_cells_matched_sensitivity")
+rule_changes <- pair_cov %>%
+  select(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class, delta_new = delta, delta_se_new = delta_se) %>%
+  full_join(
+    pre_paired %>%
+      select(trait_label, trained_bucket, target_ancestry, pgs_id, delta_pre_rule = delta, delta_se_pre_rule = delta_se),
+    by = c("trait_label", "trained_bucket", "target_ancestry", "pgs_id")
+  ) %>%
+  mutate(delta_diff = delta_new - delta_pre_rule) %>%
+  filter(!is.finite(delta_diff) | abs(delta_diff) > 1e-6) %>%
+  arrange(trait_label, trained_bucket, target_ancestry, pgs_id)
+
+rule_changes <- rule_changes %>%
+  mutate(change_type = case_when(
+    is.finite(delta_pre_rule) & is.finite(delta_new) ~ "value",
+    is.finite(delta_new) & !is.finite(delta_pre_rule) ~ "admitted",
+    is.finite(delta_pre_rule) & !is.finite(delta_new) ~ "dropped",
+    TRUE ~ "other"
+  ))
+
+expected_value_changes <- tibble(
+  trait_label = c(
+    rep("Coronary heart disease (incident and prevalent)", 4),
+    "Type 2 diabetes"
+  ),
+  trained_bucket = "Train: Multi incl. EUR",
+  target_ancestry = c(
+    "African", "Hispanic or Latin American",
+    "African", "Hispanic or Latin American",
+    "Middle Eastern or North African"
+  ),
+  pgs_id = c("PGS000013", "PGS000013", "PGS000018", "PGS000018", "PGS000804")
+)
+got_value_changes <- rule_changes %>%
+  filter(change_type == "value") %>%
+  select(trait_label, trained_bucket, target_ancestry, pgs_id) %>%
+  arrange(trait_label, trained_bucket, target_ancestry, pgs_id)
+exp_value_changes <- expected_value_changes %>%
+  arrange(trait_label, trained_bucket, target_ancestry, pgs_id)
+if (!isTRUE(all.equal(got_value_changes, exp_value_changes, check.attributes = FALSE))) {
+  print(as.data.frame(rule_changes), row.names = FALSE)
+  stop("Value changes are not the five expected scores.", call. = FALSE)
+}
+if (any(rule_changes$change_type == "dropped")) {
+  print(as.data.frame(rule_changes %>% filter(change_type == "dropped")), row.names = FALSE)
+  stop("The class rule dropped a pair.", call. = FALSE)
+}
+write_tbl(rule_changes, "10_covariates_rule_changes")
+
+cov_colour_levels <- covariate_colour_levels
+pal_cov_colour <- c(
+  "Uses covariates" = "#332288",
+  "Does not use covariates" = "#882255",
+  "Both kinds of score" = "#999933"
+)
+
+cov_colour_tbl <- pair_cov %>%
+  group_by(trait_label, trained_bucket, target_ancestry) %>%
+  summarise(
+    n_pairs = n(),
+    n_uses = sum(covariate_class != "None (PRS only)"),
+    n_none = sum(covariate_class == "None (PRS only)"),
+    covariate_colour = comparison_covariate_colour(covariate_class),
+    .groups = "drop"
+  ) %>%
+  mutate(covariate_colour = factor(covariate_colour, levels = cov_colour_levels))
+
+write_tbl(cov_colour_tbl, "10_covariates_comparison_colour")
+old_matched <- file.path(dir_tables, "10_covariates_cells_matched_sensitivity.csv")
+if (file.exists(old_matched)) unlink(old_matched)
+
+# 120 pairs become 127 because seven scores were previously one high-I2 average
+# of two covariate classes. Each class is now its own side, so those scores pair.
+if (nrow(pair_cov) != 127L || nrow(cov_colour_tbl) != 32L) {
+  stop(
+    glue("Expected 127 pairs and 32 comparisons; got {nrow(pair_cov)} pairs and {nrow(cov_colour_tbl)} comparisons."),
+    call. = FALSE
+  )
+}
 
 cov_summary <- tibble(
   n_pairs = nrow(pair_cov),
-  n_pairs_covariate_matched = sum(pair_cov$covariate_matched),
-  n_pairs_either_side_clinical = sum(pair_cov$either_side_clinical),
-  n_pairs_mixed_classes_within_side = sum(pair_cov$either_side_mixed_classes),
-  n_cells = nrow(cov_cells),
-  n_cells_estimable_matched_only = sum(!is.na(cov_cells$delta_matched)),
-  n_cells_matched_identical = sum(cov_cells$n_pairs_covariate_matched == cov_cells$n_pairs),
-  n_cells_matched_reduced = sum(cov_cells$matched_reduced),
-  n_cells_no_matched_pair = sum(cov_cells$n_pairs_covariate_matched == 0),
-  n_cells_inference_flip_matched_only = sum(cov_cells$inference_flip_matched)
+  n_pairs_score_only = sum(pair_cov$covariate_class == "None (PRS only)"),
+  n_pairs_age_sex_pcs = sum(pair_cov$covariate_class == "Age/sex/PCs/technical"),
+  n_pairs_clinical = sum(pair_cov$covariate_class == "Clinical or other covariates"),
+  n_pairs_class_mismatch = n_class_mismatch,
+  n_comparisons = nrow(cov_colour_tbl),
+  n_comparisons_uses_covariates = sum(cov_colour_tbl$covariate_colour == "Uses covariates"),
+  n_comparisons_score_only = sum(cov_colour_tbl$covariate_colour == "Does not use covariates"),
+  n_comparisons_both_kinds = sum(cov_colour_tbl$covariate_colour == "Both kinds of score"),
+  n_pairs_rule_changed = nrow(rule_changes)
 )
 write_tbl(cov_summary, "10_covariates_summary")
 
-# Random effects are not used here. Matching is a subset of pairs, and the only
-# cells that lose pairs still share one target sample set, so a DL model of the
-# retained scores would not be two independent ΔAUCs.
-src_cov_all <- "IVW fixed effect"
-src_cov_matched <- "Covariate-matched pairs"
-cov_long <- bind_rows(
-  delta_dm %>% transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = src_cov_all),
-  cells_cov_matched %>%
-    inner_join(
-      cov_cells %>% filter(matched_reduced) %>% select(trait_label, trained_bucket, target_ancestry),
-      by = c("trait_label", "trained_bucket", "target_ancestry")
-    ) %>%
-    transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi, source = src_cov_matched)
-) %>% mutate(source = factor(source, levels = c(src_cov_all, src_cov_matched)))
+cov_plot_df <- delta_dm %>%
+  transmute(trait_label, trained_bucket, target_ancestry, n_pairs, delta_hat, lo, hi) %>%
+  left_join(
+    cov_colour_tbl %>%
+      mutate(covariate_colour = as.character(covariate_colour)) %>%
+      select(trait_label, trained_bucket, target_ancestry, covariate_colour),
+    by = c("trait_label", "trained_bucket", "target_ancestry")
+  ) %>%
+  mutate(
+    trait_wrapped = factor(wrap_trait(trait_label), levels = trait_levels_wrapped),
+    target_ancestry = factor(as.character(target_ancestry), levels = rev(anc_keep)),
+    trained_bucket = factor(trained_bucket, levels = names(pal_bucket)),
+    covariate_colour = factor(covariate_colour, levels = cov_colour_levels),
+    sig = (lo > 0) | (hi < 0)
+  )
 
-p_cov <- forest_compare_plot(
-  cov_long,
-  # Outside the ancestry palette, same indigo/red as the dependence forest.
-  pal = c("#332288", "#E41A1C"), shapes = c(16, 17),
-  title = "ΔAUC restricted to pairs with the same covariate class on both sides",
-  subtitle = glue(
-    "{cov_summary$n_pairs_covariate_matched} of {cov_summary$n_pairs} pairs match. ",
-    "Matched estimate shown only where that drops pairs: {cov_summary$n_cells_matched_reduced} cells. ",
-    "{cov_summary$n_cells_no_matched_pair} cells have no matched pair. ",
-    "{cov_summary$n_cells_inference_flip_matched_only} inference changes."
-  ),
-  caption = paste0(
-    "IVW fixed effect: inverse-variance pool of every pair in the cell. ",
-    "Covariate-matched pairs: the same pool after keeping pairs whose two sides share one covariate class, drawn only when that removes at least one pair.\n",
-    "Class from the Catalog 'Covariates Included in the Model' field: None (PRS only) / Age-sex-PCs-technical / Clinical or other. ",
-    "k is the number of pairs in that point. * = 95% CI excludes zero."
-  ),
-  lost_df = cov_cells %>% filter(is.na(delta_matched)) %>% select(trait_label, trained_bucket, target_ancestry),
-  lost_label = "no matched pair", trait_levels = trait_levels_wrapped
-)
+n_cov_uses <- sum(cov_colour_tbl$covariate_colour == "Uses covariates")
+n_cov_none <- sum(cov_colour_tbl$covariate_colour == "Does not use covariates")
+n_cov_both <- sum(cov_colour_tbl$covariate_colour == "Both kinds of score")
+
+p_cov <- ggplot(
+  cov_plot_df,
+  aes(x = delta_hat, y = target_ancestry, colour = covariate_colour)
+) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
+  geom_errorbar(aes(xmin = lo, xmax = hi), width = 0, linewidth = 0.5, orientation = "y") +
+  geom_point(size = 2.3, shape = 16) +
+  scale_colour_manual(values = pal_cov_colour, name = NULL, drop = FALSE) +
+  scale_x_continuous(breaks = x_breaks_forest, labels = x_labels_forest) +
+  coord_cartesian(xlim = x_lim_forest, clip = "off") +
+  facet_grid(trait_wrapped ~ trained_bucket, scales = "free_y", space = "free_y", switch = "y") +
+  labs(
+    title = "ΔAUC by covariate content of the scores in each comparison",
+    subtitle = str_wrap(glue(
+      "{n_cov_uses} comparisons use covariates on every score. ",
+      "{n_cov_none} use none. ",
+      "{n_cov_both} include both kinds of score. ",
+      "Every delta is one covariate class on the European side and on the non-European side. ",
+      "The accompanying figure shows each score in the comparisons that include both kinds."
+    ), width = 120),
+    x = "ΔAUC (non-European − European) with 95% CI",
+    y = NULL,
+    caption = str_wrap(paste0(
+      "Each point is the average of all scores in the comparison. ",
+      "Colour is the covariate class of those scores: covariates on every score, ",
+      "no covariates on any score, or both kinds of score. ",
+      "A class present on one side only is not part of a delta. ",
+      "When one score has more than one class on both sides, the score-only delta is kept, ",
+      "then age, sex, and principal components, then clinical covariates. ",
+      "Age, sex, and principal components count as covariates."
+    ), width = 150)
+  ) +
+  theme_reviewer(base_size = 9) +
+  theme(
+    strip.placement = "outside",
+    strip.text.y.left = element_text(angle = 0, hjust = 1, size = 8, face = "bold", lineheight = 0.85),
+    strip.text.x = element_text(face = "bold", size = 9),
+    strip.background = element_rect(fill = "grey95", colour = NA),
+    panel.spacing.y = unit(0.35, "lines"),
+    panel.spacing.x = unit(1.6, "lines"),
+    panel.grid.major.y = element_blank(),
+    plot.margin = margin(5.5, 20, 5.5, 5.5),
+    plot.caption = element_text(hjust = 0, size = 7.5),
+    plot.title = element_text(size = 10.5)
+  )
 save_plot("10_covariates_forest", p_cov, width = 12.5, height = max(7.2, 0.32 * n_row_plot + 2.8), limitsize = FALSE)
+
+training_label <- c(
+  "Train: European-only" = "European-only training",
+  "Train: Multi incl. EUR" = "Multi-ancestry training"
+)
+focus_deltas <- pair_cov %>%
+  inner_join(
+    cov_colour_tbl %>%
+      filter(covariate_colour == "Both kinds of score") %>%
+      select(trait_label, trained_bucket, target_ancestry),
+    by = c("trait_label", "trained_bucket", "target_ancestry")
+  ) %>%
+  mutate(
+    model = if_else(
+      covariate_class == "None (PRS only)",
+      "Does not use covariates",
+      "Uses covariates"
+    ),
+    model = factor(model, levels = c("Uses covariates", "Does not use covariates")),
+    training = unname(training_label[as.character(trained_bucket)]),
+    strip = paste0(wrap_trait(trait_label), "\n", training, "\n", target_ancestry),
+    lo = delta - 1.96 * delta_se,
+    hi = delta + 1.96 * delta_se
+  )
+
+strip_levels <- focus_deltas %>%
+  distinct(trait_label, trained_bucket, target_ancestry, strip) %>%
+  mutate(
+    trait_label = factor(trait_label, levels = trait_order),
+    trained_bucket = factor(trained_bucket, levels = names(pal_bucket)),
+    target_ancestry = factor(target_ancestry, levels = anc_keep)
+  ) %>%
+  arrange(trait_label, trained_bucket, target_ancestry) %>%
+  pull(strip)
+
+focus_deltas <- focus_deltas %>%
+  mutate(strip = factor(strip, levels = strip_levels)) %>%
+  arrange(strip, delta) %>%
+  mutate(score = factor(
+    paste(pgs_id, strip, sep = " | "),
+    levels = unique(paste(pgs_id, strip, sep = " | "))
+  ))
+
+both_colours <- focus_deltas %>%
+  group_by(strip) %>%
+  summarise(n_model = n_distinct(model), .groups = "drop")
+if (any(both_colours$n_model < 2L)) {
+  stop("A comparison marked as both kinds of score has only one kind.", call. = FALSE)
+}
+
+focus_span <- range(c(focus_deltas$lo, focus_deltas$hi), na.rm = TRUE)
+focus_pad <- max(0.01, 0.08 * diff(focus_span))
+
+p_focus <- ggplot(focus_deltas, aes(x = delta, y = score, colour = model)) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey55") +
+  geom_errorbar(aes(xmin = lo, xmax = hi), width = 0, linewidth = 0.5, orientation = "y") +
+  geom_point(size = 2.3) +
+  scale_colour_manual(values = pal_cov_colour, name = NULL, drop = TRUE) +
+  scale_y_discrete(labels = function(x) sub(" \\|.*", "", x)) +
+  scale_x_continuous(labels = label_number(accuracy = 0.02, style_negative = "minus")) +
+  coord_cartesian(xlim = c(focus_span[1] - focus_pad, focus_span[2] + focus_pad)) +
+  facet_grid(strip ~ ., scales = "free_y", space = "free_y", switch = "y") +
+  labs(
+    title = "Scores in comparisons that include both kinds",
+    subtitle = str_wrap(
+      "Each point is one score. The European side and the non-European side use the same covariate class.",
+      width = 100
+    ),
+    x = "ΔAUC (non-European − European) with 95% CI",
+    y = NULL,
+    caption = str_wrap(paste0(
+      "These are the comparisons whose average includes a score with no covariates and a score that uses covariates. ",
+      "Does not use covariates: both sides are None (PRS only). ",
+      "Uses covariates: both sides include covariates. Age, sex, and principal components count as covariates."
+    ), width = 110)
+  ) +
+  theme_reviewer(base_size = 9) +
+  theme(
+    strip.placement = "outside",
+    strip.text.y.left = element_text(angle = 0, hjust = 1, size = 8, face = "bold", lineheight = 0.9),
+    strip.background = element_rect(fill = "grey95", colour = NA),
+    panel.spacing.y = unit(0.45, "lines"),
+    panel.grid.major.y = element_blank(),
+    plot.caption = element_text(hjust = 0, size = 7.5),
+    plot.title = element_text(size = 10.5)
+  )
+save_plot(
+  "10b_covariates_by_phenotype",
+  p_focus,
+  width = 8.6,
+  height = max(8.4, 0.28 * nrow(focus_deltas) + 1.1 * nlevels(focus_deltas$strip) + 2),
+  limitsize = FALSE
+)
+old_chd <- file.path(dir_plots, c("10b_covariates_chd.png", "10b_covariates_chd.pdf"))
+unlink(old_chd[file.exists(old_chd)])
+
 
 # ===========================================================================
 # 11) Training ancestry
@@ -1676,13 +2020,15 @@ if (nrow(or_plot_df) > 0) {
 
 # Case fractions per cell side
 side_pss <- bind_rows(
-  paired_dm %>% transmute(trait_label, trained_bucket, target_ancestry, pgs_id, side = "European", ancestry = "European"),
-  paired_dm %>% transmute(trait_label, trained_bucket, target_ancestry, pgs_id, side = "Target", ancestry = target_ancestry)
+  paired_dm %>% transmute(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class, side = "European", ancestry = "European"),
+  paired_dm %>% transmute(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class, side = "Target", ancestry = target_ancestry)
 ) %>%
-  # many-to-many is intended: each pair side expands to all its evaluations
-  inner_join(usable_keys %>% select(pgs_id, trait_label, ancestry_display, sampleset_id, performance_id, ci_source),
-             by = c("pgs_id", "trait_label", "ancestry" = "ancestry_display"),
-             relationship = "many-to-many") %>%
+  # many-to-many is intended: each pair side expands to the evaluations in its class
+  inner_join(
+    usable_keys %>% select(pgs_id, trait_label, ancestry_display, covariate_class, sampleset_id, performance_id, ci_source),
+    by = c("pgs_id", "trait_label", "ancestry" = "ancestry_display", "covariate_class"),
+    relationship = "many-to-many"
+  ) %>%
   left_join(pss, by = "sampleset_id")
 
 case_fraction_cells <- side_pss %>%
@@ -2317,7 +2663,8 @@ sanity <- tibble(
     "Figure 1C cells with Multi-ancestry including European",
     "I2 values outside 0-100 (pipeline tables)",
     "Catalog All of Us evaluations",
-    "Figure 1C rows whose cohort is All of Us"
+    "Figure 1C rows whose cohort is All of Us",
+    "Pairs whose two sides differ in covariate class"
   ),
   value = c(
     as.numeric(stamp),
@@ -2332,7 +2679,8 @@ sanity <- tibble(
     sum(i2_check$n_I2_below_0[i2_check$table != "stage1_or_hr (this script)"]) +
       sum(i2_check$n_I2_above_100[i2_check$table != "stage1_or_hr (this script)"]),
     sum(eval_df$catalog_all_of_us, na.rm = TRUE),
-    sum(cell_identifiers$catalog_all_of_us, na.rm = TRUE)
+    sum(cell_identifiers$catalog_all_of_us, na.rm = TRUE),
+    n_class_mismatch
   ),
   check = c(
     stamp,
@@ -2346,7 +2694,8 @@ sanity <- tibble(
     "should be 0 under the single-ancestry rule",
     "should be 0",
     "flag only; not a count lock",
-    "flag only; not a count lock"
+    "flag only; not a count lock",
+    "should be 0"
   )
 )
 

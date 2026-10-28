@@ -1,0 +1,128 @@
+trait_label,trained_bucket,target_ancestry,pgs_id,covariate_class,eur_auc,eur_se,eur_k,tgt_auc,tgt_se,tgt_k,is_pooled
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005237,None (PRS only),0.6825096646967125,0.0206768031516644,3,0.578,0.12618952635462652,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005238,None (PRS only),0.6996547649173532,0.02020293703638713,3,0.5919999999999999,0.12531774324214154,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005239,None (PRS only),0.6859430603170292,0.02070141019984147,3,0.596,0.12469315038873637,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005240,None (PRS only),0.6949520492562624,0.02000071636827076,3,0.553,0.1192124705995751,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005241,None (PRS only),0.6473067936638022,0.01963300053797513,3,0.55,0.13791597750042073,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005237,None (PRS only),0.6825096646967125,0.0206768031516644,3,0.7259999999999999,0.2527858392511134,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005238,None (PRS only),0.6996547649173532,0.02020293703638713,3,0.742,0.2130552295548108,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005239,None (PRS only),0.6859430603170292,0.02070141019984147,3,0.709,0.21760989902461264,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005240,None (PRS only),0.6949520492562624,0.02000071636827076,3,0.699,0.20937542835395648,1,FALSE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005241,None (PRS only),0.6473067936638022,0.01963300053797513,3,0.594,0.23409168228638683,1,FALSE
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,PGS002238,Clinical or other covariates,0.68,0.02341394747021902,1,0.666,0.05235363887402983,1,FALSE
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,PGS002239,Clinical or other covariates,0.679,0.02588862383768359,1,0.663,0.05051470787539226,1,FALSE
+Breast Carcinoma,Train: European-only,African,PGS005345,None (PRS only),0.6416624947535509,0.01996689530863715,3,0.626,0.24288633989049943,1,FALSE
+Breast Carcinoma,Train: European-only,African,PGS005346,None (PRS only),0.6637407756698931,0.02056036630953144,3,0.5919999999999999,0.2436918088813521,1,FALSE
+Breast Carcinoma,Train: European-only,African,PGS005347,None (PRS only),0.6589734026596237,0.02043030381267525,3,0.598,0.24949628201799265,1,FALSE
+Breast Carcinoma,Train: European-only,African,PGS005348,None (PRS only),0.6624653677862106,0.02054875592049059,3,0.607,0.23112224472482876,1,FALSE
+Breast Carcinoma,Train: European-only,South Asian,PGS005345,None (PRS only),0.6416624947535509,0.01996689530863715,3,0.6589999999999999,0.16873984858400426,1,FALSE
+Breast Carcinoma,Train: European-only,South Asian,PGS005346,None (PRS only),0.6637407756698931,0.02056036630953144,3,0.67,0.18740992639456588,1,FALSE
+Breast Carcinoma,Train: European-only,South Asian,PGS005347,None (PRS only),0.6589734026596237,0.02043030381267525,3,0.678,0.1938007547174659,1,FALSE
+Breast Carcinoma,Train: European-only,South Asian,PGS005348,None (PRS only),0.6624653677862106,0.02054875592049059,3,0.657,0.1897162457422842,1,FALSE
+Breast cancer,Train: European-only,African,PGS000004,Age/sex/PCs/technical,0.7,0.02430223136294093,1,0.5734258512811957,0.01607784062623504,3,FALSE
+Breast cancer,Train: European-only,East Asian,PGS000004,Age/sex/PCs/technical,0.7,0.02430223136294093,1,0.64,0.08885374853781022,1,FALSE
+Breast cancer,Train: European-only,East Asian,PGS001336,Age/sex/PCs/technical,0.8085258595410928,0.01729534966385592,2,0.7602,0.12842395542375246,1,FALSE
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000004,None (PRS only),0.6,0.02126194919445238,1,0.55,0.10343497655820516,1,FALSE
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000015,None (PRS only),0.61,0.02144977479860754,1,0.56,0.09322953405471046,1,FALSE
+Breast cancer,Train: European-only,South Asian,PGS001336,Age/sex/PCs/technical,0.8085258595410928,0.01729534966385592,2,0.83564,0.08494907087387726,1,FALSE
+Breast cancer,Train: European-only,South Asian,PGS003983,None (PRS only),0.6463816592549446,0.00805904999408955,4,0.6102149570101991,0.06043927730191177,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS003999,None (PRS only),0.6472870008543842,0.00804112167331543,4,0.6204964523215648,0.06274578716533033,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS004025,None (PRS only),0.6542117922695923,0.00806932725730504,4,0.6186141747828695,0.06230445426671674,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS004040,None (PRS only),0.6544881893388007,0.0080763111974688,4,0.6183167669779875,0.0618259399456779,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS004053,None (PRS only),0.6480851940790464,0.00802558538481319,4,0.6130561646447642,0.06167513211420645,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS004069,None (PRS only),0.6506926705143116,0.00805463928980226,4,0.6172405064731935,0.06058692754977355,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS004083,None (PRS only),0.6501440711893776,0.00807083565065933,4,0.6208692593883886,0.06151584257880996,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS004107,None (PRS only),0.61644140593879,0.00792471664895826,4,0.5933445480927249,0.0589893486394358,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS004123,None (PRS only),0.6244108881015868,0.00795012354416251,4,0.6013674235889979,0.05920237429710543,2,TRUE
+Breast cancer,Train: European-only,South Asian,PGS004153,None (PRS only),0.6582519390211554,0.00809541797377738,4,0.630220039956027,0.06217218258668086,2,TRUE
+Breast cancer,Train: Multi incl. EUR,East Asian,PGS000028,None (PRS only),0.6299999999999999,0.08781114304160066,1,0.62,0.23331119068125647,1,FALSE
+Colorectal cancer,Train: European-only,African,PGS003851,Age/sex/PCs/technical,0.6453262112082871,0.0228329482313729,2,0.5382772245470867,0.10987255243185134,2,TRUE
+Colorectal cancer,Train: European-only,East Asian,PGS003851,Age/sex/PCs/technical,0.6453262112082871,0.0228329482313729,2,0.601,0.1349176837839755,1,FALSE
+Colorectal cancer,Train: European-only,Hispanic or Latin American,PGS003851,Age/sex/PCs/technical,0.6453262112082871,0.0228329482313729,2,0.5946089262242725,0.09852981991028066,2,TRUE
+Colorectal cancer,Train: Multi incl. EUR,African,PGS003850,Age/sex/PCs/technical,0.61,0.02144977479860754,1,0.58,0.03132737764911307,1,FALSE
+Colorectal cancer,Train: Multi incl. EUR,African,PGS003852,Age/sex/PCs/technical,0.65,0.02243114094558734,1,0.59,0.04220945558741769,1,FALSE
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,PGS003850,Age/sex/PCs/technical,0.61,0.02144977479860754,1,0.59,0.03153417244060631,1,FALSE
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,PGS003852,Age/sex/PCs/technical,0.65,0.02243114094558734,1,0.62,0.03233461878549592,1,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000011,Clinical or other covariates,0.75,0.01761622650867995,1,0.7630000000000001,0.05489174333073398,1,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000013,Clinical or other covariates,0.77,0.01819602404697991,1,0.771,0.05566793334301444,1,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000018,Clinical or other covariates,0.772,0.01825871767226687,1,0.775,0.0560730504827242,1,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000200,Clinical or other covariates,0.748,0.01756258740905262,1,0.7630000000000001,0.05489174333073398,1,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000011,Clinical or other covariates,0.75,0.01761622650867995,1,0.7689999999999999,0.07970089886074458,1,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000013,Clinical or other covariates,0.77,0.01819602404697991,1,0.7760000000000001,0.08068066610108232,1,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000018,Clinical or other covariates,0.772,0.01825871767226687,1,0.794,0.08345191467047239,1,FALSE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000200,Clinical or other covariates,0.748,0.01756258740905262,1,0.771,0.07997570380602846,1,FALSE
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,PGS002250,None (PRS only),0.588,0.04829600628818015,1,0.538,0.02754633462026264,1,FALSE
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,PGS003394,None (PRS only),0.595,0.04860335270105757,1,0.542,0.0275790607549486,1,FALSE
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,PGS001800,Clinical or other covariates,0.739,0.05704268056634305,1,0.635,0.0883196862509444,1,FALSE
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,PGS001801,Clinical or other covariates,0.739,0.05704268056634305,1,0.635,0.0883196862509444,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004696,Age/sex/PCs/technical,0.774,0.02288986492738094,1,0.762,0.02101881609538886,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004697,Age/sex/PCs/technical,0.773,0.02284791898195186,1,0.756,0.02083192806268867,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004698,Age/sex/PCs/technical,0.773,0.02284791898195186,1,0.748,0.02059508271598809,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004696,Age/sex/PCs/technical,0.774,0.02288986492738094,1,0.706,0.08086074351698781,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004697,Age/sex/PCs/technical,0.773,0.02284791898195186,1,0.708,0.08108161524051749,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004698,Age/sex/PCs/technical,0.773,0.02284791898195186,1,0.699,0.08010737373095804,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004696,Age/sex/PCs/technical,0.774,0.02288986492738094,1,0.803,0.07460760503502027,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004697,Age/sex/PCs/technical,0.773,0.02284791898195186,1,0.803,0.07460760503502027,1,FALSE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004698,Age/sex/PCs/technical,0.773,0.02284791898195186,1,0.7859999999999999,0.07198786855670326,1,FALSE
+Seropositive RA,Train: Multi incl. EUR,South Asian,PGS004118,None (PRS only),0.589897193211258,0.0105351908260512,4,0.6537917400000001,0.14020216831658855,1,FALSE
+Seropositive RA,Train: Multi incl. EUR,South Asian,PGS004133,None (PRS only),0.594525946615601,0.01051426631902616,4,0.62630388,0.14581727497339084,1,FALSE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS003984,None (PRS only),0.5391736537013785,0.00612782180856302,4,0.5319041362310171,0.04688454193675062,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004000,None (PRS only),0.5319858957582397,0.0061440652143298,4,0.5130099989925749,0.04454535585841323,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004015,None (PRS only),0.5363805942966962,0.00614887083052243,4,0.5416046070875377,0.04425977558431458,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004041,None (PRS only),0.541378765061592,0.00614608655842539,4,0.5429242467721682,0.04511266192366399,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004054,None (PRS only),0.542939116366216,0.0061373326963334,4,0.5383003506201426,0.04502339579718861,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004070,None (PRS only),0.5434887840066052,0.00613821776213922,4,0.5393056926093038,0.04528146022166924,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004098,None (PRS only),0.5380748011037313,0.0061400914658194,4,0.5482663276699838,0.04549749296953348,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004108,None (PRS only),0.5189563336386053,0.00613725221009989,4,0.5070293294876077,0.04657688246675607,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004124,None (PRS only),0.5268880662007275,0.00611945489410083,4,0.5366013053049042,0.04572874342999829,2,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004154,None (PRS only),0.5439222806620223,0.00614080414297245,4,0.5329968883628509,0.04535191848445005,2,TRUE
+Type 2 diabetes,Train: European-only,East Asian,PGS000330,Age/sex/PCs/technical,0.7259999999999999,0.01152939277563231,1,0.714,0.14130536011781175,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS000713,Age/sex/PCs/technical,0.712,0.01244155257063196,1,0.754,0.15045123114951803,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS000729,Age/sex/PCs/technical,0.712,0.01244155257063196,1,0.718,0.13362696235852067,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS000805,Age/sex/PCs/technical,0.707,0.01231569228459777,1,0.7339999999999999,0.14380913539724147,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS000864,Age/sex/PCs/technical,0.687,0.01186425958694115,1,0.7,0.13976858868339792,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS000868,Age/sex/PCs/technical,0.696,0.01205759356479064,1,0.727,0.14288646571867758,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS001295,Age/sex/PCs/technical,0.6850058613595111,0.04311277640300249,2,0.83509,0.5225026728443444,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS001818,Age/sex/PCs/technical,0.709,0.01236536981779332,1,0.7339999999999999,0.14380913539724147,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS002026,Age/sex/PCs/technical,0.714,0.01249347679251682,1,0.722,0.1491059652597057,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS002671,Age/sex/PCs/technical,0.7040000000000001,0.0110076055970672,1,0.737,0.15033995561048438,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS002771,Age/sex/PCs/technical,0.7349999999999999,0.01309846429556777,1,0.728,0.14322708767930337,1,FALSE
+Type 2 diabetes,Train: European-only,East Asian,PGS002780,Age/sex/PCs/technical,0.6940000000000001,0.01201329557410972,1,0.712,0.14326082662754036,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000330,Age/sex/PCs/technical,0.7259999999999999,0.01152939277563231,1,0.768,0.02004918908641629,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000713,Age/sex/PCs/technical,0.712,0.01244155257063196,1,0.762,0.01969737762233486,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000729,Age/sex/PCs/technical,0.712,0.01244155257063196,1,0.761,0.01964069627698195,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000805,Age/sex/PCs/technical,0.707,0.01231569228459777,1,0.764,0.01842365064372569,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000864,Age/sex/PCs/technical,0.687,0.01186425958694115,1,0.745,0.01880312677180666,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000868,Age/sex/PCs/technical,0.696,0.01205759356479064,1,0.758,0.01947386846503821,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS001818,Age/sex/PCs/technical,0.709,0.01236536981779332,1,0.762,0.01969737762233486,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002026,Age/sex/PCs/technical,0.714,0.01249347679251682,1,0.764,0.01981238773270145,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002671,Age/sex/PCs/technical,0.7040000000000001,0.0110076055970672,1,0.761,0.01964069627698195,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002771,Age/sex/PCs/technical,0.7349999999999999,0.01309846429556777,1,0.775,0.01905265785009482,1,FALSE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002780,Age/sex/PCs/technical,0.6940000000000001,0.01201329557410972,1,0.756,0.01936526677650263,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS000330,Age/sex/PCs/technical,0.7259999999999999,0.01152939277563231,1,0.724,0.03700690343845423,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS000713,Age/sex/PCs/technical,0.712,0.01244155257063196,1,0.721,0.0393006553852325,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS000729,Age/sex/PCs/technical,0.712,0.01244155257063196,1,0.717,0.0365226480720637,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS000805,Age/sex/PCs/technical,0.707,0.01231569228459777,1,0.721,0.03807284322142853,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS000864,Age/sex/PCs/technical,0.687,0.01186425958694115,1,0.693,0.03722870330730801,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS000868,Age/sex/PCs/technical,0.696,0.01205759356479064,1,0.711,0.03727039528278775,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS001295,Age/sex/PCs/technical,0.6850058613595111,0.04311277640300249,2,0.65806,0.08986351766024349,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS001818,Age/sex/PCs/technical,0.709,0.01236536981779332,1,0.723,0.03824209934029023,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS002026,Age/sex/PCs/technical,0.714,0.01249347679251682,1,0.724,0.03832787098593713,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS002671,Age/sex/PCs/technical,0.7040000000000001,0.0110076055970672,1,0.721,0.03807284322142853,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS002771,Age/sex/PCs/technical,0.7349999999999999,0.01309846429556777,1,0.742,0.03872521127454378,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS002780,Age/sex/PCs/technical,0.6940000000000001,0.01201329557410972,1,0.713,0.03871500656669757,1,FALSE
+Type 2 diabetes,Train: European-only,South Asian,PGS004106,None (PRS only),0.5683789866480483,0.00437303865661593,4,0.5497141687800193,0.01358784631661634,2,TRUE
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS000804,None (PRS only),0.6586,0.00873579829034413,1,0.568,0.019131692066371,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS004859,Age/sex/PCs/technical,0.77,0.02882317943696187,1,0.7509633436780165,0.01277465280099578,2,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS003443,Age/sex/PCs/technical,0.7310000000000001,0.01297426202699854,1,0.738,0.14253775810387873,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS004859,Age/sex/PCs/technical,0.77,0.02882317943696187,1,0.84,0.22252529657975023,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS000804,None (PRS only),0.6586,0.00873579829034413,1,0.6249,0.0202458931833915,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS002308,Age/sex/PCs/technical,0.7929999999999999,0.01853897903067238,1,0.8510000000000001,0.06970499509431004,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS003443,Age/sex/PCs/technical,0.7310000000000001,0.01297426202699854,1,0.78,0.01929891487278973,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS003867,Age/sex/PCs/technical,0.7299999999999999,0.01294390715268132,1,0.7760000000000001,0.02055155190471767,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS004859,Age/sex/PCs/technical,0.77,0.02882317943696187,1,0.84,0.07626083603830631,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS005242,Clinical or other covariates,0.761,0.02107459870108605,1,0.753,0.01646151721930563,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS000804,Clinical or other covariates,0.825,0.01007457131206432,1,0.83,0.0414662025648034,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS003867,Age/sex/PCs/technical,0.7299999999999999,0.01294390715268132,1,0.7383999999999998,0.0502525906542299,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS003443,Age/sex/PCs/technical,0.7310000000000001,0.01297426202699854,1,0.746,0.03912660012237768,1,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS004859,Age/sex/PCs/technical,0.77,0.02882317943696187,1,0.8800000000000001,0.3812318376684798,1,FALSE

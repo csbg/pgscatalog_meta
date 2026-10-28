@@ -46,6 +46,64 @@ pool_stage2_cells <- function(paired_df, se_scale = c("logit_as_implemented", "d
   assert_one_row_per_stage2_cell(out)
 }
 
+# Pair a Stage-1 table on trait, score, training set, and covariate class.
+# se_col is the standard-error column on scat_df. lo_pooled, hi_pooled, and
+# se_logit are copied to eur_* / tgt_* when they are present. The class
+# column is the class on both sides. Call pick_one_class_per_score() before
+# the Stage-2 average so one score contributes one delta.
+pair_stage1_by_class <- function(scat_df, se_col = "se") {
+  required <- c(
+    "trait_label", "ancestry_display", "pgs_id", "auc_pooled",
+    "k_eval", "trained_bucket", "covariate_class", se_col
+  )
+  missing <- setdiff(required, names(scat_df))
+  if (length(missing)) {
+    stop("Missing columns: ", paste(missing, collapse = ", "), call. = FALSE)
+  }
+  classes <- as.character(scat_df$covariate_class)
+  unknown <- setdiff(unique(classes), covariate_class_levels)
+  if (length(unknown) || anyNA(classes)) {
+    stop(
+      "Unknown covariate class: ",
+      paste(unique(classes[!classes %in% covariate_class_levels]), collapse = ", "),
+      call. = FALSE
+    )
+  }
+
+  side_frame <- function(df, prefix) {
+    out <- tibble::tibble(
+      trait_label = as.character(df$trait_label),
+      pgs_id = as.character(df$pgs_id),
+      trained_bucket = as.character(df$trained_bucket),
+      covariate_class = as.character(df$covariate_class)
+    )
+    out[[paste0(prefix, "_auc")]] <- df$auc_pooled
+    out[[paste0(prefix, "_se")]] <- df[[se_col]]
+    out[[paste0(prefix, "_k")]] <- df$k_eval
+    if ("lo_pooled" %in% names(df)) out[[paste0(prefix, "_lo")]] <- df$lo_pooled
+    if ("hi_pooled" %in% names(df)) out[[paste0(prefix, "_hi")]] <- df$hi_pooled
+    if ("se_logit" %in% names(df)) out[[paste0(prefix, "_se_logit")]] <- df$se_logit
+    out
+  }
+
+  eur_df <- side_frame(scat_df[scat_df$ancestry_display == "European", , drop = FALSE], "eur")
+  tgt_src <- scat_df[scat_df$ancestry_display != "European", , drop = FALSE]
+  tgt_df <- side_frame(tgt_src, "tgt")
+  tgt_df$target_ancestry <- as.character(tgt_src$ancestry_display)
+
+  tgt_df %>%
+    dplyr::inner_join(
+      eur_df,
+      by = c("trait_label", "pgs_id", "trained_bucket", "covariate_class")
+    ) %>%
+    dplyr::mutate(is_pooled = (.data$eur_k >= 2) & (.data$tgt_k >= 2)) %>%
+    dplyr::filter(
+      is.finite(.data$eur_auc), is.finite(.data$tgt_auc),
+      is.finite(.data$eur_se), is.finite(.data$tgt_se),
+      .data$eur_se > 0, .data$tgt_se > 0
+    )
+}
+
 safe_weighted_paired_test <- function(eur_auc, tgt_auc, eur_se, tgt_se,
                                       se_scale = c("logit_as_implemented", "delta_method")) {
   se_scale <- match.arg(se_scale)

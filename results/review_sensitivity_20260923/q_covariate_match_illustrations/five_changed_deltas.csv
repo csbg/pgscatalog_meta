@@ -1,0 +1,6 @@
+trait_label,trained_bucket,target_ancestry,pgs_id,covariate_class,delta_pre_rule,delta_new,delta_diff
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000013,Clinical or other covariates,1.5397663291083497e-4,0.001,8.460233670891659e-4
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000018,Clinical or other covariates,0.00168015378994434,0.003,0.00131984621005565
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000013,Clinical or other covariates,0.00515397663291095,0.00600000000000011,8.460233670891659e-4
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000018,Clinical or other covariates,0.02068015378994436,0.02200000000000002,0.00131984621005565
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS000804,Clinical or other covariates,0.1714,0.005,-0.1664

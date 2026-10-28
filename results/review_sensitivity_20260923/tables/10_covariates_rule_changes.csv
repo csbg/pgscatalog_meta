@@ -1,0 +1,13 @@
+trait_label,trained_bucket,target_ancestry,pgs_id,covariate_class,delta_new,delta_se_new,delta_pre_rule,delta_se_pre_rule,delta_diff,change_type
+Breast cancer,Train: European-only,African,PGS000004,Age/sex/PCs/technical,-0.12657414871880424,0.006442991595468575,NA,NA,NA,admitted
+Breast cancer,Train: European-only,East Asian,PGS000004,Age/sex/PCs/technical,-0.05999999999999994,0.02109844144012128,NA,NA,NA,admitted
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000004,None (PRS only),-0.04999999999999993,0.02610377909082255,NA,NA,NA,admitted
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000015,None (PRS only),-0.04999999999999993,0.023531706937556306,NA,NA,NA,admitted
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000013,Clinical or other covariates,0.0010000000000000009,0.010343473966700078,1.5397663291083497e-4,0.010311276544562228,8.460233670891659e-4,value
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000018,Clinical or other covariates,0.0030000000000000027,0.010292368256407166,0.0016801537899443497,0.010257928650575747,0.001319846210055653,value
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000013,Clinical or other covariates,0.006000000000000116,0.01438971183764233,0.00515397663291095,0.01436658543457772,8.460233670891659e-4,value
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000018,Clinical or other covariates,0.02200000000000002,0.01402297334503639,0.020680153789944367,0.013997715431826934,0.001319846210055653,value
+Type 2 diabetes,Train: European-only,East Asian,PGS000805,Age/sex/PCs/technical,0.026999999999999913,0.028193536361177173,NA,NA,NA,admitted
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000805,Age/sex/PCs/technical,0.05700000000000005,0.004188484459098956,NA,NA,NA,admitted
+Type 2 diabetes,Train: European-only,South Asian,PGS000805,Age/sex/PCs/technical,0.014000000000000012,0.00807243905442925,NA,NA,NA,admitted
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS000804,Clinical or other covariates,0.0050000000000000044,0.006028965755187251,0.1714,0.006171785006053905,-0.1664,value
