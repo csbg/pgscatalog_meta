@@ -1,2 +1,2 @@
-n_cells,n_sig_fixed_corrected,n_cells_single_delta,n_sig_single_delta,n_cells_single_pgs_sensitivity,n_sig_single_pgs_sensitivity,n_cells_random_effects,n_sig_random_dl,n_sig_fixed_and_random,n_cells_reduced_fixed_effect,n_cells_k_reduced_by_one_per_pss
-32,21,5,3,18,10,9,2,1,4,22
+n_cells,n_sig_fixed_corrected,n_cells_single_delta,n_sig_single_delta,n_shared,n_sig_cov,n_cells_single_pgs_sensitivity,n_sig_single_pgs_sensitivity,n_cells_reduced_fixed_effect,n_robust_reported,n_partial_pairs,n_linked_changes,n_width_narrowed,n_sigma2_unstable,width_ratio_shared_min,width_ratio_shared_max,width_ratio_full_min,width_ratio_full_max,max_abs_fe0,max_abs_diag
+32,21,5,3,24,10,18,10,4,0,22,0,2,12,1.0042843669083525,2.6359737147334505,1.259783769984634,7.666597132515554,5.551115123125783e-17,1.734723475976807e-18

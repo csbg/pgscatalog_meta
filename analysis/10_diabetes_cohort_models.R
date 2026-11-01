@@ -3,9 +3,10 @@
 # ============================================================
 # Script: 10_diabetes_cohort_models.R
 # Project: pgscatalog_meta
-# Purpose: Type 2 diabetes side analysis. Fit ancestry models that
-#          mark shared sample sets, write an HTML page for Georg, and leave
-#          script 09 / DerSimonian-Laird unchanged.
+# Purpose: Type 2 diabetes side analysis, plus the page for the covariance
+#          model of every comparison whose scores share people.
+#          The four AUC models stay as context. The dependence answer is
+#          metafor::vcalc, rma.mv, and robust, fit in script 09.
 #
 # Reader-facing words, matching tests/q_random_effects_t2d_illustrations.R:
 #   PGS, evaluation, sample set, pair, comparison, training set.
@@ -50,38 +51,15 @@ html_escape <- function(x) {
   x
 }
 
-normalize_study <- function(x) {
-  x0 <- trimws(as.character(x))
-  x0[is.na(x0) | !nzchar(x0)] <- "(blank)"
-  xl <- tolower(x0)
-  out <- x0
-  out[xl %in% c("ukb", "uk biobank") | grepl("^uk\\s*biobank", xl)] <- "UK Biobank"
-  out[xl %in% c("g&h", "g and h") | grepl("genes\\s*&\\s*health|genes and health", xl)] <- "Genes & Health"
-  out[xl %in% c("allofus", "all of us") | grepl("all\\s*of\\s*us", xl)] <- "All of Us"
-  out
-}
-
-pool_delta_check <- function(delta, se, model = c("fixed", "random_dl")) {
-  model <- match.arg(model)
+pool_delta_check <- function(delta, se) {
   w <- 1 / se^2
   sw <- sum(w)
   dh <- sum(w * delta) / sw
-  Q <- sum(w * (delta - dh)^2)
-  k <- length(delta)
-  df <- k - 1L
-  tau2 <- 0
-  if (model == "random_dl" && k >= 2) {
-    C <- sw - sum(w^2) / sw
-    tau2 <- if (is.finite(C) && C > 0) max(0, (Q - df) / C) else 0
-  }
-  ws <- 1 / (se^2 + tau2)
-  dh2 <- sum(ws * delta) / sum(ws)
-  se_hat <- sqrt(1 / sum(ws))
-  I2 <- if (k >= 2 && Q > 0) max(0, (Q - df) / Q) * 100 else NA_real_
+  se_hat <- sqrt(1 / sw)
   tibble(
-    delta_hat = dh2, se_hat = se_hat,
-    lo = dh2 - 1.96 * se_hat, hi = dh2 + 1.96 * se_hat,
-    tau2 = tau2, Q = Q, df = df, I2 = I2, k = k
+    delta_hat = dh, se_hat = se_hat,
+    lo = dh - 1.96 * se_hat, hi = dh + 1.96 * se_hat,
+    k = length(delta)
   )
 }
 
@@ -235,7 +213,11 @@ stopifnot(
 
 eval_raw <- read_csv(fp_eval, show_col_types = FALSE)
 stage1_f <- read_csv(fp_s1f, show_col_types = FALSE)
-dep_cells <- read_csv(fp_dep, show_col_types = FALSE) %>%
+dep_all <- read_csv(fp_dep, show_col_types = FALSE)
+if (!"goes_through_covariance_model" %in% names(dep_all)) {
+  stop("09_dependence_cells.csv has no covariance-model columns. Re-run analysis/09_review_sensitivity.R.", call. = FALSE)
+}
+dep_cells <- dep_all %>%
   filter(trait_label == "Type 2 diabetes")
 pairs_t2d <- read_csv(fp_pairs, show_col_types = FALSE) %>%
   filter(trait_label == "Type 2 diabetes")
@@ -423,32 +405,34 @@ sa_kept <- sa_pairs %>%
   ungroup()
 
 stopifnot(nrow(sa_kept) == 13L, sum(sa_kept$kept) == 3L)
-sa_all <- pool_delta_check(sa_kept$delta, sa_kept$delta_se, "fixed")
-sa_one <- pool_delta_check(sa_kept$delta[sa_kept$kept], sa_kept$delta_se[sa_kept$kept], "fixed")
-sa_re  <- pool_delta_check(sa_kept$delta[sa_kept$kept], sa_kept$delta_se[sa_kept$kept], "random_dl")
+sa_all <- pool_delta_check(sa_kept$delta, sa_kept$delta_se)
+sa_one <- pool_delta_check(sa_kept$delta[sa_kept$kept], sa_kept$delta_se[sa_kept$kept])
 
 sa_pub <- dep_cells %>%
   filter(trained_bucket == "Train: European-only", target_ancestry == "South Asian")
 stopifnot(nrow(sa_pub) == 1L)
 stopifnot(abs(sa_all$delta_hat - sa_pub$delta_fixed) < 1e-8)
 stopifnot(abs(sa_one$delta_hat - sa_pub$delta_one_per_pss) < 1e-8)
-stopifnot(abs(sa_re$delta_hat - sa_pub$delta_random) < 1e-8)
-stopifnot(abs(sa_re$I2 - sa_pub$I2_stage2) < 1e-6)
+if (!"delta_cov" %in% names(sa_pub) || !is.finite(sa_pub$delta_cov)) {
+  stop("South Asian comparison has no covariance-model estimate. Re-run analysis/09_review_sensitivity.R.", call. = FALSE)
+}
 
 sa_check <- tibble(
-  estimate = c("IVW, all 13 scores", "IVW, 3 independent scores", "Random effects (DL), 3 independent scores"),
-  delta_hat = c(sa_all$delta_hat, sa_one$delta_hat, sa_re$delta_hat),
-  lo = c(sa_all$lo, sa_one$lo, sa_re$lo),
-  hi = c(sa_all$hi, sa_one$hi, sa_re$hi),
-  Q = c(sa_all$Q, sa_one$Q, sa_re$Q),
-  I2 = c(sa_all$I2, sa_one$I2, sa_re$I2),
-  k = c(sa_all$k, sa_one$k, sa_re$k),
-  note = "Current DerSimonian-Laird on three DeltaAUC values. Not one of the new ancestry models."
+  estimate = c(
+    "Average of all scores",
+    "Check, one score per target sample set",
+    "Covariance model"
+  ),
+  delta_hat = c(sa_all$delta_hat, sa_one$delta_hat, sa_pub$delta_cov),
+  lo = c(sa_all$lo, sa_one$lo, sa_pub$lo_cov),
+  hi = c(sa_all$hi, sa_one$hi, sa_pub$hi_cov),
+  k = c(sa_all$k, sa_one$k, sa_pub$n_pairs),
+  note = "The covariance model keeps every score. The one-score row is a check."
 )
-write_csv(sa_check, file.path(out_dir, "south_asian_dl_check.csv"))
+write_csv(sa_check, file.path(out_dir, "south_asian_dependence_check.csv"))
 message(glue::glue(
-  ">> South Asian check: IVW13={fmt4(sa_all$delta_hat)}, IVW3={fmt4(sa_one$delta_hat)}, ",
-  "RE={fmt4(sa_re$delta_hat)}, Q={fmt3(sa_re$Q)}, I2={fmt3(sa_re$I2)}"
+  ">> South Asian check: average={fmt4(sa_all$delta_hat)}, one-score check={fmt4(sa_one$delta_hat)}, ",
+  "covariance={fmt4(sa_pub$delta_cov)}"
 ))
 
 # ---------------------------------------------------------------------------
@@ -483,7 +467,7 @@ fit_bucket <- function(df, cohort_col, cohort_label, include_lm = FALSE) {
     fit2 <- lm(auc ~ ancestry + PGS, data = d, weights = weight_auc)
     out[[length(out) + 1]] <- extract_ancestry_lm(
       fit2, "lm(AUC ~ ancestry + PGS, weights = 1/SE^2)", "— (not used)",
-      note = "Joint weighted regression. Not the cell-wise Figure 1C pool."
+      note = "Joint weighted regression. Not the average of all scores."
     )
   }
 
@@ -730,7 +714,7 @@ page_note <- function(r) {
       ))
     } else if (nrow(ref) == 1L) {
       bits <- c(bits, sprintf(
-        "Point is %s; All PGS IVW is %s. This joint regression is not the All PGS IVW pool for that comparison. A shared sample set is not marked.",
+        "Point is %s; All PGS IVW is %s. This joint regression is not the average of all scores for that comparison. A shared sample set is not marked.",
         fmt4(r$estimate), fmt4(ref$estimate)
       ))
     }
@@ -847,13 +831,13 @@ cell_table_html <- function(bucket, ancestry) {
 fig_dir <- file.path(
   "results", paste0("review_sensitivity_", stamp), "q_random_effects_t2d_illustrations"
 )
-embed_png <- function(filename, alt) {
-  path <- file.path(fig_dir, filename)
+dep_fig_dir <- file.path(
+  "results", paste0("review_sensitivity_", stamp), "q_dependence_illustrations"
+)
+embed_png <- function(filename, alt, dir = fig_dir) {
+  path <- file.path(dir, filename)
   if (!file.exists(path)) {
-    stop(
-      "Missing ", path, ". Run tests/q_random_effects_t2d_illustrations.R first.",
-      call. = FALSE
-    )
+    stop("Missing ", path, call. = FALSE)
   }
   raw <- readBin(path, "raw", file.info(path)$size)
   b64 <- gsub("[\r\n]", "", jsonlite::base64_enc(raw))
@@ -888,18 +872,131 @@ img.fig { max-width: 100%; height: auto; border: 1px solid #ddd; margin: 8px 0 4
 .cap { color: #444; font-size: 0.9rem; margin: 0 0 22px; }
 "
 
+page_train <- function(x) {
+  ifelse(grepl("European-only", x), "European-only training", "Multi-ancestry training")
+}
+share_side_label <- function(x) {
+  dplyr::case_when(
+    x == "both" ~ "European and non-European",
+    x == "European" ~ "European",
+    x == "Target" ~ "non-European",
+    TRUE ~ "neither"
+  )
+}
+shared_page <- dep_all %>%
+  filter(goes_through_covariance_model) %>%
+  arrange(trait_label, trained_bucket, target_ancestry)
+n_shared_page <- nrow(shared_page)
+n_one_group_page <- sum(shared_page$n_sharing_groups == 1L)
+n_sig_cov_page <- sum(shared_page$sig_cov, na.rm = TRUE)
+n_partial_page <- sum(shared_page$n_partial_pairs, na.rm = TRUE)
+n_linked_change <- sum(shared_page$linked_changes_conclusion, na.rm = TRUE)
+n_unstable_page <- sum(shared_page$sigma2_unstable, na.rm = TRUE)
+if (!"width_ratio_shared" %in% names(shared_page)) {
+  stop("09_dependence_cells.csv has no shared-samples width. Re-run analysis/09_review_sensitivity.R.", call. = FALSE)
+}
+width_shared_sentence <- sprintf(
+  "Shared samples alone widen the intervals %.1f\u2013%.1f\u00d7; the rest comes from variance between scores.",
+  min(shared_page$width_ratio_shared, na.rm = TRUE),
+  max(shared_page$width_ratio_shared, na.rm = TRUE)
+)
+linked_sentence <- if (n_partial_page == 0L || n_linked_change == 0L) {
+  "The linked-group bound, which puts \u03c1 on every pair that shares any study, does not change whether any interval excludes zero."
+} else {
+  sprintf(
+    "The linked-group bound changes whether the interval excludes zero for %d comparisons.",
+    n_linked_change
+  )
+}
+
+shared_table <- c(
+  "<table><thead><tr>",
+  "<th>Trait</th><th>Training</th><th>Ancestry group</th><th>Scores</th><th>Shared side</th>",
+  "<th>Average of all scores</th><th>Covariance model</th><th>Excludes 0</th>",
+  "<th>Shared samples only</th><th>Full model</th><th>Robust df</th>",
+  "</tr></thead><tbody>"
+)
+for (i in seq_len(nrow(shared_page))) {
+  r <- shared_page[i, ]
+  excludes <- if (isTRUE(r$sig_fixed) == isTRUE(r$sig_cov)) {
+    ifelse(isTRUE(r$sig_cov), "yes", "no")
+  } else {
+    sprintf("changes, now %s", ifelse(isTRUE(r$sig_cov), "yes", "no"))
+  }
+  robust_cell <- if (isTRUE(r$robust_reported)) {
+    sprintf("%s to %s", fmt4(r$lo_robust), fmt4(r$hi_robust))
+  } else if (is.finite(r$robust_df)) {
+    sprintf("df %s, not reported", fmt3(r$robust_df))
+  } else {
+    "\u2014"
+  }
+  shared_table <- c(shared_table, sprintf(
+    "<tr><td>%s</td><td>%s</td><td>%s</td><td>%d</td><td>%s</td><td>%s to %s</td><td>%s to %s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+    html_escape(r$trait_label),
+    html_escape(page_train(r$trained_bucket)),
+    html_escape(r$target_ancestry),
+    r$n_pairs,
+    html_escape(share_side_label(r$share_side)),
+    fmt4(r$lo_fixed), fmt4(r$hi_fixed),
+    fmt4(r$lo_cov), fmt4(r$hi_cov),
+    html_escape(excludes),
+    fmt3(r$width_ratio_shared),
+    fmt3(r$width_ratio_cov),
+    html_escape(robust_cell)
+  ))
+}
+shared_table <- c(shared_table, "</tbody></table>")
+
 html <- c(
   "<!DOCTYPE html>",
   "<html lang='en'><head><meta charset='utf-8'>",
-  "<title>Type 2 diabetes — which model for PGS that share a sample set</title>",
+  "<title>Scores that share a sample</title>",
   paste0("<style>", css, "</style>"),
   "</head><body>",
-  "<h1>Type 2 diabetes: PGS that share a sample set</h1>",
+  "<h1>Scores that share a sample</h1>",
   paste0(
     "<p class='small'>Catalog stamp ", html_escape(stamp),
-    ". In the models, cohort means the sample set.</p>"
+    ". In the four AUC models below, cohort means the sample set.</p>"
   ),
+  "<div class='lead'>",
+  "<p>Several scores can sit on one sample set. Different sample-set ids can still be the same study, including UK Biobank and Genes &amp; Health. ",
+  "The average of all scores treats those evaluations as independent, so its interval is too narrow.</p>",
+  "<p>The four AUC models change the residual only. They do not put in the covariance between the European evaluations, or between the non-European evaluations, of scores that share a sample.</p>",
+  "<p>The covariance is built with <code>vcalc</code>, once for the European source and once for the non-European source. ",
+  "<code>rma.mv</code> fits the ancestry difference. <code>robust</code> gives a cluster-robust interval when the degrees of freedom are at least 4. ",
+  "This follows Pustejovsky &amp; Tipton (2022) and the metafor manual page for dependent estimates. The paper is the one to confirm with Pirmin.</p>",
+  "<p><strong>With one sharing group, the interval depends on the assumed \u03c1; we show 0.3\u20130.9.</strong> ",
+  sprintf(
+    "%d of the %d comparisons with shared samples are one sharing group. %d of %d still exclude zero under the covariance model. ",
+    n_one_group_page, n_shared_page, n_sig_cov_page, n_shared_page
+  ),
+  "The model is only for comparisons whose scores share people. The others keep the average of all scores. ",
+  html_escape(width_shared_sentence), "</p>",
+  sprintf(
+    "<p>%s %d of the %d comparisons have only 2\u20133 scores and are flagged unstable for the between-score variance.</p>",
+    linked_sentence, n_unstable_page, n_shared_page
+  ),
+  "</div>",
 
+  "<h2>Worked comparisons</h2>",
+  embed_png("01_who_shares_south_asian.png", "Who shares a sample in type 2 diabetes, South Asian participants", dep_fig_dir),
+  "<p class='cap'>Type 2 diabetes, South Asian participants, European-only training. Colour is the source study. Two UK Biobank ids are the same people.</p>",
+  embed_png("02_covariance_south_asian.png", "Covariance of the ancestry differences", dep_fig_dir),
+  "<p class='cap'>Diagonal only, then the European block from vcalc, then the non-European block. Colour is on a square-root scale. A score that does not share the UK Biobank label stays out of the non-European square. \u03c1 = 0.6.</p>",
+  embed_png("03_forest_south_asian.png", "Score differences and the covariance-model interval", dep_fig_dir),
+  "<p class='cap'>Grey is one score. Black is the average of all scores, labelled All PGS IVW in the tables below. Blue is the covariance model.</p>",
+  embed_png("04_rho_south_asian.png", "The interval at four values of rho", dep_fig_dir),
+  "<p class='cap'>With one sharing group, the interval depends on the assumed \u03c1; we show 0.3\u20130.9.</p>",
+  embed_png("05_two_other_patterns.png", "European-only sharing, and sharing on both sides", dep_fig_dir),
+  "<p class='cap'>Left: shared on the European side only. Right: every score uses the same studies on both sides. There is no comparison shared on the non-European side only.</p>",
+  embed_png("06_dumbbell_shared.png", "Average of all scores and the covariance model for every shared comparison", dep_fig_dir),
+  "<p class='cap'>A triangle marks a comparison whose interval changes whether it excludes zero.</p>",
+
+  "<h2>Comparisons whose scores share people</h2>",
+  shared_table,
+
+  "<h2>Context: four AUC models on type 2 diabetes</h2>",
+  "<p>These four models are the ones Nikolaus wrote down. They stay here as context. They are not the answer to the dependence question.</p>",
   "<div class='q'>",
   "The input I need: which of the four models should account for several PGS evaluated on the same sample set, ",
   "or whether you would rather drop rows than model the sharing.",
@@ -924,9 +1021,9 @@ html <- c(
   "<div class='box'>",
   "<p>Europeans and South Asian participants, European-only training. Thirteen PGS, eleven of them on one UK Biobank sample set.</p>",
   "<ul>",
-  sprintf("<li>Inverse-variance pool of all 13: <strong>%s</strong> (%s to %s).</li>",
+  sprintf("<li>Average of all scores (All PGS IVW): <strong>%s</strong> (%s to %s).</li>",
           fmt4(sa_all$delta_hat), fmt4(sa_all$lo), fmt4(sa_all$hi)),
-  sprintf("<li>Pool of the 3 kept PGS, one per sample set: <strong>%s</strong> (%s to %s).</li>",
+  sprintf("<li>Check, one score per target sample set: <strong>%s</strong> (%s to %s).</li>",
           fmt4(sa_one$delta_hat), fmt4(sa_one$lo), fmt4(sa_one$hi)),
   "</ul>",
   "</div>",
@@ -938,7 +1035,7 @@ html <- c(
 
   embed_png("02_south_asian_one_of_eight.png", "Type 2 diabetes, Europeans and South Asian participants, European-only training"),
   "<p class='cap'>Thirteen PGS. Eleven share PSS011749. Two other target sample sets are in the comparison. ",
-  "The black line is All PGS IVW, the pool of all thirteen, about 0. One PGS per target sample set is −0.016 and excludes 0.</p>",
+  "The black line is All PGS IVW, the average of all thirteen, about 0. One score per target sample set is \u22120.016 and excludes 0.</p>",
 
   embed_png("03_hispanic_one_of_seventeen.png", "Type 2 diabetes, Europeans and Hispanic or Latin American participants, European-only training"),
   "<p class='cap'>Eleven PGS, all on PSS011736. Ancestry group and sample set are the same column. ",
@@ -998,7 +1095,7 @@ for (i in seq_len(nrow(model_blurbs))) {
     sprintf("<h3>%s</h3>", html_escape(mb$title)),
     sprintf("<p>%s</p>", html_escape(mb$blurb)),
     "<p class='small'>Ancestry estimates:</p>",
-    "<table><thead><tr><th>Bucket</th><th>Cohort</th><th>Ancestry</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th></tr></thead><tbody>"
+    "<table><thead><tr><th>Training</th><th>Cohort</th><th>Ancestry</th><th>Estimate</th><th>95% CI</th><th>Excludes 0</th><th>Note</th></tr></thead><tbody>"
   )
   if (nrow(sub) == 0L) {
     html <- c(html, "<tr><td colspan='7'>No fit returned ancestry coefficients.</td></tr>")

@@ -1,0 +1,4 @@
+estimate,delta_hat,lo,hi,k,note
+Average of all scores,7.169988199493247e-4,-0.0031883243127928135,0.004622321952691463,13,The covariance model keeps every score. The one-score row is a check.
+"Check, one score per target sample set",-0.016023825708426986,-0.022255109636068783,-0.009792541780785188,3,The covariance model keeps every score. The one-score row is a check.
+Covariance model,0.00381135338176718,-0.00718573949506395,0.01480844625859832,13,The covariance model keeps every score. The one-score row is a check.

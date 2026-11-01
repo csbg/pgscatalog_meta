@@ -1,0 +1,8 @@
+23 of the 24 comparisons with shared samples are one sharing group, so the robust interval applies to 1 comparison.
+With one sharing group, the interval depends on the assumed ρ; we show 0.3–0.9.
+Do you have a value for ρ in mind, or a reason to prefer one?
+The write-up cites Pustejovsky & Tipton 2022 and the metafor manual page for vcalc, rma.mv, and robust. Is that the paper you meant?
+
+After the fit: Type 2 diabetes, Hispanic or Latin American participants, multi-ancestry training has 4 sharing groups and degrees of freedom 2.3. The robust interval is reported only when the degrees of freedom are at least 4, so it is not reported here. The intervals are the model-based intervals at rho = 0.6.
+Shared samples alone widen the intervals 1.0–2.6×; the rest comes from variance between scores.
+12 of the 24 comparisons have only 2–3 scores and are flagged unstable for the between-score variance.

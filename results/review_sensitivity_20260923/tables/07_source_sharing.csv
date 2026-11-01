@@ -1,0 +1,33 @@
+trait_label,trained_bucket,target_ancestry,n_scores,eur_shared_sample_set_id,tgt_shared_sample_set_id,eur_shared_source,tgt_shared_source,share_side,source_adds_link,n_sharing_groups,n_partial_pairs,consortium_strings,goes_through_covariance_model
+5-year incident prostate cancer,Train: Multi incl. EUR,African,5,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,5,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,2,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Breast Carcinoma,Train: European-only,African,4,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Breast Carcinoma,Train: European-only,South Asian,4,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Breast cancer,Train: European-only,African,1,FALSE,FALSE,FALSE,FALSE,neither,FALSE,1,0,NBHS|MEC|CBCS|NC-BCFR|PLCO|SFBCS|CARE|WCHS|WFBC|BWHS,FALSE
+Breast cancer,Train: European-only,East Asian,2,FALSE,FALSE,FALSE,FALSE,neither,FALSE,2,0,,FALSE
+Breast cancer,Train: European-only,Hispanic or Latin American,2,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Breast cancer,Train: European-only,South Asian,11,TRUE,TRUE,TRUE,TRUE,both,TRUE,1,10,,TRUE
+Breast cancer,Train: Multi incl. EUR,East Asian,1,FALSE,FALSE,FALSE,FALSE,neither,FALSE,1,0,,FALSE
+Colorectal cancer,Train: European-only,African,1,FALSE,FALSE,FALSE,FALSE,neither,FALSE,1,0,CPSII|GERA|eMERGE|BCC; GERA|eMERGE|MG-AA,FALSE
+Colorectal cancer,Train: European-only,East Asian,1,FALSE,FALSE,FALSE,FALSE,neither,FALSE,1,0,CPSII|GERA|eMERGE|BCC,FALSE
+Colorectal cancer,Train: European-only,Hispanic or Latin American,1,FALSE,FALSE,FALSE,FALSE,neither,FALSE,1,0,CPSII|GERA|eMERGE|BCC; GERA|HCCS,FALSE
+Colorectal cancer,Train: Multi incl. EUR,African,2,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,CPSII|GERA|eMERGE|BCC; GERA|eMERGE|MG-AA,TRUE
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,2,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,CPSII|GERA|eMERGE|BCC; GERA|HCCS,TRUE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,4,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe; MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,TRUE
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,4,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe; MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,TRUE
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,2,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,2,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,3,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,BBJ|TaiChi|OACIS; WHI|ARIC|CHS|MESA|eMERGE,TRUE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,3,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,WHI|ARIC|CHS|MESA|eMERGE; WHI|MESA|eMERGE,TRUE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,3,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,WHI|ARIC|CHS|MESA|eMERGE,TRUE
+Seropositive RA,Train: Multi incl. EUR,South Asian,2,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,10,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Type 2 diabetes,Train: European-only,East Asian,12,TRUE,TRUE,TRUE,TRUE,both,TRUE,1,0,,TRUE
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,11,TRUE,TRUE,TRUE,TRUE,both,FALSE,1,0,,TRUE
+Type 2 diabetes,Train: European-only,South Asian,13,TRUE,TRUE,TRUE,TRUE,both,TRUE,1,12,,TRUE
+Type 2 diabetes,Train: Multi incl. EUR,African,2,FALSE,FALSE,FALSE,FALSE,neither,FALSE,2,0,MEC|WHI|ARIC|CARDIA|BioMe,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,2,FALSE,FALSE,TRUE,FALSE,European,TRUE,1,0,,TRUE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,6,TRUE,TRUE,TRUE,TRUE,both,TRUE,4,0,MEC|WHI|HCHS-SOL|BioMe,TRUE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,2,FALSE,FALSE,FALSE,FALSE,neither,FALSE,2,0,,FALSE
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,2,FALSE,FALSE,TRUE,FALSE,European,TRUE,1,0,,TRUE

@@ -12,3 +12,6 @@ I2 values outside 0-100 (pipeline tables),0,should be 0
 Catalog All of Us evaluations,717,flag only; not a count lock
 Figure 1C rows whose cohort is All of Us,60,flag only; not a count lock
 Pairs whose two sides differ in covariate class,0,should be 0
+"Covariance model with rho 0 and sigma2 0, max |difference| from the inverse-variance average",5.551115123125783e-17,should be near 0
+Comparisons where the covariance interval narrows as rho rises,2,"diagnostic; list any comparison where the width falls: Type 2 diabetes, Train: European-only, East Asian | Type 2 diabetes, Train: Multi incl. EUR, Hispanic or Latin American"
+"Scores missing or repeated in the covariance rows, plus unnamed-label collisions",0,should be 0

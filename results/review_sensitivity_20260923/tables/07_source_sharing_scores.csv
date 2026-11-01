@@ -1,0 +1,255 @@
+trait_label,trained_bucket,target_ancestry,pgs_id,side,sampleset_ids,cohort_txt,display_name,cluster_label
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005237,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005237,Target,PSS012055,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005238,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005238,Target,PSS012055,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005239,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005239,Target,PSS012055,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005240,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005240,Target,PSS012055,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005241,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,African,PGS005241,Target,PSS012055,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005237,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005237,Target,PSS012057,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005238,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005238,Target,PSS012057,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005239,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005239,Target,PSS012057,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005240,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005240,Target,PSS012057,UKB,UK Biobank,UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005241,European,PSS012053;PSS012054;PSS012056,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,PGS005241,Target,PSS012057,UKB,UK Biobank,UK Biobank
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,PGS002238,European,PSS009512,BioVU,BioVU,BioVU
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,PGS002238,Target,PSS009511,BioVU,BioVU,BioVU
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,PGS002239,European,PSS009512,BioVU,BioVU,BioVU
+Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,PGS002239,Target,PSS009511,BioVU,BioVU,BioVU
+Breast Carcinoma,Train: European-only,African,PGS005345,European,PSS012137;PSS012138;PSS012140,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+Breast Carcinoma,Train: European-only,African,PGS005345,Target,PSS012139,UKB,UK Biobank,UK Biobank
+Breast Carcinoma,Train: European-only,African,PGS005346,European,PSS012137;PSS012138;PSS012140,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+Breast Carcinoma,Train: European-only,African,PGS005346,Target,PSS012139,UKB,UK Biobank,UK Biobank
+Breast Carcinoma,Train: European-only,African,PGS005347,European,PSS012137;PSS012138;PSS012140,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+Breast Carcinoma,Train: European-only,African,PGS005347,Target,PSS012139,UKB,UK Biobank,UK Biobank
+Breast Carcinoma,Train: European-only,African,PGS005348,European,PSS012137;PSS012138;PSS012140,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+Breast Carcinoma,Train: European-only,African,PGS005348,Target,PSS012139,UKB,UK Biobank,UK Biobank
+Breast Carcinoma,Train: European-only,South Asian,PGS005345,European,PSS012137;PSS012138;PSS012140,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+Breast Carcinoma,Train: European-only,South Asian,PGS005345,Target,PSS012141,UKB,UK Biobank,UK Biobank
+Breast Carcinoma,Train: European-only,South Asian,PGS005346,European,PSS012137;PSS012138;PSS012140,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+Breast Carcinoma,Train: European-only,South Asian,PGS005346,Target,PSS012141,UKB,UK Biobank,UK Biobank
+Breast Carcinoma,Train: European-only,South Asian,PGS005347,European,PSS012137;PSS012138;PSS012140,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+Breast Carcinoma,Train: European-only,South Asian,PGS005347,Target,PSS012141,UKB,UK Biobank,UK Biobank
+Breast Carcinoma,Train: European-only,South Asian,PGS005348,European,PSS012137;PSS012138;PSS012140,MCCS;QSKIN;UKB,MCCS;QSKIN;UK Biobank,MCCS + QSKIN + UK Biobank
+Breast Carcinoma,Train: European-only,South Asian,PGS005348,Target,PSS012141,UKB,UK Biobank,UK Biobank
+Breast cancer,Train: European-only,African,PGS000004,European,PSS013835,UCLA,UCLA,UCLA
+Breast cancer,Train: European-only,African,PGS000004,Target,PSS000995;PSS011899;PSS013834,NBHS|MEC|CBCS|NC-BCFR|PLCO|SFBCS|CARE|WCHS|WFBC|BWHS;AABCG;UCLA,NBHS|MEC|CBCS|NC-BCFR|PLCO|SFBCS|CARE|WCHS|WFBC|BWHS;AABCG;UCLA,AABCG + NBHS|MEC|CBCS|NC-BCFR|PLCO|SFBCS|CARE|WCHS|WFBC|BWHS + UCLA
+Breast cancer,Train: European-only,East Asian,PGS000004,European,PSS013835,UCLA,UCLA,UCLA
+Breast cancer,Train: European-only,East Asian,PGS000004,Target,PSS013836,UCLA,UCLA,UCLA
+Breast cancer,Train: European-only,East Asian,PGS001336,European,PSS007618;PSS007620,UKB;UKB,UK Biobank;UK Biobank,UK Biobank
+Breast cancer,Train: European-only,East Asian,PGS001336,Target,PSS007617,UKB,UK Biobank,UK Biobank
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000004,European,PSS003599,eMERGE,eMERGE,eMERGE
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000004,Target,PSS003600,eMERGE,eMERGE,eMERGE
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000015,European,PSS003599,eMERGE,eMERGE,eMERGE
+Breast cancer,Train: European-only,Hispanic or Latin American,PGS000015,Target,PSS003600,eMERGE,eMERGE,eMERGE
+Breast cancer,Train: European-only,South Asian,PGS001336,European,PSS007618;PSS007620,UKB;UKB,UK Biobank;UK Biobank,UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS001336,Target,PSS007619,UKB,UK Biobank,UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS003983,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS003983,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS003999,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS003999,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004025,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004025,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004040,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004040,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004053,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004053,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004069,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004069,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004083,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004083,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004107,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004107,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004123,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004123,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004153,European,PSS011215;PSS011227;PSS011254;PSS011268,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Breast cancer,Train: European-only,South Asian,PGS004153,Target,PSS011238;PSS011282,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Breast cancer,Train: Multi incl. EUR,East Asian,PGS000028,European,PSS000039,CPMCBHC,CPMCBHC,CPMCBHC
+Breast cancer,Train: Multi incl. EUR,East Asian,PGS000028,Target,PSS000038,CPMCBHC,CPMCBHC,CPMCBHC
+Colorectal cancer,Train: European-only,African,PGS003851,European,PSS011059;PSS011065,GERA;CPSII|GERA|eMERGE|BCC,GERA;CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC + GERA
+Colorectal cancer,Train: European-only,African,PGS003851,Target,PSS011057;PSS011063,GERA;GERA|eMERGE|MG-AA,GERA;GERA|eMERGE|MG-AA,GERA + GERA|eMERGE|MG-AA
+Colorectal cancer,Train: European-only,East Asian,PGS003851,European,PSS011059;PSS011065,GERA;CPSII|GERA|eMERGE|BCC,GERA;CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC + GERA
+Colorectal cancer,Train: European-only,East Asian,PGS003851,Target,PSS011058,GERA,GERA,GERA
+Colorectal cancer,Train: European-only,Hispanic or Latin American,PGS003851,European,PSS011059;PSS011065,GERA;CPSII|GERA|eMERGE|BCC,GERA;CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC + GERA
+Colorectal cancer,Train: European-only,Hispanic or Latin American,PGS003851,Target,PSS011060;PSS011064,GERA;GERA|HCCS,GERA;GERA|HCCS,GERA + GERA|HCCS
+Colorectal cancer,Train: Multi incl. EUR,African,PGS003850,European,PSS011065,CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC
+Colorectal cancer,Train: Multi incl. EUR,African,PGS003850,Target,PSS011063,GERA|eMERGE|MG-AA,GERA|eMERGE|MG-AA,GERA|eMERGE|MG-AA
+Colorectal cancer,Train: Multi incl. EUR,African,PGS003852,European,PSS011065,CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC
+Colorectal cancer,Train: Multi incl. EUR,African,PGS003852,Target,PSS011063,GERA|eMERGE|MG-AA,GERA|eMERGE|MG-AA,GERA|eMERGE|MG-AA
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,PGS003850,European,PSS011065,CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,PGS003850,Target,PSS011064,GERA|HCCS,GERA|HCCS,GERA|HCCS
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,PGS003852,European,PSS011065,CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC,CPSII|GERA|eMERGE|BCC
+Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,PGS003852,Target,PSS011064,GERA|HCCS,GERA|HCCS,GERA|HCCS
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000011,European,PSS000333,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000011,Target,PSS000331,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000013,European,PSS000333,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000013,Target,PSS000331,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000018,European,PSS000333,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000018,Target,PSS000331,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000200,European,PSS000333,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,PGS000200,Target,PSS000331,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000011,European,PSS000333,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000011,Target,PSS000335,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000013,European,PSS000333,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000013,Target,PSS000335,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000018,European,PSS000333,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000018,Target,PSS000335,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000200,European,PSS000333,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|CCHMC|MyCode|Marshfield|PHB|BioMe
+Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,PGS000200,Target,PSS000335,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe,MAYO|BioVU|eMERGE|Columbia|KP|Nugene|PHB|BioMe
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,PGS002250,European,PSS010091,UKB,UK Biobank,UK Biobank
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,PGS002250,Target,PSS010090,OCAC,OCAC,OCAC
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,PGS003394,European,PSS010091,UKB,UK Biobank,UK Biobank
+Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,PGS003394,Target,PSS010090,OCAC,OCAC,OCAC
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,PGS001800,European,PSS009985,COPDGene,COPDGene,COPDGene
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,PGS001800,Target,PSS009983,COPDGene,COPDGene,COPDGene
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,PGS001801,European,PSS009985,COPDGene,COPDGene,COPDGene
+Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,PGS001801,Target,PSS009983,COPDGene,COPDGene,COPDGene
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004696,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004696,Target,PSS011447,BBJ|TaiChi|OACIS,BBJ|TaiChi|OACIS,BBJ|TaiChi|OACIS
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004697,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004697,Target,PSS011447,BBJ|TaiChi|OACIS,BBJ|TaiChi|OACIS,BBJ|TaiChi|OACIS
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004698,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,East Asian,PGS004698,Target,PSS011447,BBJ|TaiChi|OACIS,BBJ|TaiChi|OACIS,BBJ|TaiChi|OACIS
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004696,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004696,Target,PSS011449,WHI|MESA|eMERGE,WHI|MESA|eMERGE,WHI|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004697,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004697,Target,PSS011449,WHI|MESA|eMERGE,WHI|MESA|eMERGE,WHI|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004698,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,PGS004698,Target,PSS011449,WHI|MESA|eMERGE,WHI|MESA|eMERGE,WHI|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004696,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004696,Target,PSS011450,UKB,UK Biobank,UK Biobank
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004697,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004697,Target,PSS011450,UKB,UK Biobank,UK Biobank
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004698,European,PSS011448,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE,WHI|ARIC|CHS|MESA|eMERGE
+Incident coronary heart disease,Train: Multi incl. EUR,South Asian,PGS004698,Target,PSS011450,UKB,UK Biobank,UK Biobank
+Seropositive RA,Train: Multi incl. EUR,South Asian,PGS004118,European,PSS011222;PSS011233;PSS011262;PSS011275,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Seropositive RA,Train: Multi incl. EUR,South Asian,PGS004118,Target,PSS011246,G&H,Genes & Health,Genes & Health
+Seropositive RA,Train: Multi incl. EUR,South Asian,PGS004133,European,PSS011222;PSS011233;PSS011262;PSS011275,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Seropositive RA,Train: Multi incl. EUR,South Asian,PGS004133,Target,PSS011246,G&H,Genes & Health,Genes & Health
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS003984,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS003984,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004000,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004000,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004015,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004015,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004041,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004041,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004054,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004054,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004070,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004070,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004098,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004098,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004108,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004108,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004124,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004124,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004154,European,PSS011223;PSS011234;PSS011263;PSS011276,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,PGS004154,Target,PSS011247;PSS011290,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS000330,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS000330,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS000713,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS000713,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS000729,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS000729,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS000805,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS000805,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS000864,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS000864,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS000868,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS000868,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS001295,European,PSS004314;PSS004316,UKB;UKB,UK Biobank;UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS001295,Target,PSS004313,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS001818,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS001818,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS002026,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS002026,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS002671,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS002671,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS002771,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS002771,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,East Asian,PGS002780,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,East Asian,PGS002780,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000330,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000330,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000713,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000713,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000729,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000729,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000805,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000805,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000864,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000864,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000868,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS000868,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS001818,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS001818,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002026,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002026,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002671,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002671,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002771,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002771,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002780,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,Hispanic or Latin American,PGS002780,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS000330,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS000330,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS000713,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS000713,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS000729,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS000729,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS000805,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS000805,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS000864,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS000864,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS000868,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS000868,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS001295,European,PSS004314;PSS004316,UKB;UKB,UK Biobank;UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS001295,Target,PSS004315,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS001818,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS001818,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS002026,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS002026,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS002671,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS002671,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS002771,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS002771,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS002780,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: European-only,South Asian,PGS002780,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS004106,European,PSS011225;PSS011236;PSS011265;PSS011278,EB;FinnGen;HUNT;UKB,EB;FinnGen;HUNT;UK Biobank,EB + FinnGen + HUNT + UK Biobank
+Type 2 diabetes,Train: European-only,South Asian,PGS004106,Target,PSS011249;PSS011291,G&H;UKB,Genes & Health;UK Biobank,Genes & Health + UK Biobank
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS000804,European,PSS001046,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS000804,Target,PSS001044,MEC|WHI|ARIC|CARDIA|BioMe,MEC|WHI|ARIC|CARDIA|BioMe,MEC|WHI|ARIC|CARDIA|BioMe
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS004859,European,PSS011518,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,African,PGS004859,Target,PSS011514;PSS011515,AllofUs;AllofUs,All of Us;All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS003443,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS003443,Target,PSS011745,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS004859,European,PSS011518,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,East Asian,PGS004859,Target,PSS011517,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS000804,European,PSS001046,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS000804,Target,PSS001047,MEC|WHI|HCHS-SOL|BioMe,MEC|WHI|HCHS-SOL|BioMe,MEC|WHI|HCHS-SOL|BioMe
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS002308,European,PSS009677,eMERGE,eMERGE,eMERGE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS002308,Target,PSS009678,eMERGE,eMERGE,eMERGE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS003443,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS003443,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS003867,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS003867,Target,PSS011736,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS004859,European,PSS011518,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS004859,Target,PSS011516,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS005242,European,PSS012060,PAGE,PAGE,PAGE
+Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,PGS005242,Target,PSS012061,PAGE,PAGE,PAGE
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS000804,European,PSS001046,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS000804,Target,PSS013832,QBB,QBB,QBB
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS003867,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,Middle Eastern or North African,PGS003867,Target,PSS011097,NA,(blank),unnamed:PSS011097
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS003443,European,PSS011737,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS003443,Target,PSS011749,UKB,UK Biobank,UK Biobank
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS004859,European,PSS011518,AllofUs,All of Us,All of Us
+Type 2 diabetes,Train: Multi incl. EUR,South Asian,PGS004859,Target,PSS011519,AllofUs,All of Us,All of Us

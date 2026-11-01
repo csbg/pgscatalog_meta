@@ -27,7 +27,17 @@ suppressPackageStartupMessages({
   library(purrr)
   library(janitor)
   library(patchwork)
+  library(metafor)
+  library(clubSandwich)
 })
+
+# Covariance model for comparisons whose scores share people.
+# With one sharing group the interval is whatever rho_main makes it.
+# The page also shows 0.3 and 0.9. robust() is reported only when its
+# degrees of freedom are at least min_robust_df.
+rho_main <- 0.6
+rho_grid <- c(0, 0.3, 0.6, 0.9)
+min_robust_df <- 4
 
 if (!file.exists("R/load.R")) {
   stop("R/load.R not found. Run this script from the repository root.", call. = FALSE)
@@ -108,8 +118,7 @@ keep_bucket_pattern <- c("European-only", "Multi incl")
 #     "delta_method"          se_auc = se_logit * AUC(1-AUC)          (proposed fix)
 #     "from_ci"               se_auc = (hi_pooled - lo_pooled)/(2*1.96) (cross-check)
 #   model:
-#     "fixed"                 inverse-variance fixed effect (as submitted)
-#     "random_dl"             DerSimonian-Laird random effects
+#     "fixed"                 inverse-variance average (as submitted)
 # ---------------------------------------------------------------------------
 
 se_scale_levels <- c("logit_as_implemented", "delta_method", "from_ci")
@@ -180,6 +189,12 @@ pair_stage1_ignoring_class <- function(scat_df, se_col) {
 }
 
 pool_delta <- function(delta, se, model = "fixed") {
+  if (!identical(model, "fixed")) {
+    stop(
+      "pool_delta fits the inverse-variance average. Shared samples use fit_shared_comparisons().",
+      call. = FALSE
+    )
+  }
   ok <- is.finite(delta) & is.finite(se) & se > 0
   delta <- delta[ok]
   se    <- se[ok]
@@ -192,10 +207,6 @@ pool_delta <- function(delta, se, model = "fixed") {
   Q  <- sum(w * (delta - dh)^2)
   df <- k - 1
   tau2 <- 0
-  if (model == "random_dl" && k >= 2) {
-    C <- sum(w) - sum(w^2) / sum(w)
-    tau2 <- if (is.finite(C) && C > 0) max(0, (Q - df) / C) else 0
-  }
   ws <- 1 / (se^2 + tau2)
   tibble(
     delta_hat = sum(ws * delta) / sum(ws),
@@ -1103,6 +1114,51 @@ sharing_summary <- tibble(
 )
 write_tbl(sharing_summary, "07_within_cell_sampleset_sharing_summary")
 
+# Source study behind each sample set. A comparison goes through the covariance
+# model when any scores share a study on either side. The other comparisons
+# keep the inverse-variance average. The note is what goes to Pirmin with these
+# tables, before the fit is the result he is asked to read.
+source_sharing <- build_source_sharing(
+  paired_dm %>%
+    select(trait_label, trained_bucket, target_ancestry, pgs_id, covariate_class,
+           delta, delta_se, eur_se, tgt_se),
+  usable_keys,
+  pss
+)
+write_tbl(source_sharing$comparisons, "07_source_sharing")
+write_tbl(source_sharing$scores, "07_source_sharing_scores")
+if (anyNA(source_sharing$scores$cluster_label) || any(!nzchar(source_sharing$scores$cluster_label))) {
+  stop("A score is missing a source label.", call. = FALSE)
+}
+if (unnamed_token_collisions(source_sharing$scores) != 0L) {
+  stop("An unnamed source label is shared by two sample sets.", call. = FALSE)
+}
+
+n_shared_src <- sum(source_sharing$comparisons$goes_through_covariance_model)
+n_one_group <- sum(
+  source_sharing$comparisons$goes_through_covariance_model &
+    source_sharing$comparisons$n_sharing_groups == 1L
+)
+n_multi_group <- sum(
+  source_sharing$comparisons$goes_through_covariance_model &
+    source_sharing$comparisons$n_sharing_groups >= 2L
+)
+source_note <- paste(
+  sprintf(
+    "%d of the %d comparisons with shared samples are one sharing group, so the robust interval applies to %d comparison%s.",
+    n_one_group,
+    n_shared_src,
+    n_multi_group,
+    if (n_multi_group == 1L) "" else "s"
+  ),
+  "With one sharing group, the interval depends on the assumed \u03c1; we show 0.3\u20130.9.",
+  "Do you have a value for \u03c1 in mind, or a reason to prefer one?",
+  "The write-up cites Pustejovsky & Tipton 2022 and the metafor manual page for vcalc, rma.mv, and robust. Is that the paper you meant?",
+  sep = "\n"
+)
+writeLines(source_note, file.path(dir_tables, "07_source_sharing_note.txt"))
+message(source_note)
+
 # ===========================================================================
 # 8) Stage-2 scale comparison
 #    (a) PGS000004 African-vs-European interval check
@@ -1245,13 +1301,10 @@ mixed_bounds <- paired_main %>%
 write_tbl(mixed_bounds, "08_scale_fix_mixed_scale_pgs_bounds")
 
 # ===========================================================================
-# 9) Dependence sensitivities on the delta-method SEs
-#    Fixed effect of every PGS in the cell.
-#    When k > 1 but every score shares one target sample set, the sensitivity
-#    is that single retained PGS. DerSimonian-Laird is not defined for one ΔAUC.
-#    When at least two target sample sets remain, random effects are fit to
-#    those independent ΔAUC values (one PGS per target sample set, lowest PGS ID).
-#    The fixed effect of that reduced set is drawn only when it drops a duplicate.
+# 9) Dependence on the delta-method standard errors
+#    The average of all scores stays. It is the Figure 1C number on this scale.
+#    The covariance model is only for comparisons whose scores share people.
+#    One score per target sample set stays as a check.
 # ===========================================================================
 
 message(">> [9] Dependence sensitivities")
@@ -1298,16 +1351,30 @@ paired_one_per_pss <- paired_dm %>%
 
 cells_one_per_pss <- pool_stage2(paired_one_per_pss, model = "fixed") %>%
   mutate(sensitivity = "one PGS per target sample set")
-# Random effects only on the independent ΔAUCs, and only when at least two remain.
-# A cell with one ΔAUC (k = 1, or several PGS on one target sample set) has no τ² to estimate.
-cells_random <- pool_stage2(paired_one_per_pss, model = "random_dl") %>%
-  filter(n_pairs >= 2) %>%
-  mutate(sensitivity = "random effects (DL)")
 
-src_fixed   <- "IVW fixed effect"
-src_single  <- "Single PGS (shared target sample set)"
-src_reduced <- "Fixed effect, one PGS per sample set"
-src_random  <- "Random effects (DL)"
+message(">> [9] Covariance model for comparisons with shared samples")
+cov_fits <- fit_shared_comparisons(
+  source_sharing$model_scores,
+  source_sharing$comparisons,
+  rho_main = rho_main,
+  rho_grid = rho_grid,
+  min_robust_df = min_robust_df
+)
+width_narrowed_tbl <- width_narrowed(cov_fits$rho)
+write_tbl(cov_fits$rho, "09_dependence_rho")
+write_tbl(width_narrowed_tbl, "09_dependence_width_narrowed")
+write_tbl(
+  source_sharing$model_scores %>%
+    select(trait_label, trained_bucket, target_ancestry, pgs_id, delta, delta_se, eur_se, tgt_se,
+           eur_cluster, tgt_cluster, eur_group, tgt_group, sharing_group,
+           eur_sampleset_ids, tgt_sampleset_ids, eur_display, tgt_display),
+  "09_dependence_scores"
+)
+
+src_fixed   <- "Average of all scores"
+src_single  <- "Check: one score for that target sample set"
+src_reduced <- "Check: one score per target sample set"
+src_cov     <- "Covariance model"
 
 dependence_cells <- delta_dm %>%
   transmute(trait_label, trained_bucket, target_ancestry, n_pairs,
@@ -1318,35 +1385,47 @@ dependence_cells <- delta_dm %>%
     by = c("trait_label", "trained_bucket", "target_ancestry")
   ) %>%
   left_join(
-    cells_random %>% transmute(trait_label, trained_bucket, target_ancestry, tau2_random = tau2, I2_stage2 = I2_stage2,
-                               delta_random = delta_hat, se_random = se_hat, lo_random = lo, hi_random = hi, sig_random = ci_excludes_zero),
+    cell_pss_sharing %>% select(trait_label, trained_bucket, target_ancestry, eur_n_sample_sets, tgt_n_sample_sets,
+                                all_pgs_share_one_target_sample_set, all_pgs_share_one_eur_sample_set),
     by = c("trait_label", "trained_bucket", "target_ancestry")
   ) %>%
-  left_join(cell_pss_sharing %>% select(trait_label, trained_bucket, target_ancestry, eur_n_sample_sets, tgt_n_sample_sets,
-                                        all_pgs_share_one_target_sample_set, all_pgs_share_one_eur_sample_set),
-            by = c("trait_label", "trained_bucket", "target_ancestry")) %>%
+  left_join(
+    source_sharing$comparisons %>%
+      select(trait_label, trained_bucket, target_ancestry, share_side, n_sharing_groups, n_partial_pairs,
+             goes_through_covariance_model),
+    by = c("trait_label", "trained_bucket", "target_ancestry")
+  ) %>%
+  left_join(
+    cov_fits$by_comparison,
+    by = c("trait_label", "trained_bucket", "target_ancestry")
+  ) %>%
   mutate(
     re_applicable = n_pairs_one_per_pss >= 2,
-    n_delta_random = if_else(re_applicable, n_pairs_one_per_pss, NA_integer_),
     single_pgs_sensitivity = n_pairs > 1 & n_pairs_one_per_pss == 1,
     reduced_fixed_effect = n_pairs_one_per_pss >= 2 & n_pairs_one_per_pss < n_pairs,
-    robust_fixed_and_random = re_applicable & sig_fixed & coalesce(sig_random, FALSE),
-    robustness = case_when(
-      n_pairs == 1 & sig_fixed ~ "significant; single ΔAUC (k = 1; random effects not applicable)",
-      n_pairs == 1 & !sig_fixed ~ "not significant; single ΔAUC (k = 1; random effects not applicable)",
-      single_pgs_sensitivity & sig_fixed & sig_one_per_pss ~ "significant in the fixed effect and in the single PGS for that target sample set",
-      single_pgs_sensitivity & sig_fixed & !sig_one_per_pss ~ "significant in the fixed effect only; the single PGS for that target sample set is not",
-      single_pgs_sensitivity & !sig_fixed ~ "not significant (corrected fixed effect); sensitivity is the single PGS, not random effects",
-      re_applicable & n_pairs_one_per_pss == n_pairs & sig_fixed & sig_random ~ "significant in the fixed effect and in random effects",
-      re_applicable & n_pairs_one_per_pss == n_pairs & sig_fixed & !sig_random ~ "significant in the fixed effect only; not in random effects",
-      re_applicable & sig_fixed & sig_one_per_pss & sig_random ~ "significant in the fixed effect, the one-per-sample-set fixed effect, and random effects",
-      re_applicable & sig_fixed & sig_one_per_pss & !sig_random ~ "significant in both fixed effects; not in random effects",
-      re_applicable & sig_fixed & !sig_one_per_pss & sig_random ~ "significant in the full fixed effect and in random effects; not after one PGS per sample set",
-      re_applicable & sig_fixed ~ "significant in the full fixed effect only; sensitive to dependence",
-      TRUE ~ "not significant (corrected fixed effect)"
-    )
+    width_ratio_shared = if_else(
+      goes_through_covariance_model,
+      (hi_shared - lo_shared) / (hi_fixed - lo_fixed),
+      NA_real_
+    ),
+    width_ratio_cov = if_else(
+      goes_through_covariance_model,
+      (hi_cov - lo_cov) / (hi_fixed - lo_fixed),
+      NA_real_
+    ),
+    linked_changes_conclusion = goes_through_covariance_model & !is.na(sig_cov_linked) & sig_cov != sig_cov_linked
   ) %>%
   arrange(delta_fixed)
+
+if (any(dependence_cells$goes_through_covariance_model & !is.finite(dependence_cells$delta_cov))) {
+  stop("A comparison with shared samples has no covariance-model estimate.", call. = FALSE)
+}
+if (any(dependence_cells$goes_through_covariance_model & !is.finite(dependence_cells$width_ratio_shared))) {
+  stop("A comparison with shared samples has no shared-samples width.", call. = FALSE)
+}
+if (cov_fits$max_abs_fe0 > 1e-8) {
+  stop("rho = 0 and sigma2 = 0 did not match the inverse-variance average.", call. = FALSE)
+}
 
 write_tbl(dependence_cells, "09_dependence_cells")
 
@@ -1355,20 +1434,63 @@ dependence_summary <- tibble(
   n_sig_fixed_corrected = sum(dependence_cells$sig_fixed),
   n_cells_single_delta = sum(dependence_cells$n_pairs == 1),
   n_sig_single_delta = sum(dependence_cells$n_pairs == 1 & dependence_cells$sig_fixed),
+  n_shared = sum(dependence_cells$goes_through_covariance_model),
+  n_sig_cov = sum(dependence_cells$sig_cov, na.rm = TRUE),
   n_cells_single_pgs_sensitivity = sum(dependence_cells$single_pgs_sensitivity),
   n_sig_single_pgs_sensitivity = sum(dependence_cells$single_pgs_sensitivity & dependence_cells$sig_one_per_pss, na.rm = TRUE),
-  n_cells_random_effects = sum(dependence_cells$re_applicable),
-  n_sig_random_dl = sum(dependence_cells$sig_random, na.rm = TRUE),
-  n_sig_fixed_and_random = sum(dependence_cells$robust_fixed_and_random, na.rm = TRUE),
   n_cells_reduced_fixed_effect = sum(dependence_cells$reduced_fixed_effect),
-  n_cells_k_reduced_by_one_per_pss = sum(dependence_cells$n_pairs_one_per_pss < dependence_cells$n_pairs, na.rm = TRUE)
+  n_robust_reported = sum(dependence_cells$robust_reported, na.rm = TRUE),
+  n_partial_pairs = sum(dependence_cells$n_partial_pairs),
+  n_linked_changes = sum(dependence_cells$linked_changes_conclusion, na.rm = TRUE),
+  n_width_narrowed = nrow(width_narrowed_tbl),
+  n_sigma2_unstable = sum(dependence_cells$sigma2_unstable, na.rm = TRUE),
+  width_ratio_shared_min = min(dependence_cells$width_ratio_shared, na.rm = TRUE),
+  width_ratio_shared_max = max(dependence_cells$width_ratio_shared, na.rm = TRUE),
+  width_ratio_full_min = min(dependence_cells$width_ratio_cov, na.rm = TRUE),
+  width_ratio_full_max = max(dependence_cells$width_ratio_cov, na.rm = TRUE),
+  max_abs_fe0 = cov_fits$max_abs_fe0,
+  max_abs_diag = cov_fits$max_abs_diag
 )
 write_tbl(dependence_summary, "09_dependence_summary")
+message(glue(
+  "{dependence_summary$n_sig_cov} of {dependence_summary$n_shared} comparisons with shared samples still exclude zero under the covariance model. ",
+  "Shared samples alone widen the intervals {sprintf('%.1f', dependence_summary$width_ratio_shared_min)}\u2013{sprintf('%.1f', dependence_summary$width_ratio_shared_max)}\u00d7; the rest comes from variance between scores. ",
+  "{dependence_summary$n_sigma2_unstable} of the {dependence_summary$n_shared} comparisons have only 2\u20133 scores and are flagged unstable for the between-score variance."
+))
+robust_rows <- dependence_cells %>% filter(is.finite(robust_df))
+if (nrow(robust_rows) > 0L && !any(robust_rows$robust_reported)) {
+  train_words <- ifelse(
+    grepl("European-only", robust_rows$trained_bucket),
+    "European-only training",
+    "multi-ancestry training"
+  )
+  robust_line <- paste(
+    sprintf(
+      "%s, %s participants, %s has %d sharing groups and degrees of freedom %.1f.",
+      robust_rows$trait_label, robust_rows$target_ancestry, train_words,
+      robust_rows$n_sharing_groups, robust_rows$robust_df
+    ),
+    collapse = " "
+  )
+  write(
+    sprintf(
+      "\nAfter the fit: %s The robust interval is reported only when the degrees of freedom are at least %d, so it is not reported here. The intervals are the model-based intervals at rho = %s.",
+      robust_line, min_robust_df, rho_main
+    ),
+    file.path(dir_tables, "07_source_sharing_note.txt"),
+    append = TRUE
+  )
+}
+write(
+  sprintf(
+    "Shared samples alone widen the intervals %.1f\u2013%.1f\u00d7; the rest comes from variance between scores.\n%d of the %d comparisons have only 2\u20133 scores and are flagged unstable for the between-score variance.",
+    dependence_summary$width_ratio_shared_min, dependence_summary$width_ratio_shared_max,
+    dependence_summary$n_sigma2_unstable, dependence_summary$n_shared
+  ),
+  file.path(dir_tables, "07_source_sharing_note.txt"),
+  append = TRUE
+)
 
-# One row in the figure gets the fixed effect, plus only the sensitivities that
-# are a different estimand. Random effects and the single retained PGS never
-# share a cell: the former needs ≥2 independent ΔAUCs, the latter is the case
-# in which only one ΔAUC remains.
 dependence_long <- bind_rows(
   dependence_cells %>%
     transmute(trait_label, trained_bucket, target_ancestry, n_pairs,
@@ -1382,58 +1504,42 @@ dependence_long <- bind_rows(
     transmute(trait_label, trained_bucket, target_ancestry, n_pairs = n_pairs_one_per_pss,
               delta_hat = delta_one_per_pss, lo = lo_one_per_pss, hi = hi_one_per_pss, source = src_reduced),
   dependence_cells %>%
-    filter(re_applicable) %>%
-    transmute(trait_label, trained_bucket, target_ancestry, n_pairs = n_delta_random,
-              delta_hat = delta_random, lo = lo_random, hi = hi_random, source = src_random)
+    filter(goes_through_covariance_model) %>%
+    transmute(trait_label, trained_bucket, target_ancestry, n_pairs,
+              delta_hat = delta_cov, lo = lo_cov, hi = hi_cov, source = src_cov)
 ) %>%
-  mutate(source = factor(source, levels = c(src_fixed, src_single, src_reduced, src_random)))
+  mutate(source = factor(source, levels = c(src_fixed, src_single, src_reduced, src_cov)))
+
+dep_x_lo <- min(dependence_long$lo, na.rm = TRUE) - 0.02
+dep_x_hi <- max(dependence_long$hi, na.rm = TRUE) + 0.02
 
 p_dep <- forest_compare_plot(
   dependence_long,
-  # Outside the ancestry Okabe-Ito palette (no blue, orange, sky, green, yellow, pink, brown, grey, black).
   pal = c("#332288", "#E41A1C", "#6A3D9A", "#01665E"),
   shapes = c(16, 17, 18, 15),
-  title = "Dependence sensitivities on the delta-method ΔAUC",
+  title = "Average of all scores and the covariance model",
   subtitle = glue(
-    "95% CI excludes zero for {dependence_summary$n_sig_fixed_corrected} IVW fixed effects. ",
-    "Single-PGS sensitivity (k > 1, one target sample set): {dependence_summary$n_sig_single_pgs_sensitivity} of {dependence_summary$n_cells_single_pgs_sensitivity}.",
-    "\nRandom effects, only where ≥2 independent ΔAUC remain: {dependence_summary$n_sig_random_dl} of {dependence_summary$n_cells_random_effects} exclude zero. ",
-    "{dependence_summary$n_cells_single_delta} cells are one ΔAUC and are drawn once."
+    "{dependence_summary$n_sig_cov} of {dependence_summary$n_shared} comparisons with shared samples still exclude zero under the covariance model.\n",
+    "With one sharing group, the interval depends on the assumed \u03c1; we show 0.3\u20130.9."
   ),
   caption = paste0(
-    "IVW fixed effect: inverse-variance fixed effect of every PGS in the cell. ",
-    "Single PGS: those scores share one target sample set; the point is the retained score (lowest PGS ID). Random effects are not fit to one ΔAUC.\n",
-    "Fixed effect, one PGS per sample set: shown only when ≥2 scores remain and a duplicate is dropped. ",
-    "Random effects (DL): DerSimonian-Laird on those independent ΔAUC values.\n",
-    "k is the number of PGS in the IVW fixed effect. * = its 95% CI excludes zero."
+    "Average of all scores: inverse-variance average on the delta-method standard errors. ",
+    "The covariance model is fit only where scores share people, with \u03c1 = ", rho_main, ".\n",
+    "Check, one score for that target sample set: those scores share one target sample set; the point is the retained score (lowest PGS ID).\n",
+    "Check, one score per target sample set: shown where at least two scores remain and a duplicate is dropped. ",
+    "Comparisons with no shared people are drawn as the average of all scores."
   ),
   trait_levels = trait_levels_wrapped,
-  show_k = FALSE
+  show_k = FALSE,
+  x_lim = c(dep_x_lo, dep_x_hi),
+  x_breaks = pretty(c(dep_x_lo, dep_x_hi), n = 6)
 )
-
-dependence_row_lab <- dependence_cells %>%
-  mutate(
-    trait_wrapped = factor(wrap_trait(trait_label), levels = trait_levels_wrapped),
-    target_ancestry = factor(as.character(target_ancestry), levels = rev(anc_keep)),
-    trained_bucket = factor(trained_bucket, levels = names(pal_bucket)),
-    k_lab = paste0("k = ", n_pairs, ifelse(sig_fixed, " *", ""))
-  )
-
 p_dep <- p_dep +
-  geom_text(
-    data = dependence_row_lab,
-    aes(x = x_lab_pos, y = target_ancestry, label = k_lab, fontface = ifelse(sig_fixed, "bold", "plain")),
-    inherit.aes = FALSE, size = 2.5, hjust = 0, vjust = 0.5, colour = "grey20",
-    show.legend = FALSE
-  ) +
   guides(
     colour = guide_legend(nrow = 2, byrow = TRUE),
     shape = guide_legend(nrow = 2, byrow = TRUE)
   ) +
-  theme(
-    panel.spacing.x = unit(1.15, "cm"),
-    plot.margin = margin(6, 50, 6, 6)
-  )
+  theme(panel.spacing.x = unit(1.15, "cm"))
 save_plot("09_dependence_forest", p_dep, width = 13.2, height = max(8.2, 0.44 * n_row_plot + 3.8), limitsize = FALSE)
 
 # ===========================================================================
@@ -2725,7 +2831,10 @@ sanity <- tibble(
     "I2 values outside 0-100 (pipeline tables)",
     "Catalog All of Us evaluations",
     "Figure 1C rows whose cohort is All of Us",
-    "Pairs whose two sides differ in covariate class"
+    "Pairs whose two sides differ in covariate class",
+    "Covariance model with rho 0 and sigma2 0, max |difference| from the inverse-variance average",
+    "Comparisons where the covariance interval narrows as rho rises",
+    "Scores missing or repeated in the covariance rows, plus unnamed-label collisions"
   ),
   value = c(
     as.numeric(stamp),
@@ -2741,7 +2850,12 @@ sanity <- tibble(
       sum(i2_check$n_I2_above_100[i2_check$table != "stage1_or_hr (this script)"]),
     sum(eval_df$catalog_all_of_us, na.rm = TRUE),
     sum(cell_identifiers$catalog_all_of_us, na.rm = TRUE),
-    n_class_mismatch
+    n_class_mismatch,
+    dependence_summary$max_abs_fe0,
+    dependence_summary$n_width_narrowed,
+    unnamed_token_collisions(source_sharing$scores) +
+      sum(duplicated(source_sharing$model_scores[c("trait_label", "trained_bucket", "target_ancestry", "pgs_id")])) +
+      abs(nrow(source_sharing$model_scores) - nrow(paired_dm))
   ),
   check = c(
     stamp,
@@ -2756,6 +2870,19 @@ sanity <- tibble(
     "should be 0",
     "flag only; not a count lock",
     "flag only; not a count lock",
+    "should be 0",
+    "should be near 0",
+    if (nrow(width_narrowed_tbl) == 0L) {
+      "diagnostic; no comparison narrowed"
+    } else {
+      paste(
+        "diagnostic; list any comparison where the width falls:",
+        paste(
+          sprintf("%s, %s, %s", width_narrowed_tbl$trait_label, width_narrowed_tbl$trained_bucket, width_narrowed_tbl$target_ancestry),
+          collapse = " | "
+        )
+      )
+    },
     "should be 0"
   )
 )
