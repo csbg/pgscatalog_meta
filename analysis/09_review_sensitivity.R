@@ -1520,7 +1520,8 @@ p_dep <- forest_compare_plot(
   title = "Average of all scores and the covariance model",
   subtitle = glue(
     "{dependence_summary$n_sig_cov} of {dependence_summary$n_shared} comparisons with shared samples still exclude zero under the covariance model.\n",
-    "With one sharing group, the interval depends on the assumed \u03c1; we show 0.3\u20130.9."
+    "With one sharing group, the interval depends on the assumed \u03c1. This plot uses \u03c1 = {rho_main}. ",
+    "\u03c1 = 0, 0.3, 0.6, and 0.9 are in 09_dependence_rho."
   ),
   caption = paste0(
     "Average of all scores: inverse-variance average on the delta-method standard errors. ",
@@ -1532,7 +1533,8 @@ p_dep <- forest_compare_plot(
   trait_levels = trait_levels_wrapped,
   show_k = FALSE,
   x_lim = c(dep_x_lo, dep_x_hi),
-  x_breaks = pretty(c(dep_x_lo, dep_x_hi), n = 6)
+  x_breaks = pretty(c(dep_x_lo, dep_x_hi), n = 6),
+  x_accuracy = 0.01
 )
 p_dep <- p_dep +
   guides(
