@@ -232,8 +232,10 @@ map_df <- tibble(
       fmt_est(fit_full$estimate), n_shared, n_comp - n_shared
     ),
     sprintf(
-      "Reported when the degrees of freedom are at least %d.\n%d of the %d have one sharing group, so the interval is the model interval.\nOne comparison has %d sharing groups and %s degrees of freedom. None is reported.",
-      min_robust_df, n_one_group, n_shared, robust_row$n_sharing_groups, df_txt
+      "Reported when the degrees of freedom are at least %d.\n%d of the %d have one sharing group, so the interval is the model interval.\n%s has %d sharing groups and %s degrees of freedom.\nBelow that threshold, the reported interval is the model interval.",
+      min_robust_df, n_one_group, n_shared,
+      comp_phrase(robust_row$trait_label, robust_row$target_ancestry, robust_row$trained_bucket),
+      robust_row$n_sharing_groups, df_txt
     ),
     "Draws the average of all scores and this model at \u03c1 = 0.6."
   )
@@ -256,7 +258,7 @@ p_map <- ggplot(map_df) +
     colour = "#332288", linewidth = 0.4
   ) +
   geom_text(aes(x = 0.03, y = .data$y + 0.22, label = .data$title), hjust = 0, fontface = "bold", size = 4.2, family = "DejaVu Sans") +
-  geom_text(aes(x = 0.03, y = .data$y - 0.12, label = .data$body), hjust = 0, vjust = 0.5, size = 3.3, lineheight = 1.05, family = "DejaVu Sans") +
+  geom_text(aes(x = 0.03, y = .data$y - 0.14, label = .data$body), hjust = 0, vjust = 0.5, size = 3.1, lineheight = 1.02, family = "DejaVu Sans") +
   scale_x_continuous(limits = c(-0.02, 1.02), expand = c(0, 0)) +
   scale_y_continuous(limits = c(0.4, 8.6), expand = c(0, 0)) +
   labs(
@@ -564,7 +566,14 @@ write_numbers(v_long %>% mutate(row = as.character(.data$row), col = as.characte
 v_lim <- c(0, max(v_long$value))
 
 heat_v <- function(panel) {
-  ggplot(v_long %>% filter(.data$panel == panel), aes(x = .data$col, y = .data$row, fill = .data$value)) +
+  dat <- v_long %>% filter(.data$panel == .env$panel)
+  if (panel == "European covariance") {
+    hit <- dat %>% filter(as.character(.data$row) == "PGS000330", as.character(.data$col) == "PGS001295")
+    if (nrow(hit) != 1L || abs(hit$value) > 1e-12) {
+      stop("The European covariance panel is not the European block.", call. = FALSE)
+    }
+  }
+  ggplot(dat, aes(x = .data$col, y = .data$row, fill = .data$value)) +
     geom_tile(colour = "white", linewidth = 0.3) +
     scale_fill_gradient(low = "#F7F7F7", high = "#332288", limits = v_lim, trans = "sqrt", na.value = "#F7F7F7") +
     labs(title = panel, x = NULL, y = NULL) +
@@ -580,7 +589,14 @@ pattern_values <- bind_rows(
   tgt_exact %>% mutate(panel = "Non-European correlation")
 )
 heat_pat <- function(panel) {
-  ggplot(pattern_values %>% filter(.data$panel == panel), aes(x = .data$col, y = .data$row, fill = .data$value)) +
+  dat <- pattern_values %>% filter(.data$panel == .env$panel)
+  if (panel == "European correlation") {
+    hit <- dat %>% filter(as.character(.data$row) == "PGS000330", as.character(.data$col) == "PGS001295")
+    if (!identical(hit$value, "0")) {
+      stop("The European correlation panel is not the European pattern.", call. = FALSE)
+    }
+  }
+  ggplot(dat, aes(x = .data$col, y = .data$row, fill = .data$value)) +
     geom_tile(colour = "white", linewidth = 0.3) +
     scale_fill_manual(values = c("0" = "#F7F7F7", "0.6" = "#88CCEE", "1" = "#332288"), drop = FALSE) +
     labs(title = panel, x = NULL, y = NULL) +
@@ -599,7 +615,14 @@ se_df <- cov_ord %>%
   ) %>%
   pivot_longer(-"pgs_id", names_to = "side", values_to = "se")
 se_plot <- function(side, title) {
-  ggplot(se_df %>% filter(.data$side == side), aes(x = 1, y = .data$pgs_id, fill = .data$se)) +
+  dat <- se_df %>% filter(.data$side == .env$side)
+  if (side == "European") {
+    se_hit <- dat$se[as.character(dat$pgs_id) == "PGS004106"]
+    if (length(se_hit) != 1L || se_hit > 0.002) {
+      stop("The European standard-error panel is not the European side.", call. = FALSE)
+    }
+  }
+  ggplot(dat, aes(x = 1, y = .data$pgs_id, fill = .data$se)) +
     geom_tile(colour = "white", width = 0.9, height = 0.9) +
     scale_fill_gradient(low = "#F7F7F7", high = "#332288", limits = range(se_df$se)) +
     scale_x_continuous(limits = c(0.4, 1.6), breaks = NULL) +
@@ -646,45 +669,33 @@ eff <- shared_cells %>%
 write_numbers(bind_rows(curve_df %>% mutate(kind = "curve"), eff %>% mutate(kind = "comparison")), "05_effective_scores")
 side_cols <- c("Both sides" = "#332288", "European side" = "#E69F00", "Non-European side" = "#009E73")
 
-p_curve <- ggplot(curve_df, aes(x = .data$n_scores, y = .data$n_eff)) +
-  geom_line(linewidth = 0.9, colour = "#222222") +
-  geom_point(size = 1.8, colour = "#222222") +
-  scale_x_continuous(breaks = c(1, 5, 10, 15)) +
-  labs(
-    title = "Every score shares one label on both sides",
-    x = "Scores",
-    y = "Effective number of scores"
-  ) +
-  theme_lesson(12)
-
 worked_eff <- eff %>% filter(.data$worked)
-p_eff <- ggplot() +
+p_neff <- ggplot() +
   geom_line(data = curve_df, aes(x = .data$n_scores, y = .data$n_eff), colour = "#222222", linewidth = 0.7) +
   geom_point(data = eff, aes(x = .data$n_scores, y = .data$n_eff, colour = .data$side), size = 2.6) +
   geom_point(data = worked_eff, aes(x = .data$n_scores, y = .data$n_eff), size = 4.2, shape = 1, stroke = 1.1, colour = "#1a1a1a") +
   geom_text(
     data = worked_eff,
     aes(x = .data$n_scores, y = .data$n_eff, label = sprintf("Worked comparison, %.1f", .data$n_eff)),
-    nudge_y = 0.7, size = 3.2, family = "DejaVu Sans"
+    nudge_y = 0.55, hjust = 1, size = 3.2, family = "DejaVu Sans"
   ) +
   scale_colour_manual(values = side_cols) +
-  labs(title = "The 24 comparisons at \u03c1 = 0.6", x = "Scores", y = "Effective number of scores") +
-  theme_lesson(12)
-
-p_neff <- p_curve + p_eff +
-  plot_annotation(
+  scale_x_continuous(breaks = seq(2, 14, by = 2)) +
+  labs(
     title = "5.  What the correlation is worth",
     subtitle = "Effective number of scores = score count \u00d7 (plain-average standard error / correlation-only standard error)\u00b2.",
-    caption = wrap_cap("The curve is m / (1 + (m \u2212 1)\u03c1) at \u03c1 = 0.6. It is the effective number when every score shares one label on both sides, or the shared side carries all of the variance. Comparisons shared on one side sit near the score count, and that is why they fall off the curve. The worked comparison sits above the curve because PGS004106 is uncorrelated with the others.", width = 130),
-    theme = annotation_theme
-  )
-save_lesson(p_neff, "05_effective_scores", width = 12.8, height = 7.2)
+    x = "Scores",
+    y = "Effective number of scores",
+    caption = wrap_cap("The curve is m / (1 + (m \u2212 1)\u03c1) at \u03c1 = 0.6. It is the effective number when every score shares one label on both sides, or the shared side carries all of the variance. Comparisons shared on one side sit near the score count, and that is why they fall off the curve. Points above the curve contain scores without a shared exact label. The worked comparison is one of them: PGS004106 is uncorrelated with the others.", width = 100)
+  ) +
+  theme_lesson(12)
+save_lesson(p_neff, "05_effective_scores", width = 8.8, height = 7.2)
 
 # -----------------------------------------------------------------
 # 6. Between-score variance
 # -----------------------------------------------------------------
 
-sigma_grid <- 10^seq(-16, -2, length.out = 45)
+sigma_grid <- seq(0, 4e-4, length.out = 41)
 profile_ll <- function(df) {
   vapply(sigma_grid, function(s) {
     fit_difference_model(
@@ -710,11 +721,33 @@ prof <- bind_rows(
   )
 )
 write_numbers(prof, "06_sigma2_profile")
+prof <- prof %>%
+  mutate(comparison = factor(.data$comparison, levels = c(
+    "Type 2 diabetes, South Asian participants, European-only training",
+    "Breast cancer, Hispanic or Latin American participants, European-only training"
+  )))
+bc_name <- "Breast cancer, Hispanic or Latin American participants, European-only training"
+boundary_lab <- tibble(
+  comparison = factor(bc_name, levels = levels(prof$comparison)),
+  sigma2 = 1.5e-5,
+  reml_ll = max(prof$reml_ll[prof$comparison == bc_name]) - 0.08,
+  label = "\u03c3\u00b2 = 0"
+)
 p_sig <- ggplot(prof, aes(x = .data$sigma2, y = .data$reml_ll)) +
   geom_line(linewidth = 0.8, colour = "#332288") +
   geom_vline(aes(xintercept = .data$fitted), linetype = "dashed", colour = "#D55E00") +
+  geom_text(
+    data = boundary_lab,
+    aes(label = .data$label),
+    hjust = 0, vjust = 1, size = 3.4, colour = "#D55E00", family = "DejaVu Sans"
+  ) +
   facet_wrap(~comparison, ncol = 1, scales = "free_y") +
-  scale_x_log10(breaks = 10^seq(-16, -2, by = 4)) +
+  scale_x_continuous(
+    limits = c(0, 4e-4),
+    breaks = c(0, 1e-4, 2e-4, 3e-4, 4e-4),
+    labels = c("0", "1e-4", "2e-4", "3e-4", "4e-4"),
+    expand = expansion(mult = c(0, 0.03))
+  ) +
   labs(
     title = "6.  Between-score variance",
     subtitle = "The curve is the REML log-likelihood with \u03c3\u00b2 held fixed. The dashed line is the fitted value.",
@@ -761,7 +794,7 @@ model_cols <- c(
 )
 p_w <- ggplot(weight_df, aes(x = .data$weight, y = .data$pgs_id, fill = .data$model)) +
   geom_vline(xintercept = 0, colour = "grey55") +
-  geom_col(position = position_dodge(width = 0.8), width = 0.72) +
+  geom_col(position = position_dodge(width = 0.8, reverse = TRUE), width = 0.72) +
   scale_fill_manual(values = model_cols) +
   scale_x_continuous(labels = function(x) paste0(round(100 * x), "%"), expand = expansion(mult = c(0.05, 0.05))) +
   labs(
@@ -793,7 +826,7 @@ width_df <- shared_cells %>%
       .data$trained_bucket == "Train: European-only" &
       .data$target_ancestry == "South Asian"
   ) %>%
-  arrange(.data$full / .data$plain, .data$label) %>%
+  arrange(.data$full - .data$plain, .data$label) %>%
   mutate(label = factor(.data$label, levels = .data$label))
 width_long <- width_df %>%
   pivot_longer(c("plain", "correlation", "full"), names_to = "step", values_to = "se") %>%
@@ -808,7 +841,7 @@ p_width <- ggplot(width_long, aes(x = .data$se, y = .data$label, colour = .data$
   scale_colour_manual(values = model_cols[1:3]) +
   labs(
     title = "8.  Where the interval width comes from",
-    subtitle = "One row is one comparison whose scores share people. The standard error is shown at three steps.",
+    subtitle = "One row is one comparison whose scores share people. Rows run from the largest increase in the standard error to the smallest.",
     x = "Standard error of the ancestry difference",
     y = NULL,
     caption = wrap_cap(sprintf(
@@ -854,10 +887,25 @@ still_bits <- mapply(function(tr, an, bu, s03, s06, s09) {
   sprintf("%s (%s)", comp_phrase(tr, an, bu), zero_words(s03, s06, s09))
 }, still_high$trait_label, still_high$target_ancestry, still_high$trained_bucket,
 still_high$r0.3, still_high$r0.6, still_high$r0.9)
+east_rho <- rho_tbl %>%
+  filter(
+    .data$trait_label == "Type 2 diabetes",
+    .data$target_ancestry == "East Asian",
+    grepl("European-only", .data$trained_bucket),
+    .data$rho %in% c(0, 0.9)
+  )
+east_0 <- east_rho$delta_hat[east_rho$rho == 0]
+east_9 <- east_rho$delta_hat[east_rho$rho == 0.9]
+if (length(east_0) != 1L || length(east_9) != 1L || east_0 <= 0 || east_9 >= 0) {
+  stop("Type 2 diabetes, East Asian participants, European-only training does not change sign between \u03c1 = 0 and \u03c1 = 0.9.", call. = FALSE)
+}
 rho_caption <- paste(
   sprintf("Five comparisons change whether the interval excludes zero from \u03c1 = 0 to \u03c1 = 0.9. Three change only between 0 and 0.3: %s.", list_phrase(only_low)),
   sprintf("Two still change between 0.3 and 0.9: %s.", paste(still_bits, collapse = "; ")),
-  "For type 2 diabetes, East Asian participants, European-only training, excluding zero again at \u03c1 = 0.9 is the narrowing in figure 12. The covariance is nearly singular as \u03c1 rises, so the interval can shrink. It is not stronger evidence.",
+  sprintf(
+    "Type 2 diabetes, East Asian participants, European-only training excludes zero at \u03c1 = 0 with estimate %s, and excludes zero again at \u03c1 = 0.9 with estimate %s. The sign reverses. Large \u03c1 makes the weights extreme as V becomes nearly singular. It is not a narrower interval around the same estimate, and it is not stronger evidence. Figure 11 shows the two comparisons whose intervals narrow as \u03c1 rises.",
+    fmt_est(east_0), fmt_est(east_9)
+  ),
   sep = "\n"
 )
 
@@ -906,50 +954,9 @@ p_rho <- ggplot(rho_plot_df, aes(x = .data$delta_hat, y = .data$label, colour = 
   theme(axis.text.y = element_text(size = 7.2))
 save_lesson(p_rho, "09_rho_grid", width = 13.4, height = 13.6)
 
+# The robust degrees of freedom are the box in figure 1.
 # -----------------------------------------------------------------
-# 10. Degrees of freedom for robust
-# -----------------------------------------------------------------
-
-robust_note <- tibble(
-  comparison = comp_phrase(robust_row$trait_label, robust_row$target_ancestry, robust_row$trained_bucket),
-  n_sharing_groups = robust_row$n_sharing_groups,
-  robust_df = robust_row$robust_df,
-  threshold = min_robust_df,
-  n_one_group = n_one_group,
-  n_shared = n_shared,
-  n_robust_reported = n_robust
-)
-write_numbers(robust_note, "10_robust_degrees_of_freedom")
-p_df <- ggplot(robust_note, aes(x = .data$robust_df, y = 1)) +
-  geom_vline(xintercept = min_robust_df, linewidth = 0.8, colour = "#D55E00") +
-  geom_point(size = 4, colour = "#332288") +
-  annotate(
-    "text", x = min_robust_df, y = 1.18, label = sprintf("Threshold %d", min_robust_df),
-    family = "DejaVu Sans", size = 3.6, colour = "#D55E00"
-  ) +
-  annotate(
-    "text", x = robust_row$robust_df, y = 0.82,
-    label = sprintf("%s\n%d sharing groups, %.1f degrees of freedom", robust_note$comparison, robust_row$n_sharing_groups, robust_row$robust_df),
-    family = "DejaVu Sans", size = 3.5, lineheight = 1.05
-  ) +
-  scale_x_continuous(limits = c(0, 6), breaks = 0:6) +
-  scale_y_continuous(limits = c(0.55, 1.45)) +
-  labs(
-    title = "10.  Why the robust interval is not the one drawn",
-    subtitle = sprintf(
-      "%d of the %d comparisons have one sharing group. The reported interval is the model interval. No comparison has degrees of freedom of at least %d.",
-      n_one_group, n_shared, min_robust_df
-    ),
-    x = "Degrees of freedom",
-    y = NULL,
-    caption = "robust is called when a comparison has two or more sharing groups. The degrees of freedom here are 2.3, below the threshold of 4, so the interval in figure 09 is the model interval."
-  ) +
-  theme_lesson(12) +
-  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
-save_lesson(p_df, "10_robust_degrees_of_freedom", width = 11.2, height = 4.8)
-
-# -----------------------------------------------------------------
-# 11. What rho means
+# 10. What rho means
 # -----------------------------------------------------------------
 
 pair_correlation <- function(se_e, se_t, rho_e, rho_t) {
@@ -1027,7 +1034,7 @@ write_numbers(
     sim_df %>% mutate(kind = "simulation"),
     real_df %>% select("share", "correlation") %>% mutate(kind = "real pair")
   ),
-  "11_what_rho_means"
+  "10_what_rho_means"
 )
 p_rho_mean <- ggplot() +
   geom_line(data = line_df, aes(x = .data$share, y = .data$correlation), linewidth = 0.9, colour = "#222222") +
@@ -1046,7 +1053,7 @@ p_rho_mean <- ggplot() +
   scale_x_continuous(limits = c(-0.02, 1.05), breaks = seq(0, 1, by = 0.2)) +
   scale_y_continuous(limits = c(-0.35, 1.05), breaks = seq(-0.2, 1, by = 0.2)) +
   labs(
-    title = "11.  What \u03c1 means",
+    title = "10.  What \u03c1 means",
     subtitle = "\u03c1 is the correlation of two scores' AUC errors on one side with the same label.",
     x = "Share of the variance on the shared side",
     y = "Correlation of the ancestry differences",
@@ -1059,10 +1066,10 @@ p_rho_mean <- ggplot() +
     ), width = 118)
   ) +
   theme_lesson(12)
-save_lesson(p_rho_mean, "11_what_rho_means", width = 11.2, height = 8.4)
+save_lesson(p_rho_mean, "10_what_rho_means", width = 11.2, height = 8.4)
 
 # -----------------------------------------------------------------
-# 12. Earlier checks
+# 11. Earlier checks
 # -----------------------------------------------------------------
 
 narrow <- width_narrowed(rho_tbl) %>% arrange(.data$trait_label, .data$trained_bucket, .data$target_ancestry)
@@ -1109,7 +1116,7 @@ earlier_long <- bind_rows(
     which = factor(.data$which, levels = c("Average of all scores", "Smallest standard error", "One score per sample set", "Covariance model")),
     label = factor(.data$label, levels = rev(sort(unique(.data$label))))
   )
-write_numbers(earlier_long %>% mutate(label = as.character(.data$label)), "12_earlier_checks")
+write_numbers(earlier_long %>% mutate(label = as.character(.data$label)), "11_earlier_checks")
 check_cols <- c(
   "Average of all scores" = "#222222",
   "Smallest standard error" = "#E41A1C",
@@ -1126,7 +1133,7 @@ p_earlier <- ggplot(earlier_long, aes(x = .data$estimate, y = .data$label, colou
   geom_point(size = 1.6, position = position_dodge(width = 0.72)) +
   scale_colour_manual(values = check_cols) +
   labs(
-    title = "12.  Earlier checks beside the covariance model",
+    title = "11.  Earlier checks beside the covariance model",
     subtitle = "The 24 comparisons whose scores share people.",
     x = "Non-European AUC \u2212 European AUC, with 95% interval",
     y = NULL,
@@ -1134,7 +1141,7 @@ p_earlier <- ggplot(earlier_long, aes(x = .data$estimate, y = .data$label, colou
       "The smallest standard error keeps the plain average and uses the smallest score standard error as its standard error. That is roughly the plain average's own standard error if every error were perfectly correlated and the plain-average weights were kept. It is not the refit at \u03c1 = 1.",
       "As \u03c1 approaches 1, V becomes nearly singular. The fit can use differences between highly correlated scores to cancel error, so the interval can shrink and the weights can go extreme.",
       sprintf(
-        "Two comparisons already narrow as \u03c1 rises: %s. Figure 9 points here for the first, whose interval excludes zero again at \u03c1 = 0.9.",
+        "Two comparisons already narrow as \u03c1 rises: %s. Figure 9 points here for the first. At \u03c1 = 0.9 its estimate has changed sign and excludes zero on the other side. That is extreme weights, not stronger evidence.",
         paste(mapply(comp_phrase, narrow$trait_label, narrow$target_ancestry, narrow$trained_bucket), collapse = "; and ")
       ),
       "The sample-set term is a different model and is not drawn.",
@@ -1144,6 +1151,6 @@ p_earlier <- ggplot(earlier_long, aes(x = .data$estimate, y = .data$label, colou
   guides(colour = guide_legend(nrow = 2, byrow = TRUE)) +
   theme_lesson(11) +
   theme(axis.text.y = element_text(size = 7.2))
-save_lesson(p_earlier, "12_earlier_checks", width = 13.2, height = 14.2)
+save_lesson(p_earlier, "11_earlier_checks", width = 13.2, height = 14.2)
 
 message("Walk-through written to ", root_dir)

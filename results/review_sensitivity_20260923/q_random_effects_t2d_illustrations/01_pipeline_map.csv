@@ -9,5 +9,6 @@ This comparison is 1 sharing group.",32,24,23,12,0
 24 comparisons with shared people take this path. The other 8 keep the average of all scores.",32,24,23,12,0
 2,robust,"Reported when the degrees of freedom are at least 4.
 23 of the 24 have one sharing group, so the interval is the model interval.
-One comparison has 4 sharing groups and 2.3 degrees of freedom. None is reported.",32,24,23,12,0
+Type 2 diabetes, Hispanic or Latin American participants, Multi-ancestry training has 4 sharing groups and 2.3 degrees of freedom.
+Below that threshold, the reported interval is the model interval.",32,24,23,12,0
 1,Figure 09,Draws the average of all scores and this model at ρ = 0.6.,32,24,23,12,0

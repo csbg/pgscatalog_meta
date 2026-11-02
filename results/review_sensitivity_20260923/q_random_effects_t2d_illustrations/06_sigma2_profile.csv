@@ -1,91 +1,83 @@
 comparison,sigma2,reml_ll,fitted,fitted_ll
-"Type 2 diabetes, South Asian participants, European-only training",1e-16,29.07022844380127,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",2.0805675382171716e-16,29.07022844380127,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",4.328761281083062e-16,29.07022844380127,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",9.006280202112796e-16,29.07022844380127,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.873817422860387e-15,29.07022844380127,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",3.898603702549064e-15,29.070228445328183,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",8.11130830789689e-15,29.07022844697812,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.6876124757881454e-14,29.070228450410934,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",3.5111917342151274e-14,29.07022845755309,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",7.305271542664449e-14,29.07022847241285,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.5199110829529332e-13,29.0702285033296,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",3.162277660168379e-13,29.070228567653963,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",6.579332246575683e-13,29.070228701485146,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.368874509537082e-12,29.070228979929954,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",2.8480358684357932e-12,29.070229559253146,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",5.925530975545687e-12,29.07023076457399,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.2328467394420634e-11,29.07023327232451,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",2.565020905680051e-11,29.070238489865133,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",5.336699231206302e-11,29.07024934529454,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.1103363181676367e-10,29.07027193067851,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",2.310129700083158e-10,29.070318920791674,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",4.806380863064389e-10,29.070416685581957,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1e-9,29.07062008614404,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",2.0805675382171716e-9,29.071043250134807,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",4.328761281083061e-9,29.07192356485462,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",9.006280202112758e-9,29.073754658011627,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.8738174228603867e-8,29.07756237625053,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",3.898603702549064e-8,29.085475966607092,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",8.111308307896855e-8,29.101903483214034,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.6876124757881452e-7,29.135921644035236,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",3.5111917342151277e-7,29.206011681886356,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",7.305271542664449e-7,29.348928688223005,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.519911082952933e-6,29.63422917295929,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",3.162277660168379e-6,30.180143981476856,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",6.579332246575683e-6,31.142888186248257,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.368874509537082e-5,32.60634940247256,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",2.8480358684358048e-5,34.330607596390024,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",5.925530975545687e-5,35.620195627116544,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",1.2328467394420633e-4,35.72712215802496,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",2.5650209056800403e-4,34.40973205779589,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",5.336699231206301e-4,31.911102735143615,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",0.0011103363181676367,28.603499676770447,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",0.002310129700083158,24.796182624861746,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",0.004806380863064389,20.703914456545967,9.066566604156065e-5,35.85630589048091
-"Type 2 diabetes, South Asian participants, European-only training",0.01,16.45971696630515,9.066566604156065e-5,35.85630589048091
-"Breast cancer, Hispanic or Latin American participants, European-only training",1e-16,3.2298850223504765,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",2.0805675382171716e-16,3.2298850223504765,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",4.328761281083062e-16,3.2298850223504765,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",9.006280202112796e-16,3.2298850223504765,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.873817422860387e-15,3.2298850223504765,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",3.898603702549064e-15,3.22988502234265,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",8.11130830789689e-15,3.229885022334195,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.6876124757881454e-14,3.2298850223166022,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",3.5111917342151274e-14,3.2298850222799986,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",7.305271542664449e-14,3.229885022203845,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.5199110829529332e-13,3.229885022045398,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",3.162277660168379e-13,3.2298850217157415,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",6.579332246575683e-13,3.2298850210298675,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.368874509537082e-12,3.229885019602861,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",2.8480358684357932e-12,3.2298850166338764,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",5.925530975545687e-12,3.229885010456704,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.2328467394420634e-11,3.2298849976046795,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",2.565020905680051e-11,3.229884970865177,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",5.336699231206302e-11,3.229884915231839,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.1103363181676367e-10,3.2298847994829436,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",2.310129700083158e-10,3.229884558659632,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",4.806380863064389e-10,3.229884057610843,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1e-9,3.229883015146606,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",2.0805675382171716e-9,3.229880846236318,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",4.328761281083061e-9,3.229876333702132,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",9.006280202112758e-9,3.229866945200498,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.8738174228603867e-8,3.2298474123536924,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",3.898603702549064e-8,3.229806775391901,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",8.111308307896855e-8,3.229722238030989,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.6876124757881452e-7,3.229546398133482,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",3.5111917342151277e-7,3.229180749405315,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",7.305271542664449e-7,3.2284208483753103,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.519911082952933e-6,3.226843514375319,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",3.162277660168379e-6,3.223577624730608,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",6.579332246575683e-6,3.2168503241486914,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.368874509537082e-5,3.2031372391246355,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",2.8480358684358048e-5,3.1757574603986103,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",5.925530975545687e-5,3.1231867399957776,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",1.2328467394420633e-4,3.028850032489221,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",2.5650209056800403e-4,2.875939533831209,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",5.336699231206301e-4,2.6573959035272132,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",0.0011103363181676367,2.3814032085135364,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",0.002310129700083158,2.065085509681477,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",0.004806380863064389,1.7247023968637651,1.185711494939117e-13,3.229885022112479
-"Breast cancer, Hispanic or Latin American participants, European-only training",0.01,1.3713440481909118,1.185711494939117e-13,3.229885022112479
+"Type 2 diabetes, South Asian participants, European-only training",0,29.07022844380127,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1e-5,31.922400672666182,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2e-5,33.50114432115437,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.0000000000000004e-5,34.44656742234923,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",4e-5,35.03477801645507,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",5e-5,35.40468684694693,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",6.000000000000001e-5,35.6335192308736,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",7.000000000000001e-5,35.76736784716438,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",8e-5,35.83525445330847,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",9e-5,35.85623238837073,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1e-4,35.84323781590602,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.1e-4,35.80529884986716,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.2000000000000002e-4,35.74886219975052,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.3000000000000002e-4,35.67862086904841,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.4000000000000001e-4,35.598047529617716,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.5000000000000001e-4,35.509747905269876,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.6e-4,35.41570061363883,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.7e-4,35.31742342089554,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.8e-4,35.2160906568534,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",1.9e-4,35.112617525092126,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2e-4,35.00772154745668,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.1e-4,34.901967946206234,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.2e-4,34.7958035694669,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.3e-4,34.68958253116726,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.4000000000000003e-4,34.58358578283704,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.5e-4,34.47803618969248,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.6000000000000003e-4,34.37311024054704,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.7e-4,34.26894721262954,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.8000000000000003e-4,34.16565639474393,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",2.9e-4,34.063322816767794,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.0000000000000003e-4,33.962011821234015,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.1e-4,33.861772730825166,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.2e-4,33.76264180525336,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.3000000000000005e-4,33.66464463612212,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.4e-4,33.5677980947163,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.5000000000000005e-4,33.472111922232465,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.6e-4,33.37759003259511,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.7000000000000005e-4,33.28423158315246,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.8e-4,33.19203185708085,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",3.9000000000000005e-4,33.100982992421706,9.066566604156065e-5,35.85630589048091
+"Type 2 diabetes, South Asian participants, European-only training",4e-4,33.011074585716464,9.066566604156065e-5,35.85630589048091
+"Breast cancer, Hispanic or Latin American participants, European-only training",0,3.2298850223504765,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1e-5,3.2102053638523187,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2e-5,3.191271039978506,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.0000000000000004e-5,3.1730276482303967,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",4e-5,3.1554265332937503,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",5e-5,3.1384240049755125,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",6.000000000000001e-5,3.1219806848022458,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",7.000000000000001e-5,3.106060956686981,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",8e-5,3.0906325023868364,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",9e-5,3.075665906515375,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1e-4,3.0611343189751365,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.1e-4,3.047013165075898,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.2000000000000002e-4,3.0332798954768667,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.3000000000000002e-4,3.01991376956273,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.4000000000000001e-4,3.006895667028699,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.5000000000000001e-4,2.994207923378101,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.6e-4,2.981834185780699,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.7e-4,2.9697592863405267,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.8e-4,2.957969130309383,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",1.9e-4,2.946450597179552,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2e-4,2.935191452915153,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.1e-4,2.924180271849971,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.2e-4,2.9134063670016563,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.3e-4,2.9028597277369106,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.4000000000000003e-4,2.8925309638762955,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.5e-4,2.8824112554565184,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.6000000000000003e-4,2.872492307476615,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.7e-4,2.8627663090462803,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.8000000000000003e-4,2.8532258964322295,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",2.9e-4,2.8438641195646155,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.0000000000000003e-4,2.8346744116218696,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.1e-4,2.8256505613605594,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.2e-4,2.816786687898213,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.3000000000000005e-4,2.808077217692749,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.4e-4,2.799516863492775,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.5000000000000005e-4,2.7911006050597162,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.6e-4,2.7828236714857573,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.7000000000000005e-4,2.774681524951638,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.8e-4,2.7666698457858807,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",3.9000000000000005e-4,2.758784518702262,1.185711494939117e-13,3.229885022112479
+"Breast cancer, Hispanic or Latin American participants, European-only training",4e-4,2.751021620105785,1.185711494939117e-13,3.229885022112479
