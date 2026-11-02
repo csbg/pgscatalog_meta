@@ -1,0 +1,13 @@
+y,title,body,n_comparisons,n_shared,n_one_group,n_unstable,n_robust_reported
+8,Evaluations,32 comparisons. This worked comparison has 13 scores.,32,24,23,12,0
+7,Score pair,"An ancestry difference, a European standard error, and a non-European standard error.",32,24,23,12,0
+6,Labels,"Sample sets become study names, then one label on each side.
+This comparison is 1 sharing group.",32,24,23,12,0
+5,Two calls to vcalc,"A European covariance and a non-European covariance, at ρ = 0.6. Their sum is V.",32,24,23,12,0
+4,rma.mv,Between-score variance by REML. Here σ² = 9.07e-05.,32,24,23,12,0
+3,Estimate,"This comparison's estimate is 0.004.
+24 comparisons with shared people take this path. The other 8 keep the average of all scores.",32,24,23,12,0
+2,robust,"Reported when the degrees of freedom are at least 4.
+23 of the 24 have one sharing group, so the interval is the model interval.
+One comparison has 4 sharing groups and 2.3 degrees of freedom. None is reported.",32,24,23,12,0
+1,Figure 09,Draws the average of all scores and this model at ρ = 0.6.,32,24,23,12,0

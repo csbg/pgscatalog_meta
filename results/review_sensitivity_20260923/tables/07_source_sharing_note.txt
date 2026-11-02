@@ -1,5 +1,5 @@
 23 of the 24 comparisons with shared samples are one sharing group, so the robust interval applies to 1 comparison.
-With one sharing group, the interval depends on the assumed ρ; we show 0.3–0.9.
+With one sharing group, the interval depends on the assumed ρ. The reported fit uses ρ = 0.6. The values 0, 0.3, 0.6, and 0.9 are in 09_dependence_rho.
 Do you have a value for ρ in mind, or a reason to prefer one?
 The write-up cites Pustejovsky & Tipton 2022 and the metafor manual page for vcalc, rma.mv, and robust. Is that the paper you meant?
 

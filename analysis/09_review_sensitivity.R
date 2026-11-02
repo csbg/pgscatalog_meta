@@ -1151,7 +1151,7 @@ source_note <- paste(
     n_multi_group,
     if (n_multi_group == 1L) "" else "s"
   ),
-  "With one sharing group, the interval depends on the assumed \u03c1; we show 0.3\u20130.9.",
+  "With one sharing group, the interval depends on the assumed \u03c1. The reported fit uses \u03c1 = 0.6. The values 0, 0.3, 0.6, and 0.9 are in 09_dependence_rho.",
   "Do you have a value for \u03c1 in mind, or a reason to prefer one?",
   "The write-up cites Pustejovsky & Tipton 2022 and the metafor manual page for vcalc, rma.mv, and robust. Is that the paper you meant?",
   sep = "\n"

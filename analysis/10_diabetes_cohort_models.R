@@ -831,9 +831,6 @@ cell_table_html <- function(bucket, ancestry) {
 fig_dir <- file.path(
   "results", paste0("review_sensitivity_", stamp), "q_random_effects_t2d_illustrations"
 )
-dep_fig_dir <- file.path(
-  "results", paste0("review_sensitivity_", stamp), "q_dependence_illustrations"
-)
 embed_png <- function(filename, alt, dir = fig_dir) {
   path <- file.path(dir, filename)
   if (!file.exists(path)) {
@@ -965,7 +962,8 @@ html <- c(
   "<p>The covariance is built with <code>vcalc</code>, once for the European source and once for the non-European source. ",
   "<code>rma.mv</code> fits the ancestry difference. <code>robust</code> gives a cluster-robust interval when the degrees of freedom are at least 4. ",
   "This follows Pustejovsky &amp; Tipton (2022) and the metafor manual page for dependent estimates. The paper is the one to confirm with Pirmin.</p>",
-  "<p><strong>With one sharing group, the interval depends on the assumed \u03c1; we show 0.3\u20130.9.</strong> ",
+  "<p><strong>With one sharing group, the interval depends on the assumed \u03c1. The reported intervals use \u03c1 = 0.6.</strong> ",
+  "Figure 9 draws \u03c1 = 0, 0.3, 0.6, and 0.9. Five comparisons change whether the interval excludes zero from 0 to 0.9. Two of those still change between 0.3 and 0.9. ",
   sprintf(
     "%d of the %d comparisons with shared samples are one sharing group. %d of %d still exclude zero under the covariance model. ",
     n_one_group_page, n_shared_page, n_sig_cov_page, n_shared_page
@@ -979,18 +977,31 @@ html <- c(
   "</div>",
 
   "<h2>Worked comparisons</h2>",
-  embed_png("01_who_shares_south_asian.png", "Who shares a sample in type 2 diabetes, South Asian participants", dep_fig_dir),
-  "<p class='cap'>Type 2 diabetes, South Asian participants, European-only training. Colour is the source study. Two UK Biobank ids are the same people.</p>",
-  embed_png("02_covariance_south_asian.png", "Covariance of the ancestry differences", dep_fig_dir),
-  "<p class='cap'>Diagonal only, then the European block from vcalc, then the non-European block. Colour is on a square-root scale. A score that does not share the UK Biobank label stays out of the non-European square. \u03c1 = 0.6.</p>",
-  embed_png("03_forest_south_asian.png", "Score differences and the covariance-model interval", dep_fig_dir),
-  "<p class='cap'>Grey is one score. Black is the average of all scores, labelled All PGS IVW in the tables below. Blue is the covariance model.</p>",
-  embed_png("04_rho_south_asian.png", "The interval at four values of rho", dep_fig_dir),
-  "<p class='cap'>With one sharing group, the interval depends on the assumed \u03c1; we show 0.3\u20130.9.</p>",
-  embed_png("05_two_other_patterns.png", "European-only sharing, and sharing on both sides", dep_fig_dir),
-  "<p class='cap'>Left: shared on the European side only. Right: every score uses the same studies on both sides. There is no comparison shared on the non-European side only.</p>",
-  embed_png("06_dumbbell_shared.png", "Average of all scores and the covariance model for every shared comparison", dep_fig_dir),
-  "<p class='cap'>A triangle marks a comparison whose interval changes whether it excludes zero.</p>",
+  "<p>The figures walk through one comparison, type 2 diabetes, South Asian participants, European-only training, and bring in the other comparisons where that example cannot show the step.</p>",
+  embed_png("01_pipeline_map.png", "From evaluations to the estimate"),
+  "<p class='cap'>Each box is one step, with this comparison's value and the count of comparisons at that step.</p>",
+  embed_png("02_what_metafor_receives.png", "What the model receives for the worked comparison"),
+  "<p class='cap'>The ancestry difference, both labels, and the variance on each side. The non-European side dominates the variance.</p>",
+  embed_png("03_labels_and_correlation.png", "From sample sets to correlation"),
+  "<p class='cap'>The model treats two sample-set ids with the same study name as the same people. PSS011749 and PSS004315 are different sample sets that share the label UK Biobank.</p>",
+  embed_png("04_building_v.png", "Building the covariance"),
+  "<p class='cap'>The correlation pattern is separate from the standard errors. V is the sum of the European and non-European covariances.</p>",
+  embed_png("05_effective_scores.png", "Effective number of scores"),
+  "<p class='cap'>The curve holds when every score shares one label on both sides, or the shared side carries the variance.</p>",
+  embed_png("06_sigma2_profile.png", "Between-score variance"),
+  "<p class='cap'>The worked comparison has a peak. Breast cancer, Hispanic or Latin American participants, European-only training is stuck at 0.</p>",
+  embed_png("07_weights.png", "Weight of each score under four fits"),
+  "<p class='cap'>Plain average, correlation only, the full model, and the linked fit. These shares are why the estimate moves.</p>",
+  embed_png("08_interval_width.png", "Standard error at three steps for every shared comparison"),
+  "<p class='cap'>Shared samples widen the interval, and the between-score variance widens it further.</p>",
+  embed_png("09_rho_grid.png", "Every shared comparison at four values of rho"),
+  "<p class='cap'>Five comparisons change their zero call from \u03c1 = 0 to 0.9. Two of those still change between 0.3 and 0.9. Excluding zero again at \u03c1 = 0.9, for type 2 diabetes, East Asian participants, European-only training, is the narrowing in the earlier-checks figure.</p>",
+  embed_png("10_robust_degrees_of_freedom.png", "Degrees of freedom for the robust interval"),
+  "<p class='cap'>One comparison has four sharing groups and 2.3 degrees of freedom. The threshold is 4, so the reported interval is the model interval.</p>",
+  embed_png("11_what_rho_means.png", "Sampling picture of rho"),
+  "<p class='cap'>\u03c1 is the correlation of two scores' AUC errors on one side with the same label. The line is the rule for the ancestry differences. This is a sampling model.</p>",
+  embed_png("12_earlier_checks.png", "Earlier checks beside the covariance model"),
+  "<p class='cap'>The average of all scores, the smallest standard error, one score per sample set, and the covariance model. The sample-set term is not drawn.</p>",
 
   "<h2>Comparisons whose scores share people</h2>",
   shared_table,
@@ -1029,21 +1040,10 @@ html <- c(
   "</div>",
 
   "<h2>Two comparisons</h2>",
-  "<p>South Asian participants, below, are one of the nine. ",
-  "Hispanic or Latin American participants are one of the eighteen, shown so the boundary is visible. ",
-  "The third figure lists the nine comparisons the question applies to.</p>",
-
-  embed_png("02_south_asian_one_of_eight.png", "Type 2 diabetes, Europeans and South Asian participants, European-only training"),
-  "<p class='cap'>Thirteen PGS. Eleven share PSS011749. Two other target sample sets are in the comparison. ",
-  "The black line is All PGS IVW, the average of all thirteen, about 0. One score per target sample set is \u22120.016 and excludes 0.</p>",
-
-  embed_png("03_hispanic_one_of_seventeen.png", "Type 2 diabetes, Europeans and Hispanic or Latin American participants, European-only training"),
-  "<p class='cap'>Eleven PGS, all on PSS011736. Ancestry group and sample set are the same column. ",
-  "This comparison is not one of the four models.</p>",
-
-  embed_png("05_eight_one_score_per_cohort.png", "Nine comparisons: every PGS, and one PGS per target sample set"),
-  "<p class='cap'>Black is All PGS IVW, the same points as in the tables below. Purple is one PGS per target sample set. ",
-  "The four models below are for these nine comparisons.</p>",
+  "<p>South Asian participants, European-only training, are one of the nine. ",
+  "Thirteen scores, eleven of them on PSS011749. The average of all scores and one score per sample set are in the box above.</p>",
+  "<p>Hispanic or Latin American participants, European-only training, are one of the eighteen. ",
+  "Eleven scores, all on PSS011736, so ancestry group and sample set are the same column. The four models are not for that comparison.</p>",
 
   "<h2>Evaluation table used here</h2>",
   "<div class='box'>",

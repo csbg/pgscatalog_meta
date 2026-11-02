@@ -97,6 +97,9 @@ test_that("vcalc blocks add, and rho = 0 with sigma2 = 0 matches the inverse-var
     sigma2 = 0
   )
   expect_equal(fe0$estimate, ivw_estimate(delta, delta_se))
+  expect_equal(sum(fe0$weight), 1)
+  expect_equal(sum(fe0$weight * delta), fe0$estimate)
+  expect_true(is.finite(fe0$reml_ll))
 
   # The linked European group puts rho on A and B even if the exact labels differed.
   linked <- difference_covariance(

@@ -60,6 +60,8 @@ fit_difference_model <- function(delta, se_eur, se_tgt, cluster_eur, cluster_tgt
       V = matrix(se^2, 1, 1),
       V_eur = matrix(se_eur^2, 1, 1),
       V_tgt = matrix(se_tgt^2, 1, 1),
+      weight = setNames(1, as.character(pgs_id)),
+      reml_ll = NA_real_,
       robust_df = NA_real_, robust_reported = FALSE,
       robust_estimate = NA_real_, robust_se = NA_real_,
       robust_lo = NA_real_, robust_hi = NA_real_, robust_sig = NA
@@ -86,6 +88,10 @@ fit_difference_model <- function(delta, se_eur, se_tgt, cluster_eur, cluster_tgt
   lo <- as.numeric(fit$ci.lb)[1]
   hi <- as.numeric(fit$ci.ub)[1]
   sig2 <- as.numeric(fit$sigma2)[1]
+  # Row sums of the marginal precision matrix. metafor returns percentages.
+  weight <- as.numeric(stats::weights(fit, type = "rowsum")) / 100
+  names(weight) <- as.character(pgs_id)
+  reml_ll <- as.numeric(fit$fit.stats["ll", "REML"])
   out <- list(
     estimate = est,
     se = se,
@@ -97,6 +103,8 @@ fit_difference_model <- function(delta, se_eur, se_tgt, cluster_eur, cluster_tgt
     V = cov$V,
     V_eur = cov$V_eur,
     V_tgt = cov$V_tgt,
+    weight = weight,
+    reml_ll = reml_ll,
     robust_df = NA_real_,
     robust_reported = FALSE,
     robust_estimate = NA_real_,

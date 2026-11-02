@@ -1,0 +1,73 @@
+label,trait_label,trained_bucket,target_ancestry,worked,step,se
+"Breast cancer — Hispanic or Latin American, European-only training",Breast cancer,Train: European-only,Hispanic or Latin American,FALSE,Plain average,0.01747822100030375
+"Breast cancer — Hispanic or Latin American, European-only training",Breast cancer,Train: European-only,Hispanic or Latin American,FALSE,Correlation only,0.02201918375062124
+"Breast cancer — Hispanic or Latin American, European-only training",Breast cancer,Train: European-only,Hispanic or Latin American,FALSE,Full model,0.02201918375205587
+"Apparent Treatment-Resistant Hypertension — African, Multi-ancestry training",Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,FALSE,Plain average,0.00895530374374706
+"Apparent Treatment-Resistant Hypertension — African, Multi-ancestry training",Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,FALSE,Correlation only,0.0113246505794377
+"Apparent Treatment-Resistant Hypertension — African, Multi-ancestry training",Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,FALSE,Full model,0.01132465058032213
+"Epithelial non-mucinous ovarian cancer — East Asian, European-only training",Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,FALSE,Plain average,0.00958922905793968
+"Epithelial non-mucinous ovarian cancer — East Asian, European-only training",Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,FALSE,Correlation only,0.01212951908689155
+"Epithelial non-mucinous ovarian cancer — East Asian, European-only training",Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,FALSE,Full model,0.01212951908798863
+"Incident chronic obstructive pulmonary disease before age 50 years — African, European-only training",Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,FALSE,Plain average,0.01643296029943744
+"Incident chronic obstructive pulmonary disease before age 50 years — African, European-only training",Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,FALSE,Correlation only,0.02078623329813795
+"Incident chronic obstructive pulmonary disease before age 50 years — African, European-only training",Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,FALSE,Full model,0.02078623329995174
+"Seropositive RA — South Asian, Multi-ancestry training",Seropositive RA,Train: Multi incl. EUR,South Asian,FALSE,Plain average,0.02330966684126815
+"Seropositive RA — South Asian, Multi-ancestry training",Seropositive RA,Train: Multi incl. EUR,South Asian,FALSE,Correlation only,0.02942712909284695
+"Seropositive RA — South Asian, Multi-ancestry training",Seropositive RA,Train: Multi incl. EUR,South Asian,FALSE,Full model,0.03009236372973466
+"Colorectal cancer — Hispanic or Latin American, Multi-ancestry training",Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Plain average,0.00648659332599776
+"Colorectal cancer — Hispanic or Latin American, Multi-ancestry training",Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Correlation only,0.0082049608594569
+"Colorectal cancer — Hispanic or Latin American, Multi-ancestry training",Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Full model,0.00868855711299614
+"Incident coronary heart disease — Hispanic or Latin American, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Plain average,0.00997169083721376
+"Incident coronary heart disease — Hispanic or Latin American, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Correlation only,0.01479024181322415
+"Incident coronary heart disease — Hispanic or Latin American, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Full model,0.01479024181456451
+"Incident coronary heart disease — South Asian, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,South Asian,FALSE,Plain average,0.00725074323321981
+"Incident coronary heart disease — South Asian, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,South Asian,FALSE,Correlation only,0.0107516903037833
+"Incident coronary heart disease — South Asian, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,South Asian,FALSE,Full model,0.01114660415705945
+"Type 2 diabetes — East Asian, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,East Asian,FALSE,Plain average,0.0204478805637828
+"Type 2 diabetes — East Asian, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,East Asian,FALSE,Correlation only,0.02054238738373008
+"Type 2 diabetes — East Asian, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,East Asian,FALSE,Full model,0.03160002999554981
+"Breast Carcinoma — South Asian, European-only training",Breast Carcinoma,Train: European-only,South Asian,FALSE,Plain average,0.02061186467859271
+"Breast Carcinoma — South Asian, European-only training",Breast Carcinoma,Train: European-only,South Asian,FALSE,Correlation only,0.03425696101940954
+"Breast Carcinoma — South Asian, European-only training",Breast Carcinoma,Train: European-only,South Asian,FALSE,Full model,0.03425696102125501
+"Breast Carcinoma — African, European-only training",Breast Carcinoma,Train: European-only,African,FALSE,Plain average,0.02890126360008843
+"Breast Carcinoma — African, European-only training",Breast Carcinoma,Train: European-only,African,FALSE,Correlation only,0.04821135352499112
+"Breast Carcinoma — African, European-only training",Breast Carcinoma,Train: European-only,African,FALSE,Full model,0.04821135352763647
+"Coronary heart disease (incident and prevalent) — Hispanic or Latin American, Multi-ancestry training",Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Plain average,0.00717955644908292
+"Coronary heart disease (incident and prevalent) — Hispanic or Latin American, Multi-ancestry training",Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Correlation only,0.01200620585984431
+"Coronary heart disease (incident and prevalent) — Hispanic or Latin American, Multi-ancestry training",Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Full model,0.01200620586262294
+"Coronary heart disease (incident and prevalent) — African, Multi-ancestry training",Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,FALSE,Plain average,0.00519468977688263
+"Coronary heart disease (incident and prevalent) — African, Multi-ancestry training",Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,FALSE,Correlation only,0.00869101706593082
+"Coronary heart disease (incident and prevalent) — African, Multi-ancestry training",Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,FALSE,Full model,0.00877787662783728
+"Incident coronary heart disease — East Asian, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,East Asian,FALSE,Plain average,0.00320660305583991
+"Incident coronary heart disease — East Asian, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,East Asian,FALSE,Correlation only,0.00475597901100345
+"Incident coronary heart disease — East Asian, Multi-ancestry training",Incident coronary heart disease,Train: Multi incl. EUR,East Asian,FALSE,Full model,0.00572955647096834
+"5-year incident prostate cancer — South Asian, Multi-ancestry training",5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,FALSE,Plain average,0.02084842629530205
+"5-year incident prostate cancer — South Asian, Multi-ancestry training",5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,FALSE,Correlation only,0.03683092183340859
+"5-year incident prostate cancer — South Asian, Multi-ancestry training",5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,FALSE,Full model,0.03761330509242347
+"5-year incident prostate cancer — African, Multi-ancestry training",5-year incident prostate cancer,Train: Multi incl. EUR,African,FALSE,Plain average,0.01391932263543902
+"5-year incident prostate cancer — African, Multi-ancestry training",5-year incident prostate cancer,Train: Multi incl. EUR,African,FALSE,Correlation only,0.0254333650863413
+"5-year incident prostate cancer — African, Multi-ancestry training",5-year incident prostate cancer,Train: Multi incl. EUR,African,FALSE,Full model,0.02569794457129132
+"Breast cancer — South Asian, European-only training",Breast cancer,Train: European-only,South Asian,FALSE,Plain average,0.00430529648340714
+"Breast cancer — South Asian, European-only training",Breast cancer,Train: European-only,South Asian,FALSE,Correlation only,0.00835204563215926
+"Breast cancer — South Asian, European-only training",Breast cancer,Train: European-only,South Asian,FALSE,Full model,0.00835204563466364
+"Type 2 diabetes — East Asian, European-only training",Type 2 diabetes,Train: European-only,East Asian,FALSE,Plain average,0.0085829292478274
+"Type 2 diabetes — East Asian, European-only training",Type 2 diabetes,Train: European-only,East Asian,FALSE,Correlation only,0.01918778114516434
+"Type 2 diabetes — East Asian, European-only training",Type 2 diabetes,Train: European-only,East Asian,FALSE,Full model,0.01918778116025081
+"Colorectal cancer — African, Multi-ancestry training",Colorectal cancer,Train: Multi incl. EUR,African,FALSE,Plain average,0.00715372276779627
+"Colorectal cancer — African, Multi-ancestry training",Colorectal cancer,Train: Multi incl. EUR,African,FALSE,Correlation only,0.00888464590515187
+"Colorectal cancer — African, Multi-ancestry training",Colorectal cancer,Train: Multi incl. EUR,African,FALSE,Full model,0.01693481245653736
+"Stroke excluding subarachnoid hemorrhage — South Asian, Multi-ancestry training",Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,FALSE,Plain average,0.0036040166141947
+"Stroke excluding subarachnoid hemorrhage — South Asian, Multi-ancestry training",Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,FALSE,Correlation only,0.00909663239389153
+"Stroke excluding subarachnoid hemorrhage — South Asian, Multi-ancestry training",Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,FALSE,Full model,0.00933766569268196
+"Type 2 diabetes — South Asian, European-only training",Type 2 diabetes,Train: European-only,South Asian,TRUE,Plain average,0.00199251180241945
+"Type 2 diabetes — South Asian, European-only training",Type 2 diabetes,Train: European-only,South Asian,TRUE,Correlation only,0.00301308837800409
+"Type 2 diabetes — South Asian, European-only training",Type 2 diabetes,Train: European-only,South Asian,TRUE,Full model,0.0056108647728095
+"Type 2 diabetes — Hispanic or Latin American, European-only training",Type 2 diabetes,Train: European-only,Hispanic or Latin American,FALSE,Plain average,0.00130383467876314
+"Type 2 diabetes — Hispanic or Latin American, European-only training",Type 2 diabetes,Train: European-only,Hispanic or Latin American,FALSE,Correlation only,0.00343693709610327
+"Type 2 diabetes — Hispanic or Latin American, European-only training",Type 2 diabetes,Train: European-only,Hispanic or Latin American,FALSE,Full model,0.00402078357975136
+"Type 2 diabetes — South Asian, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,South Asian,FALSE,Plain average,0.00769818056238598
+"Type 2 diabetes — South Asian, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,South Asian,FALSE,Correlation only,0.00773130445697566
+"Type 2 diabetes — South Asian, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,South Asian,FALSE,Full model,0.04684490782028672
+"Type 2 diabetes — Hispanic or Latin American, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Plain average,0.00219451402596789
+"Type 2 diabetes — Hispanic or Latin American, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Correlation only,0.00241075183758859
+"Type 2 diabetes — Hispanic or Latin American, Multi-ancestry training",Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,FALSE,Full model,0.0168247640977391

@@ -1,0 +1,40 @@
+n_scores,n_eff,kind,trait_label,trained_bucket,target_ancestry,side,worked
+1,1,curve,NA,NA,NA,NA,NA
+2,1.25,curve,NA,NA,NA,NA,NA
+3,1.3636363636363635,curve,NA,NA,NA,NA,NA
+4,1.4285714285714286,curve,NA,NA,NA,NA,NA
+5,1.4705882352941178,curve,NA,NA,NA,NA,NA
+6,1.5,curve,NA,NA,NA,NA,NA
+7,1.5217391304347827,curve,NA,NA,NA,NA,NA
+8,1.5384615384615383,curve,NA,NA,NA,NA,NA
+9,1.5517241379310345,curve,NA,NA,NA,NA,NA
+10,1.5625000000000002,curve,NA,NA,NA,NA,NA
+11,1.5714285714285714,curve,NA,NA,NA,NA,NA
+12,1.5789473684210527,curve,NA,NA,NA,NA,NA
+13,1.5853658536585367,curve,NA,NA,NA,NA,NA
+14,1.5909090909090908,curve,NA,NA,NA,NA,NA
+15,1.5957446808510638,curve,NA,NA,NA,NA,NA
+5,1.4976644359961058,comparison,5-year incident prostate cancer,Train: Multi incl. EUR,African,Both sides,FALSE
+2,1.2500459393528824,comparison,Incident chronic obstructive pulmonary disease before age 50 years,Train: European-only,African,Both sides,FALSE
+3,1.3637170696013674,comparison,Incident coronary heart disease,Train: Multi incl. EUR,Hispanic or Latin American,Both sides,FALSE
+2,1.2500465256245512,comparison,Epithelial non-mucinous ovarian cancer,Train: European-only,East Asian,Both sides,FALSE
+4,1.4375103006955985,comparison,Breast Carcinoma,Train: European-only,African,Both sides,FALSE
+2,1.260195654759785,comparison,Breast cancer,Train: European-only,Hispanic or Latin American,Both sides,FALSE
+2,1.2966713645676555,comparison,Colorectal cancer,Train: Multi incl. EUR,African,Both sides,FALSE
+2,1.2500467945692535,comparison,Colorectal cancer,Train: Multi incl. EUR,Hispanic or Latin American,Both sides,FALSE
+11,2.9230016313218354,comparison,Breast cancer,Train: European-only,South Asian,Both sides,FALSE
+3,1.3637908142507564,comparison,Incident coronary heart disease,Train: Multi incl. EUR,East Asian,Both sides,FALSE
+2,1.250711019350784,comparison,Apparent Treatment-Resistant Hypertension,Train: Multi incl. EUR,African,Both sides,FALSE
+10,1.569741861294147,comparison,Stroke excluding subarachnoid hemorrhage,Train: Multi incl. EUR,South Asian,Both sides,FALSE
+13,5.6850904339916175,comparison,Type 2 diabetes,Train: European-only,South Asian,Both sides,TRUE
+4,1.429071573145812,comparison,Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,African,Both sides,FALSE
+4,1.448147670949485,comparison,Breast Carcinoma,Train: European-only,South Asian,Both sides,FALSE
+5,1.6021653852069064,comparison,5-year incident prostate cancer,Train: Multi incl. EUR,South Asian,Both sides,FALSE
+4,1.4304069443416312,comparison,Coronary heart disease (incident and prevalent),Train: Multi incl. EUR,Hispanic or Latin American,Both sides,FALSE
+2,1.9829720413736902,comparison,Type 2 diabetes,Train: Multi incl. EUR,South Asian,European side,FALSE
+12,2.4011470577415652,comparison,Type 2 diabetes,Train: European-only,East Asian,Both sides,FALSE
+6,4.972089298734974,comparison,Type 2 diabetes,Train: Multi incl. EUR,Hispanic or Latin American,Both sides,FALSE
+3,1.3644221927499618,comparison,Incident coronary heart disease,Train: Multi incl. EUR,South Asian,Both sides,FALSE
+2,1.9817128537283843,comparison,Type 2 diabetes,Train: Multi incl. EUR,East Asian,European side,FALSE
+2,1.254938086574568,comparison,Seropositive RA,Train: Multi incl. EUR,South Asian,Both sides,FALSE
+11,1.5831079674734745,comparison,Type 2 diabetes,Train: European-only,Hispanic or Latin American,Both sides,FALSE
