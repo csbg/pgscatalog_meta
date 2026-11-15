@@ -1,0 +1,1471 @@
+---
+title: "Δ AUC under different models: type 2 diabetes, European-trained scores"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: flatly
+    code_folding: hide
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, warning = TRUE, message = FALSE, comment = NA,
+  fig.width = 8, fig.height = 5
+)
+if (!file.exists("R/load.R")) {
+  if (file.exists("../R/load.R")) {
+    knitr::opts_knit$set(root.dir = normalizePath(".."))
+    setwd(normalizePath(".."))
+  } else {
+    stop("Run from the repository root.", call. = FALSE)
+  }
+}
+source("R/load.R")
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(tidyr)
+  library(readr)
+  library(purrr)
+  library(janitor)
+  library(ggplot2)
+  library(lme4)
+  library(lattice)
+  library(metafor)
+  library(knitr)
+})
+options(scipen = 6, digits = 5, width = 110, knitr.table.format = "pipe")
+stamp <- pipeline_stamp
+```
+
+```{r load-data, include = FALSE}
+# The same inputs and filters as the main analysis (scripts 05 to 08).
+fp_eval <- file.path("results", paste0("pgs_auc_ci_audit_", stamp), "eval_df_final_auc_ci.csv")
+fp_s1 <- file.path(
+  catalog_results_dir(stamp), "stage1",
+  paste0("stage1_pooled_cells_I2filtered_", stamp, ".csv")
+)
+fp_s2 <- file.path(
+  catalog_results_dir(stamp), "stage2",
+  paste0("deltaAUC_forest_faceted_data_", stamp, ".csv")
+)
+eval_raw <- read_csv(fp_eval, show_col_types = FALSE)
+stage1_saved <- read_csv(fp_s1, show_col_types = FALSE)
+stage2_saved <- read_csv(fp_s2, show_col_types = FALSE)
+
+pss <- read_csv(
+  catalog_bulk_file("evaluation_sample_sets", stamp),
+  show_col_types = FALSE, col_types = cols(.default = col_character())
+) %>%
+  clean_names() %>%
+  transmute(
+    sampleset_id = as.character(pgs_sample_set_pss),
+    n_individuals = suppressWarnings(as.numeric(number_of_individuals)),
+    n_cases = suppressWarnings(as.numeric(number_of_cases)),
+    n_controls = suppressWarnings(as.numeric(number_of_controls)),
+    cohort_txt = as.character(cohort_s)
+  ) %>%
+  distinct(sampleset_id, .keep_all = TRUE)
+
+ppm_cov <- read_csv(
+  catalog_bulk_file("performance_metrics", stamp),
+  show_col_types = FALSE, col_types = cols(.default = col_character())
+) %>%
+  clean_names() %>%
+  transmute(
+    performance_id = as.character(pgs_performance_metric_ppm_id),
+    covariates = covariates_included_in_the_model
+  ) %>%
+  distinct(performance_id, .keep_all = TRUE)
+
+eval_proc <- eval_raw %>%
+  mutate(
+    pgs_id = as.character(pgs_id),
+    sampleset_id = as.character(sampleset_id),
+    performance_id = as.character(performance_id),
+    train_bucket = as.character(train_bucket),
+    trait_label = harmonize_trait_label(
+      NA_character_,
+      coalesce(na_if(trimws(as.character(reported_trait)), ""), NA_character_)
+    ),
+    ancestry_display = as.character(ancestry_eval)
+  ) %>%
+  mutate(across(c(auc, estimate_ci_lower, estimate_ci_upper), as.numeric)) %>%
+  filter(
+    .data$ancestry_display %in% evaluation_display_levels,
+    is.finite(.data$auc), is.finite(.data$estimate_ci_lower), is.finite(.data$estimate_ci_upper)
+  ) %>%
+  left_join(
+    pss %>% select(sampleset_id, n = n_individuals, cases = n_cases, controls = n_controls),
+    by = "sampleset_id"
+  ) %>%
+  left_join(ppm_cov, by = "performance_id") %>%
+  mutate(covariate_class = classify_covariates(covariates))
+
+one_eval <- keep_one_evaluation(eval_proc, class_col = "covariate_class", return_dropped = FALSE)
+
+t2d_eval <- one_eval %>%
+  filter(.data$trait_label == "Type 2 diabetes", .data$train_bucket == "Train: European-only")
+
+# Which covariate class the analysis uses for each score, per comparison.
+t2d_stage1 <- stage1_saved %>%
+  filter(.data$trait_label == "Type 2 diabetes") %>%
+  mutate(
+    pgs_id = as.character(pgs_id),
+    ancestry_display = as.character(ancestry_display),
+    covariate_class = as.character(covariate_class),
+    auc_pooled = plogis(eta)
+  ) %>%
+  inner_join(t2d_eval %>% distinct(pgs_id, trained_bucket = train_bucket), by = "pgs_id")
+stage2_pairs <- pair_stage1_by_class(t2d_stage1, se_col = "se") %>%
+  pick_one_class_per_score()
+
+# The master table for one comparison: one row per AUC in the catalog.
+make_master <- function(target) {
+  keep <- stage2_pairs %>%
+    filter(.data$target_ancestry == target) %>%
+    select(pgs_id, covariate_class)
+  t2d_eval %>%
+    filter(.data$ancestry_display %in% c("European", target)) %>%
+    inner_join(keep, by = c("pgs_id", "covariate_class")) %>%
+    left_join(pss %>% select(sampleset_id, cohort_txt, n_individuals), by = "sampleset_id") %>%
+    mutate(tmp = pmap(list(auc, estimate_ci_lower, estimate_ci_upper), auc_ci_to_logit)) %>%
+    unnest_wider(tmp) %>%
+    transmute(
+      pgs_id, ancestry = factor(ancestry_display, levels = c("European", target)),
+      sampleset_id, study = normalize_study(cohort_txt), n_individuals, covariate_class,
+      auc, ci_lower = estimate_ci_lower, ci_upper = estimate_ci_upper,
+      logit_auc = eta, se_logit = se, se_auc = se * auc * (1 - auc)
+    ) %>%
+    mutate(PGS = factor(pgs_id), cohort = factor(sampleset_id)) %>%
+    arrange(ancestry, pgs_id, sampleset_id)
+}
+
+sa <- make_master("South Asian")
+hi <- make_master("Hispanic or Latin American")
+
+saved_stage2 <- function(target) {
+  stage2_saved %>%
+    filter(
+      .data$trait_label == "Type 2 diabetes",
+      .data$trained_bucket == "Train: European-only",
+      .data$target_ancestry == target
+    )
+}
+```
+
+```{r helpers, include = FALSE}
+fmt <- function(x, d = 4) formatC(x, format = "f", digits = d)
+
+# Every estimate on this page goes into this table, so the pipelines can be
+# compared at the end.
+est_tbl <- tibble()
+
+fixed_parts <- function(fit) {
+  if (inherits(fit, "rma")) {
+    list(b = coef(fit), V = vcov(fit), rhs = fit$formula.mods)
+  } else if (inherits(fit, "merMod")) {
+    list(b = fixef(fit), V = as.matrix(vcov(fit)), rhs = delete.response(terms(fit)))
+  } else {
+    list(b = coef(fit), V = vcov(fit), rhs = delete.response(terms(fit)))
+  }
+}
+
+# Logit to AUC. For each score, the model's fitted European logit and the
+# fitted logit with the ancestry term added go through plogis(). The Δ AUC
+# is the average of those per-score differences, each score counting once.
+# A model without a score term gives the same two logits for every score.
+# The SE is the delta method on that average.
+to_auc <- function(fit, m) {
+  p <- fixed_parts(fit)
+  nd <- data.frame(PGS = factor(levels(m$PGS), levels = levels(m$PGS)))
+  nd$ancestry <- factor(levels(m$ancestry)[1], levels = levels(m$ancestry))
+  X0 <- model.matrix(p$rhs, nd)
+  nd$ancestry <- factor(levels(m$ancestry)[2], levels = levels(m$ancestry))
+  X1 <- model.matrix(p$rhs, nd)
+  stopifnot(ncol(X0) == length(p$b))
+  e0 <- drop(X0 %*% p$b)
+  e1 <- drop(X1 %*% p$b)
+  g <- colMeans(dlogis(e1) * X1 - dlogis(e0) * X0)
+  c(est = mean(plogis(e1) - plogis(e0)), se = sqrt(drop(t(g) %*% p$V %*% g)))
+}
+
+fit_note <- function(fit) {
+  if (!inherits(fit, "merMod")) return("")
+  out <- character()
+  if (isSingular(fit)) out <- c(out, "singular fit")
+  if (length(fit@optinfo$conv$lme4$messages)) out <- c(out, "convergence warning")
+  paste(out, collapse = "; ")
+}
+
+record <- function(comparison, pipeline, model, scale, fit = NULL, m = NULL,
+                   est = NULL, se = NULL) {
+  if (!is.null(fit)) {
+    p <- fixed_parts(fit)
+    stopifnot(grepl("^ancestry", names(p$b)[2]))
+    est <- unname(p$b[2])
+    se <- sqrt(p$V[2, 2])
+    sigma <- if (inherits(fit, "rma")) NA_real_ else sigma(fit)
+    auc <- if (scale == "logit") to_auc(fit, m) else c(est = est, se = se)
+    note <- fit_note(fit)
+  } else {
+    sigma <- NA_real_
+    auc <- c(est = est, se = se)
+    note <- ""
+  }
+  row <- tibble(
+    comparison = comparison, pipeline = pipeline, model = model, scale = scale,
+    estimate = est, se = se, sigma = sigma,
+    delta_auc = auc[["est"]], se_auc = auc[["se"]],
+    lo_auc = auc[["est"]] - 1.96 * auc[["se"]], hi_auc = auc[["est"]] + 1.96 * auc[["se"]],
+    note = note
+  )
+  if (nrow(est_tbl)) {
+    est_tbl <<- est_tbl %>% filter(!(.data$comparison == .env$comparison & .data$model == .env$model))
+  }
+  est_tbl <<- bind_rows(est_tbl, row)
+  invisible(row)
+}
+
+show_rows <- function(comparison, models) {
+  est_tbl %>%
+    filter(.data$comparison == .env$comparison, .data$model %in% models) %>%
+    mutate(model = factor(.data$model, levels = models)) %>%
+    arrange(.data$model) %>%
+    transmute(
+      model, scale,
+      `estimate (model scale)` = estimate, `SE (model scale)` = se,
+      `σ` = sigma, `Δ AUC` = delta_auc, `SE (AUC)` = se_auc,
+      `95% CI` = paste0(fmt(lo_auc), " to ", fmt(hi_auc)), note
+    ) %>%
+    kable(digits = 5)
+}
+
+get_est <- function(comparison, model, col = "delta_auc") {
+  est_tbl[[col]][est_tbl$comparison == comparison & est_tbl$model == model]
+}
+
+# Studies that contribute rows to both ancestry groups of a master table.
+mixed_studies <- function(m) {
+  names(which(tapply(as.character(m$ancestry), m$study, n_distinct) > 1))
+}
+
+# Each lmer model next to the rma.mv model with the same fixed and random terms.
+lmer_rma_pairs <- tribble(
+  ~lmer_model, ~rma_model,
+  "2.4 lmer(logit ~ ancestry + PGS + (1|cohort)), weighted", "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)",
+  "2.5 lmer(logit ~ ancestry + (1|PGS) + (1|cohort)), weighted", "4.4 rma.mv(logit ~ ancestry, random = 1|PGS + 1|cohort)",
+  "3.4 lmer(AUC ~ ancestry + PGS + (1|cohort)), weighted", "5.3 rma.mv(AUC ~ ancestry + PGS, random = 1|cohort)",
+  "3.5 lmer(AUC ~ ancestry + (1|PGS) + (1|cohort)), weighted", "5.4 rma.mv(AUC ~ ancestry, random = 1|PGS + 1|cohort)"
+)
+show_pairs <- function(comparison) {
+  lmer_rma_pairs %>%
+    transmute(
+      `Model pair` = paste(lmer_model, "vs", rma_model),
+      `lmer Δ AUC` = map_dbl(lmer_model, ~ get_est(comparison, .x)),
+      `rma.mv Δ AUC` = map_dbl(rma_model, ~ get_est(comparison, .x))
+    ) %>%
+    kable(digits = 4)
+}
+
+# Default diagnostics from each package.
+diag_lm <- function(fit) {
+  op <- par(mfrow = c(2, 2), mar = c(4, 4, 2, 1))
+  plot(fit)
+  par(op)
+}
+diag_lmer <- function(fit) {
+  print(plot(fit, main = "Residuals vs fitted"))
+  print(qqmath(fit, main = "Normal Q-Q of residuals"))
+}
+diag_rma <- function(fit, m) {
+  forest(fit, slab = paste(m$pgs_id, m$ancestry, m$sampleset_id), cex = 0.6)
+  funnel(fit)
+  if (isTRUE(fit$withS)) {
+    profile(fit)
+  }
+}
+```
+
+## What this page is for
+
+- The main analysis estimates Δ AUC, the AUC of a score in another ancestry group minus its AUC in European participants, with two inverse-variance (IVW) averages.
+- On this page I ask one question about one example: **which model should the analysis use?** 
+- I use type 2 diabetes as the example, with scores trained only on European data, South Asian versus European.
+- A second, shorter example is Hispanic or Latin American versus European.
+- Hispanic or Latin American in type 2 diabetes is an example of `r sum(stage2_saved$one_sample_set)` of the `r nrow(stage2_saved)` comparisons in the analysis, where every score uses one European and one target sample set. These comparisons are spread across all `r n_distinct(stage2_saved$trait_label[stage2_saved$one_sample_set])` traits.
+- South Asian is an example of the `r sum(stage2_saved$n_pairs >= 2 & !stage2_saved$one_sample_set)` comparisons with more than one score and more than one sample set. They come from two traits: `r sum(stage2_saved$n_pairs >= 2 & !stage2_saved$one_sample_set & stage2_saved$trait_label == "Type 2 diabetes")` within type 2 diabetes and `r sum(stage2_saved$n_pairs >= 2 & !stage2_saved$one_sample_set & stage2_saved$trait_label == "Breast cancer")` within breast cancer.
+
+Every route starts from the same master table and ends on the AUC scale, so I can put the answers side by side:
+
+| Pipeline | Scale of the model | Model | Back to AUC |
+|---|---|---|---|
+| 1 | logit, then AUC | IVW within each score and ancestry (stage 1), then IVW of the per-score differences (stage 2) | after stage 1 |
+| 2 | logit | `lm`, then `lmer`, adding terms one at a time | after the model |
+| 3 | AUC | the same `lm` and `lmer` models | not needed |
+| 4 | logit | `rma.mv` from metafor | after the model |
+| 5 | AUC | the same `rma.mv` models | not needed |
+
+I show the model calls. The rest of the code is behind the **Code** buttons.
+
+**Where to look first.**
+
+- [Open questions](#open-questions): the five points I would like input on.
+- [All South Asian estimates side by side](#sa-all) and [all Hispanic or Latin American estimates side by side](#hi-all): one table and one plot per comparison, with every model on this page.
+- Pipeline 1 gives almost the same estimate and SE as the `rma.mv` model on the AUC scale with ancestry and score as fixed terms and no random effects (model 5.2: [South Asian](#sa-5-2), [Hispanic or Latin American](#hi-5-2)).
+
+# South Asian versus European
+
+## The master table
+
+- Each row is one AUC reported in the PGS Catalog: one score, evaluated in one sample set (a PSS identifier, a fixed group of people), in one ancestry group.
+- For each score I keep only the covariate class the main analysis uses, so that every model below sees the rows the analysis sees.
+
+```{r sa-master}
+kable(sa %>% select(-PGS, -cohort), digits = 4)
+```
+
+- That is `r nrow(sa)` rows: `r n_distinct(sa$pgs_id)` scores in `r n_distinct(sa$sampleset_id)` sample sets.
+- Every score has at least one European row and at least one South Asian row.
+- The last three columns are the logit, its SE (from the catalog's 95% CI), and that SE converted to the AUC scale. I explain where the logit comes in and goes out, and why, at the start of Pipeline 1.
+
+### How are the rows spread over sample sets?
+
+Before fitting anything, I wanted to see which scores were measured where.
+
+```{r sa-layout}
+sa_layout <- sa %>%
+  mutate(column = paste0(ancestry, " · ", sampleset_id, " (", study, ")")) %>%
+  count(pgs_id, column) %>%
+  pivot_wider(names_from = column, values_from = n, values_fill = 0)
+kable(sa_layout)
+sa_main_sets <- sa %>%
+  count(ancestry, sampleset_id, study) %>%
+  group_by(ancestry) %>%
+  slice_max(n, n = 1, with_ties = FALSE) %>%
+  ungroup()
+sa_eur_main <- sa_main_sets$sampleset_id[sa_main_sets$ancestry == "European"]
+sa_tgt_main <- sa_main_sets$sampleset_id[sa_main_sets$ancestry != "European"]
+sa_n_tied <- sa %>%
+  group_by(pgs_id) %>%
+  summarise(tied = all(sampleset_id[ancestry == "European"] == sa_eur_main) &
+    all(sampleset_id[ancestry != "European"] == sa_tgt_main)) %>%
+  pull(tied) %>%
+  sum()
+```
+
+- `r sa_n_tied` of the `r n_distinct(sa$pgs_id)` scores were measured in exactly one European sample set, `r sa_eur_main` (`r sa_main_sets$study[sa_main_sets$ancestry == "European"]`), and one South Asian sample set, `r sa_tgt_main` (`r sa_main_sets$study[sa_main_sets$ancestry != "European"]`).
+- So for most scores, it seems to me that comparing the two ancestry groups is also comparing two different studies. 
+
+## Pipeline 1: IVW in two stages (the analysis) {#sa-pipeline-1}
+
+This is how the IVW based analysis computes Δ AUC. I recompute it here from the master table, step by step.
+
+### Where the logit comes in and goes out
+
+This took me a while to get straight, so I set it out before the code, based on the reviewer 2 suggestion:
+
+| Step | What I do | Scale | Why |
+|---|---|---|---|
+| Master table | Turn each AUC into a logit, log(AUC / (1 − AUC)), and its 95% CI into a logit SE, (logit(upper) − logit(lower)) / (2 × 1.96) | **logit comes in** | The catalog gives a CI, not an SE. I take the half-width of the CI on the logit scale, divided by 1.96, as the SE. This assumes the CI is roughly symmetric on the logit scale. |
+| Stage 1 | IVW of a score's rows within one ancestry group | logit | An AUC is bounded between 0 and 1. On the logit scale that bound is gone, so the average and its SE behave better. |
+| End of stage 1 | `plogis()` for the pooled estimate, the delta method for its SE | **logit goes out** | The estimate and its SE have to leave the logit scale together, so that both are in AUC units. |
+| Stage 2, first | Δ for each score = AUC(South Asian) − AUC(European) | AUC | Δ is in AUC units, which is what Fig. 1C shows. |
+| Stage 2, then | IVW of the per-score Δs | AUC | One Δ AUC for the whole comparison. |
+
+- My understanding is that IVW itself does not need the logit. It needs an estimate and an SE on the same scale: the weight is 1 / SE², and the SE of the average is √(1 / Σ weights).
+- So I use the logit in stage 1 for two jobs: to get an SE out of the catalog's CI, and to pool a score's AUCs away from the 0 to 1 bound. Once stage 1 is done, the logit has no job left.
+- In stage 2 the thing I average is a difference. It sits near 0 and can be negative, so it is not bounded the way an AUC is, and with SEs this small I take it to be close to normal on the AUC scale.
+
+### Stage 1: one AUC per score and ancestry
+
+- Some scores have more than one evaluation row in an ancestry group (`k_eval` in the table below counts them).
+- In stage 1 I combine them into one value: an inverse-variance average on the logit scale, with weights 1 / SE(logit)².
+- Then the logit goes out: `plogis()` turns the pooled logit into an AUC, and the delta method, SE(AUC) = SE(logit) × AUC × (1 − AUC), turns its SE into AUC units, as Reviewer 2 suggested. After this step nothing is on the logit scale.
+
+```{r sa-p1-stage1, class.source = "fold-show"}
+sa_s1 <- sa %>%
+  group_by(pgs_id, ancestry) %>%
+  summarise(pooled = list(ivw_pool_logit(logit_auc, se_logit)), .groups = "drop") %>%
+  unnest_wider(pooled) %>%
+  mutate(auc = plogis(eta), se_auc = se * auc * (1 - auc))
+kable(sa_s1 %>% select(pgs_id, ancestry, k_eval, logit = eta, se_logit = se, auc, se_auc), digits = 5)
+```
+
+I checked whether this is the same as the stage-1 table the analysis saved:
+
+```{r sa-p1-check1}
+sa_s1_cmp <- sa_s1 %>%
+  mutate(ancestry = as.character(ancestry)) %>%
+  inner_join(
+    t2d_stage1 %>%
+      semi_join(stage2_pairs %>% filter(target_ancestry == "South Asian"), by = c("pgs_id", "covariate_class")) %>%
+      select(pgs_id, ancestry = ancestry_display, eta_saved = eta, se_saved = se),
+    by = c("pgs_id", "ancestry")
+  )
+tibble(
+  rows_compared = nrow(sa_s1_cmp),
+  largest_logit_difference = max(abs(sa_s1_cmp$eta - sa_s1_cmp$eta_saved)),
+  largest_se_difference = max(abs(sa_s1_cmp$se - sa_s1_cmp$se_saved))
+)
+```
+
+It is: all `r nrow(sa_s1_cmp)` rows match to rounding error.
+
+### Stage 2: the per-score differences, then their average
+
+- Now everything is on the AUC scale, the estimates and their SEs.
+- First, the delta for each score: Δ = AUC(South Asian) − AUC(European), with SE(Δ) = √(SE(South Asian)² + SE(European)²).
+- Then I aggregate the deltas over scores with IVW: weight = 1 / SE(Δ)², Δ AUC = Σ weight × Δ / Σ weight, and SE = √(1 / Σ weight).
+- That gives one Δ AUC for this comparison (type 2 diabetes, European-trained scores, South Asian versus European), which is one row of submitted Fig. 1C.
+
+```{r sa-p1-stage2, class.source = "fold-show"}
+sa_diff <- sa_s1 %>%
+  select(pgs_id, ancestry, auc, se_auc) %>%
+  pivot_wider(names_from = ancestry, values_from = c(auc, se_auc)) %>%
+  transmute(
+    pgs_id,
+    auc_european = `auc_European`, auc_south_asian = `auc_South Asian`,
+    delta = auc_south_asian - auc_european,
+    se_delta = sqrt(`se_auc_European`^2 + `se_auc_South Asian`^2),
+    weight = 1 / se_delta^2
+  )
+kable(sa_diff, digits = 5)
+sa_p1 <- with(sa_diff, c(
+  delta_auc = sum(weight * delta) / sum(weight),
+  se = sqrt(1 / sum(weight))
+))
+sa_p1
+```
+
+```{r sa-p1-record}
+sa_p1_saved <- saved_stage2("South Asian")
+record("South Asian", "1", "1. IVW stage 1 → stage 2", "AUC", est = sa_p1[["delta_auc"]], se = sa_p1[["se"]])
+c(saved_delta_auc = sa_p1_saved$delta_hat, saved_se = sa_p1_saved$se_hat)
+sa_q <- with(sa_diff, sum(weight * (delta - sa_p1[["delta_auc"]])^2))
+```
+
+I get Δ AUC = `r fmt(sa_p1[["delta_auc"]])` (SE `r fmt(sa_p1[["se"]])`), the same value as the saved stage-2 table behind the figure.
+
+The same average, split by where the scores were measured:
+
+```{r sa-p1-split}
+sa_where <- sa %>%
+  group_by(pgs_id) %>%
+  summarise(
+    only_main_sets = all(sampleset_id[ancestry == "European"] == sa_eur_main) &
+      all(sampleset_id[ancestry != "European"] == sa_tgt_main),
+    sample_sets = n_distinct(sampleset_id),
+    covariate_class = paste(unique(covariate_class), collapse = ", ")
+  )
+sa_split <- sa_diff %>%
+  left_join(sa_where, by = "pgs_id") %>%
+  mutate(group = if_else(only_main_sets, paste0("Scores measured only in ", sa_eur_main, " and ", sa_tgt_main), pgs_id)) %>%
+  group_by(group) %>%
+  summarise(
+    scores = n(),
+    `sample sets per score` = paste(sort(unique(sample_sets)), collapse = ", "),
+    `covariate class` = paste(unique(covariate_class), collapse = ", "),
+    `Δ AUC` = sum(weight * delta) / sum(weight),
+    SE = sqrt(1 / sum(weight)),
+    w = sum(weight),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(scores), group)
+bind_rows(
+  sa_split,
+  tibble(
+    group = paste("All", nrow(sa_diff), "scores"), scores = nrow(sa_diff),
+    `sample sets per score` = "", `covariate class` = "",
+    `Δ AUC` = sa_p1[["delta_auc"]], SE = sa_p1[["se"]], w = sum(sa_diff$weight)
+  )
+) %>%
+  mutate(`share of stage-2 weight` = w / sum(sa_diff$weight)) %>%
+  select(-w) %>%
+  kable(digits = 4)
+```
+
+Two things I keep in mind for the models that follow:
+
+- The logit is undone **after stage 1**, before any difference is taken. Stage 2 itself is on the AUC scale.
+- The SE of the average uses the row SEs as they are. It does not ask whether the scores' differences scatter more than those SEs allow, and I think they do: the heterogeneity statistic Q = Σ weight × (Δ − average)² is `r fmt(sa_q, 1)` on `r nrow(sa_diff) - 1` degrees of freedom, where I would expect about `r nrow(sa_diff) - 1` if the SEs explained all the scatter.
+
+**Open question.**
+
+- The metafor documentation cites Thompson & Sharp (1999), who "clearly recommend to use a model with an additive heterogeneity component" ([metafor: rma() vs lm(), lme(), lmer()](https://www.metafor-project.org/doku.php/tips:rma_vs_lm_lme_lmer)). That is a random-effects model, with a between-score variance τ² added to each SE², rather than a multiplier like σ in `lm`. Pipeline 1 has neither.
+- For the τ² estimator, the docs say "use of restricted maximum likelihood (REML) estimation is generally recommended", and REML is metafor's default ([metafor: recommended practices](https://wviechtb.github.io/metafor/reference/misc-recs.html)). DerSimonian–Laird is another option. With one or two scores in a comparison, τ² is hard to estimate with any of them.
+- The same page recommends the Knapp-Hartung method (`test = "knha"`) for tests and intervals from `rma`, especially with few estimates. The table below uses metafor's default z-test, so its intervals may be too narrow.
+- Here is the same stage-2 average as a fixed-effect model (FE, as in pipeline 1) and as a random-effects model with two τ² estimators:
+
+```{r sa-p1-re}
+sa_p1_re <- map_dfr(c("FE", "REML", "DL"), function(m) {
+  f <- rma(sa_diff$delta, sei = sa_diff$se_delta, method = m)
+  tibble(method = m, `Δ AUC` = coef(f)[[1]], SE = f$se, `95% CI` = paste0(fmt(f$ci.lb), " to ", fmt(f$ci.ub)), tau = sqrt(f$tau2))
+})
+kable(sa_p1_re, digits = 4)
+```
+
+- With REML the estimate is `r fmt(sa_p1_re[["Δ AUC"]][sa_p1_re$method == "REML"])`, against `r fmt(sa_p1_re[["Δ AUC"]][sa_p1_re$method == "FE"])` for the fixed-effect model, and the SE is larger too.
+- Should stage 2 use a random-effects model?
+
+## Pipeline 2: logit scale, `lm` then `lmer`
+
+- Instead of averaging in two stages, I now fit one model to all `r nrow(sa)` rows at once. The outcome is the logit AUC.
+- The way I think of it, each model asks the same question, "how much higher or lower is a South Asian row than a European row?", and differs in what else it takes into account.
+- The answer is the `ancestrySouth Asian` coefficient; European is the reference level.
+- That coefficient is a difference in logits, not in AUC, so to compare it with pipeline 1 I map it back.
+- For each score I take the model's fitted European logit and the same logit plus the ancestry coefficient, pass both through `plogis()`, and subtract.
+- Δ AUC is the average of those differences over the scores, each score counting once.
+- When a model has no term for the score, every score gets the same two logits. I get the SE from the delta method.
+
+### 2.1 Ancestry only
+
+I start with the simplest question: if I ignore which score a row comes from, how do South Asian rows compare with European rows?
+
+```{r sa-2-1, class.source = "fold-show"}
+fit_sa_2_1 <- lm(logit_auc ~ ancestry, data = sa, weights = 1 / se_logit^2)
+summary(fit_sa_2_1)
+```
+
+```{r sa-2-1-out, fig.height = 6.5}
+record("South Asian", "2", "2.1 lm(logit ~ ancestry), weighted", "logit", fit_sa_2_1, sa)
+show_rows("South Asian", "2.1 lm(logit ~ ancestry), weighted")
+diag_lm(fit_sa_2_1)
+```
+
+I wanted to know which rows carry the weight in this model. The share of each ancestry group's total weight, for the heaviest rows:
+
+```{r sa-2-1-weight}
+sa_weight <- sa %>%
+  mutate(row = row_number(), w = 1 / se_logit^2) %>%
+  group_by(ancestry) %>%
+  mutate(share_of_weight = w / sum(w)) %>%
+  slice_max(share_of_weight, n = 3) %>%
+  ungroup() %>%
+  select(row, pgs_id, ancestry, sampleset_id, auc, se_logit, share_of_weight)
+kable(sa_weight, digits = 4)
+sa_heavy <- sa_weight$pgs_id[1]
+sa_heavy_share <- sa %>%
+  mutate(w = 1 / se_logit^2) %>%
+  group_by(ancestry) %>%
+  summarise(share = sum(w[pgs_id == sa_heavy]) / sum(w))
+```
+
+**What we see.**
+
+- The logit difference is `r fmt(get_est("South Asian", "2.1 lm(logit ~ ancestry), weighted", "estimate"))`, which maps back to Δ AUC = `r fmt(get_est("South Asian", "2.1 lm(logit ~ ancestry), weighted"))`.
+- Pipeline 1 gives `r fmt(sa_p1[["delta_auc"]])`. The sign differs, and both are close to 0.
+- The residual standard error σ is `r fmt(sigma(fit_sa_2_1), 1)`.
+- In the weight table, the rows of `r sa_heavy` carry `r fmt(100 * sa_heavy_share$share[1], 0)`% of the European weight and `r fmt(100 * sa_heavy_share$share[2], 0)`% of the South Asian weight.
+- With a term for the score, σ is much smaller, as model 2.3 shows.
+
+### 2.2 Add the score, no weights
+
+- Next I let each score have its own baseline.
+- With a `PGS` term, my understanding is that the ancestry coefficient compares rows of the same score.
+- Here every row counts equally, whatever its sample size.
+
+```{r sa-2-2, class.source = "fold-show"}
+fit_sa_2_2 <- lm(logit_auc ~ ancestry + PGS, data = sa)
+summary(fit_sa_2_2)
+```
+
+```{r sa-2-2-out, fig.height = 6.5}
+record("South Asian", "2", "2.2 lm(logit ~ ancestry + PGS)", "logit", fit_sa_2_2, sa)
+show_rows("South Asian", "2.2 lm(logit ~ ancestry + PGS)")
+diag_lm(fit_sa_2_2)
+```
+
+**What we see.**
+
+- The `PGS` rows of the summary are each score's logit relative to the first score, `r levels(sa$PGS)[1]`.
+- Δ AUC is now `r fmt(get_est("South Asian", "2.2 lm(logit ~ ancestry + PGS)"))`.
+- This model does not use the weights, so a small sample set counts as much as a large one.
+
+### 2.3 Add the score, with weights
+
+I put the weights back into the same model.
+
+```{r sa-2-3, class.source = "fold-show"}
+fit_sa_2_3 <- lm(logit_auc ~ ancestry + PGS, data = sa, weights = 1 / se_logit^2)
+summary(fit_sa_2_3)
+```
+
+```{r sa-2-3-out, fig.height = 6.5}
+record("South Asian", "2", "2.3 lm(logit ~ ancestry + PGS), weighted", "logit", fit_sa_2_3, sa)
+show_rows("South Asian", "2.3 lm(logit ~ ancestry + PGS), weighted")
+diag_lm(fit_sa_2_3)
+```
+
+**What we see.**
+
+- Δ AUC = `r fmt(get_est("South Asian", "2.3 lm(logit ~ ancestry + PGS), weighted"))`, against `r fmt(sa_p1[["delta_auc"]])` from pipeline 1. The sign differs, and both are close to 0.
+- σ drops from `r fmt(sigma(fit_sa_2_1), 1)` in 2.1 to `r fmt(sigma(fit_sa_2_3), 2)`.
+- σ² here (`r fmt(sigma(fit_sa_2_3)^2, 2)`) is similar to Q / df in pipeline 1 (`r fmt(sa_q / (nrow(sa_diff) - 1), 2)`).
+- The AUC-scale version of this model is 3.3.
+
+### 2.4 Add a random effect for the sample set {#sa-2-4}
+
+- Rows from the same sample set share people, so I would expect them to share a shift up or down that has nothing to do with ancestry.
+- `(1 | cohort)` gives each sample set its own random shift.
+
+```{r sa-2-4, class.source = "fold-show"}
+fit_sa_2_4 <- lmer(logit_auc ~ ancestry + PGS + (1 | cohort), data = sa, weights = 1 / se_logit^2)
+summary(fit_sa_2_4)
+ranef(fit_sa_2_4)
+```
+
+```{r sa-2-4-out, fig.show = "hold", out.width = "49%"}
+record("South Asian", "2", "2.4 lmer(logit ~ ancestry + PGS + (1|cohort)), weighted", "logit", fit_sa_2_4, sa)
+show_rows("South Asian", "2.4 lmer(logit ~ ancestry + PGS + (1|cohort)), weighted")
+diag_lmer(fit_sa_2_4)
+```
+
+**What we see.**
+
+- Adding the sample set moves the estimate: Δ AUC goes from `r fmt(get_est("South Asian", "2.3 lm(logit ~ ancestry + PGS), weighted"))` to `r fmt(get_est("South Asian", "2.4 lmer(logit ~ ancestry + PGS + (1|cohort)), weighted"))`, and the SE grows.
+- In `ranef()`, the two sample sets with the most rows, `r sa_eur_main` (European) and `r sa_tgt_main` (South Asian), get shifts of opposite sign.
+- `r sa_n_tied` scores were measured only in these two sets.
+- I am not sure how to interpret this change in the estimate ([open question 2](#open-questions)).
+
+My understanding is that `lmer`, like `lm`, multiplies the variances by its own residual scale (`Residual` in the summary).
+
+### 2.5 Score as a random effect too
+
+- Here, instead of a fixed baseline per score, I let the scores' baselines come from a distribution, `(1 | PGS)`.
+- As I understand it, the fixed intercept is now the logit of a typical score, so I map Δ AUC back at that typical score.
+
+```{r sa-2-5, class.source = "fold-show"}
+fit_sa_2_5 <- lmer(logit_auc ~ ancestry + (1 | PGS) + (1 | cohort), data = sa, weights = 1 / se_logit^2)
+summary(fit_sa_2_5)
+```
+
+```{r sa-2-5-out, fig.show = "hold", out.width = "49%"}
+record("South Asian", "2", "2.5 lmer(logit ~ ancestry + (1|PGS) + (1|cohort)), weighted", "logit", fit_sa_2_5, sa)
+show_rows("South Asian", "2.5 lmer(logit ~ ancestry + (1|PGS) + (1|cohort)), weighted")
+diag_lmer(fit_sa_2_5)
+```
+
+**What we see.**
+
+- Δ AUC = `r fmt(get_est("South Asian", "2.5 lmer(logit ~ ancestry + (1|PGS) + (1|cohort)), weighted"))`, close to 2.4, where the score is a fixed term.
+
+### Pipeline 2 so far
+
+```{r sa-p2-summary}
+sa_models_p2 <- est_tbl %>% filter(comparison == "South Asian", pipeline %in% c("1", "2")) %>% pull(model)
+show_rows("South Asian", sa_models_p2)
+```
+
+## Pipeline 3: AUC scale, `lm` then `lmer`
+
+- The same five models, with AUC as the outcome and weights 1 / SE(AUC)².
+- There is no back-transformation: the coefficient is already a Δ AUC.
+- What I want to know here is whether the scale changes the story.
+
+```{r sa-p3, class.source = "fold-show"}
+fit_sa_3_1 <- lm(auc ~ ancestry, data = sa, weights = 1 / se_auc^2)
+fit_sa_3_2 <- lm(auc ~ ancestry + PGS, data = sa)
+fit_sa_3_3 <- lm(auc ~ ancestry + PGS, data = sa, weights = 1 / se_auc^2)
+fit_sa_3_4 <- lmer(auc ~ ancestry + PGS + (1 | cohort), data = sa, weights = 1 / se_auc^2)
+fit_sa_3_5 <- lmer(auc ~ ancestry + (1 | PGS) + (1 | cohort), data = sa, weights = 1 / se_auc^2)
+```
+
+```{r sa-p3-record, include = FALSE}
+record("South Asian", "3", "3.1 lm(AUC ~ ancestry), weighted", "AUC", fit_sa_3_1, sa)
+record("South Asian", "3", "3.2 lm(AUC ~ ancestry + PGS)", "AUC", fit_sa_3_2, sa)
+record("South Asian", "3", "3.3 lm(AUC ~ ancestry + PGS), weighted", "AUC", fit_sa_3_3, sa)
+record("South Asian", "3", "3.4 lmer(AUC ~ ancestry + PGS + (1|cohort)), weighted", "AUC", fit_sa_3_4, sa)
+record("South Asian", "3", "3.5 lmer(AUC ~ ancestry + (1|PGS) + (1|cohort)), weighted", "AUC", fit_sa_3_5, sa)
+```
+
+### 3.1 Ancestry only
+
+```{r sa-3-1, fig.height = 6.5}
+summary(fit_sa_3_1)
+diag_lm(fit_sa_3_1)
+```
+
+### 3.2 Add the score, no weights
+
+```{r sa-3-2, fig.height = 6.5}
+summary(fit_sa_3_2)
+diag_lm(fit_sa_3_2)
+```
+
+### 3.3 Add the score, with weights
+
+```{r sa-3-3, fig.height = 6.5}
+summary(fit_sa_3_3)
+diag_lm(fit_sa_3_3)
+```
+
+**What we see.**
+
+- This model gives Δ AUC = `r fmt(get_est("South Asian", "3.3 lm(AUC ~ ancestry + PGS), weighted"), 6)`, against `r fmt(sa_p1[["delta_auc"]], 6)` from pipeline 1. The two are almost the same.
+
+The SE is a different story. It is `r fmt(get_est("South Asian", "3.3 lm(AUC ~ ancestry + PGS), weighted", "se"))`, against `r fmt(sa_p1[["se"]])` in pipeline 1. I divided it by σ:
+
+```{r sa-3-3-sigma}
+c(
+  se_lm = get_est("South Asian", "3.3 lm(AUC ~ ancestry + PGS), weighted", "se"),
+  sigma = sigma(fit_sa_3_3),
+  se_lm_divided_by_sigma = get_est("South Asian", "3.3 lm(AUC ~ ancestry + PGS), weighted", "se") / sigma(fit_sa_3_3),
+  se_pipeline_1 = sa_p1[["se"]]
+)
+```
+
+- Once σ is taken out, the SE is close to the pipeline 1 SE.
+- σ for this model is `r fmt(sigma(fit_sa_3_3), 1)`.
+
+### 3.4 Add a random effect for the sample set
+
+```{r sa-3-4, fig.show = "hold", out.width = "49%"}
+summary(fit_sa_3_4)
+ranef(fit_sa_3_4)
+diag_lmer(fit_sa_3_4)
+```
+
+### 3.5 Score as a random effect too
+
+```{r sa-3-5, fig.show = "hold", out.width = "49%"}
+summary(fit_sa_3_5)
+diag_lmer(fit_sa_3_5)
+```
+
+### Pipeline 3 so far {#sa-pipeline-3-so-far}
+
+```{r sa-p3-summary}
+sa_models_p3 <- est_tbl %>% filter(comparison == "South Asian", pipeline %in% c("1", "2", "3")) %>% pull(model)
+show_rows("South Asian", sa_models_p3)
+```
+
+**What we see.**
+
+- For 3.1 to 3.4, the AUC-scale estimates are close to the logit-scale ones in pipeline 2.
+- Models with a term for the score, and no sample-set term, land near pipeline 1.
+- In 3.4, adding the sample set pulls the estimate down to `r fmt(get_est("South Asian", "3.4 lmer(AUC ~ ancestry + PGS + (1|cohort)), weighted"), 3)`, against `r fmt(get_est("South Asian", "2.4 lmer(logit ~ ancestry + PGS + (1|cohort)), weighted"), 3)` in 2.4. `lmer` gave a convergence warning for 3.4.
+- 3.5, where the score is also random, gives `r fmt(get_est("South Asian", "3.5 lmer(AUC ~ ancestry + (1|PGS) + (1|cohort)), weighted"), 3)`, against `r fmt(get_est("South Asian", "2.5 lmer(logit ~ ancestry + (1|PGS) + (1|cohort)), weighted"), 3)` in 2.5, and its SE is much larger than in 3.4. The variance components:
+
+```{r sa-3-5-vc}
+VarCorr(fit_sa_3_5)
+sa_vc35 <- as.data.frame(VarCorr(fit_sa_3_5))
+```
+
+- On the AUC scale, the sample-set SD is `r fmt(sa_vc35$sdcor[sa_vc35$grp == "cohort"], 3)` and the score SD is `r fmt(sa_vc35$sdcor[sa_vc35$grp == "PGS"], 3)`. On the logit scale (2.5) it was the other way round.
+
+## Pipeline 4: logit scale, `rma.mv`
+
+- `rma.mv` from metafor seems to be built for this kind of data: the docs point to it for multilevel models ([metafor: rma() vs lm(), lme(), lmer()](https://www.metafor-project.org/doku.php/tips:rma_vs_lm_lme_lmer)).
+- My understanding is that it takes each row's variance, SE², as known.
+- Extra scatter shows up in the output either as the variance of a random effect (`sigma^2`) or in the test of residual heterogeneity (QE).
+- For `rma.mv`, the docs suggest `test = "t"` and say "one should also set `dfs="contain"`" ([metafor: recommended practices](https://wviechtb.github.io/metafor/reference/misc-recs.html)). I use the default z-tests, and every interval on this page is the estimate ± 1.96 × SE, so the intervals may be too narrow.
+
+The models mirror pipeline 2. I have no unweighted version, because `rma.mv` always uses the SEs.
+
+```{r sa-p4, class.source = "fold-show"}
+fit_sa_4_1 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry, data = sa)
+fit_sa_4_2 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry + PGS, data = sa)
+fit_sa_4_3 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry + PGS, random = ~ 1 | cohort, data = sa)
+fit_sa_4_4 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry, random = list(~ 1 | PGS, ~ 1 | cohort), data = sa)
+```
+
+```{r sa-p4-record, include = FALSE}
+record("South Asian", "4", "4.1 rma.mv(logit ~ ancestry)", "logit", fit_sa_4_1, sa)
+record("South Asian", "4", "4.2 rma.mv(logit ~ ancestry + PGS)", "logit", fit_sa_4_2, sa)
+record("South Asian", "4", "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)", "logit", fit_sa_4_3, sa)
+record("South Asian", "4", "4.4 rma.mv(logit ~ ancestry, random = 1|PGS + 1|cohort)", "logit", fit_sa_4_4, sa)
+```
+
+### 4.1 Ancestry only
+
+```{r sa-4-1, fig.height = 7}
+fit_sa_4_1
+diag_rma(fit_sa_4_1, sa)
+```
+
+**How to read these two plots.** They are metafor's `forest()` and `funnel()`, and I show them for every `rma.mv` model on this page.
+
+- Forest plot: each row is one AUC from the master table, on the scale of the model, with its 95% interval. The model has moderators, so there is no summary diamond. Instead, "the fitted value for each study is added as a polygon to the plot" ([metafor: forest.rma](https://wviechtb.github.io/metafor/reference/forest.rma.html)). Here a study is a row.
+- Funnel plot: the x-axis is not the logit AUC. With moderators, "the plot shows the residuals on the x-axis against their corresponding standard errors" ([metafor: funnel](https://wviechtb.github.io/metafor/reference/funnel.html)).
+
+**What we see.**
+
+- The logit estimate is the same as in 2.1 (`r fmt(get_est("South Asian", "4.1 rma.mv(logit ~ ancestry)", "estimate"))`).
+- The SE is `r fmt(get_est("South Asian", "4.1 rma.mv(logit ~ ancestry)", "se"))` here, against `r fmt(get_est("South Asian", "2.1 lm(logit ~ ancestry), weighted", "se"))` from `lm`. The ratio of the two is σ from 2.1.
+- σ² from `lm` is equal to QE divided by its degrees of freedom:
+
+```{r sa-4-1-qe}
+c(QE = fit_sa_4_1$QE, df = fit_sa_4_1$k - fit_sa_4_1$p, QE_over_df = fit_sa_4_1$QE / (fit_sa_4_1$k - fit_sa_4_1$p), sigma_squared_lm = sigma(fit_sa_2_1)^2)
+```
+
+**What the metafor docs say.**
+
+- With weights 1 / SE², `lm`, `lme` and `lmer` "assume that the sampling variances are known only up to a proportionality constant" ([metafor: rma() vs lm(), lme(), lmer()](https://www.metafor-project.org/doku.php/tips:rma_vs_lm_lme_lmer)).
+- In the `lm` example on that page, multiplying the variances by a constant "does not affect the model estimate, but only the corresponding standard error". The example shows the `lm` SE divided by σ giving the `rma` SE, which is what I see here.
+- The page says this for the `lm` example. In its `lme` and `lmer` examples the estimate differs from the `rma` one as well.
+
+### 4.2 Add the score
+
+```{r sa-4-2, fig.height = 7}
+fit_sa_4_2
+diag_rma(fit_sa_4_2, sa)
+```
+
+**What we see.**
+
+- Again the estimate is the same as the weighted `lm` (2.3), and QE / df is σ² from 2.3.
+
+### 4.3 Add a random effect for the sample set
+
+```{r sa-4-3, fig.height = 7}
+fit_sa_4_3
+diag_rma(fit_sa_4_3, sa)
+```
+
+**What we see.** As in 2.4, the estimate moves once the sample set has its own variance: Δ AUC = `r fmt(get_est("South Asian", "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)"))`.
+
+- The last plot is new to this pipeline: the profile of the restricted log-likelihood over values of the sample-set variance σ².
+- It has a clear peak near `r fmt(fit_sa_4_3$sigma2, 4)`.
+- I come back to this plot in the Hispanic or Latin American comparison.
+
+**What the metafor docs say.**
+
+- "A profile likelihood plot should show a single peak at the corresponding ML/REML estimate" ([metafor: profile.rma](https://wviechtb.github.io/metafor/reference/profile.rma.html)). The South Asian profile has one.
+
+### 4.4 Score and sample set as random effects
+
+```{r sa-4-4, fig.height = 7}
+fit_sa_4_4
+diag_rma(fit_sa_4_4, sa)
+```
+
+```{r sa-4-4-peaks, include = FALSE}
+# Local peaks of the profile for the sample-set variance (the second component).
+sa_pr44 <- profile(fit_sa_4_4, sigma2 = 2, plot = FALSE, progbar = FALSE)
+sa_pk <- which(diff(sign(diff(sa_pr44$ll))) == -2) + 1
+sa_pk_x <- sa_pr44$sigma2[sa_pk]
+sa_pk_other <- sa_pk_x[which.min(sa_pr44$ll[sa_pk])]
+```
+
+**What we see.**
+
+- Δ AUC = `r fmt(get_est("South Asian", "4.4 rma.mv(logit ~ ancestry, random = 1|PGS + 1|cohort)"))`, close to 4.3 (`r fmt(get_est("South Asian", "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)"))`).
+- `r if (length(sa_pk) >= 2) paste0("The profile for the sample-set variance has its highest peak at the estimate (", fmt(fit_sa_4_4$sigma2[2]), "), and a second, lower peak near ", fmt(sa_pk_other, 2), ".") else "The profile for the sample-set variance has a single peak at the estimate."`
+- `r if (length(sa_pk) >= 2) "The metafor docs say: \"If the profiled log-likelihood has multiple peaks, this indicates that the likelihood surface is not unimodal\". The estimate would be a local optimum only if the dotted lines did not meet at the highest peak, and here they do ([metafor: profile.rma](https://wviechtb.github.io/metafor/reference/profile.rma.html))." else ""`
+
+### 4.5 A random effect for each row too
+
+- The metafor docs say "a common mistake is to forget to add random effects at both levels". With only the outer level, the model "assumes that the true effects for different studies within the same district are all identical" ([metafor: Konstantopoulos (2011) example](https://www.metafor-project.org/doku.php/analyses:konstantopoulos2011)). Here the district is the sample set and the studies are the rows.
+- 4.3 has only the sample-set level. Following that advice, I add a random effect for each row inside its sample set: `random = ~ 1 | cohort/row`.
+
+```{r sa-4-5, class.source = "fold-show", fig.height = 7}
+sa$row <- factor(seq_len(nrow(sa)))
+fit_sa_4_5 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry + PGS, random = ~ 1 | cohort/row, data = sa)
+record("South Asian", "4", "4.5 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row)", "logit", fit_sa_4_5, sa)
+fit_sa_4_5
+profile(fit_sa_4_5)
+```
+
+**What we see.**
+
+- The row-level variance is estimated at `r fmt(fit_sa_4_5$sigma2[2], 4)`.
+- Δ AUC = `r fmt(get_est("South Asian", "4.5 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row)"))`, the same as in 4.3 (`r fmt(get_est("South Asian", "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)"))`).
+
+### 4.6 Rows that share participants {#sa-4-6}
+
+- The metafor docs say standard models "assume that the effect size estimates (or more precisely, their sampling errors) are independent" ([metafor: vcalc](https://wviechtb.github.io/metafor/reference/vcalc.html)). Rows from the same study can share people, so that assumption may not hold here.
+- The recommended workflow is to build the variance-covariance matrix V with `vcalc()`, fit `rma.mv()` with it, and then use `robust()` with clubSandwich, "since V is often only a rough approximation" ([metafor: recommended practices](https://wviechtb.github.io/metafor/reference/misc-recs.html)).
+- I don't know the correlation between the sampling errors of rows from the same source study, so I assume ρ = 0.6, an intermediate value between 0 (independent) and 1. In `09_review_sensitivity.R` I also try 0, 0.3 and 0.9. I would value advice on what value is reasonable here.
+- With `cluster = study`, ρ also applies between European and South Asian rows of the same study (here `r paste(mixed_studies(sa), collapse = ", ")`), and those rows cannot share people. `vcalc()` has a `subgroup` argument for "(independent) subgroups within clusters", which I do not use here ([open question 3](#open-questions)).
+- `robust()` then clusters on the study. I only take the robust interval as usable when it has at least 4 degrees of freedom. That threshold is also my choice, and I am open to advice on it.
+- The same page warns that with few clusters the degrees of freedom can be very low.
+
+```{r sa-4-6, class.source = "fold-show"}
+V_sa <- vcalc(se_logit^2, cluster = study, obs = row, rho = 0.6, data = sa)
+fit_sa_4_6 <- rma.mv(logit_auc, V_sa, mods = ~ ancestry + PGS, random = ~ 1 | cohort/row, data = sa)
+record("South Asian", "4", "4.6 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row), V with rho = 0.6 within study", "logit", fit_sa_4_6, sa)
+fit_sa_4_6
+rob_sa_4_6 <- tryCatch(
+  robust(fit_sa_4_6, cluster = sa$study, clubSandwich = TRUE),
+  error = function(e) { cat("robust() could not be fitted:", conditionMessage(e), "\n"); NULL }
+)
+rob_sa_df <- if (is.null(rob_sa_4_6)) NA_real_ else unname(rob_sa_4_6$ddf[2])
+if (!is.null(rob_sa_4_6)) print(rob_sa_4_6)
+# The robust interval is used only with at least 4 degrees of freedom (my threshold, open to advice).
+if (isTRUE(rob_sa_df >= 4)) record("South Asian", "4", "4.6 robust(), clustered on study", "logit", rob_sa_4_6, sa)
+c(studies = n_distinct(sa$study), robust_df_ancestry = rob_sa_df)
+```
+
+The profile plots for the two variance components of this model, as for 4.3 to 4.5:
+
+```{r sa-4-6-profile, fig.height = 7}
+profile(fit_sa_4_6)
+```
+
+**What we see.**
+
+- With V, Δ AUC = `r fmt(get_est("South Asian", "4.6 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row), V with rho = 0.6 within study"))` (SE `r fmt(get_est("South Asian", "4.6 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row), V with rho = 0.6 within study", "se_auc"))`), against `r fmt(get_est("South Asian", "4.5 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row)"))` in 4.5.
+- The 95% interval is `r fmt(get_est("South Asian", "4.6 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row), V with rho = 0.6 within study", "lo_auc"))` to `r fmt(get_est("South Asian", "4.6 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row), V with rho = 0.6 within study", "hi_auc"))`.
+- `robust()` uses the `r n_distinct(sa$study)` studies as clusters. The degrees of freedom for the ancestry coefficient are `r fmt(rob_sa_df, 2)`, `r if (isTRUE(rob_sa_df >= 4)) "at least 4, so I use the robust interval" else "below the threshold of 4, so I don't use the robust interval"`.
+- `r if (!is.null(rob_sa_4_6)) paste0("On the logit scale, the robust interval for the ancestry coefficient is ", fmt(rob_sa_4_6$ci.lb[2]), " to ", fmt(rob_sa_4_6$ci.ub[2]), ". The model-based interval from the same fit is ", fmt(fit_sa_4_6$ci.lb[2]), " to ", fmt(fit_sa_4_6$ci.ub[2]), ".") else "The robust fit failed, so there is no robust interval to compare."`
+- The same model with other values of ρ:
+
+```{r sa-4-6-rho}
+sa_rho <- map_dfr(c(0, 0.3, 0.6, 0.9), function(r) {
+  V <- vcalc(se_logit^2, cluster = study, obs = row, rho = r, data = sa)
+  f <- rma.mv(logit_auc, V, mods = ~ ancestry + PGS, random = ~ 1 | cohort/row, data = sa)
+  a <- to_auc(f, sa)
+  tibble(rho = r, delta_auc = a[["est"]], se_auc = a[["se"]], lo = a[["est"]] - 1.96 * a[["se"]], hi = a[["est"]] + 1.96 * a[["se"]])
+})
+sa_rho_excl <- sa_rho$rho[sa_rho$lo > 0 | sa_rho$hi < 0]
+kable(sa_rho %>% transmute(rho, `Δ AUC` = delta_auc, `SE (AUC)` = se_auc, `95% CI` = paste0(fmt(lo), " to ", fmt(hi))), digits = 4)
+```
+
+- The interval excludes 0 for ρ = `r paste(sa_rho_excl, collapse = ", ")`.
+
+### Pipeline 4 so far
+
+```{r sa-p4-summary}
+sa_models_p4 <- est_tbl %>% filter(comparison == "South Asian", pipeline %in% c("1", "2", "4")) %>% pull(model)
+show_rows("South Asian", sa_models_p4)
+```
+
+## Pipeline 5: AUC scale, `rma.mv`
+
+I fit the same four models with AUC as the outcome and SE(AUC)² as the known variances.
+
+```{r sa-p5, class.source = "fold-show"}
+fit_sa_5_1 <- rma.mv(auc, se_auc^2, mods = ~ ancestry, data = sa)
+fit_sa_5_2 <- rma.mv(auc, se_auc^2, mods = ~ ancestry + PGS, data = sa)
+fit_sa_5_3 <- rma.mv(auc, se_auc^2, mods = ~ ancestry + PGS, random = ~ 1 | cohort, data = sa)
+fit_sa_5_4 <- rma.mv(auc, se_auc^2, mods = ~ ancestry, random = list(~ 1 | PGS, ~ 1 | cohort), data = sa)
+```
+
+```{r sa-p5-record, include = FALSE}
+record("South Asian", "5", "5.1 rma.mv(AUC ~ ancestry)", "AUC", fit_sa_5_1, sa)
+record("South Asian", "5", "5.2 rma.mv(AUC ~ ancestry + PGS)", "AUC", fit_sa_5_2, sa)
+record("South Asian", "5", "5.3 rma.mv(AUC ~ ancestry + PGS, random = 1|cohort)", "AUC", fit_sa_5_3, sa)
+record("South Asian", "5", "5.4 rma.mv(AUC ~ ancestry, random = 1|PGS + 1|cohort)", "AUC", fit_sa_5_4, sa)
+```
+
+### 5.1 Ancestry only
+
+```{r sa-5-1, fig.height = 7}
+fit_sa_5_1
+diag_rma(fit_sa_5_1, sa)
+```
+
+### 5.2 Add the score {#sa-5-2}
+
+```{r sa-5-2, fig.height = 7}
+fit_sa_5_2
+diag_rma(fit_sa_5_2, sa)
+```
+
+**What we see.**
+
+- This model gives the same estimate as the weighted `lm` in 3.3, and its SE is close to the pipeline 1 SE:
+
+```{r sa-5-2-check}
+c(
+  delta_auc_rma = get_est("South Asian", "5.2 rma.mv(AUC ~ ancestry + PGS)"),
+  delta_auc_pipeline_1 = sa_p1[["delta_auc"]],
+  se_rma = get_est("South Asian", "5.2 rma.mv(AUC ~ ancestry + PGS)", "se"),
+  se_pipeline_1 = sa_p1[["se"]]
+)
+```
+
+### 5.3 Add a random effect for the sample set
+
+```{r sa-5-3, fig.height = 7}
+fit_sa_5_3
+diag_rma(fit_sa_5_3, sa)
+```
+
+### 5.4 Score and sample set as random effects {#sa-5-4}
+
+```{r sa-5-4, fig.height = 7}
+fit_sa_5_4
+diag_rma(fit_sa_5_4, sa)
+```
+
+**What we see.**
+
+- This model has the same terms as the `lmer` model 3.5, but the two report different variance components:
+
+```{r sa-5-4-vs-3-5}
+tibble(
+  model = c("3.5 lmer", "5.4 rma.mv"),
+  `score SD` = c(sa_vc35$sdcor[sa_vc35$grp == "PGS"], sqrt(fit_sa_5_4$sigma2[1])),
+  `sample-set SD` = c(sa_vc35$sdcor[sa_vc35$grp == "cohort"], sqrt(fit_sa_5_4$sigma2[2])),
+  `Δ AUC` = c(
+    get_est("South Asian", "3.5 lmer(AUC ~ ancestry + (1|PGS) + (1|cohort)), weighted"),
+    get_est("South Asian", "5.4 rma.mv(AUC ~ ancestry, random = 1|PGS + 1|cohort)")
+  ),
+  SE = c(
+    get_est("South Asian", "3.5 lmer(AUC ~ ancestry + (1|PGS) + (1|cohort)), weighted", "se"),
+    get_est("South Asian", "5.4 rma.mv(AUC ~ ancestry, random = 1|PGS + 1|cohort)", "se")
+  )
+) %>%
+  kable(digits = 4)
+```
+
+- In 3.5 the sample-set SD is the larger of the two. Here the score SD is the larger.
+- `lmer` gave no warning for 3.5. I don't know whether 3.5 is a sound fit.
+
+## All South Asian estimates side by side {#sa-all}
+
+```{r sa-all}
+sa_models <- est_tbl %>% filter(comparison == "South Asian") %>% pull(model)
+show_rows("South Asian", sa_models)
+```
+
+```{r sa-all-plot, fig.height = 6.5}
+# xlim_from: a function of the model names that picks the models whose intervals
+# set the x-axis. Intervals of the other models are cut at the edges, and the
+# caption names them.
+plot_all <- function(comparison, xlim_from = NULL) {
+  d <- est_tbl %>%
+    filter(.data$comparison == .env$comparison) %>%
+    mutate(model = factor(.data$model, levels = rev(.data$model)))
+  ref <- d$delta_auc[d$pipeline == "1"]
+  xlim <- NULL
+  caption <- NULL
+  if (!is.null(xlim_from)) {
+    keep <- xlim_from(as.character(d$model))
+    xlim <- range(c(d$lo_auc[keep], d$hi_auc[keep], 0))
+    cut <- as.character(d$model[d$lo_auc < xlim[1] | d$hi_auc > xlim[2]])
+    if (length(cut)) {
+      caption <- paste0(
+        "Intervals cut at the axis edges:\n",
+        paste0(cut, " (", fmt(d$lo_auc[d$model %in% cut]), " to ", fmt(d$hi_auc[d$model %in% cut]), ")", collapse = "\n")
+      )
+    }
+  }
+  ggplot(d, aes(x = delta_auc, y = model, colour = pipeline)) +
+    geom_vline(xintercept = 0, colour = "grey70") +
+    geom_vline(xintercept = ref, linetype = "dashed", colour = "grey40") +
+    geom_errorbar(aes(xmin = lo_auc, xmax = hi_auc), width = 0.2, orientation = "y") +
+    geom_point(size = 2) +
+    coord_cartesian(xlim = xlim) +
+    labs(
+      x = "Δ AUC with 95% interval (dashed line: pipeline 1)", y = NULL, colour = "Pipeline",
+      title = paste(comparison, "minus European"),
+      subtitle = "Type 2 diabetes, European-trained scores",
+      caption = caption
+    ) +
+    theme_minimal(base_size = 11) +
+    theme(plot.title.position = "plot", plot.caption = element_text(hjust = 0), plot.caption.position = "plot")
+}
+plot_all("South Asian")
+```
+
+**What I take from the South Asian comparison.**
+
+- Without a sample-set term, the models with a term for the score give between `r fmt(min(est_tbl$delta_auc[est_tbl$comparison == "South Asian" & grepl("PGS", est_tbl$model) & !grepl("cohort", est_tbl$model)]), 4)` and `r fmt(max(est_tbl$delta_auc[est_tbl$comparison == "South Asian" & grepl("PGS", est_tbl$model) & !grepl("cohort", est_tbl$model)]), 4)`. Pipeline 1 gives `r fmt(sa_p1[["delta_auc"]], 4)`.
+- With a sample-set term, the estimates are between `r fmt(min(est_tbl$delta_auc[est_tbl$comparison == "South Asian" & grepl("cohort", est_tbl$model)]), 3)` and `r fmt(max(est_tbl$delta_auc[est_tbl$comparison == "South Asian" & grepl("cohort", est_tbl$model)]), 3)`.
+- `r sa_n_tied` of the `r n_distinct(sa$pgs_id)` scores were measured in one European and one South Asian sample set.
+- The logit-scale and AUC-scale versions of each model give estimates within about 0.003 of each other, except 2.5 and 3.5 (`r fmt(get_est("South Asian", "2.5 lmer(logit ~ ancestry + (1|PGS) + (1|cohort)), weighted"))` against `r fmt(get_est("South Asian", "3.5 lmer(AUC ~ ancestry + (1|PGS) + (1|cohort)), weighted"))`).
+- Four pairs differ in sign, all with both values close to 0: 2.1 and 3.1 (`r fmt(get_est("South Asian", "2.1 lm(logit ~ ancestry), weighted"))` against `r fmt(get_est("South Asian", "3.1 lm(AUC ~ ancestry), weighted"))`), 2.3 and 3.3 (`r fmt(get_est("South Asian", "2.3 lm(logit ~ ancestry + PGS), weighted"))` against `r fmt(get_est("South Asian", "3.3 lm(AUC ~ ancestry + PGS), weighted"))`), 4.1 and 5.1 (`r fmt(get_est("South Asian", "4.1 rma.mv(logit ~ ancestry)"))` against `r fmt(get_est("South Asian", "5.1 rma.mv(AUC ~ ancestry)"))`), and 4.2 and 5.2 (`r fmt(get_est("South Asian", "4.2 rma.mv(logit ~ ancestry + PGS)"))` against `r fmt(get_est("South Asian", "5.2 rma.mv(AUC ~ ancestry + PGS)"))`).
+- For 3.5, `lmer` and `rma.mv` report different variance components for the same terms ([5.4](#sa-5-4)).
+- `rma.mv(AUC ~ ancestry + PGS)` (5.2) gives almost the same estimate and SE as pipeline 1.
+- `lm` and `rma.mv` give the same estimates for the same fixed terms. Their SEs differ by the factor σ.
+- `lmer` and `rma.mv` do not give the same estimates:
+
+```{r sa-lmer-vs-rma}
+show_pairs("South Asian")
+```
+
+- The metafor docs say that `lme()` and `lmer()` "lead to a mix of additive and multiplicative variance components, which is not how multivariate/multilevel meta-analytic models are typically defined" ([metafor: rma() vs lm(), lme(), lmer()](https://www.metafor-project.org/doku.php/tips:rma_vs_lm_lme_lmer)). In the example on that page the `lme` estimate also differs from the `rma` one.
+
+# Hispanic or Latin American versus European
+
+I go through the same steps, more briefly. I think most of the reasoning carries over, so I only point out what is different.
+
+## The master table
+
+```{r hi-master}
+kable(hi %>% select(-PGS, -cohort), digits = 4)
+```
+
+`r nrow(hi)` rows: `r n_distinct(hi$pgs_id)` scores in `r n_distinct(hi$sampleset_id)` sample sets.
+
+```{r hi-layout}
+hi_layout <- hi %>%
+  mutate(column = paste0(ancestry, " · ", sampleset_id, " (", study, ")")) %>%
+  count(pgs_id, column) %>%
+  pivot_wider(names_from = column, values_from = n, values_fill = 0)
+kable(hi_layout)
+hi_sets <- hi %>% distinct(ancestry, sampleset_id, study)
+```
+
+- To me this is the key difference from the South Asian comparison.
+- There are only `r nrow(hi_sets)` sample sets, one per ancestry group. Every European row comes from `r hi_sets$sampleset_id[hi_sets$ancestry == "European"]` and every Hispanic or Latin American row from `r hi_sets$sampleset_id[hi_sets$ancestry != "European"]`.
+- So ancestry and sample set are not just hard to separate here: as far as I can see, they are **the same variable**.
+- I keep this in mind for the models with `(1 | cohort)`.
+
+## Pipeline 1: IVW in two stages (the analysis)
+
+```{r hi-p1, class.source = "fold-show"}
+hi_s1 <- hi %>%
+  group_by(pgs_id, ancestry) %>%
+  summarise(pooled = list(ivw_pool_logit(logit_auc, se_logit)), .groups = "drop") %>%
+  unnest_wider(pooled) %>%
+  mutate(auc = plogis(eta), se_auc = se * auc * (1 - auc))
+hi_diff <- hi_s1 %>%
+  select(pgs_id, ancestry, auc, se_auc) %>%
+  pivot_wider(names_from = ancestry, values_from = c(auc, se_auc)) %>%
+  transmute(
+    pgs_id,
+    auc_european = `auc_European`, auc_hispanic = `auc_Hispanic or Latin American`,
+    delta = auc_hispanic - auc_european,
+    se_delta = sqrt(`se_auc_European`^2 + `se_auc_Hispanic or Latin American`^2),
+    weight = 1 / se_delta^2
+  )
+kable(hi_diff, digits = 5)
+hi_p1 <- with(hi_diff, c(delta_auc = sum(weight * delta) / sum(weight), se = sqrt(1 / sum(weight))))
+hi_p1
+```
+
+```{r hi-p1-record}
+hi_p1_saved <- saved_stage2("Hispanic or Latin American")
+record("Hispanic or Latin American", "1", "1. IVW stage 1 → stage 2", "AUC", est = hi_p1[["delta_auc"]], se = hi_p1[["se"]])
+c(saved_delta_auc = hi_p1_saved$delta_hat, saved_se = hi_p1_saved$se_hat)
+```
+
+- I get Δ AUC = `r fmt(hi_p1[["delta_auc"]])` (SE `r fmt(hi_p1[["se"]])`), the same as the saved stage-2 table.
+- Here the scores seem to do better in Hispanic or Latin American participants than in European participants.
+- The same comparison of fixed and random effects as in the South Asian pipeline 1:
+
+```{r hi-p1-re}
+hi_p1_re <- map_dfr(c("FE", "REML", "DL"), function(m) {
+  f <- rma(hi_diff$delta, sei = hi_diff$se_delta, method = m)
+  tibble(method = m, `Δ AUC` = coef(f)[[1]], SE = f$se, `95% CI` = paste0(fmt(f$ci.lb), " to ", fmt(f$ci.ub)), tau = sqrt(f$tau2))
+})
+kable(hi_p1_re, digits = 4)
+```
+
+## Pipeline 2: logit scale, `lm` then `lmer`
+
+```{r hi-p2, class.source = "fold-show"}
+fit_hi_2_1 <- lm(logit_auc ~ ancestry, data = hi, weights = 1 / se_logit^2)
+fit_hi_2_2 <- lm(logit_auc ~ ancestry + PGS, data = hi)
+fit_hi_2_3 <- lm(logit_auc ~ ancestry + PGS, data = hi, weights = 1 / se_logit^2)
+fit_hi_2_4 <- lmer(logit_auc ~ ancestry + PGS + (1 | cohort), data = hi, weights = 1 / se_logit^2)
+fit_hi_2_5 <- lmer(logit_auc ~ ancestry + (1 | PGS) + (1 | cohort), data = hi, weights = 1 / se_logit^2)
+```
+
+```{r hi-p2-record, include = FALSE}
+hc <- "Hispanic or Latin American"
+record(hc, "2", "2.1 lm(logit ~ ancestry), weighted", "logit", fit_hi_2_1, hi)
+record(hc, "2", "2.2 lm(logit ~ ancestry + PGS)", "logit", fit_hi_2_2, hi)
+record(hc, "2", "2.3 lm(logit ~ ancestry + PGS), weighted", "logit", fit_hi_2_3, hi)
+record(hc, "2", "2.4 lmer(logit ~ ancestry + PGS + (1|cohort)), weighted", "logit", fit_hi_2_4, hi)
+record(hc, "2", "2.5 lmer(logit ~ ancestry + (1|PGS) + (1|cohort)), weighted", "logit", fit_hi_2_5, hi)
+```
+
+### 2.1 Ancestry only
+
+```{r hi-2-1, fig.height = 6.5}
+summary(fit_hi_2_1)
+diag_lm(fit_hi_2_1)
+```
+
+### 2.2 Add the score, no weights
+
+```{r hi-2-2, fig.height = 6.5}
+summary(fit_hi_2_2)
+diag_lm(fit_hi_2_2)
+```
+
+### 2.3 Add the score, with weights
+
+```{r hi-2-3, fig.height = 6.5}
+summary(fit_hi_2_3)
+diag_lm(fit_hi_2_3)
+```
+
+### 2.4 Add a random effect for the sample set {#hi-2-4}
+
+```{r hi-2-4, fig.show = "hold", out.width = "49%"}
+summary(fit_hi_2_4)
+ranef(fit_hi_2_4)
+diag_lmer(fit_hi_2_4)
+```
+
+**What we see.**
+
+- The estimate barely moves, but its SE grows to `r fmt(get_est(hc, "2.4 lmer(logit ~ ancestry + PGS + (1|cohort)), weighted", "se"), 2)` on the logit scale.
+- In this comparison there is one sample set per ancestry group.
+- The metafor docs say what a flat profile means for this model ([4.3](#hi-4-3)).
+
+### 2.5 Score as a random effect too
+
+```{r hi-2-5, fig.show = "hold", out.width = "49%"}
+summary(fit_hi_2_5)
+diag_lmer(fit_hi_2_5)
+```
+
+### Pipeline 2 so far
+
+```{r hi-p2-summary}
+show_rows(hc, est_tbl %>% filter(comparison == hc, pipeline %in% c("1", "2")) %>% pull(model))
+```
+
+## Pipeline 3: AUC scale, `lm` then `lmer`
+
+```{r hi-p3, class.source = "fold-show"}
+fit_hi_3_1 <- lm(auc ~ ancestry, data = hi, weights = 1 / se_auc^2)
+fit_hi_3_2 <- lm(auc ~ ancestry + PGS, data = hi)
+fit_hi_3_3 <- lm(auc ~ ancestry + PGS, data = hi, weights = 1 / se_auc^2)
+fit_hi_3_4 <- lmer(auc ~ ancestry + PGS + (1 | cohort), data = hi, weights = 1 / se_auc^2)
+fit_hi_3_5 <- lmer(auc ~ ancestry + (1 | PGS) + (1 | cohort), data = hi, weights = 1 / se_auc^2)
+```
+
+```{r hi-p3-record, include = FALSE}
+record(hc, "3", "3.1 lm(AUC ~ ancestry), weighted", "AUC", fit_hi_3_1, hi)
+record(hc, "3", "3.2 lm(AUC ~ ancestry + PGS)", "AUC", fit_hi_3_2, hi)
+record(hc, "3", "3.3 lm(AUC ~ ancestry + PGS), weighted", "AUC", fit_hi_3_3, hi)
+record(hc, "3", "3.4 lmer(AUC ~ ancestry + PGS + (1|cohort)), weighted", "AUC", fit_hi_3_4, hi)
+record(hc, "3", "3.5 lmer(AUC ~ ancestry + (1|PGS) + (1|cohort)), weighted", "AUC", fit_hi_3_5, hi)
+```
+
+### 3.1 Ancestry only
+
+```{r hi-3-1, fig.height = 6.5}
+summary(fit_hi_3_1)
+diag_lm(fit_hi_3_1)
+```
+
+### 3.2 Add the score, no weights
+
+```{r hi-3-2, fig.height = 6.5}
+summary(fit_hi_3_2)
+diag_lm(fit_hi_3_2)
+```
+
+### 3.3 Add the score, with weights
+
+```{r hi-3-3, fig.height = 6.5}
+summary(fit_hi_3_3)
+diag_lm(fit_hi_3_3)
+```
+
+### 3.4 Add a random effect for the sample set
+
+```{r hi-3-4, fig.show = "hold", out.width = "49%"}
+summary(fit_hi_3_4)
+ranef(fit_hi_3_4)
+diag_lmer(fit_hi_3_4)
+```
+
+### 3.5 Score as a random effect too
+
+```{r hi-3-5, fig.show = "hold", out.width = "49%"}
+summary(fit_hi_3_5)
+diag_lmer(fit_hi_3_5)
+```
+
+### Pipeline 3 so far
+
+```{r hi-p3-summary}
+show_rows(hc, est_tbl %>% filter(comparison == hc, pipeline %in% c("1", "2", "3")) %>% pull(model))
+```
+
+## Pipeline 4: logit scale, `rma.mv`
+
+```{r hi-p4, class.source = "fold-show"}
+fit_hi_4_1 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry, data = hi)
+fit_hi_4_2 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry + PGS, data = hi)
+fit_hi_4_3 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry + PGS, random = ~ 1 | cohort, data = hi)
+fit_hi_4_4 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry, random = list(~ 1 | PGS, ~ 1 | cohort), data = hi)
+```
+
+```{r hi-p4-record, include = FALSE}
+record(hc, "4", "4.1 rma.mv(logit ~ ancestry)", "logit", fit_hi_4_1, hi)
+record(hc, "4", "4.2 rma.mv(logit ~ ancestry + PGS)", "logit", fit_hi_4_2, hi)
+record(hc, "4", "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)", "logit", fit_hi_4_3, hi)
+record(hc, "4", "4.4 rma.mv(logit ~ ancestry, random = 1|PGS + 1|cohort)", "logit", fit_hi_4_4, hi)
+```
+
+### 4.1 Ancestry only
+
+```{r hi-4-1, fig.height = 6}
+fit_hi_4_1
+diag_rma(fit_hi_4_1, hi)
+```
+
+### 4.2 Add the score
+
+```{r hi-4-2, fig.height = 6}
+fit_hi_4_2
+diag_rma(fit_hi_4_2, hi)
+```
+
+### 4.3 Add a random effect for the sample set {#hi-4-3}
+
+```{r hi-4-3, fig.height = 6}
+fit_hi_4_3
+diag_rma(fit_hi_4_3, hi)
+```
+
+**What we see.**
+
+- Unlike the South Asian 4.3, the profile plot is flat.
+- `rma.mv` reports a sample-set variance of `r fmt(fit_hi_4_3$sigma2, 4)`.
+- The estimate, `r fmt(get_est(hc, "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)", "estimate"))` on the logit scale, is the same as without the random effect.
+
+**What the metafor docs say.**
+
+- A flat profile "suggests that at least some of the parameters of the model are not identifiable", and the estimates are then "to some extent arbitrary" ([metafor: profile.rma](https://wviechtb.github.io/metafor/reference/profile.rma.html)).
+- The documentation also has a section on overparameterised models, where it says of its example that "such models should be avoided" ([metafor: Konstantopoulos (2011) example](https://www.metafor-project.org/doku.php/analyses:konstantopoulos2011)). That example combines multilevel and multivariate random effects, which is a different case from this one, so I don't know whether the advice applies here.
+
+### 4.4 Score and sample set as random effects
+
+```{r hi-4-4, fig.height = 6}
+fit_hi_4_4
+diag_rma(fit_hi_4_4, hi)
+```
+
+### 4.5 A random effect for each row too
+
+- The metafor docs say "a common mistake is to forget to add random effects at both levels". With only the outer level, the model "assumes that the true effects for different studies within the same district are all identical" ([metafor: Konstantopoulos (2011) example](https://www.metafor-project.org/doku.php/analyses:konstantopoulos2011)). Here the district is the sample set and the studies are the rows.
+- 4.3 has only the sample-set level. Following that advice, I add a random effect for each row inside its sample set: `random = ~ 1 | cohort/row`.
+
+```{r hi-4-5, class.source = "fold-show", fig.height = 6}
+hi$row <- factor(seq_len(nrow(hi)))
+fit_hi_4_5 <- rma.mv(logit_auc, se_logit^2, mods = ~ ancestry + PGS, random = ~ 1 | cohort/row, data = hi)
+record(hc, "4", "4.5 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row)", "logit", fit_hi_4_5, hi)
+fit_hi_4_5
+profile(fit_hi_4_5)
+```
+
+**What we see.**
+
+- The row-level variance is estimated at `r fmt(fit_hi_4_5$sigma2[2], 4)`.
+- Δ AUC = `r fmt(get_est(hc, "4.5 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row)"))`, close to 4.3 (`r fmt(get_est(hc, "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)"))`).
+- The sample-set variance is still `r fmt(fit_hi_4_5$sigma2[1], 4)`, the value from 4.3 that the data cannot identify. The SE of Δ AUC (`r fmt(get_est(hc, "4.5 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row)", "se_auc"))`) depends on it, so I read the size of that SE as arbitrary too.
+
+### 4.6 Rows that share participants {#hi-4-6}
+
+- The metafor docs say standard models "assume that the effect size estimates (or more precisely, their sampling errors) are independent" ([metafor: vcalc](https://wviechtb.github.io/metafor/reference/vcalc.html)). Rows from the same study can share people, so that assumption may not hold here.
+- The recommended workflow is to build the variance-covariance matrix V with `vcalc()`, fit `rma.mv()` with it, and then use `robust()` with clubSandwich, "since V is often only a rough approximation" ([metafor: recommended practices](https://wviechtb.github.io/metafor/reference/misc-recs.html)).
+- I don't know the correlation between the sampling errors of rows from the same source study, so I assume ρ = 0.6, an intermediate value between 0 (independent) and 1. In `09_review_sensitivity.R` I also try 0, 0.3 and 0.9. I would value advice on what value is reasonable here.
+- With `cluster = study`, ρ also applies between European and Hispanic or Latin American rows of the same study, and those rows cannot share people. Here all `r nrow(hi)` rows come from `r paste(mixed_studies(hi), collapse = ", ")`, so every European row is correlated with every Hispanic or Latin American row. `vcalc()` has a `subgroup` argument for "(independent) subgroups within clusters", which I do not use here ([open question 3](#open-questions)).
+- `robust()` then clusters on the study. I only take the robust interval as usable when it has at least 4 degrees of freedom. That threshold is also my choice, and I am open to advice on it.
+- The same page warns that with few clusters the degrees of freedom can be very low.
+
+```{r hi-4-6, class.source = "fold-show"}
+V_hi <- vcalc(se_logit^2, cluster = study, obs = row, rho = 0.6, data = hi)
+fit_hi_4_6 <- rma.mv(logit_auc, V_hi, mods = ~ ancestry + PGS, random = ~ 1 | cohort/row, data = hi)
+record(hc, "4", "4.6 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row), V with rho = 0.6 within study", "logit", fit_hi_4_6, hi)
+fit_hi_4_6
+rob_hi_4_6 <- tryCatch(
+  robust(fit_hi_4_6, cluster = hi$study, clubSandwich = TRUE),
+  error = function(e) { cat("robust() could not be fitted:", conditionMessage(e), "\n"); NULL }
+)
+rob_hi_df <- if (is.null(rob_hi_4_6)) NA_real_ else unname(rob_hi_4_6$ddf[2])
+if (!is.null(rob_hi_4_6)) print(rob_hi_4_6)
+# The robust interval is used only with at least 4 degrees of freedom (my threshold, open to advice).
+if (isTRUE(rob_hi_df >= 4)) record(hc, "4", "4.6 robust(), clustered on study", "logit", rob_hi_4_6, hi)
+c(studies = n_distinct(hi$study), robust_df_ancestry = rob_hi_df)
+```
+
+The profile plots for the two variance components of this model:
+
+```{r hi-4-6-profile, fig.height = 6}
+profile(fit_hi_4_6)
+```
+
+**What we see.**
+
+- With V, Δ AUC = `r fmt(get_est(hc, "4.6 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row), V with rho = 0.6 within study"))` (SE `r fmt(get_est(hc, "4.6 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row), V with rho = 0.6 within study", "se_auc"))`), close to 4.5 (`r fmt(get_est(hc, "4.5 rma.mv(logit ~ ancestry + PGS, random = 1|cohort/row)"))`).
+- As in 4.5, the SE depends on a sample-set variance the data cannot identify, so its size is arbitrary.
+- All `r nrow(hi)` rows come from `r n_distinct(hi$study)` study, so `robust()` has a single cluster and could not be fitted.
+
+## Pipeline 5: AUC scale, `rma.mv`
+
+```{r hi-p5, class.source = "fold-show"}
+fit_hi_5_1 <- rma.mv(auc, se_auc^2, mods = ~ ancestry, data = hi)
+fit_hi_5_2 <- rma.mv(auc, se_auc^2, mods = ~ ancestry + PGS, data = hi)
+fit_hi_5_3 <- rma.mv(auc, se_auc^2, mods = ~ ancestry + PGS, random = ~ 1 | cohort, data = hi)
+fit_hi_5_4 <- rma.mv(auc, se_auc^2, mods = ~ ancestry, random = list(~ 1 | PGS, ~ 1 | cohort), data = hi)
+```
+
+```{r hi-p5-record, include = FALSE}
+record(hc, "5", "5.1 rma.mv(AUC ~ ancestry)", "AUC", fit_hi_5_1, hi)
+record(hc, "5", "5.2 rma.mv(AUC ~ ancestry + PGS)", "AUC", fit_hi_5_2, hi)
+record(hc, "5", "5.3 rma.mv(AUC ~ ancestry + PGS, random = 1|cohort)", "AUC", fit_hi_5_3, hi)
+record(hc, "5", "5.4 rma.mv(AUC ~ ancestry, random = 1|PGS + 1|cohort)", "AUC", fit_hi_5_4, hi)
+```
+
+### 5.1 Ancestry only
+
+```{r hi-5-1, fig.height = 6}
+fit_hi_5_1
+diag_rma(fit_hi_5_1, hi)
+```
+
+### 5.2 Add the score {#hi-5-2}
+
+```{r hi-5-2, fig.height = 6}
+fit_hi_5_2
+diag_rma(fit_hi_5_2, hi)
+```
+
+### 5.3 Add a random effect for the sample set
+
+```{r hi-5-3, fig.height = 6}
+fit_hi_5_3
+diag_rma(fit_hi_5_3, hi)
+```
+
+### 5.4 Score and sample set as random effects
+
+```{r hi-5-4, fig.height = 6}
+fit_hi_5_4
+diag_rma(fit_hi_5_4, hi)
+```
+
+## All Hispanic or Latin American estimates side by side {#hi-all}
+
+```{r hi-all}
+show_rows(hc, est_tbl %>% filter(comparison == hc) %>% pull(model))
+```
+
+```{r hi-all-plot, fig.height = 7.5}
+# The lmer models with a sample-set term have intervals of up to ±68, which would
+# hide every other model, so the x-axis is set by the remaining models.
+plot_all(hc, xlim_from = function(m) !grepl("^[23]\\.[45] lmer", m))
+```
+
+- The x-axis is set by the models other than the `lmer` models with a sample-set term (2.4, 2.5, 3.4, 3.5). Their intervals run past the edges, and the caption gives them in full.
+
+**What I take from the Hispanic or Latin American comparison.**
+
+- Every model gives nearly the same estimate, about `r fmt(hi_p1[["delta_auc"]], 3)`.
+- Without a sample-set term, the SEs are small, as in pipeline 1. With one, they are much larger.
+- Each ancestry group in this comparison has a single sample set.
+- I don't think the data determine how much larger. `rma.mv` reports the same sample-set variance on the logit scale (`r fmt(fit_hi_4_3$sigma2, 4)` in 4.3) and on the AUC scale (`r fmt(fit_hi_5_3$sigma2, 4)` in 5.3), and `lmer` reports `r fmt(as.data.frame(VarCorr(fit_hi_2_4))$vcov[1], 0)` (2.4) and `r fmt(as.data.frame(VarCorr(fit_hi_3_4))$vcov[1], 0)` (3.4).
+- With a flat profile, the docs call such estimates "to some extent arbitrary" ([4.3](#hi-4-3)). So I read the SEs of the sample-set models as arbitrary in size.
+
+# Comparing the two examples
+
+The South Asian plot again, from [all South Asian estimates side by side](#sa-all), so that both comparisons are in view here. The Hispanic or Latin American plot is just above.
+
+```{r sa-all-plot-again, fig.height = 6.5}
+plot_all("South Asian")
+```
+
+- When the sample set enters the model, the South Asian estimate moves. The Hispanic or Latin American estimate stays about the same, and its SE grows by an amount the data do not determine.
+- South Asian has a few scores measured in other sample sets. Hispanic or Latin American has none.
+
+## Open questions {#open-questions}
+
+1. Should the model include a sample-set term? Without one, the intervals are narrow. With one, the Hispanic or Latin American interval becomes wider by an amount the data do not determine, and the South Asian estimate moves to about `r fmt(get_est("South Asian", "4.3 rma.mv(logit ~ ancestry + PGS, random = 1|cohort)"), 2)` ([South Asian estimates side by side](#sa-all), [Hispanic or Latin American estimates side by side](#hi-all)).
+2. How much of each difference is ancestry and how much is the difference between the sample sets? This is the point I would most like an expert opinion on ([South Asian 2.4](#sa-2-4), [Hispanic or Latin American 2.4](#hi-2-4), [Hispanic or Latin American 4.3](#hi-4-3)).
+3. What value of ρ is reasonable for rows from the same study? In South Asian 4.6, the interval excludes 0 for ρ = `r paste(sa_rho_excl, collapse = ", ")` ([South Asian 4.6](#sa-4-6)). And should ρ apply between the ancestry groups of a study, as it does now, or only within one, with `subgroup` in `vcalc()`?
+4. Should stage 2 use a random-effects model? In both examples it widens the interval, and in neither does the interval change its relation to 0. In the South Asian example it also moves the estimate, from `r fmt(sa_p1_re[["Δ AUC"]][sa_p1_re$method == "FE"])` to `r fmt(sa_p1_re[["Δ AUC"]][sa_p1_re$method == "REML"])` with REML ([South Asian pipeline 1](#sa-pipeline-1)).
+5. Should the tests and intervals use the t-based methods the metafor docs recommend, instead of the default z-tests used on this page ([South Asian pipeline 1](#sa-pipeline-1))?

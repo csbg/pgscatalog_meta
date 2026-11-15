@@ -1,3 +1,0 @@
-rule,n_rows_kept,n_rows_dropped,n_rows_total
-One score per sample set (lowest PGS ID within sample set × ancestry),34,46,80
-Largest cohort when one score is evaluated more than once within ancestry,74,6,80
