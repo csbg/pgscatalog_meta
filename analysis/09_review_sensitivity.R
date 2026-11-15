@@ -358,6 +358,20 @@ forest_compare_plot <- function(long_df, pal, shapes, title, subtitle, caption,
       nudge_y = 0.33
     )
   }
+  if ("one_sample_set" %in% names(long_df) && any(long_df$one_sample_set %in% TRUE)) {
+    marks <- long_df %>%
+      filter(.data$one_sample_set %in% TRUE) %>%
+      distinct(.data$trait_wrapped, .data$trained_bucket, .data$target_ancestry)
+    p <- p + geom_text(
+      data = marks,
+      aes(x = x_lim[1], y = .data$target_ancestry, label = "\u2020"),
+      inherit.aes = FALSE,
+      hjust = -0.15,
+      size = 3.2,
+      colour = "grey20",
+      show.legend = FALSE
+    )
+  }
   p +
     scale_colour_manual(values = pal, name = NULL) +
     scale_shape_manual(values = shapes, name = NULL) +
@@ -374,7 +388,7 @@ forest_compare_plot <- function(long_df, pal, shapes, title, subtitle, caption,
       panel.spacing.y = unit(0.35, "lines"),
       panel.spacing.x = unit(1.6, "lines"),
       panel.grid.major.y = element_blank(),
-      plot.margin = margin(5.5, 45, 5.5, 5.5),
+      plot.margin = margin(5.5, 45, 5.5, 12),
       plot.caption = element_text(hjust = 0, size = 7.5),
       plot.title = element_text(size = 10.5)
     )
@@ -1510,6 +1524,19 @@ dependence_long <- bind_rows(
 ) %>%
   mutate(source = factor(source, levels = c(src_fixed, src_single, src_reduced, src_cov)))
 
+one_sample_set_tbl <- cell_pss_sharing %>%
+  transmute(
+    trait_label, trained_bucket, target_ancestry,
+    one_sample_set = .data$n_pairs >= 2 &
+      .data$all_pgs_share_one_target_sample_set &
+      .data$all_pgs_share_one_eur_sample_set
+  )
+if (sum(one_sample_set_tbl$one_sample_set) != 18L) {
+  stop("Expected 18 comparisons in which every score uses one sample set on both sides.", call. = FALSE)
+}
+dependence_long <- dependence_long %>%
+  left_join(one_sample_set_tbl, by = c("trait_label", "trained_bucket", "target_ancestry"))
+
 dep_x_lo <- min(dependence_long$lo, na.rm = TRUE) - 0.02
 dep_x_hi <- max(dependence_long$hi, na.rm = TRUE) + 0.02
 
@@ -1523,13 +1550,15 @@ p_dep <- forest_compare_plot(
     "With one sharing group, the interval depends on the assumed \u03c1. This plot uses \u03c1 = {rho_main}. ",
     "\u03c1 = 0, 0.3, 0.6, and 0.9 are in 09_dependence_rho."
   ),
-  caption = paste0(
+  caption = stringr::str_wrap(paste0(
     "Average of all scores: inverse-variance average on the delta-method standard errors. ",
-    "The covariance model is fit only where scores share people, with \u03c1 = ", rho_main, ".\n",
-    "Check, one score for that target sample set: those scores share one target sample set; the point is the retained score (lowest PGS ID).\n",
+    "The covariance model is fit only where scores share people, with \u03c1 = ", rho_main, ". ",
+    "Check, one score for that target sample set: those scores share one target sample set; the point is the retained score (lowest PGS ID). ",
     "Check, one score per target sample set: shown where at least two scores remain and a duplicate is dropped. ",
-    "Comparisons with no shared people are drawn as the average of all scores."
-  ),
+    "Comparisons with no shared people are drawn as the average of all scores. ",
+    "A dagger marks a comparison in which every score uses one sample set on the European side and one sample set on the non-European side. ",
+    "The interval is the variation across scores inside that sample set."
+  ), width = 150),
   trait_levels = trait_levels_wrapped,
   show_k = FALSE,
   x_lim = c(dep_x_lo, dep_x_hi),

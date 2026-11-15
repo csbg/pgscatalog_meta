@@ -663,11 +663,36 @@ cov_colour <- paired_df %>%
   group_by(trait_label, trained_bucket, target_ancestry) %>%
   summarise(covariate_colour = comparison_covariate_colour(covariate_class), .groups = "drop")
 
+fp_share <- file.path(
+  "results", paste0("review_sensitivity_", stamp), "tables",
+  "07_within_cell_sampleset_sharing.csv"
+)
+if (!file.exists(fp_share)) {
+  stop(
+    "Sample-set sharing table is missing. Run analysis/09_review_sensitivity.R so the dagger can be drawn.",
+    call. = FALSE
+  )
+}
+one_sample_set_tbl <- readr::read_csv(fp_share, show_col_types = FALSE) %>%
+  transmute(
+    trait_label = as.character(.data$trait_label),
+    trained_bucket = as.character(.data$trained_bucket),
+    target_ancestry = as.character(.data$target_ancestry),
+    one_sample_set = .data$n_pairs >= 2 &
+      .data$all_pgs_share_one_target_sample_set &
+      .data$all_pgs_share_one_eur_sample_set
+  )
+if (sum(one_sample_set_tbl$one_sample_set) != 18L) {
+  stop("Expected 18 comparisons in which every score uses one sample set on both sides.", call. = FALSE)
+}
+
 delta_df <- pool_stage2_cells(paired_df, se_scale = "delta_method") %>%
   mutate(across(all_of(scale_keys), as.character)) %>%
   left_join(delta_submitted, by = scale_keys) %>%
   left_join(cov_colour, by = scale_keys) %>%
+  left_join(one_sample_set_tbl, by = scale_keys) %>%
   mutate(
+    one_sample_set = dplyr::coalesce(.data$one_sample_set, FALSE),
     pooled_group    = all_not_pooled,
     trait_clean     = wrap_trait(trait_label),
     target_ancestry = factor(
@@ -746,6 +771,21 @@ g_delta_faceted <- ggplot(
     stroke   = 0.3,
     position = pos_dodge
   ) +
+  geom_text(
+    data = delta_df,
+    aes(
+      x = .data$lo,
+      y = .data$target_ancestry,
+      group = interaction(.data$target_ancestry, .data$trained_bucket),
+      label = ifelse(.data$one_sample_set, "\u2020", "")
+    ),
+    inherit.aes = FALSE,
+    position = pos_dodge,
+    hjust = 1.15,
+    size = 2.4,
+    colour = "grey20",
+    show.legend = FALSE
+  ) +
   scale_color_manual(
     values = anc_colors,
     name   = "Target ancestry"
@@ -772,7 +812,11 @@ g_delta_faceted <- ggplot(
   ) +
   labs(
     y = NULL,
-    caption = "Points = pooled ΔAUC across PGS; hollow = all single-eval (no pooled cells); filled = includes pooled cells; 95% CI from inverse-variance-weighted ΔAUC."
+    caption = stringr::str_wrap(paste0(
+      "Points = pooled \u0394AUC across PGS; hollow = all single-eval (no pooled cells); filled = includes pooled cells; 95% CI from inverse-variance-weighted \u0394AUC. ",
+      "A dagger marks a comparison in which every score uses one sample set on the European side and one sample set on the non-European side. ",
+      "The interval is the variation across scores inside that sample set."
+    ), width = 110)
   ) +
   theme_CrossAncestryGenPhen(
     base_size    = 6,
@@ -874,7 +918,7 @@ by_train_df <- delta_df %>%
       levels = pooled_levels_forest
     ),
     sig = (lo > 0) | (hi < 0),
-    k_lab = paste0("k = ", n_pairs, ifelse(sig, " *", ""))
+    k_lab = paste0(ifelse(one_sample_set, "\u2020 ", ""), "k = ", n_pairs, ifelse(sig, " *", ""))
   )
 
 n_sig_by_train <- sum(by_train_df$sig, na.rm = TRUE)
@@ -918,11 +962,13 @@ g_delta_by_train <- ggplot(
     ),
     x = "ΔAUC (target − European) with 95% CI",
     y = NULL,
-    caption = paste0(
+    caption = stringr::str_wrap(paste0(
       "Same cells as deltaAUC_forest_faceted_", stamp, ". ",
-      "k = number of PGS with a paired European/target estimate; * = 95% CI excludes zero.\n",
-      "Hollow points: every PGS in the cell has a single evaluation on each side (no Stage-1 pooling)."
-    )
+      "k = number of PGS with a paired European/target estimate; * = 95% CI excludes zero. ",
+      "Hollow points: every PGS in the cell has a single evaluation on each side (no Stage-1 pooling). ",
+      "A dagger marks a comparison in which every score uses one sample set on the European side and one sample set on the non-European side. ",
+      "The interval is the variation across scores inside that sample set."
+    ), width = 140)
   ) +
   theme_minimal(base_size = 9) +
   theme(
